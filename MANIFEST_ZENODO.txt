@@ -1,0 +1,105 @@
+# MANIFEST_ZENODO.txt — intended Zenodo package contents
+# Repository: ~/papers/invert/invert
+# Generated: 2026-06-29
+#
+# Lines prefixed with "+" are intended INCLUSIONS.
+# Lines prefixed with "-" are intended EXCLUSIONS.
+
+# --- Core source and configuration ---
++ pyproject.toml
++ requirements.txt
++ LICENSE
++ README.md
++ REPRODUCIBILITY.md
++ ARTIFACTS.md
++ ZENODO_AUDIT.md
++ MANIFEST_ZENODO.txt
++ CITATION.cff
++ .zenodo.json
++ .env.example
++ ARTIFACT.md
++ .gitignore
+
++ src/invert/
++ src/invert_core/
++ tests/
++ configs/
++ scripts/
++ prereg/
+
+# --- Core v2 experimental artifacts (required for paper claims) ---
++ data/core_v2/tasks/
++ data/core_v2/raw/core_v2_generalization_local_quadrature_001/
++ data/core_v2/raw/core_v2_generalization_local_eager_lazy_001/
++ data/core_v2/raw/core_v2_generalization_local_bfs_dfs_001/
++ data/core_v2/raw/core_v2_generalization_local_deterministic_randomized_001/
++ data/core_v2/code/core_v2_generalization_local_quadrature_001/
++ data/core_v2/code/core_v2_generalization_local_eager_lazy_001/
++ data/core_v2/code/core_v2_generalization_local_bfs_dfs_001/
++ data/core_v2/code/core_v2_generalization_local_deterministic_randomized_001/
++ data/core_v2/stripped/core_v2_generalization_local_quadrature_001/
++ data/core_v2/stripped/core_v2_generalization_local_eager_lazy_001/
++ data/core_v2/stripped/core_v2_generalization_local_bfs_dfs_001/
++ data/core_v2/stripped/core_v2_generalization_local_deterministic_randomized_001/
+
+# --- Development pilots (transparency; not confirmatory) ---
++ data/core_v2/raw/core_v2_*_pilot_*
++ data/core_v2/code/core_v2_*_pilot_*
++ data/core_v2/stripped/core_v2_*_pilot_*
+
+# --- Results and reports ---
++ results/core_v2/core_v2_decision_report.md
++ results/core_v2/core_v2_dimension_summary.csv
++ results/core_v2/core_v2_model_dimension_summary.csv
++ results/core_v2/README.md
++ results/core_v2/runs/core_v2_generalization_local_quadrature_001/
++ results/core_v2/runs/core_v2_generalization_local_eager_lazy_001/
++ results/core_v2/runs/core_v2_generalization_local_bfs_dfs_001/
++ results/core_v2/runs/core_v2_generalization_local_deterministic_randomized_001/
++ results/core_v2/runs/core_v2_*_pilot_*/
+
+# --- Optional legacy prototype (include for completeness) ---
++ data/intents/
++ data/raw/local_stub/
++ data/code/local_stub/
++ src/invert/
++ results/runs/
+
+# --- Optional legacy cloud artifacts (omit unless desired) ---
+# + data/raw/openai/
+# + data/raw/anthropic/
+# + data/code/openai/
+# + data/code/anthropic/
+
+# --- EXCLUSIONS (do not upload) ---
+- .git/
+- .venv/
+- venv/
+- env/
+- __pycache__/
+- .pytest_cache/
+- .mypy_cache/
+- .ruff_cache/
+- *.pyc
+- *.pyo
+- *.egg-info/
+- dist/
+- build/
+- htmlcov/
+- .coverage
+- .env
+- .env.local
+- *.pem
+- *.key
+- .DS_Store
+- .idea/
+- .vscode/
+- *.swp
+- *~
+- *.tmp
+- *.log
+- paper/
+
+# --- External (separate Zenodo record or journal supplement) ---
+# Manuscript LaTeX: ~/papers/invert/paper/
+# Ollama model weights: managed by Ollama, not in this repository

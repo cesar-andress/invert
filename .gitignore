@@ -33,3 +33,6 @@ htmlcov/
 # Temporary files
 *.tmp
 *.log
+
+# TOSEM manuscript lives outside this repo: ~/papers/invert/paper/
+paper/

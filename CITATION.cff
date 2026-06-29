@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "INVERT Core v2 Replication Package"
+message: "If you use this software, please cite it using these metadata."
+type: software
+license: MIT
+authors:
+  - given-names: Anonymous
+    family-names: Author
+    affiliation: "Anonymous Institution"
+repository-code: "https://github.com/TODO/invert"
+version: 0.1.0
+date-released: 2026-06-29
+keywords:
+  - LLM code generation
+  - process signatures
+  - dynamic analysis
+  - software engineering benchmark
+preferred-citation:
+  type: article
+  title: "INVERT: The Process Trinity of Generated Code"
+  subtitle: "Recovering Quantity, Order, and Variability Signatures from LLM-Generated Programs"
+  authors:
+    - given-names: Anonymous
+      family-names: Author
+  journal: "ACM Transactions on Software Engineering and Methodology"
+  year: 2026
+  notes: "Manuscript source of truth: ~/papers/invert/paper/ (LaTeX). TODO: Zenodo DOI."

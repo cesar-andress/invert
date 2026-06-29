@@ -1,76 +1,130 @@
-# INVERT — Minimal Falsification Prototype
+# INVERT — Replication Package (Core v2)
 
-INVERT studies whether developer intent dimensions are recoverable from generated code.
+**Paper:** *INVERT: The Process Trinity of Generated Code* — Recovering Quantity, Order, and Variability Signatures from LLM-Generated Programs (ACM TOSEM manuscript; LaTeX source at `~/papers/invert/paper/`).
 
-This prototype runs a controlled experiment: for each programming task and intent dimension, we generate code with contrasting intent values (v0 vs v1), then ask a blind LLM judge to recover those values from the code alone.
+This repository packages the **INVERT Core v2** deterministic benchmark: preregistered tasks, behavioral oracles, process-signature detectors, generated code artifacts, frozen generalization runs, and cross-run analysis reports.
 
-**Figure 1** is a heatmap of identifiability by intent dimension and generator model. If the heatmap is flat, the project dies. If it shows non-trivial structure, the project continues.
+## Overview
 
-## Install
+INVERT tests whether **process intent** (how code computes, not only what it outputs) is recoverable from LLM-generated programs under outcome equivalence.
+
+| Class | Dimension | Role |
+|-------|-----------|------|
+| A | `euler_vs_rk4` | Positive control (derivative-call identity) |
+| B | `trapezoidal_vs_simpson` | Positive control (quadrature weight identity) |
+| C | `eager_vs_lazy` | Dynamic quantity / avoidable computation |
+| D | `bfs_vs_dfs` | Dynamic traversal order |
+| E | `deterministic_vs_randomized` | Inter-execution variability |
+
+Classes **C, D, E** are the novel dynamic process-signature dimensions. The **Process Trinity** (quantity, order, variability) is an empirical design-space label from this repository—not a completeness theorem.
+
+**Reported confirmatory results** come from **frozen generalization runs** using **local Ollama models**. Paid cloud APIs (OpenAI, Anthropic, Google) are optional and not required to verify archived outputs.
+
+## Repository layout
+
+```
+invert/
+├── README.md                 # this file
+├── REPRODUCIBILITY.md        # exact commands and status table
+├── ARTIFACTS.md              # inventory of configs, data, results
+├── ZENODO_AUDIT.md           # sensitive-data and bloat audit
+├── MANIFEST_ZENODO.txt       # intended Zenodo include/exclude lists
+├── CITATION.cff / .zenodo.json / LICENSE
+├── pyproject.toml            # primary dependency manifest (Python ≥3.10)
+├── requirements.txt          # pinned runtime deps (mirror of pyproject)
+├── configs/                  # YAML run configurations
+├── scripts/                  # shell runners (generalization + pilots)
+├── prereg/                   # preregistered task registry and predictions
+├── data/
+│   ├── core_v2/              # Core v2 raw responses, generated code, stripped variants
+│   └── intents/              # legacy prototype tasks
+├── src/
+│   ├── invert/               # legacy falsification CLI (`invert`)
+│   └── invert_core/          # Core v2 CLI (`invert-core`), detectors, oracles
+├── tests/core_v2/            # pytest suite + fixtures
+└── results/core_v2/          # per-run reports + cross-run summaries
+```
+
+## Installation
+
+**Requirements:** Python **≥ 3.10** (developed and tested with **3.12**), `git`, and optionally [Ollama](https://ollama.com/) for re-generation (not needed to read archived results).
 
 ```bash
 cd ~/papers/invert/invert
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e ".[dev]"
 ```
 
-## Smoke test (no API keys)
+Dependencies are declared in `pyproject.toml`; `requirements.txt` lists the same runtime packages for convenience.
+
+## Quick verification (no API keys, no Ollama)
 
 ```bash
-python scripts/smoke_test.py
+invert-core smoke-test          # detector + oracle fixture checks
+pytest                          # full unit/integration suite
+invert-core summarize-core-v2   # regenerate cross-run CSVs and decision report
 ```
 
-This runs generate → recover → aggregate → plot using the `local_stub` provider and verifies output files exist.
-
-## First real experiment
-
-1. Copy environment template and set API keys:
+Legacy prototype smoke test (optional):
 
 ```bash
-cp .env.example .env
-# export OPENAI_API_KEY, ANTHROPIC_API_KEY, and/or GOOGLE_API_KEY
+python scripts/smoke_test.py    # or: invert smoke-test
 ```
 
-2. Generate code with a real model:
+## Reproducing main paper results
 
-```bash
-invert generate --models openai --tasks data/intents/tasks.json --repetitions 1
-```
+Archived generated code and reports are bundled under `data/core_v2/` and `results/core_v2/`. **Analysis-only reproduction** re-runs detectors on archived code (no LLM calls):
 
-3. Run blind recovery:
+| Claim | Run ID | Analysis command |
+|-------|--------|------------------|
+| Class B control | `core_v2_generalization_local_quadrature_001` | see `REPRODUCIBILITY.md` |
+| Class C | `core_v2_generalization_local_eager_lazy_001` | see `REPRODUCIBILITY.md` |
+| Class D | `core_v2_generalization_local_bfs_dfs_001` | see `REPRODUCIBILITY.md` |
+| Class E | `core_v2_generalization_local_deterministic_randomized_001` | see `REPRODUCIBILITY.md` |
 
-```bash
-invert recover --judge openai --models openai
-```
+**Full re-generation** (optional) requires Ollama with the models listed in each config YAML and the shell scripts under `scripts/run_core_v2_generalization_local_*.sh`. See `REPRODUCIBILITY.md` for exact commands.
 
-4. Aggregate and plot:
+## Reading final reports
 
-```bash
-invert aggregate
-invert plot
-```
+| Output | Path |
+|--------|------|
+| Cross-run decision report | `results/core_v2/core_v2_decision_report.md` |
+| Dimension summary CSV | `results/core_v2/core_v2_dimension_summary.csv` |
+| Model × dimension CSV | `results/core_v2/core_v2_model_dimension_summary.csv` |
+| Per-run reports | `results/core_v2/runs/<run_id>/*_report.md` |
+| Frozen detector metadata | `results/core_v2/runs/<run_id>/frozen_detector_metadata.json` |
+| Class C pole-asymmetry audit | `results/core_v2/runs/core_v2_generalization_local_eager_lazy_001/eager_lazy_pole_asymmetry.md` |
 
-Outputs land in `results/`:
-
-- `recovery.csv` — per-sample recovery rows
-- `identifiability_matrix.csv` — accuracy by dimension and model
-- `identifiability_heatmap.png` — Figure 1
-
-## Environment variables
+## Environment variables (optional)
 
 | Variable | Purpose |
-|---|---|
-| `OPENAI_API_KEY` | OpenAI provider |
-| `ANTHROPIC_API_KEY` | Anthropic provider |
-| `GOOGLE_API_KEY` | Google Gemini provider |
+|----------|---------|
+| `OPENAI_API_KEY` | OpenAI provider (legacy / optional) |
+| `ANTHROPIC_API_KEY` | Anthropic provider (optional) |
+| `GOOGLE_API_KEY` | Google Gemini provider (optional) |
 
-Missing keys only cause errors when that provider is explicitly selected.
+Copy `.env.example` to `.env` for local development. **No API keys are required** to verify Core v2 archived results or run `pytest` / `invert-core smoke-test`.
 
-## Current limitations
+## CLI entry points
 
-- 10 tasks, 8 intent dimensions, 1 repetition by default
-- Correctness computed only for the manipulated dimension
-- No deterministic detectors, temperature sweeps, or prompt variants
-- `local_stub` is for pipeline testing only, not scientific results
-- No database, dashboard, or advanced statistics
+```bash
+invert-core --help    # Core v2: generate, analyze-run, summarize-core-v2, smoke-test, …
+invert --help         # Legacy prototype
+```
+
+## Further documentation
+
+- `REPRODUCIBILITY.md` — command matrix and reproduction status
+- `ARTIFACTS.md` — file inventory
+- `ZENODO_AUDIT.md` — packaging audit (secrets, bloat, exclusions)
+- `MANIFEST_ZENODO.txt` — intended Zenodo file list
+- `ARTIFACT.md` — legacy prototype artifact notes (superseded for Core v2 by this README)
+
+## Citation
+
+See `CITATION.cff`. Zenodo DOI: **TODO** (to be assigned on upload).
+
+## License
+
+MIT — see `LICENSE`.
