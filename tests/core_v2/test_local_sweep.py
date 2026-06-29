@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from invert_core.analyze_run import _build_model_rankings
+from invert_core.analyze_run import _build_model_rankings, _classify_model_failure
 from invert_core.generate import run_core_v2_generation
 from invert_core.pilot_config import CoreV2PilotConfig, plan_core_v2_generations
 from invert_core.tasks import project_root
@@ -85,5 +85,34 @@ def test_model_ranking_orders_f11_first() -> None:
     }
     rankings = _build_model_rankings(detection_rows, model_f11)
     assert rankings[0]["model"] == "m_pass"
-    assert rankings[0]["f11_survives"] is True
+    assert rankings[0]["f1_1_survives"] is True
     assert rankings[0]["rank"] == 1
+    assert "valid_ambiguous_rate_format_normalized" in rankings[0]
+
+
+def test_classify_invalid_generation_vs_detector_collapse() -> None:
+    assert _classify_model_failure({"valid_n": 6}, {"survives": False}) == "invalid_generation"
+    assert (
+        _classify_model_failure(
+            {"valid_n": 18},
+            {
+                "survives": False,
+                "raw_accuracy": 0.5,
+                "format_normalized_accuracy": 1.0,
+                "raw_ambiguous_rate": 0.0,
+            },
+        )
+        == "detector_collapse"
+    )
+    assert (
+        _classify_model_failure(
+            {"valid_n": 18},
+            {
+                "survives": True,
+                "raw_accuracy": 1.0,
+                "format_normalized_accuracy": 1.0,
+                "raw_ambiguous_rate": 0.0,
+            },
+        )
+        == "f1_1_support"
+    )

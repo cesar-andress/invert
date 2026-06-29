@@ -431,8 +431,29 @@ def _f11_survival_for_model(detection_rows: list[dict[str, Any]], model: str) ->
         "raw_accuracy": raw["valid_detector_accuracy"],
         "format_normalized_accuracy": fmt["valid_detector_accuracy"],
         "raw_ambiguous_rate": raw["valid_ambiguous_rate"],
+        "format_normalized_ambiguous_rate": fmt["valid_ambiguous_rate"],
         "survives": survives,
     }
+
+
+def _classify_model_failure(
+    row: dict[str, Any],
+    f11: dict[str, Any],
+) -> str:
+    if f11.get("survives"):
+        return "f1_1_support"
+    if row["valid_n"] < F11_MIN_VALID_N:
+        return "invalid_generation"
+    raw_acc = f11.get("raw_accuracy")
+    fmt_acc = f11.get("format_normalized_accuracy")
+    amb_raw = f11.get("raw_ambiguous_rate")
+    if (
+        (raw_acc is not None and raw_acc < F11_MIN_ACCURACY)
+        or (fmt_acc is not None and fmt_acc < F11_MIN_ACCURACY)
+        or (amb_raw is not None and amb_raw > F11_MAX_AMBIGUOUS)
+    ):
+        return "detector_collapse"
+    return "other"
 
 
 def _format_rate(value: float | None) -> str:
@@ -468,23 +489,28 @@ def _build_model_rankings(
             {
                 "model": model,
                 "display_name": _model_display_name(model),
-                "n_generated": n_generated,
-                "n_valid": n_valid,
+                "generated_n": n_generated,
+                "valid_n": n_valid,
                 "valid_artifact_rate": valid_artifact_rate,
-                "valid_raw_accuracy": raw["valid_detector_accuracy"],
-                "valid_fmt_accuracy": fmt["valid_detector_accuracy"],
-                "ambiguous_rate": raw["valid_ambiguous_rate"],
-                "f11_survives": bool(f11.get("survives")),
+                "valid_accuracy_raw": raw["valid_detector_accuracy"],
+                "valid_accuracy_format_normalized": fmt["valid_detector_accuracy"],
+                "valid_ambiguous_rate_raw": raw["valid_ambiguous_rate"],
+                "valid_ambiguous_rate_format_normalized": fmt["valid_ambiguous_rate"],
+                "f1_1_survives": bool(f11.get("survives")),
+                "failure_class": _classify_model_failure(
+                    {"valid_n": n_valid},
+                    f11,
+                ),
             }
         )
 
     def sort_key(row: dict[str, Any]) -> tuple:
         rate = row["valid_artifact_rate"]
-        raw_acc = row["valid_raw_accuracy"]
-        fmt_acc = row["valid_fmt_accuracy"]
-        amb = row["ambiguous_rate"]
+        raw_acc = row["valid_accuracy_raw"]
+        fmt_acc = row["valid_accuracy_format_normalized"]
+        amb = row["valid_ambiguous_rate_raw"]
         return (
-            0 if row["f11_survives"] else 1,
+            0 if row["f1_1_survives"] else 1,
             -(rate if rate is not None else -1.0),
             -(raw_acc if raw_acc is not None else -1.0),
             -(fmt_acc if fmt_acc is not None else -1.0),
@@ -495,6 +521,43 @@ def _build_model_rankings(
     for idx, row in enumerate(rankings, start=1):
         row["rank"] = idx
     return rankings
+
+
+def _sweep_conclusions(model_rankings: list[dict[str, Any]]) -> dict[str, list[str]]:
+    f11_support = [
+        row["display_name"] for row in model_rankings if row["f1_1_survives"]
+    ]
+    invalid_gen = [
+        row["display_name"]
+        for row in model_rankings
+        if row["failure_class"] == "invalid_generation"
+    ]
+    detector_collapse = [
+        row["display_name"]
+        for row in model_rankings
+        if row["failure_class"] == "detector_collapse"
+    ]
+    return {
+        "f1_1_support": f11_support,
+        "invalid_generation": invalid_gen,
+        "detector_collapse": detector_collapse,
+    }
+
+
+def _quadrature_recommendation(model_rankings: list[dict[str, Any]]) -> str:
+    f11_models = [r for r in model_rankings if r["f1_1_survives"]]
+    if not f11_models:
+        return (
+            "**No.** No model in this run meets F1.1 valid-only survival thresholds. "
+            "Do not spend API tokens on quadrature until at least one local model "
+            "passes with valid_n >= 12 and stable detector accuracy after stripping."
+        )
+    names = ", ".join(r["display_name"] for r in f11_models)
+    return (
+        f"**Yes, cautiously.** Local evidence supports F1.1 for: {names}. "
+        "Quadrature implementation can proceed using local-only validation first; "
+        "defer paid API pilots until quadrature fixtures and detectors are verified locally."
+    )
 
 
 def _write_report(
@@ -517,6 +580,8 @@ def _write_report(
         )
 
     model_rankings = _build_model_rankings(detection_rows, stats["model_f11"])
+    conclusions = _sweep_conclusions(model_rankings)
+    quadrature_local = _quadrature_recommendation(model_rankings)
 
     def _f11_answer(model_key: str, f11: dict[str, Any]) -> str:
         if model_key not in models:
@@ -537,18 +602,7 @@ def _write_report(
             f"ambiguous rate={_format_rate(f11.get('raw_ambiguous_rate'))})."
         )
 
-    any_model_survives = any(
-        stats["model_f11"].get(m, {}).get("survives") for m in models
-    )
-    n_valid = stats["n_valid"]
-    n_generated = stats["n_generated_raw"]
-    quadrature_answer = (
-        "**Not yet.** At least one model must pass F1.1 valid-only survival thresholds "
-        "with sufficient valid artifacts before adding quadrature."
-        if not any_model_survives or n_valid < F11_MIN_VALID_N
-        else "**Maybe.** One or more models meet valid-only F1.1 thresholds; review per-task "
-        "failures and validity rates before expanding to quadrature."
-    )
+    quadrature_answer = quadrature_local
 
     lines = [
         f"# INVERT Core v2 — F1.1 Integration Report (`{run_name}`)",
@@ -578,27 +632,87 @@ def _write_report(
             "## 2. Model ranking (valid-only recovery)",
             "",
             "Ranked by: F1.1 survival (pass first), then valid_artifact_rate, "
-            "valid_detector_accuracy at raw, valid_detector_accuracy at format_normalized, "
-            "ambiguous_rate (lower is better).",
+            "valid_accuracy_raw, valid_accuracy_format_normalized, "
+            "valid_ambiguous_rate_raw (lower is better).",
             "",
-            "| rank | model | valid_artifact_rate | valid_raw_acc | valid_fmt_acc | ambiguous_rate | F1.1 |",
-            "|------|-------|---------------------|---------------|---------------|----------------|------|",
+            "| rank | model | generated_n | valid_n | valid_artifact_rate | "
+            "valid_accuracy_raw | valid_accuracy_format_normalized | "
+            "valid_ambiguous_rate_raw | valid_ambiguous_rate_format_normalized | f1_1_survives |",
+            "|------|-------|-------------|---------|---------------------|"
+            "---------------------|--------------------------------|"
+            "--------------------------|-------------------------------------|---------------|",
         ]
     )
     for row in model_rankings:
         lines.append(
-            f"| {row['rank']} | {row['display_name']} | "
+            f"| {row['rank']} | {row['display_name']} | {row['generated_n']} | {row['valid_n']} | "
             f"{_format_rate(row['valid_artifact_rate'])} | "
-            f"{_format_rate(row['valid_raw_accuracy'])} | "
-            f"{_format_rate(row['valid_fmt_accuracy'])} | "
-            f"{_format_rate(row['ambiguous_rate'])} | "
-            f"{'pass' if row['f11_survives'] else 'fail'} |"
+            f"{_format_rate(row['valid_accuracy_raw'])} | "
+            f"{_format_rate(row['valid_accuracy_format_normalized'])} | "
+            f"{_format_rate(row['valid_ambiguous_rate_raw'])} | "
+            f"{_format_rate(row['valid_ambiguous_rate_format_normalized'])} | "
+            f"{'pass' if row['f1_1_survives'] else 'fail'} |"
         )
 
     lines.extend(
         [
             "",
-            "## 3. Recovery on valid artifacts only",
+            "## 3. Local model sweep conclusions",
+            "",
+            "### 1. Which local models support F1.1?",
+            "",
+        ]
+    )
+    if conclusions["f1_1_support"]:
+        lines.append("- " + ", ".join(conclusions["f1_1_support"]))
+    else:
+        lines.append("- None in this run.")
+
+    lines.extend(
+        [
+            "",
+            "### 2. Which local models fail because of invalid generation?",
+            "",
+        ]
+    )
+    if conclusions["invalid_generation"]:
+        for name in conclusions["invalid_generation"]:
+            row = next(r for r in model_rankings if r["display_name"] == name)
+            lines.append(
+                f"- **{name}**: valid_n={row['valid_n']} / generated_n={row['generated_n']} "
+                f"(valid_artifact_rate={_format_rate(row['valid_artifact_rate'])}; "
+                f"need valid_n >= {F11_MIN_VALID_N})"
+            )
+    else:
+        lines.append("- None (all models with failures have enough valid artifacts for detector evaluation).")
+
+    lines.extend(
+        [
+            "",
+            "### 3. Which local models fail because the detector signal collapses?",
+            "",
+        ]
+    )
+    if conclusions["detector_collapse"]:
+        for name in conclusions["detector_collapse"]:
+            row = next(r for r in model_rankings if r["display_name"] == name)
+            lines.append(
+                f"- **{name}**: valid_n={row['valid_n']}, "
+                f"raw accuracy={_format_rate(row['valid_accuracy_raw'])}, "
+                f"format_normalized accuracy={_format_rate(row['valid_accuracy_format_normalized'])}, "
+                f"ambiguous rate={_format_rate(row['valid_ambiguous_rate_raw'])}"
+            )
+    else:
+        lines.append("- None in this run.")
+
+    lines.extend(
+        [
+            "",
+            "### 4. Is there enough local evidence to implement quadrature next without spending API tokens?",
+            "",
+            quadrature_local,
+            "",
+            "## 4. Recovery on valid artifacts only",
             "",
             "| model | strip_level | valid_n | valid_detector_accuracy | valid_ambiguous_rate |",
             "|-------|-------------|---------|-------------------------|----------------------|",
@@ -632,7 +746,7 @@ def _write_report(
 
     lines.extend(
         [
-            "## 4. F1.1 decision",
+            "## 5. F1.1 decision (per model)",
             "",
             f"Preregistered rule: valid_n >= {F11_MIN_VALID_N}, valid_detector_accuracy >= "
             f"{F11_MIN_ACCURACY} at raw and format_normalized, valid_ambiguous_rate <= "
@@ -662,7 +776,7 @@ def _write_report(
             "",
             quadrature_answer,
             "",
-            "## 5. All-generated summary (includes invalid artifacts)",
+            "## 6. All-generated summary (includes invalid artifacts)",
             "",
             "Detector accuracy in this section includes invalid artifacts and is **not** used "
             "for F1.1 recovery decisions.",

@@ -16,7 +16,34 @@ Invalid artifacts by model/task/method (raw level):
 
 Invalid artifacts are **not** recovery failures; they failed the behavioral oracle and are excluded from valid-only recovery metrics (R_raw, R_stripped).
 
-## 2. Recovery on valid artifacts only
+## 2. Model ranking (valid-only recovery)
+
+Ranked by: F1.1 survival (pass first), then valid_artifact_rate, valid_accuracy_raw, valid_accuracy_format_normalized, valid_ambiguous_rate_raw (lower is better).
+
+| rank | model | generated_n | valid_n | valid_artifact_rate | valid_accuracy_raw | valid_accuracy_format_normalized | valid_ambiguous_rate_raw | valid_ambiguous_rate_format_normalized | f1_1_survives |
+|------|-------|-------------|---------|---------------------|---------------------|--------------------------------|--------------------------|-------------------------------------|---------------|
+| 1 | Qwen2.5-coder:32b | 18 | 18 | 1.0000 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | pass |
+| 2 | DeepSeek-coder-v2:lite | 18 | 6 | 0.3333 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | fail |
+
+## 3. Local model sweep conclusions
+
+### 1. Which local models support F1.1?
+
+- Qwen2.5-coder:32b
+
+### 2. Which local models fail because of invalid generation?
+
+- **DeepSeek-coder-v2:lite**: valid_n=6 / generated_n=18 (valid_artifact_rate=0.3333; need valid_n >= 12)
+
+### 3. Which local models fail because the detector signal collapses?
+
+- None in this run.
+
+### 4. Is there enough local evidence to implement quadrature next without spending API tokens?
+
+**Yes, cautiously.** Local evidence supports F1.1 for: Qwen2.5-coder:32b. Quadrature implementation can proceed using local-only validation first; defer paid API pilots until quadrature fixtures and detectors are verified locally.
+
+## 4. Recovery on valid artifacts only
 
 | model | strip_level | valid_n | valid_detector_accuracy | valid_ambiguous_rate |
 |-------|-------------|---------|-------------------------|----------------------|
@@ -47,15 +74,15 @@ Invalid artifacts are **not** recovery failures; they failed the behavioral orac
 - raw: valid_n=18, accuracy=1.0000, ambiguous=0.0000
 - format_normalized: valid_n=18, accuracy=1.0000, ambiguous=0.0000
 
-## 3. F1.1 decision
+## 5. F1.1 decision (per model)
 
 Preregistered rule: valid_n >= 12, valid_detector_accuracy >= 0.9 at raw and format_normalized, valid_ambiguous_rate <= 0.1.
 
-### Does Qwen2.5-coder:32b support F1.1 survival after stripping?
+### Qwen2.5-coder:32b
 
 **Yes.** Qwen2.5-coder:32b meets preregistered F1.1 thresholds on valid artifacts (valid_n=18, raw accuracy=1.0000, format_normalized accuracy=1.0000, ambiguous rate=0.0000).
 
-### Does DeepSeek-coder-v2:lite support F1.1 survival after stripping?
+### DeepSeek-coder-v2:lite
 
 **No / not yet.** DeepSeek-coder-v2:lite does not meet all F1.1 thresholds (valid_n=6, raw accuracy=1.0000, format_normalized accuracy=1.0000, ambiguous rate=0.0000).
 
@@ -65,9 +92,9 @@ Preregistered rule: valid_n >= 12, valid_detector_accuracy >= 0.9 at raw and for
 
 ### Is this enough to move to quadrature?
 
-**Maybe.** One or more models meet valid-only F1.1 thresholds; review per-task failures and validity rates before expanding to quadrature.
+**Yes, cautiously.** Local evidence supports F1.1 for: Qwen2.5-coder:32b. Quadrature implementation can proceed using local-only validation first; defer paid API pilots until quadrature fixtures and detectors are verified locally.
 
-## 4. All-generated summary (includes invalid artifacts)
+## 6. All-generated summary (includes invalid artifacts)
 
 Detector accuracy in this section includes invalid artifacts and is **not** used for F1.1 recovery decisions.
 
