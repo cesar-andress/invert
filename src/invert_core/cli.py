@@ -20,6 +20,7 @@ from invert_core.pilot_config import CoreV2PilotConfig
 from invert_core.stripping import StripLevel, strip_file_with_evidence
 from invert_core.summarize_core_v2 import run_summarize_core_v2
 from invert_core.diagnose_quadrature import run_diagnose_quadrature
+from invert_core.diagnose_deterministic_randomized import run_diagnose_deterministic_randomized
 from invert_core.tasks import fixtures_dir, project_root, results_dir
 from invert_core.verify import verify_fixture_dir
 
@@ -243,6 +244,17 @@ def diagnose_quadrature_cmd(
     """Diagnose trapezoidal detector failures for a quadrature pilot run."""
     root = project_root()
     result = run_diagnose_quadrature(run, root)
+    typer.echo(f"Wrote {result.csv_path} ({len(result.rows)} rows)")
+    typer.echo(f"Wrote {result.md_path}")
+
+
+@app.command("diagnose-deterministic-randomized")
+def diagnose_deterministic_randomized_cmd(
+    run: str = typer.Option(..., "--run", help="Core v2 deterministic/randomized run name"),
+) -> None:
+    """Diagnose behavioral validity failures for a deterministic/randomized pilot run."""
+    root = project_root()
+    result = run_diagnose_deterministic_randomized(run, root)
     typer.echo(f"Wrote {result.csv_path} ({len(result.rows)} rows)")
     typer.echo(f"Wrote {result.md_path}")
 
