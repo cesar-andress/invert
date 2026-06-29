@@ -16,29 +16,32 @@ from invert_core.tasks import project_root
 
 EULER_CONFIG = project_root() / "configs" / "core_v2_generalization_local_euler_rk4.yaml"
 QUADRATURE_CONFIG = project_root() / "configs" / "core_v2_generalization_local_quadrature.yaml"
+EAGER_LAZY_CONFIG = project_root() / "configs" / "core_v2_generalization_local_eager_lazy.yaml"
 
 
 @pytest.mark.parametrize(
-    ("config_path", "run_name", "expected"),
+    ("config_path", "run_name", "expected", "n_models"),
     [
-        (EULER_CONFIG, "core_v2_generalization_local_euler_rk4_001", 90),
-        (QUADRATURE_CONFIG, "core_v2_generalization_local_quadrature_001", 90),
+        (EULER_CONFIG, "core_v2_generalization_local_euler_rk4_001", 90, 3),
+        (QUADRATURE_CONFIG, "core_v2_generalization_local_quadrature_001", 90, 3),
+        (EAGER_LAZY_CONFIG, "core_v2_generalization_local_eager_lazy_001", 120, 4),
     ],
 )
 def test_generalization_expected_generations(
-    config_path: Path, run_name: str, expected: int
+    config_path: Path, run_name: str, expected: int, n_models: int
 ) -> None:
     pilot = CoreV2PilotConfig.from_yaml(config_path, project_root())
     items = plan_core_v2_generations(pilot, pilot.load_tasks())
     assert pilot.run_name == run_name
     assert pilot.repetitions == 5
-    assert len(pilot.models) == 3
+    assert len(pilot.models) == n_models
     assert pilot.expected_generations() == expected
     assert len(items) == expected
 
 
 def test_generalization_run_name_detection() -> None:
     assert is_generalization_run_name("core_v2_generalization_local_euler_rk4_001")
+    assert is_generalization_run_name("core_v2_generalization_local_eager_lazy_001")
     assert not is_generalization_run_name("core_v2_euler_rk4_pilot_local_001")
 
 
@@ -49,6 +52,7 @@ def test_write_frozen_detector_metadata(tmp_path: Path) -> None:
     det_dir.mkdir(parents=True)
     (det_dir / "integration.py").write_text("# integration\n", encoding="utf-8")
     (det_dir / "quadrature.py").write_text("# quadrature\n", encoding="utf-8")
+    (det_dir / "eager_lazy.py").write_text("# eager_lazy\n", encoding="utf-8")
 
     run_dir = tmp_path / "results" / "core_v2" / "runs" / "core_v2_generalization_local_euler_rk4_001"
     path = write_frozen_detector_metadata(
@@ -65,6 +69,52 @@ def test_write_frozen_detector_metadata(tmp_path: Path) -> None:
     assert meta["note"] == FROZEN_NOTE
     assert "integration.py" in meta["detector_files_hash"]
     assert "quadrature.py" in meta["detector_files_hash"]
+    assert "eager_lazy.py" in meta["detector_files_hash"]
+
+
+def test_frozen_metadata_includes_eager_lazy_detector_hash() -> None:
+    root = project_root()
+    run_dir = root / "results" / "core_v2" / "runs" / "_test_frozen_eager_lazy_meta"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    path = write_frozen_detector_metadata(
+        run_dir,
+        project_root=root,
+        run_name="core_v2_generalization_local_eager_lazy_001",
+        dimension="eager_vs_lazy",
+    )
+    meta = json.loads(path.read_text(encoding="utf-8"))
+    assert meta["dimension"] == "eager_vs_lazy"
+    assert meta["git_commit"] != "unknown"
+    eager_hash = meta["detector_files_hash"]["eager_lazy.py"]
+    assert len(eager_hash) == 64
+    import hashlib
+
+    expected = hashlib.sha256(
+        (root / "src/invert_core/detectors/eager_lazy.py").read_bytes()
+    ).hexdigest()
+    assert eager_hash == expected
+    path.unlink()
+    run_dir.rmdir()
+
+
+def test_maybe_write_frozen_metadata_for_eager_lazy_generalization(tmp_path: Path) -> None:
+    from invert_core.frozen_detector import maybe_write_frozen_detector_metadata
+
+    root = tmp_path / "repo"
+    root.mkdir()
+    det_dir = root / "src/invert_core/detectors"
+    det_dir.mkdir(parents=True)
+    for name in ("integration.py", "quadrature.py", "eager_lazy.py"):
+        (det_dir / name).write_text(f"# {name}\n", encoding="utf-8")
+
+    path = maybe_write_frozen_detector_metadata(
+        "core_v2_generalization_local_eager_lazy_001",
+        root,
+        "eager_vs_lazy",
+    )
+    assert path is not None
+    meta = json.loads(path.read_text(encoding="utf-8"))
+    assert "eager_lazy.py" in meta["detector_files_hash"]
 
 
 def test_summarize_report_lists_run_inventory(tmp_path: Path) -> None:

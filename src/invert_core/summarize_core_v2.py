@@ -532,7 +532,16 @@ def _write_decision_report(
         and eager_lazy["status"] in ("supported_if_2plus_models_survive", "promising_if_1_model_survives")
         and _parse_int(eager_lazy["runs_found"]) > 0
     )
-    if class_c_passes:
+    frozen_c = _aggregate_frozen_dimension_evidence("eager_vs_lazy", model_rows)
+    if frozen_c["has_data"]:
+        process_signature_text = (
+            "Frozen generalization evidence for Class C is available "
+            f"(models evaluated: {', '.join(frozen_c['models_evaluated']) or 'none'}; "
+            f"models survived: {', '.join(frozen_c['models_survived']) or 'none'}). "
+            "This result is not reducible to mathematical-coefficient identity because "
+            "eager and lazy compute the same feature formulas; only timing of computation differs."
+        )
+    elif class_c_passes:
         process_signature_text = (
             "This result is not reducible to mathematical-coefficient identity because "
             "eager and lazy compute the same feature formulas; only timing of computation differs."
@@ -680,6 +689,11 @@ def _write_decision_report(
             lines.append("- No frozen generalization runs analyzed for this dimension yet.")
             lines.append("")
             continue
+        if dimension == "eager_vs_lazy":
+            lines.append(
+                "- Frozen detector metadata includes SHA256 of `eager_lazy.py` "
+                "when analyzed via `core_v2_generalization_local_eager_lazy_001`."
+            )
         lines.append(
             f"- Models evaluated: {', '.join(evidence['models_evaluated']) or 'none'}"
         )

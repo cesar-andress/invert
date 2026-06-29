@@ -9,6 +9,7 @@ from pathlib import Path
 DETECTOR_REL_PATHS = {
     "integration.py": Path("src/invert_core/detectors/integration.py"),
     "quadrature.py": Path("src/invert_core/detectors/quadrature.py"),
+    "eager_lazy.py": Path("src/invert_core/detectors/eager_lazy.py"),
 }
 
 FROZEN_NOTE = "detectors frozen before this generalization run"

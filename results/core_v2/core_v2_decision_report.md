@@ -11,6 +11,7 @@ Signature classes under evaluation:
 
 ### Development runs
 
+- `core_v2_eager_lazy_pilot_local_001`
 - `core_v2_euler_rk4_pilot_local_001`
 - `core_v2_euler_rk4_pilot_local_sweep_001`
 - `core_v2_quadrature_pilot_local_001`
@@ -23,6 +24,7 @@ Signature classes under evaluation:
 
 - Class A (derivative-call signatures)
 - Class B (arithmetic weight signatures)
+- Class C (dynamic temporal process signatures)
 
 ## 2. Which models are reliable generators?
 
@@ -40,7 +42,7 @@ Signature classes under evaluation:
 
 ## 4. Detector / stripping failures
 
-- None identified at the model-run aggregate level.
+- core_v2_eager_lazy_pilot_local_001 / Qwen3-coder:30b (eager_vs_lazy)
 
 ## 5. Is Class A supported?
 
@@ -52,11 +54,11 @@ Signature classes under evaluation:
 
 ## 7. Is Class C supported?
 
-Class C not yet evaluated.
+**Yes (preliminary).** At least two models meet the preregistered valid-only survival rule for `eager_vs_lazy`.
 
 ## 8. Process signature vs mathematical identity (F1.3)
 
-Current evidence remains limited to arithmetic/static signatures.
+This result is not reducible to mathematical-coefficient identity because eager and lazy compute the same feature formulas; only timing of computation differs.
 
 ## 9. Two mechanistically distinct classes (preregistered criterion)
 
@@ -64,7 +66,7 @@ Current evidence remains limited to arithmetic/static signatures.
 
 ## 10. Next cheapest experiment
 
-Run `invert-core analyze-run --run core_v2_eager_lazy_pilot_local_001` (or complete eager/lazy generation first) to evaluate Class C without new API spend.
+Add the next preregistered Family 1 dimension or a minimal paid-API replication on the two best local models only.
 
 ## Dimension status snapshot
 
@@ -72,7 +74,7 @@ Run `invert-core analyze-run --run core_v2_eager_lazy_pilot_local_001` (or compl
 |-----------|------------|------------------|-----------------|--------|
 | euler_vs_rk4 | 2 | 5 | 2 | supported_if_2plus_models_survive |
 | trapezoidal_vs_simpson | 2 | 4 | 4 | supported_if_2plus_models_survive |
-| eager_vs_lazy | 0 | 0 | 0 | insufficient_data |
+| eager_vs_lazy | 1 | 4 | 3 | supported_if_2plus_models_survive |
 
 ## Frozen generalization evidence
 
