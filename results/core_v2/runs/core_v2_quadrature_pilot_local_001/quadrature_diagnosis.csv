@@ -1,0 +1,814 @@
+run,model,task_id,method,rep,strip_level,path,detected_method,detector_evidence,valid_artifact,behavioral_pass,has_endpoint_averaging,has_h_times_pattern,has_loop_accumulation,has_explicit_fa_fb_div2,has_init_total_fa_plus_fb,has_divide_by_2_at_end,has_n_plus_1_points,failure_classification,classification_notes,code_excerpt
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_exp_0_1,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_polynomial,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * x1(x2) + 0.5 * x1(x3)
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    integral = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        integral += f(a + i * h)
+    return integral * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__14b,integrate_sin_0_pi,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__14b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 3.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_exp_0_1,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_polynomial,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": true, ""has_simpson_4_2_pattern"": true, ""reason"": ""Ambiguous: half_weights=True, simpson_42=True, h_div_3=False, h_mult=False""}",true,true,false,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = x2
+    x7 = 0.5 * x1(x6)
+    for x8 in x9(1, x4):
+        x6 += x5
+        x7 += x1(x6)
+    x6 += x5
+    x7 += 0.5 * x1(x6)
+    x7 *= x5
+    return x7"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    s = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen2_5-coder__32b,integrate_sin_0_pi,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen2_5-coder__32b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_exp_0_1,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_exp_0_1/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,true,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    result = 0.5 * (f(x[0]) + f(x[-1]))
+    for i in range(1, n):
+        result += f(x[i])
+    result *= h
+    return result"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,true,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    result = 0.5 * (f(x[0]) + f(x[-1]))
+    for i in range(1, n):
+        result += f(x[i])
+    result *= h
+    return result"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_1.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_1.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_1.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,true,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    result = 0.5 * (f(x[0]) + f(x[-1]))
+    for i in range(1, n):
+        result += f(x[i])
+    result *= h
+    return result"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,true,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    result = 0.5 * (f(x[0]) + f(x[-1]))
+    for i in range(1, n):
+        result += f(x[i])
+    result *= h
+    return result"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_2.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_2.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_2.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,true,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    result = 0.5 * (f(x[0]) + f(x[-1]))
+    for i in range(1, n):
+        result += f(x[i])
+    result *= h
+    return result"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,true,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    result = 0.5 * (f(x[0]) + f(x[-1]))
+    for i in range(1, n):
+        result += f(x[i])
+    result *= h
+    return result"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_3.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_3.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_polynomial,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_polynomial/trapezoidal/rep_3.py,simpson,"{""coefficient_literals"": [0.5, 1.0, 2.0, 4.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": true, ""reason"": ""4/2 interior weights detected""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = [x2 + x7 * x5 for x7 in x8(x4 + 1)]
+    x9 = 0.5 * (x1(x6[0]) + x1(x6[-1]))
+    for x7 in x8(1, x4):
+        x9 += x1(x6[x7])
+    x9 *= x5
+    return x9"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,1,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,1,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,1,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,1,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,1,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_1.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,2,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,2,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,2,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,2,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,2,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_2.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,3,raw,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_quadrature_pilot_local_001/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,3,no_comments,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_comments/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=True""}",true,true,true,true,true,false,false,false,false,detector_too_strict,Uses 0.5*(f(a)+f(b)) endpoint averaging; detector expects separate half weights.,"def integrate(f, a, b, n):
+    h = (b - a) / n
+    result = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,3,renamed,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/renamed/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,3,no_imports,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/no_imports/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"
+core_v2_quadrature_pilot_local_001,ollama__qwen3-coder__30b,integrate_sin_0_pi,trapezoidal,3,format_normalized,/home/cesar/papers/invert/invert/data/core_v2/stripped/core_v2_quadrature_pilot_local_001/format_normalized/ollama__qwen3-coder__30b/integrate_sin_0_pi/trapezoidal/rep_3.py,ambiguous,"{""coefficient_literals"": [0.5, 1.0], ""function_eval_pattern"": ""loop_weighted_sum"", ""has_endpoint_half_weights"": false, ""has_simpson_4_2_pattern"": false, ""reason"": ""Ambiguous: half_weights=False, simpson_42=False, h_div_3=False, h_mult=False""}",true,true,true,true,true,false,false,false,false,stripping_broke_detector,Detection regressed after stripping or entry-function scope changed.,"def x0(x1, x2, x3, x4):
+    x5 = (x3 - x2) / x4
+    x6 = 0.5 * (x1(x2) + x1(x3))
+    for x7 in x8(1, x4):
+        x6 += x1(x2 + x7 * x5)
+    return x6 * x5"

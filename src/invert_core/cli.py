@@ -16,6 +16,7 @@ from invert_core.generate import run_core_v2_generation
 from invert_core.pilot_config import CoreV2PilotConfig
 from invert_core.stripping import StripLevel, strip_file_with_evidence
 from invert_core.summarize_core_v2 import run_summarize_core_v2
+from invert_core.diagnose_quadrature import run_diagnose_quadrature
 from invert_core.tasks import fixtures_dir, project_root, results_dir
 from invert_core.verify import verify_fixture_dir
 
@@ -171,6 +172,17 @@ def summarize_core_v2_cmd() -> None:
     typer.echo(f"Wrote {result.model_summary_path}")
     typer.echo(f"Wrote {result.dimension_summary_path}")
     typer.echo(f"Wrote {result.decision_report_path}")
+
+
+@app.command("diagnose-quadrature")
+def diagnose_quadrature_cmd(
+    run: str = typer.Option(..., "--run", help="Core v2 quadrature run name"),
+) -> None:
+    """Diagnose trapezoidal detector failures for a quadrature pilot run."""
+    root = project_root()
+    result = run_diagnose_quadrature(run, root)
+    typer.echo(f"Wrote {result.csv_path} ({len(result.rows)} rows)")
+    typer.echo(f"Wrote {result.md_path}")
 
 
 def main() -> None:
