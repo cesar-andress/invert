@@ -1,0 +1,12 @@
+{
+  "source": "counter_with_lock.py",
+  "level": "lock_marker_strip",
+  "markers_removed": [
+    "import:threading",
+    "lock_assignment:Lock",
+    "with_lock_context",
+    "threading"
+  ],
+  "lines_removed": 1,
+  "replacements_made": 3
+}

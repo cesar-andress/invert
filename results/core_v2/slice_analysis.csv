@@ -14,10 +14,12 @@ f2_lock,counter_no_lock.py,no_lock,no_comments,no_lock,true,,,,,,,,,,,,
 f2_lock,counter_no_lock.py,no_lock,renamed,no_lock,true,,,,,,,,,,,,
 f2_lock,counter_no_lock.py,no_lock,no_imports,no_lock,true,,,,,,,,,,,,
 f2_lock,counter_no_lock.py,no_lock,format_normalized,no_lock,true,,,,,,,,,,,,
+f2_lock,counter_no_lock.py,no_lock,lock_marker_strip,no_lock,true,,,,,,,,,,,,
 f2_lock,counter_with_lock.py,locked,raw,locked,true,,,regex:\bthreading\.Lock\b;regex:\bLock\s*\(;ast:lock_instantiation,,,,,,,,,
 f2_lock,counter_with_lock.py,locked,no_comments,locked,true,,,regex:\bthreading\.Lock\b;regex:\bLock\s*\(;ast:lock_instantiation,,,,,,,,,
 f2_lock,counter_with_lock.py,locked,renamed,locked,true,,,regex:\bthreading\.Lock\b;regex:\bLock\s*\(;ast:lock_instantiation,,,,,,,,,
 f2_lock,counter_with_lock.py,locked,no_imports,locked,true,,,regex:\bthreading\.Lock\b;regex:\bLock\s*\(;ast:lock_instantiation,,,,,,,,,
 f2_lock,counter_with_lock.py,locked,format_normalized,locked,true,,,regex:\bthreading\.Lock\b;regex:\bLock\s*\(;ast:lock_instantiation,,,,,,,,,
+f2_lock,counter_with_lock.py,locked,lock_marker_strip,no_lock,false,,,,,,,,,,,,
 f3_shuffled,,,,,,,,,pair_1,m0,m0,true,rk4,no_above_chance_signal,2c5950bf1e315348,false,false
 f3_shuffled,,,,,,,,,pair_2,m0,m0,true,euler,no_above_chance_signal,cfd59c6abe41fcd1,true,true

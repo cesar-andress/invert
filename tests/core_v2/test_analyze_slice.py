@@ -13,5 +13,5 @@ def test_analyze_slice_passes(tmp_path: Path) -> None:
     assert result.summary_path.exists()
     assert result.passed
     assert len(result.f1_rows) == 10  # 2 fixtures x 5 strip levels
-    assert len(result.f2_rows) == 10
+    assert len(result.f2_rows) == 12  # 2 fixtures x 6 strip levels
     assert len(result.f3_rows) >= 2

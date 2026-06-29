@@ -1,0 +1,7 @@
+{
+  "source": "counter_no_lock.py",
+  "level": "lock_marker_strip",
+  "markers_removed": [],
+  "lines_removed": 0,
+  "replacements_made": 0
+}

@@ -9,7 +9,7 @@ import typer
 from invert_core.analyze import run_analyze_slice
 from invert_core.detectors.integration import detect_integration, detect_integration_file
 from invert_core.detectors.shuffled_control import run_shuffled_control
-from invert_core.stripping import StripLevel, strip_file
+from invert_core.stripping import StripLevel, strip_file_with_evidence
 from invert_core.tasks import fixtures_dir, results_dir
 from invert_core.verify import verify_fixture_dir
 
@@ -57,9 +57,20 @@ def strip_cmd(
         "--level",
         help="Stripping level",
     ),
+    sidecar: Path | None = typer.Option(
+        None,
+        "--sidecar",
+        help="JSON sidecar path (lock_marker_strip evidence)",
+    ),
 ) -> None:
     """Apply deterministic stripping transforms."""
-    typer.echo(strip_file(str(file), level))
+    stripped, evidence = strip_file_with_evidence(
+        str(file), level, sidecar_path=sidecar
+    )
+    typer.echo(stripped)
+    if evidence is not None:
+        sidecar_written = sidecar or (file.parent / f"{file.name}.lock_marker_strip.json")
+        typer.echo(f"Wrote sidecar {sidecar_written}", err=True)
 
 
 @app.command("smoke-test")

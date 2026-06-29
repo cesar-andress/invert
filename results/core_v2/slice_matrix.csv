@@ -6,7 +6,8 @@ F1,F1.1_integration,no_imports,1.0000,2,correct_all_levels,pass
 F1,F1.1_integration,format_normalized,1.0000,2,correct_all_levels,pass
 F2,F2.1_lock_control,raw,1.0000,2,correct_positive_control,pass
 F2,F2.1_lock_control,no_comments,1.0000,2,correct_positive_control,pass
-F2,F2.1_lock_control,renamed,1.0000,2,collapse_if_lock_marker_stripping_exists,not_tested
-F2,F2.1_lock_control,no_imports,1.0000,2,collapse_if_lock_marker_stripping_exists,not_tested
-F2,F2.1_lock_control,format_normalized,1.0000,2,collapse_if_lock_marker_stripping_exists,not_tested
+F2,F2.1_lock_control,renamed,1.0000,2,not_lock_marker_ablation,not_tested
+F2,F2.1_lock_control,no_imports,1.0000,2,not_lock_marker_ablation,not_tested
+F2,F2.1_lock_control,format_normalized,1.0000,2,not_lock_marker_ablation,not_tested
+F2,F2.1_lock_control,lock_marker_strip,0.5000,2,collapse_after_lock_marker_removal,pass
 F3,F3.2_shuffled_label,n/a,0.5000,10,chance_no_above_chance_signal,pass

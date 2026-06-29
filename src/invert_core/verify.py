@@ -5,7 +5,7 @@ from typing import Any
 
 from invert_core.detectors.integration import detect_integration
 from invert_core.detectors.lock_control import detect_lock_control
-from invert_core.stripping import StripLevel, strip_code
+from invert_core.stripping import STANDARD_STRIP_LEVELS, StripLevel, strip_code
 
 
 def verify_integration_detector(
@@ -16,7 +16,7 @@ def verify_integration_detector(
     strip_levels: list[StripLevel] | None = None,
 ) -> dict[str, Any]:
     """Verify detector returns expected method, optionally across strip levels."""
-    levels = strip_levels or list(StripLevel)
+    levels = strip_levels or STANDARD_STRIP_LEVELS
     results: dict[str, Any] = {"expected": expected, "levels": {}}
     all_match = True
 

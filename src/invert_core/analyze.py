@@ -10,7 +10,12 @@ from typing import Any
 from invert_core.detectors.integration import detect_integration
 from invert_core.detectors.lock_control import detect_lock_control
 from invert_core.detectors.shuffled_control import run_shuffled_control
-from invert_core.stripping import StripLevel, strip_code
+from invert_core.stripping import (
+    StripLevel,
+    strip_code,
+    strip_code_with_evidence,
+    write_strip_sidecar,
+)
 
 
 STRIP_LEVELS = [
@@ -20,6 +25,8 @@ STRIP_LEVELS = [
     StripLevel.NO_IMPORTS,
     StripLevel.FORMAT_NORMALIZED,
 ]
+
+F2_STRIP_LEVELS = STRIP_LEVELS + [StripLevel.LOCK_MARKER_STRIP]
 
 INTEGRATION_TRUE = {
     "euler": "euler",
@@ -84,6 +91,30 @@ def _write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) ->
             writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
+def _f2_strip(code: str, level: StripLevel, sidecar_dir: Path, artifact: str) -> str:
+    if level == StripLevel.LOCK_MARKER_STRIP:
+        stripped, evidence = strip_code_with_evidence(code, level)
+        if evidence:
+            write_strip_sidecar(
+                sidecar_dir / f"{artifact}.lock_marker_strip.json",
+                source=artifact,
+                level=level.value,
+                evidence=evidence,
+            )
+        return stripped
+    return strip_code(code, level)
+
+
+def _f2_collapse_observed(f2_rows: list[dict[str, Any]]) -> bool:
+    subset = [r for r in f2_rows if r["strip_level"] == StripLevel.LOCK_MARKER_STRIP.value]
+    if len(subset) < 2:
+        return False
+    with_lock = next((r for r in subset if r["true_label"] == "locked"), None)
+    if with_lock is None:
+        return False
+    return with_lock["correct"] != "true" or with_lock["predicted_label"] != "locked"
+
+
 def _analyze_f1(fixtures_dir: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     paths = _glob_fixtures(fixtures_dir, "euler*.py") + _glob_fixtures(fixtures_dir, "rk4*.py")
@@ -113,7 +144,7 @@ def _analyze_f1(fixtures_dir: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def _analyze_f2(fixtures_dir: Path) -> list[dict[str, Any]]:
+def _analyze_f2(fixtures_dir: Path, sidecar_dir: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     paths = _glob_fixtures(fixtures_dir, "counter_no_lock*.py") + _glob_fixtures(
         fixtures_dir, "counter_with_lock*.py"
@@ -121,8 +152,8 @@ def _analyze_f2(fixtures_dir: Path) -> list[dict[str, Any]]:
     for path in paths:
         code = path.read_text(encoding="utf-8")
         true_label = _true_lock_label(path.stem)
-        for level in STRIP_LEVELS:
-            stripped = strip_code(code, level)
+        for level in F2_STRIP_LEVELS:
+            stripped = _f2_strip(code, level, sidecar_dir, path.name)
             result = detect_lock_control(stripped)
             predicted = result.method
             rows.append(
@@ -199,6 +230,7 @@ def _build_matrix(
     f3_meta: dict[str, Any],
 ) -> list[dict[str, Any]]:
     matrix: list[dict[str, Any]] = []
+    f2_collapse = _f2_collapse_observed(f2_rows)
 
     for level in STRIP_LEVELS:
         acc, n = _accuracy(f1_rows, level.value)
@@ -214,13 +246,16 @@ def _build_matrix(
             }
         )
 
-    for level in STRIP_LEVELS:
+    for level in F2_STRIP_LEVELS:
         acc, n = _accuracy(f2_rows, level.value)
         if level in (StripLevel.RAW, StripLevel.NO_COMMENTS):
             expected = "correct_positive_control"
             status = "pass" if acc == 1.0 else "fail"
+        elif level == StripLevel.LOCK_MARKER_STRIP:
+            expected = "collapse_after_lock_marker_removal"
+            status = "pass" if f2_collapse else "fail"
         else:
-            expected = "collapse_if_lock_marker_stripping_exists"
+            expected = "not_lock_marker_ablation"
             status = "not_tested"
         matrix.append(
             {
@@ -259,16 +294,18 @@ def _write_summary(
     f3_meta: dict[str, Any],
     matrix_rows: list[dict[str, Any]],
 ) -> None:
-    f1_all_pass = all(
-        r["correct"] == "true"
-        for r in f1_rows
-    )
+    f1_all_pass = all(r["correct"] == "true" for r in f1_rows)
     f2_raw_pass = all(
         r["correct"] == "true"
         for r in f2_rows
         if r["strip_level"] in ("raw", "no_comments")
     )
+    f2_collapse = _f2_collapse_observed(f2_rows)
     f3_pass = f3_meta.get("at_chance", False)
+
+    lock_strip_rows = [
+        r for r in f2_rows if r["strip_level"] == StripLevel.LOCK_MARKER_STRIP.value
+    ]
 
     lines = [
         "# INVERT Core v2 — Slice Analysis Summary",
@@ -299,7 +336,8 @@ def _write_summary(
     if f1_all_pass:
         lines.append(
             "**Yes.** Euler and RK4 fixtures remain correctly classified at raw, no_comments, "
-            "renamed, no_imports, and format_normalized."
+            "renamed, no_imports, and format_normalized. F1.1 is not evaluated at "
+            "`lock_marker_strip` (lock ablation applies only to F2.1)."
         )
     else:
         failed = [r for r in f1_rows if r["correct"] != "true"]
@@ -324,13 +362,26 @@ def _write_summary(
     else:
         lines.append("**No at raw/no_comments.** Positive control failed on baseline levels.")
 
+    lines.extend(["", "### Collapse after `lock_marker_strip`", ""])
+    if f2_collapse:
+        locked_row = next(r for r in lock_strip_rows if r["true_label"] == "locked")
+        lines.append(
+            "**Yes — collapse observed on fixtures.** After lock-marker ablation, the with-lock "
+            f"fixture is no longer classified as locked (predicted `{locked_row['predicted_label']}`). "
+            "The no-lock fixture remains no-lock. This matches the preregistered trivial-control "
+            "expectation: lock recovery depends on obvious lock markers."
+        )
+    else:
+        lines.append(
+            "**No — collapse not observed.** Lock-marker stripping did not prevent lock detection "
+            "on the with-lock fixture."
+        )
+
     lines.extend(
         [
             "",
-            "Lock-marker stripping (removing `Lock`/`with`-lock AST patterns) is **not implemented**. "
-            "Therefore collapse after lock-marker removal is **not_tested** for renamed/no_imports/"
-            "format_normalized levels. Current strip levels do not remove lock primitives; "
-            "F2.1 accuracy at those levels is reported but not interpreted as collapse evidence.",
+            "Levels `renamed`, `no_imports`, and `format_normalized` do not remove lock primitives; "
+            "F2.1 accuracy at those levels is reported but **not_tested** as collapse evidence.",
             "",
             "## 4. Preregistered conditions satisfied",
             "",
@@ -342,6 +393,10 @@ def _write_summary(
         satisfied.append("F1.1 detection survives all implemented stripping levels (≥0.95 threshold)")
     if f2_raw_pass:
         satisfied.append("F2.1 detector accuracy ≥0.95 at raw/no_comments")
+    if f2_collapse:
+        satisfied.append(
+            "F2.1 collapse after lock_marker_strip (with-lock no longer detected as locked)"
+        )
     if f3_pass:
         satisfied.append("F3.2 shuffled-label accuracy in chance band (0.30–0.70 on fixtures)")
 
@@ -359,15 +414,14 @@ def _write_summary(
             "- F1.1 manipulation failure rate (requires generated artifacts + behavioral oracle)",
             "- F1.1 detector accuracy ≥0.90 on manipulation-confirmed LLM-generated pairs",
             "- F2.1 false positive rate ≤0.05 on large artifact sample",
-            "- F2.1 collapse after lock-marker stripping (stripping level not implemented)",
             "- F3.2 on LLM-generated artifacts (only fixture-based shuffled copies tested)",
             "",
             "## 6. Recommended next implementation steps",
             "",
-            "1. Add `lock_marker_strip` ablation level that removes Lock/with-lock AST patterns.",
-            "2. Add ODE integration task generation with behavioral equivalence tests.",
-            "3. Run F1.1 on generated artifacts (still detector-primary, no LLM judge).",
-            "4. Expand F3.2 to generated artifact pairs with metadata-only label shuffle.",
+            "1. Add ODE integration task generation with behavioral equivalence tests.",
+            "2. Run F1.1 on generated artifacts (still detector-primary, no LLM judge).",
+            "3. Expand F3.2 to generated artifact pairs with metadata-only label shuffle.",
+            "4. Add Jacobi/Gauss-Seidel and quadrature dimensions when Family 1 expands.",
             "",
             "## Matrix status",
             "",
@@ -391,9 +445,10 @@ def run_analyze_slice(
     """Run preregistered slice analysis on handcrafted fixtures."""
     output_dir.mkdir(parents=True, exist_ok=True)
     tmp_shuffled = output_dir / "_shuffled_tmp"
+    sidecar_dir = output_dir / "strip_sidecars"
 
     f1_rows = _analyze_f1(fixtures_dir)
-    f2_rows = _analyze_f2(fixtures_dir)
+    f2_rows = _analyze_f2(fixtures_dir, sidecar_dir)
     f3_rows, f3_meta = _analyze_f3(fixtures_dir, tmp_shuffled)
     matrix_rows = _build_matrix(f1_rows, f2_rows, f3_meta)
 
@@ -438,6 +493,7 @@ def run_analyze_slice(
             for r in f2_rows
             if r["strip_level"] in ("raw", "no_comments")
         )
+        and _f2_collapse_observed(f2_rows)
         and f3_meta.get("at_chance", False)
     )
 
