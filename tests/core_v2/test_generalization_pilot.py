@@ -18,6 +18,9 @@ EULER_CONFIG = project_root() / "configs" / "core_v2_generalization_local_euler_
 QUADRATURE_CONFIG = project_root() / "configs" / "core_v2_generalization_local_quadrature.yaml"
 EAGER_LAZY_CONFIG = project_root() / "configs" / "core_v2_generalization_local_eager_lazy.yaml"
 BFS_DFS_CONFIG = project_root() / "configs" / "core_v2_generalization_local_bfs_dfs.yaml"
+DET_RAND_CONFIG = (
+    project_root() / "configs" / "core_v2_generalization_local_deterministic_randomized.yaml"
+)
 
 
 @pytest.mark.parametrize(
@@ -27,6 +30,12 @@ BFS_DFS_CONFIG = project_root() / "configs" / "core_v2_generalization_local_bfs_
         (QUADRATURE_CONFIG, "core_v2_generalization_local_quadrature_001", 90, 3),
         (EAGER_LAZY_CONFIG, "core_v2_generalization_local_eager_lazy_001", 120, 4),
         (BFS_DFS_CONFIG, "core_v2_generalization_local_bfs_dfs_001", 120, 4),
+        (
+            DET_RAND_CONFIG,
+            "core_v2_generalization_local_deterministic_randomized_001",
+            120,
+            4,
+        ),
     ],
 )
 def test_generalization_expected_generations(
@@ -45,6 +54,9 @@ def test_generalization_run_name_detection() -> None:
     assert is_generalization_run_name("core_v2_generalization_local_euler_rk4_001")
     assert is_generalization_run_name("core_v2_generalization_local_eager_lazy_001")
     assert is_generalization_run_name("core_v2_generalization_local_bfs_dfs_001")
+    assert is_generalization_run_name(
+        "core_v2_generalization_local_deterministic_randomized_001"
+    )
     assert not is_generalization_run_name("core_v2_euler_rk4_pilot_local_001")
 
 
@@ -141,6 +153,37 @@ def test_frozen_metadata_includes_bfs_dfs_and_stripping_hashes() -> None:
     run_dir.rmdir()
 
 
+def test_frozen_metadata_includes_deterministic_randomized_and_stripping_hashes() -> None:
+    root = project_root()
+    run_dir = root / "results" / "core_v2" / "runs" / "_test_frozen_det_rand_meta"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    path = write_frozen_detector_metadata(
+        run_dir,
+        project_root=root,
+        run_name="core_v2_generalization_local_deterministic_randomized_001",
+        dimension="deterministic_vs_randomized",
+    )
+    meta = json.loads(path.read_text(encoding="utf-8"))
+    assert meta["dimension"] == "deterministic_vs_randomized"
+    assert meta["git_commit"] != "unknown"
+    import hashlib
+
+    det_hash = meta["detector_files_hash"]["deterministic_randomized.py"]
+    strip_hash = meta["detector_files_hash"]["stripping.py"]
+    assert len(det_hash) == 64
+    assert len(strip_hash) == 64
+    expected_det = hashlib.sha256(
+        (root / "src/invert_core/detectors/deterministic_randomized.py").read_bytes()
+    ).hexdigest()
+    expected_strip = hashlib.sha256(
+        (root / "src/invert_core/stripping.py").read_bytes()
+    ).hexdigest()
+    assert det_hash == expected_det
+    assert strip_hash == expected_strip
+    path.unlink()
+    run_dir.rmdir()
+
+
 def test_maybe_write_frozen_metadata_for_eager_lazy_generalization(tmp_path: Path) -> None:
     from invert_core.frozen_detector import maybe_write_frozen_detector_metadata
 
@@ -184,6 +227,37 @@ def test_maybe_write_frozen_metadata_for_bfs_dfs_generalization(tmp_path: Path) 
     assert path is not None
     meta = json.loads(path.read_text(encoding="utf-8"))
     assert "bfs_dfs.py" in meta["detector_files_hash"]
+    assert "stripping.py" in meta["detector_files_hash"]
+
+
+def test_maybe_write_frozen_metadata_for_deterministic_randomized_generalization(
+    tmp_path: Path,
+) -> None:
+    from invert_core.frozen_detector import maybe_write_frozen_detector_metadata
+
+    root = tmp_path / "repo"
+    root.mkdir()
+    det_dir = root / "src/invert_core/detectors"
+    det_dir.mkdir(parents=True)
+    for name in (
+        "integration.py",
+        "quadrature.py",
+        "eager_lazy.py",
+        "bfs_dfs.py",
+        "deterministic_randomized.py",
+    ):
+        (det_dir / name).write_text(f"# {name}\n", encoding="utf-8")
+    (root / "src/invert_core").mkdir(parents=True, exist_ok=True)
+    (root / "src/invert_core/stripping.py").write_text("# stripping\n", encoding="utf-8")
+
+    path = maybe_write_frozen_detector_metadata(
+        "core_v2_generalization_local_deterministic_randomized_001",
+        root,
+        "deterministic_vs_randomized",
+    )
+    assert path is not None
+    meta = json.loads(path.read_text(encoding="utf-8"))
+    assert "deterministic_randomized.py" in meta["detector_files_hash"]
     assert "stripping.py" in meta["detector_files_hash"]
 
 

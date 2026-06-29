@@ -1,0 +1,36 @@
+run:
+  name: core_v2_generalization_local_deterministic_randomized_001
+  overwrite: false
+
+family: F1
+dimension: deterministic_vs_randomized
+
+tasks:
+  file: data/core_v2/tasks/deterministic_randomized_tasks.json
+  include:
+    - letters_8
+    - numbers_10
+    - mixed_tokens
+
+generation:
+  models:
+    - ollama:qwen2.5-coder:14b
+    - ollama:qwen2.5-coder:32b
+    - ollama:qwen3-coder:30b
+    - ollama:devstral:latest
+  repetitions: 5
+  language: python
+  pure_implementation: true
+  models_config: configs/models.yaml
+
+methods:
+  - deterministic
+  - randomized
+
+stripping:
+  levels:
+    - raw
+    - no_comments
+    - renamed
+    - no_imports
+    - format_normalized

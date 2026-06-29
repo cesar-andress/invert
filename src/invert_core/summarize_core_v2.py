@@ -371,9 +371,9 @@ def _next_cheapest_experiment(
 
     if det_rand and det_rand["status"] == "insufficient_data":
         return (
-            "Run `invert-core analyze-run --run core_v2_deterministic_randomized_pilot_local_001` "
-            "(or complete deterministic/randomized generation first) to evaluate Class E "
-            "without new API spend."
+            "Run `./scripts/run_core_v2_generalization_local_deterministic_randomized_001.sh` "
+            "(or analyze an existing Class E pilot) to evaluate deterministic/randomized "
+            "without paid APIs."
         )
     if bfs_dfs and bfs_dfs["status"] == "insufficient_data":
         return (
@@ -814,7 +814,8 @@ def _write_decision_report(
         if dimension == "deterministic_vs_randomized":
             lines.append(
                 "- Frozen detector metadata includes SHA256 of `deterministic_randomized.py` "
-                "and `stripping.py` when analyzed via a frozen generalization run for Class E."
+                "and `stripping.py` when analyzed via "
+                "`core_v2_generalization_local_deterministic_randomized_001`."
             )
         lines.append(
             f"- Models evaluated: {', '.join(evidence['models_evaluated']) or 'none'}"
