@@ -1,0 +1,5 @@
+run,section,pole,generated_n,valid_n,genuine_n,manipulation_success_rate,detector_accuracy_raw,detector_accuracy_format_normalized,ambiguous_rate_raw,ambiguous_rate_format_normalized,full_demand_detected_rate,full_demand_ambiguous_rate,full_demand_collapsed_rate
+core_v2_generalization_local_eager_lazy_001,partial_demand,eager,60,60,60,1.0000,1.0000,1.0000,0.0000,0.0000,,,
+core_v2_generalization_local_eager_lazy_001,partial_demand,lazy,60,60,60,1.0000,1.0000,0.7500,0.0000,0.2500,,,
+core_v2_generalization_local_eager_lazy_001,full_demand_control,eager,,60,,,,,,,1.0000,0.0000,0.0000
+core_v2_generalization_local_eager_lazy_001,full_demand_control,lazy,,60,,,,,,,0.0000,1.0000,1.0000

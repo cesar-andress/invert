@@ -14,6 +14,8 @@ Signature classes under evaluation:
 ### Development runs
 
 - `core_v2_bfs_dfs_pilot_local_001`
+- `core_v2_deterministic_randomized_pilot_local_001`
+- `core_v2_deterministic_randomized_pilot_local_repair_001`
 - `core_v2_eager_lazy_pilot_local_001`
 - `core_v2_euler_rk4_pilot_local_001`
 - `core_v2_euler_rk4_pilot_local_sweep_001`
@@ -22,6 +24,7 @@ Signature classes under evaluation:
 ### Frozen generalization runs
 
 - `core_v2_generalization_local_bfs_dfs_001` (has `frozen_detector_metadata.json`)
+- `core_v2_generalization_local_deterministic_randomized_001` (has `frozen_detector_metadata.json`)
 - `core_v2_generalization_local_eager_lazy_001` (has `frozen_detector_metadata.json`)
 - `core_v2_generalization_local_quadrature_001` (has `frozen_detector_metadata.json`)
 
@@ -31,6 +34,7 @@ Signature classes under evaluation:
 - Class B (arithmetic weight signatures)
 - Class C (dynamic temporal / avoidable-computation signatures)
 - Class D (dynamic order process signatures)
+- Class E (dynamic inter-execution variability signatures)
 
 ## 2. Which models are reliable generators?
 
@@ -41,6 +45,13 @@ Signature classes under evaluation:
 
 ## 3. Generation validity failures
 
+- core_v2_deterministic_randomized_pilot_local_001 / Devstral:latest (deterministic_vs_randomized)
+- core_v2_deterministic_randomized_pilot_local_001 / Qwen2.5-coder:14b (deterministic_vs_randomized)
+- core_v2_deterministic_randomized_pilot_local_001 / Qwen2.5-coder:32b (deterministic_vs_randomized)
+- core_v2_deterministic_randomized_pilot_local_001 / Qwen3-coder:30b (deterministic_vs_randomized)
+- core_v2_deterministic_randomized_pilot_local_repair_001 / Devstral:latest (deterministic_vs_randomized)
+- core_v2_deterministic_randomized_pilot_local_repair_001 / Qwen2.5-coder:14b (deterministic_vs_randomized)
+- core_v2_deterministic_randomized_pilot_local_repair_001 / Qwen2.5-coder:32b (deterministic_vs_randomized)
 - core_v2_euler_rk4_pilot_local_001 / DeepSeek-coder-v2:lite (euler_vs_rk4)
 - core_v2_euler_rk4_pilot_local_sweep_001 / DeepSeek-coder-v2:lite (euler_vs_rk4)
 - core_v2_euler_rk4_pilot_local_sweep_001 / Devstral:latest (euler_vs_rk4)
@@ -67,6 +78,10 @@ Signature classes under evaluation:
 
 Frozen generalization evidence for Class C is available (models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b; models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b). This result is not reducible to mathematical-coefficient identity because eager and lazy compute the same feature formulas; only timing of computation differs.
 
+## 8.1 Class C pole asymmetry (frozen generalization audit)
+
+Frozen generalization audit (`core_v2_generalization_local_eager_lazy_001/eager_lazy_pole_asymmetry.md`): partial-demand recovery is symmetric at raw (eager 1.0000, lazy 1.0000) but lazy weakens after format normalization (0.7500 vs eager 1.0000). Eager is recovered by a **positive precomputation trace**; lazy by **withheld computation until demand**. Full-demand control collapses lazy signatures (1.0000 ambiguous) while eager remains detected.
+
 ## 9. Is Class D supported?
 
 **Yes (preliminary).** At least two models meet the preregistered valid-only survival rule for `bfs_vs_dfs`.
@@ -77,11 +92,11 @@ Frozen generalization evidence for Class D is available (models evaluated: Devst
 
 ## 11. Is Class E supported?
 
-Class E not yet evaluated.
+**Yes (preliminary).** At least two models meet the preregistered valid-only survival rule for `deterministic_vs_randomized`.
 
 ## 12. Inter-execution variability vs other signature classes (F1.5 / Class E)
 
-Class E (dynamic inter-execution variability signatures) not yet supported by completed runs.
+Frozen generalization evidence for Class E is available (models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b; models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b). This result is not reducible to mathematical identity, avoidable computation, or traversal order because the same input and same behavioral output produce stable versus variable traces across repeated executions.
 
 ## 13. Two mechanistically distinct classes (preregistered criterion)
 
@@ -89,7 +104,7 @@ Class E (dynamic inter-execution variability signatures) not yet supported by co
 
 ## 14. Next cheapest experiment
 
-Run `invert-core analyze-run --run core_v2_deterministic_randomized_pilot_local_001` (or complete deterministic/randomized generation first) to evaluate Class E without new API spend.
+Add the next preregistered Family 1 dimension or a minimal paid-API replication on the two best local models only.
 
 ## Dimension status snapshot
 
@@ -99,7 +114,7 @@ Run `invert-core analyze-run --run core_v2_deterministic_randomized_pilot_local_
 | trapezoidal_vs_simpson | 2 | 4 | 4 | supported_if_2plus_models_survive |
 | eager_vs_lazy | 2 | 4 | 3 | supported_if_2plus_models_survive |
 | bfs_vs_dfs | 2 | 4 | 4 | supported_if_2plus_models_survive |
-| deterministic_vs_randomized | 0 | 0 | 0 | insufficient_data |
+| deterministic_vs_randomized | 3 | 4 | 4 | supported_if_2plus_models_survive |
 
 ## Frozen generalization evidence
 
@@ -138,5 +153,11 @@ Run `invert-core analyze-run --run core_v2_deterministic_randomized_pilot_local_
 
 ### Class E (dynamic inter-execution variability signatures) (`deterministic_vs_randomized`)
 
-- No frozen generalization runs analyzed for this dimension yet.
+- Frozen detector metadata includes SHA256 of `deterministic_randomized.py` and `stripping.py` when analyzed via `core_v2_generalization_local_deterministic_randomized_001`.
+- Models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b
+- Models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b
+- Valid artifact rate: 1.0000
+- Detector accuracy (raw): 1.0000
+- Detector accuracy (format_normalized): 1.0000
+- Ambiguous rate (raw): 0.0000
 

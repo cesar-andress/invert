@@ -505,6 +505,7 @@ def _write_decision_report(
     *,
     development_runs: list[str],
     frozen_runs: list[str],
+    project_root: Path,
 ) -> None:
     by_dim = {r["dimension"]: r for r in dimension_rows}
     euler = by_dim.get("euler_vs_rk4")
@@ -593,6 +594,10 @@ def _write_decision_report(
         process_signature_text = (
             "Current evidence remains limited to arithmetic/static signatures."
         )
+
+    from invert_core.audit_eager_lazy_pole_asymmetry import class_c_asymmetry_note
+
+    class_c_asymmetry = class_c_asymmetry_note(project_root)
 
     class_d_passes = (
         bfs_dfs is not None
@@ -756,6 +761,12 @@ def _write_decision_report(
             "",
             process_signature_text,
             "",
+            "## 8.1 Class C pole asymmetry (frozen generalization audit)",
+            "",
+            class_c_asymmetry
+            if class_c_asymmetry
+            else "No pole-asymmetry audit found for frozen eager/lazy generalization.",
+            "",
             "## 9. Is Class D supported?",
             "",
             class_d if bfs_dfs and _parse_int(bfs_dfs["runs_found"]) > 0 else "Class D not yet evaluated.",
@@ -901,6 +912,7 @@ def run_summarize_core_v2(project_root: Path) -> SummarizeCoreV2Result:
         dimension_rows,
         development_runs=sorted(development_runs),
         frozen_runs=sorted(frozen_runs),
+        project_root=project_root,
     )
 
     return SummarizeCoreV2Result(
