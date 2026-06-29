@@ -1,0 +1,45 @@
+{
+  "generator_model": "local_stub",
+  "judge_model": "local_stub",
+  "task_id": "normalize_file_paths",
+  "manipulated_dimension": "api_preference",
+  "true_value": "v0",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function normalize_path(path: str) -> str that converts a file path to a normalized form: collapse repeated slashes, resolve . and .. segments, and use forward slashes.\n\n## Generated code\n# invert:api_preference=v0\n# invert:concurrency=v0\n# invert:edge_cases=v0\n# invert:error_handling=v0\n# invert:maintainability=v0\n# invert:performance=v0\n# invert:readability=v0\n# invert:security=v0\n\n# Stub implementation (seed=db42b530)\ndef solve(*args, **kwargs):\n    \"\"\"Generated stub for smoke test.\"\"\"\n    # Intent snapshot:\n    # - performance (v0): No specific complexity requirement.\n    # - security (v0): No explicit input validation required.\n    # - error_handling (v0): Fail fast by raising exceptions on invalid input.\n    # - api_preference (v0): Use Python standard library utilities where appropriate.\n    # - readability (v0): Prefer compact code with short names and minimal comments.\n    # - maintainability (v0): Implement the solution as a single function.\n    # - edge_cases (v0): Assume inputs are well formed.\n    # - concurrency (v0): Assume single-threaded execution.\n    return None\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\"performance\": {\"value\": \"v0\", \"confidence\": 0.85}, \"security\": {\"value\": \"v0\", \"confidence\": 0.85}, \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.85}, \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.85}, \"readability\": {\"value\": \"v0\", \"confidence\": 0.85}, \"maintainability\": {\"value\": \"v0\", \"confidence\": 0.85}, \"edge_cases\": {\"value\": \"v0\", \"confidence\": 0.85}, \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.85}}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "error_handling": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "readability": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "maintainability": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "edge_cases": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.85
+    }
+  },
+  "timestamp": "2026-06-29T13:40:07.021500+00:00"
+}

@@ -1,0 +1,9 @@
+dimension,model,accuracy,n
+api_preference,local_stub,1.0,20
+concurrency,local_stub,1.0,20
+edge_cases,local_stub,1.0,20
+error_handling,local_stub,1.0,20
+maintainability,local_stub,1.0,20
+performance,local_stub,1.0,20
+readability,local_stub,1.0,20
+security,local_stub,1.0,20

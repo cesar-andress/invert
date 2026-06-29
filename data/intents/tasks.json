@@ -1,0 +1,152 @@
+[
+  {
+    "task_id": "parse_csv_rows",
+    "language": "python",
+    "functional_behavior": "Implement a function parse_csv_rows(text: str) -> list[dict[str, str]] that parses CSV text with a header row into a list of row dictionaries. Assume comma-separated values with no embedded commas in fields.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "normalize_file_paths",
+    "language": "python",
+    "functional_behavior": "Implement a function normalize_path(path: str) -> str that converts a file path to a normalized form: collapse repeated slashes, resolve . and .. segments, and use forward slashes.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "grouped_statistics",
+    "language": "python",
+    "functional_behavior": "Implement a function grouped_mean(records: list[dict], key: str, value_field: str) -> dict[str, float] that computes the mean of value_field for each group defined by key.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "validate_email_like",
+    "language": "python",
+    "functional_behavior": "Implement a function is_email_like(s: str) -> bool that returns True if the string looks like a valid email address (contains exactly one @, non-empty local and domain parts, domain contains a dot).",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "merge_intervals",
+    "language": "python",
+    "functional_behavior": "Implement a function merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]] that merges overlapping or adjacent intervals and returns sorted non-overlapping intervals.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "lru_cache",
+    "language": "python",
+    "functional_behavior": "Implement a class LRUCache with methods get(key) and put(key, value) supporting a fixed capacity. get returns -1 for missing keys. Both operations must be O(1) average time.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "rate_limiter",
+    "language": "python",
+    "functional_behavior": "Implement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "sanitize_filename",
+    "language": "python",
+    "functional_behavior": "Implement a function sanitize_filename(name: str) -> str that removes or replaces characters unsafe for filenames, trims whitespace, and returns a non-empty fallback if the result would be empty.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "top_k_frequent",
+    "language": "python",
+    "functional_behavior": "Implement a function top_k_frequent(items: list[str], k: int) -> list[str] that returns the k most frequent strings in descending frequency order. Break ties lexicographically.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  },
+  {
+    "task_id": "dependency_order",
+    "language": "python",
+    "functional_behavior": "Implement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.",
+    "dimensions": {
+      "performance": {"v0": "No specific complexity requirement.", "v1": "Must run in O(n log n) time or better."},
+      "security": {"v0": "No explicit input validation required.", "v1": "Validate and sanitize all external inputs."},
+      "error_handling": {"v0": "Fail fast by raising exceptions on invalid input.", "v1": "Degrade gracefully by returning a safe default value."},
+      "api_preference": {"v0": "Use Python standard library utilities where appropriate.", "v1": "Implement the logic manually without relying on helper libraries."},
+      "readability": {"v0": "Prefer compact code with short names and minimal comments.", "v1": "Prefer verbose, readable code with descriptive names and helpful comments."},
+      "maintainability": {"v0": "Implement the solution as a single function.", "v1": "Decompose the solution into small reusable helper functions."},
+      "edge_cases": {"v0": "Assume inputs are well formed.", "v1": "Explicitly handle null, empty, and boundary inputs."},
+      "concurrency": {"v0": "Assume single-threaded execution.", "v1": "Make the implementation safe for concurrent use when relevant."}
+    }
+  }
+]

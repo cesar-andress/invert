@@ -1,0 +1,19 @@
+tasks:
+  include:
+    - merge_intervals
+    - lru_cache
+
+generation:
+  models:
+    - openai
+    - anthropic
+  repetitions: 2
+
+recovery:
+  judge_models:
+    - openai
+
+run:
+  name: pilot_001
+  max_generations: 128
+  overwrite: false

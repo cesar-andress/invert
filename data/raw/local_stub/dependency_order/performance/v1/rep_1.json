@@ -1,0 +1,13 @@
+{
+  "model": "local_stub",
+  "task_id": "dependency_order",
+  "dimension": "performance",
+  "value": "v1",
+  "rep": 1,
+  "prompt": "Implement the following programming task in Python.\n\n## Functional behavior\nImplement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.\n\n## Intent dimensions\nApply ALL of the following intent constraints when writing the code:\n- performance (v1): Must run in O(n log n) time or better.\n- security (v0): No explicit input validation required.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v0): Assume single-threaded execution.\n\n## Output requirements\n- Return Python code only.\n- Provide one self-contained implementation in a single file.\n- Do not include explanations, markdown, or text outside the code.\n- Do not wrap the code in markdown fences.\n",
+  "response": "# Stub implementation (seed=0e15ce33)\ndef solve(*args, **kwargs):\n    \"\"\"Generated stub for smoke test.\"\"\"\n    # Intent snapshot:\n    # - performance (v1): Must run in O(n log n) time or better.\n    # - security (v0): No explicit input validation required.\n    # - error_handling (v0): Fail fast by raising exceptions on invalid input.\n    # - api_preference (v0): Use Python standard library utilities where appropriate.\n    # - readability (v0): Prefer compact code with short names and minimal comments.\n    # - maintainability (v0): Implement the solution as a single function.\n    # - edge_cases (v0): Assume inputs are well formed.\n    # - concurrency (v0): Assume single-threaded execution.\n    return None\n",
+  "timestamp": "2026-06-29T13:40:06.715642+00:00",
+  "parameters": {
+    "temperature": 0
+  }
+}

@@ -1,0 +1,17 @@
+providers:
+  openai:
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0
+  anthropic:
+    provider: anthropic
+    model: claude-3-5-haiku-latest
+    temperature: 0
+  google:
+    provider: google
+    model: gemini-1.5-flash
+    temperature: 0
+  local_stub:
+    provider: local_stub
+    model: stub-v1
+    temperature: 0

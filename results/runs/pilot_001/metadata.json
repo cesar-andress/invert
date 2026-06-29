@@ -1,0 +1,20 @@
+{
+  "run_name": "pilot_001",
+  "started_at": "2026-06-29T13:40:56.655940+00:00",
+  "tasks": [
+    "merge_intervals",
+    "lru_cache"
+  ],
+  "generator_models": [
+    "openai",
+    "anthropic"
+  ],
+  "judge_models": [
+    "openai"
+  ],
+  "repetitions": 2,
+  "temperature": 0,
+  "max_generations": 128,
+  "git_commit": null,
+  "config_file": "configs/pilot.yaml"
+}

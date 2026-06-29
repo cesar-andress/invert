@@ -1,0 +1,13 @@
+{
+  "model": "openai",
+  "task_id": "merge_intervals",
+  "dimension": "error_handling",
+  "value": "v0",
+  "rep": 2,
+  "prompt": "Implement the following programming task in Python.\n\n## Functional behavior\nImplement a function merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]] that merges overlapping or adjacent intervals and returns sorted non-overlapping intervals.\n\n## Intent dimensions\nApply ALL of the following intent constraints when writing the code:\n- performance (v0): No specific complexity requirement.\n- security (v0): No explicit input validation required.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v0): Assume single-threaded execution.\n\n## Output requirements\n- Return Python code only.\n- Provide one self-contained implementation in a single file.\n- Do not include explanations, markdown, or text outside the code.\n- Do not wrap the code in markdown fences.\n",
+  "response": "def merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]:\n    if not intervals:\n        return []\n    \n    intervals.sort(key=lambda x: x[0])\n    merged = [intervals[0]]\n    \n    for current in intervals[1:]:\n        last = merged[-1]\n        if current[0] <= last[1]:  # Overlapping or adjacent\n            merged[-1] = (last[0], max(last[1], current[1]))\n        else:\n            merged.append(current)\n    \n    return merged",
+  "timestamp": "2026-06-29T13:41:26.373031+00:00",
+  "parameters": {
+    "temperature": 0
+  }
+}

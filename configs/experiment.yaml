@@ -1,0 +1,7 @@
+tasks_file: data/intents/tasks.json
+repetitions: 1
+generator_models:
+  - local_stub
+judge_model: local_stub
+results_dir: results
+data_dir: data
