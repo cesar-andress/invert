@@ -5,7 +5,13 @@ from pathlib import Path
 
 import pytest
 
-from invert_core.detectors.eager_lazy import detect_eager_lazy, detect_eager_lazy_file
+from invert_core.detectors.eager_lazy import (
+    detect_eager_lazy,
+    detect_eager_lazy_file,
+    is_genuine_eager,
+    is_genuine_lazy,
+    pole_manipulation_success,
+)
 from invert_core.eager_lazy_behavioral import run_eager_lazy_behavioral_oracle
 from invert_core.eager_lazy_prompts import (
     EAGER_LAZY_METHOD_OPERATIONAL,
@@ -154,3 +160,94 @@ def test_lazy_values_correct_but_eager_timing_is_behaviorally_valid() -> None:
     assert behavioral.behavioral_pass
     detected = detect_eager_lazy(code, task=tasks[0])
     assert detected.method == "eager"
+
+
+def test_genuine_pole_flags_on_fixtures() -> None:
+    eager = detect_eager_lazy((FIXTURES / "eager_pipeline.py").read_text(encoding="utf-8"))
+    lazy = detect_eager_lazy((FIXTURES / "lazy_pipeline.py").read_text(encoding="utf-8"))
+    assert is_genuine_eager(eager.evidence)
+    assert pole_manipulation_success("eager", eager.evidence)
+    assert not is_genuine_lazy(eager.evidence)
+    assert is_genuine_lazy(lazy.evidence)
+    assert pole_manipulation_success("lazy", lazy.evidence)
+    assert not is_genuine_eager(lazy.evidence)
+
+
+def test_full_demand_control_lazy_becomes_ambiguous() -> None:
+    code = (FIXTURES / "lazy_pipeline.py").read_text(encoding="utf-8")
+    result = detect_eager_lazy(code, demand_pattern="full")
+    assert result.method == "ambiguous"
+    assert result.evidence["reason"] == "full_demand_no_avoidable_computation_remaining"
+    assert result.evidence["demand_pattern"] == "full"
+    assert len(result.evidence["trace"]) == 3
+
+
+def test_full_demand_control_eager_still_recoverable() -> None:
+    code = (FIXTURES / "eager_pipeline.py").read_text(encoding="utf-8")
+    result = detect_eager_lazy(code, demand_pattern="full")
+    assert result.method == "eager"
+    assert result.evidence["calls_before_first_request"] == 3
+    assert result.evidence["calls_during_first_request"] == 0
+
+
+def test_full_demand_control_recovery_drops_for_lazy_stub() -> None:
+    tasks = load_eager_lazy_tasks(TASKS_FILE)
+    task = tasks[0]
+    lazy_code = build_eager_lazy_stub_code(task, "lazy")
+    partial = detect_eager_lazy(lazy_code, task=task, demand_pattern="partial")
+    full = detect_eager_lazy(lazy_code, task=task, demand_pattern="full")
+    assert partial.method == "lazy"
+    assert full.method == "ambiguous"
+
+
+def test_analyze_run_control_aggregation(tmp_path: Path) -> None:
+    from invert_core.analyze_eager_lazy_run import _accuracy, _manipulation_rate, _row_from_detection
+    from invert_core.detectors.eager_lazy import detect_eager_lazy as detect
+
+    art = {
+        "model": "local_stub",
+        "task_id": "small_positive_vector",
+        "method": "lazy",
+        "rep": 1,
+    }
+    code = (FIXTURES / "lazy_pipeline.py").read_text(encoding="utf-8")
+    partial = detect(code, demand_pattern="partial")
+    full = detect(code, demand_pattern="full")
+    rows = [
+        _row_from_detection(
+            run_name="test",
+            art=art,
+            strip_level="raw",
+            parsed=True,
+            behavioral_pass=True,
+            valid_artifact=True,
+            result=partial,
+            include_manipulation=True,
+        ),
+        _row_from_detection(
+            run_name="test",
+            art={**art, "method": "eager"},
+            strip_level="raw",
+            parsed=True,
+            behavioral_pass=True,
+            valid_artifact=True,
+            result=detect((FIXTURES / "eager_pipeline.py").read_text(encoding="utf-8")),
+            include_manipulation=True,
+        ),
+    ]
+    full_rows = [
+        _row_from_detection(
+            run_name="test",
+            art=art,
+            strip_level="raw",
+            parsed=True,
+            behavioral_pass=True,
+            valid_artifact=True,
+            result=full,
+            include_manipulation=False,
+        ),
+    ]
+    assert _manipulation_rate(rows, requested_method="lazy") == 1.0
+    assert _accuracy(rows) == 1.0
+    assert _accuracy(full_rows) == 0.0
+
