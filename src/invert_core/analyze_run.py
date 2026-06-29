@@ -17,6 +17,9 @@ NA = "NA"
 
 MODEL_DISPLAY_NAMES = {
     "ollama__qwen2_5-coder__32b": "Qwen2.5-coder:32b",
+    "ollama__qwen3-coder__30b": "Qwen3-coder:30b",
+    "ollama__qwen2_5-coder__14b": "Qwen2.5-coder:14b",
+    "ollama__devstral__latest": "Devstral:latest",
     "ollama__deepseek-coder-v2__lite": "DeepSeek-coder-v2:lite",
     "openai": "openai",
     "anthropic": "anthropic",
@@ -438,6 +441,62 @@ def _format_rate(value: float | None) -> str:
     return f"{value:.4f}"
 
 
+def _model_validity_counts(
+    detection_rows: list[dict[str, Any]], model: str
+) -> tuple[int, int]:
+    raw_rows = [
+        r for r in detection_rows if r["model"] == model and r["strip_level"] == "raw"
+    ]
+    n_generated = len(raw_rows)
+    n_valid = sum(1 for r in raw_rows if r["valid_artifact"] == "true")
+    return n_generated, n_valid
+
+
+def _build_model_rankings(
+    detection_rows: list[dict[str, Any]],
+    model_f11: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    models = sorted({r["model"] for r in detection_rows})
+    rankings: list[dict[str, Any]] = []
+    for model in models:
+        n_generated, n_valid = _model_validity_counts(detection_rows, model)
+        valid_artifact_rate = n_valid / n_generated if n_generated else None
+        raw = _aggregate_model_strip_valid(detection_rows, model, "raw")
+        fmt = _aggregate_model_strip_valid(detection_rows, model, "format_normalized")
+        f11 = model_f11.get(model, {})
+        rankings.append(
+            {
+                "model": model,
+                "display_name": _model_display_name(model),
+                "n_generated": n_generated,
+                "n_valid": n_valid,
+                "valid_artifact_rate": valid_artifact_rate,
+                "valid_raw_accuracy": raw["valid_detector_accuracy"],
+                "valid_fmt_accuracy": fmt["valid_detector_accuracy"],
+                "ambiguous_rate": raw["valid_ambiguous_rate"],
+                "f11_survives": bool(f11.get("survives")),
+            }
+        )
+
+    def sort_key(row: dict[str, Any]) -> tuple:
+        rate = row["valid_artifact_rate"]
+        raw_acc = row["valid_raw_accuracy"]
+        fmt_acc = row["valid_fmt_accuracy"]
+        amb = row["ambiguous_rate"]
+        return (
+            0 if row["f11_survives"] else 1,
+            -(rate if rate is not None else -1.0),
+            -(raw_acc if raw_acc is not None else -1.0),
+            -(fmt_acc if fmt_acc is not None else -1.0),
+            amb if amb is not None else 999.0,
+        )
+
+    rankings.sort(key=sort_key)
+    for idx, row in enumerate(rankings, start=1):
+        row["rank"] = idx
+    return rankings
+
+
 def _write_report(
     path: Path,
     run_name: str,
@@ -457,10 +516,7 @@ def _write_report(
             detection_rows, model, "format_normalized"
         )
 
-    qwen_key = "ollama__qwen2_5-coder__32b"
-    deepseek_key = "ollama__deepseek-coder-v2__lite"
-    qwen_f11 = stats["model_f11"].get(qwen_key, {})
-    deepseek_f11 = stats["model_f11"].get(deepseek_key, {})
+    model_rankings = _build_model_rankings(detection_rows, stats["model_f11"])
 
     def _f11_answer(model_key: str, f11: dict[str, Any]) -> str:
         if model_key not in models:
@@ -519,7 +575,30 @@ def _write_report(
             "Invalid artifacts are **not** recovery failures; they failed the behavioral oracle "
             "and are excluded from valid-only recovery metrics (R_raw, R_stripped).",
             "",
-            "## 2. Recovery on valid artifacts only",
+            "## 2. Model ranking (valid-only recovery)",
+            "",
+            "Ranked by: F1.1 survival (pass first), then valid_artifact_rate, "
+            "valid_detector_accuracy at raw, valid_detector_accuracy at format_normalized, "
+            "ambiguous_rate (lower is better).",
+            "",
+            "| rank | model | valid_artifact_rate | valid_raw_acc | valid_fmt_acc | ambiguous_rate | F1.1 |",
+            "|------|-------|---------------------|---------------|---------------|----------------|------|",
+        ]
+    )
+    for row in model_rankings:
+        lines.append(
+            f"| {row['rank']} | {row['display_name']} | "
+            f"{_format_rate(row['valid_artifact_rate'])} | "
+            f"{_format_rate(row['valid_raw_accuracy'])} | "
+            f"{_format_rate(row['valid_fmt_accuracy'])} | "
+            f"{_format_rate(row['ambiguous_rate'])} | "
+            f"{'pass' if row['f11_survives'] else 'fail'} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## 3. Recovery on valid artifacts only",
             "",
             "| model | strip_level | valid_n | valid_detector_accuracy | valid_ambiguous_rate |",
             "|-------|-------------|---------|-------------------------|----------------------|",
@@ -553,20 +632,27 @@ def _write_report(
 
     lines.extend(
         [
-            "## 3. F1.1 decision",
+            "## 4. F1.1 decision",
             "",
             f"Preregistered rule: valid_n >= {F11_MIN_VALID_N}, valid_detector_accuracy >= "
             f"{F11_MIN_ACCURACY} at raw and format_normalized, valid_ambiguous_rate <= "
             f"{F11_MAX_AMBIGUOUS}.",
             "",
-            "### Does Qwen2.5-coder:32b support F1.1 survival after stripping?",
-            "",
-            _f11_answer(qwen_key, qwen_f11),
-            "",
-            "### Does DeepSeek-coder-v2:lite support F1.1 survival after stripping?",
-            "",
-            _f11_answer(deepseek_key, deepseek_f11),
-            "",
+        ]
+    )
+    for row in model_rankings:
+        f11 = stats["model_f11"].get(row["model"], {})
+        lines.extend(
+            [
+                f"### {_model_display_name(row['model'])}",
+                "",
+                _f11_answer(row["model"], f11),
+                "",
+            ]
+        )
+
+    lines.extend(
+        [
             "### Should invalid artifacts be interpreted as recovery failure?",
             "",
             "**No.** Invalid artifacts failed behavioral validation (parse/runtime/tolerance). "
@@ -576,7 +662,7 @@ def _write_report(
             "",
             quadrature_answer,
             "",
-            "## 4. All-generated summary (includes invalid artifacts)",
+            "## 5. All-generated summary (includes invalid artifacts)",
             "",
             "Detector accuracy in this section includes invalid artifacts and is **not** used "
             "for F1.1 recovery decisions.",

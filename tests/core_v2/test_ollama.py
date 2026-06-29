@@ -18,6 +18,9 @@ from invert_core.tasks import project_root
     ("spec", "expected"),
     [
         ("ollama:qwen2.5-coder:32b", "ollama__qwen2_5-coder__32b"),
+        ("ollama:qwen3-coder:30b", "ollama__qwen3-coder__30b"),
+        ("ollama:qwen2.5-coder:14b", "ollama__qwen2_5-coder__14b"),
+        ("ollama:devstral:latest", "ollama__devstral__latest"),
         ("ollama:deepseek-coder-v2:lite", "ollama__deepseek-coder-v2__lite"),
         ("openai", "openai"),
     ],
