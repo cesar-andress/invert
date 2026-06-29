@@ -1,0 +1,15 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v1/rep_2.py",
+  "replacements": [
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "1"
+    },
+    {
+      "from": "isinstance",
+      "to": "type_check",
+      "count": "1"
+    }
+  ]
+}

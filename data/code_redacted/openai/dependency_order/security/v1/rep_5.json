@@ -1,0 +1,23 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/openai/dependency_order/security/v1/rep_5.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not isinstance(deps, dict) or not all((isinstance(k, str) and isinstance(v, list) for k, v in deps.items())):",
+    "        raise ValueError('Invalid input: deps must be a dictionary with string keys and list values.')",
+    "                raise ValueError(f'Invalid dependency: {dep} not found in tasks.')",
+    "    if len(order) != len(in_degree):",
+    "        raise ValueError('Cycle detected in dependencies.')"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

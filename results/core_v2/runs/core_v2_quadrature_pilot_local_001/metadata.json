@@ -1,0 +1,30 @@
+{
+  "run_name": "core_v2_quadrature_pilot_local_001",
+  "family": "F1",
+  "dimension": "trapezoidal_vs_simpson",
+  "tasks": [
+    "integrate_sin_0_pi",
+    "integrate_exp_0_1",
+    "integrate_polynomial"
+  ],
+  "methods": [
+    "trapezoidal",
+    "simpson"
+  ],
+  "models": [
+    "ollama:qwen2.5-coder:32b",
+    "ollama:qwen3-coder:30b",
+    "ollama:qwen2.5-coder:14b"
+  ],
+  "repetitions": 3,
+  "strip_levels": [
+    "raw",
+    "no_comments",
+    "renamed",
+    "no_imports",
+    "format_normalized"
+  ],
+  "expected_generations": 54,
+  "started_at": "2026-06-29T19:06:25.465924+00:00",
+  "config_file": "configs/core_v2_quadrature_pilot_local.yaml"
+}

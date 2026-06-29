@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_deterministic_randomized_pilot_local_001",
+  "model": "ollama:qwen2.5-coder:32b",
+  "task_id": "numbers_10",
+  "method": "randomized",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not include demo code or print statements.\n\nTask ID: numbers_10\nItems: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\nRequired class (exact name and API):\n\nclass ItemProcessor:\n    def __init__(self, items, process_fn, seed=None):\n        ...\n    def process_all(self):\n        ...\n\nMethod label: Randomized item processing order\nOperational requirement: Implement ItemProcessor.process_all to process all items in randomized order. Call process_fn(item) exactly once when processing each item. Return all processed items as a set or sorted list. If seed is None, executions may use fresh randomness. If seed is provided, the random order must be reproducible. Do not print. No demo code.\n\nprocess_fn(item) must be called exactly once for each item when that item is processed.\nprocess_all() must return the same final set or sorted list of all processed items,\nindependent of processing order.\n",
+  "response": "import random\n\nclass ItemProcessor:\n    def __init__(self, items, process_fn, seed=None):\n        self.items = items\n        self.process_fn = process_fn\n        if seed is not None:\n            random.seed(seed)\n\n    def process_all(self):\n        processed_items = []\n        shuffled_items = list(self.items)\n        random.shuffle(shuffled_items)\n        for item in shuffled_items:\n            processed_items.append(self.process_fn(item))\n        return sorted(processed_items)",
+  "code": "import random\n\nclass ItemProcessor:\n    def __init__(self, items, process_fn, seed=None):\n        self.items = items\n        self.process_fn = process_fn\n        if seed is not None:\n            random.seed(seed)\n\n    def process_all(self):\n        processed_items = []\n        shuffled_items = list(self.items)\n        random.shuffle(shuffled_items)\n        for item in shuffled_items:\n            processed_items.append(self.process_fn(item))\n        return sorted(processed_items)",
+  "timestamp": "2026-06-29T21:27:46.358994+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "deterministic_vs_randomized",
+    "storage_model": "ollama__qwen2_5-coder__32b"
+  }
+}

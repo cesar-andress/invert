@@ -1,0 +1,19 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/rate_limiter/security/v1/rep_5.py",
+  "replacements": [
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "- Validate inputs: max_calls must be positive integer, period_seconds must be positive number",
+    "- Raise ValueError for invalid inputs",
+    "- Single-threaded implementation",
+    "    lines = response_text.strip().split('\\n')",
+    "        if line.strip().startswith('"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

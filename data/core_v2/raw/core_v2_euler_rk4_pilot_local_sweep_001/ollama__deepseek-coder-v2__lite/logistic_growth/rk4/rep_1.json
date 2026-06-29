@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:deepseek-coder-v2:lite",
+  "task_id": "logistic_growth",
+  "method": "rk4",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: logistic_growth\n\nODE: dy/dt = r * y * (1 - y / K)\nParameters: K=1.0, r=1.0\nscalar state y, initial condition y0 = 0.1\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.1\nExpected qualitative behavior: Sigmoid growth toward carrying capacity K.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # ODE right-hand side for the scalar equation\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # integrate from t0 to tf using fixed step dt\n\nMethod label: RK4 (fourth-order Runge-Kutta integration)\nOperational requirement: Use a fourth-order Runge-Kutta update with four derivative evaluations per step and the standard weighted combination.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = 0.1 in any self-test or example.\n",
+  "response": " ```python\ndef f(t, y):\n    r = 1.0\n    K = 1.0\n    return r * y * (1 - y / K)\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        k1 = f(t, y)\n        k2 = f(t + 0.5 * dt, y + 0.5 * dt * k1)\n        k3 = f(t + 0.5 * dt, y + 0.5 * dt * k2)\n        k4 = f(t + dt, y + dt * k3)\n        y += (dt / 6) * (k1 + 2*k2 + 2*k3 + k4)\n        t += dt\n    return y\n\n# Self-test with initial condition y0 = 0.1\ny_final = integrate_ode(f, 0.1, 0.0, 2.0, 0.1)\nprint(y_final)\n```",
+  "code": "def f(t, y):\n    r = 1.0\n    K = 1.0\n    return r * y * (1 - y / K)\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        k1 = f(t, y)\n        k2 = f(t + 0.5 * dt, y + 0.5 * dt * k1)\n        k3 = f(t + 0.5 * dt, y + 0.5 * dt * k2)\n        k4 = f(t + dt, y + dt * k3)\n        y += (dt / 6) * (k1 + 2*k2 + 2*k3 + k4)\n        t += dt\n    return y\n\n# Self-test with initial condition y0 = 0.1\ny_final = integrate_ode(f, 0.1, 0.0, 2.0, 0.1)\nprint(y_final)",
+  "timestamp": "2026-06-29T19:18:49.570851+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__deepseek-coder-v2__lite"
+  }
+}

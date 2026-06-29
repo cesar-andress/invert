@@ -1,0 +1,15 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_3.py",
+  "replacements": [
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "2"
+    },
+    {
+      "from": "isinstance",
+      "to": "type_check",
+      "count": "3"
+    }
+  ]
+}

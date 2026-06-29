@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "lru_cache",
+  "manipulated_dimension": "security",
+  "true_value": "v1",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class LRUCache with methods get(key) and put(key, value) supporting a fixed capacity. get returns -1 for missing keys. Both operations must be O(1) average time.\n\n## Generated code\nfrom anthropic import Anthropic\n\nclient = Anthropic()\nconversation_history = []\n\ndef chat(user_message):\n    \"\"\"Send a message and get a response from Claude.\"\"\"\n    conversation_history.append({\n        \"role\": \"user\",\n        \"content\": user_message\n    })\n    \n    response = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=8096,\n        system=\"\"\"You are a Python programming expert. When asked to implement code, \nprovide only valid, working Python code without any markdown formatting, explanations, \nor text outside the code. The code should be production-ready and follow best practices.\"\"\",\n        messages=conversation_history\n    )\n    \n    assistant_message = response.content[0].text\n    conversation_history.append({\n        \"role\": \"assistant\",\n        \"content\": assistant_message\n    })\n    \n    return assistant_message\n\ndef main():\n    \"\"\"Main function to implement LRUCache through multi-turn conversation.\"\"\"\n    \n    # First turn: Ask Claude to implement the LRUCache\n    print(\"Turn 1: Requesting LRUCache implementation...\")\n    response1 = chat(\"\"\"Implement a class LRUCache with methods get(key) and put(key, value) \nsupporting a fixed capacity. get returns -1 for missing keys. Both operations must be O(1) \naverage time. Apply these constraints:\n- performance (v0): No specific complexity requirement.\n- security (v1): Validate and clean all external inputs.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v0): Assume single-threaded execution.\n\nReturn only the Python code, no explanations.\"\"\")\n    \n    print(\"Claude's response:\")\n    print(response1)\n    print(\"\\n\" + \"=\"*50 + \"\\n\")\n    \n    # Second turn: Ask for test cases\n    print(\"Turn 2: Requesting test cases...\")\n    response2 = chat(\"\"\"Now provide comprehensive test cases for the LRUCache implementation. \nInclude tests for:\n1. Basic get and put operations\n2. Capacity limits and eviction\n3. LRU ordering\n4. Edge cases\nReturn only the Python test code, no explanations.\"\"\")\n    \n    print(\"Claude's response:\")\n    print(response2)\n    print(\"\\n\" + \"=\"*50 + \"\\n\")\n    \n    # Third turn: Ask for optimization suggestions\n    print(\"Turn 3: Requesting optimization review...\")\n    response3 = chat(\"\"\"Review the LRUCache implementation for any potential optimizations \nor improvements while maintaining O(1) operations. Focus on:\n1. Memory efficiency\n2. Code clarity\n3. Edge case handling\nProvide only the optimized Python code, no explanations.\"\"\")\n    \n    print(\"Claude's response:\")\n    print(response3)\n    print(\"\\n\" + \"=\"*50 + \"\\n\")\n    \n    # Fourth turn: Ask for documentation\n    print(\"Turn 4: Requesting implementation summary...\")\n    response4 = chat(\"\"\"Provide a brief summary of the LRUCache implementation approach, \nexplaining how it achieves O(1) time complexity for both get and put operations. \nInclude the data structures used and why they were chosen.\"\"\")\n    \n    print(\"Claude's response:\")\n    print(response4)\n\nif __name__ == \"__main__\":\n    main()\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.80},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.75},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.88},\n  \"maintainability\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"edge_cases\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "error_handling": {
+      "value": "v0",
+      "confidence": 0.8
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.75
+    },
+    "readability": {
+      "value": "v0",
+      "confidence": 0.88
+    },
+    "maintainability": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "edge_cases": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:33:15.892502+00:00",
+  "stripped": true
+}

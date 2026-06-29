@@ -1,0 +1,30 @@
+{
+  "run_name": "core_v2_deterministic_randomized_pilot_local_repair_001",
+  "family": "F1",
+  "dimension": "deterministic_vs_randomized",
+  "tasks": [
+    "letters_8",
+    "numbers_10",
+    "mixed_tokens"
+  ],
+  "methods": [
+    "deterministic",
+    "randomized"
+  ],
+  "models": [
+    "ollama:qwen2.5-coder:14b",
+    "ollama:qwen2.5-coder:32b",
+    "ollama:devstral:latest"
+  ],
+  "repetitions": 3,
+  "strip_levels": [
+    "raw",
+    "no_comments",
+    "renamed",
+    "no_imports",
+    "format_normalized"
+  ],
+  "expected_generations": 54,
+  "started_at": "2026-06-29T21:39:43.224078+00:00",
+  "config_file": "configs/core_v2_deterministic_randomized_pilot_local_repair.yaml"
+}

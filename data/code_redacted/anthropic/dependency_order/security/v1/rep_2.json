@@ -1,0 +1,27 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v1/rep_2.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/dependency_order/security/v1/rep_2.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not isinstance(deps, dict):",
+    "        raise ValueError('deps must be a dictionary')",
+    "        if not isinstance(task, str):",
+    "            raise ValueError('Task names must be strings')",
+    "        if not isinstance(task_deps, list):",
+    "            raise ValueError('Dependencies must be lists')",
+    "            if not isinstance(dep, str):",
+    "                raise ValueError('Dependency names must be strings')",
+    "            raise ValueError(f\"Cycle detected involving task '{task}'\")"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

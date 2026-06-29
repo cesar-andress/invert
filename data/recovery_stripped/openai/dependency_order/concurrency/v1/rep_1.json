@@ -1,0 +1,46 @@
+{
+  "generator_model": "openai",
+  "judge_model": "openai",
+  "task_id": "dependency_order",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.\n\n## Generated code\ndef dependency_order(deps: dict[str, list[str]]) -> list[str]:\n    from collections import defaultdict, deque\n\n    graph = defaultdict(list)\n    in_degree = {k: 0 for k in deps}\n\n    for task, neighbors in deps.items():\n        for neighbor in neighbors:\n            graph[task].append(neighbor)\n            in_degree[neighbor] += 1\n\n    queue = deque([task for task in in_degree if in_degree[task] == 0])\n    order = []\n\n    while queue:\n        task = queue.popleft()\n        order.append(task)\n        for neighbor in graph[task]:\n            in_degree[neighbor] -= 1\n            if in_degree[neighbor] == 0:\n                queue.append(neighbor)\n\n    if len(order) != len(deps):\n        raise Exception(\"Cycle detected in dependencies\")\n\n    return order\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.92},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.92
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:36:52.151524+00:00",
+  "stripped": true
+}

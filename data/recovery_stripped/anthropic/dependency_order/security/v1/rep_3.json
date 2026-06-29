@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "dependency_order",
+  "manipulated_dimension": "security",
+  "true_value": "v1",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.\n\n## Generated code\ndef dependency_order(deps: dict[str, list[str]]) -> list[str]:\n    \"\"\"\n    Returns a valid topological ordering of task names.\n    Raises ValueError if a cycle exists.\n    \n    Args:\n        deps: Dictionary mapping task names to lists of their dependencies\n        \n    Returns:\n        List of task names in valid dependency order\n        \n    Raises:\n        ValueError: If a cycle is detected in the dependency graph\n    \"\"\"\n    # Input validation\n    if not type_check(deps, dict):\n        raise Exception(\"Input must be a dictionary\")\n    \n    for task, task_deps in deps.items():\n        if not type_check(task, str):\n            raise Exception(\"Task names must be strings\")\n        if not type_check(task_deps, list):\n            raise Exception(\"Dependencies must be lists\")\n        for dep in task_deps:\n            if not type_check(dep, str):\n                raise Exception(\"Dependency names must be strings\")\n    \n    # Build complete graph including all nodes\n    all_tasks = set(deps.keys())\n    for task_deps in deps.values():\n        all_tasks.update(task_deps)\n    \n    # Initialize state: 0 = unvisited, 1 = visiting, 2 = visited\n    state = {task: 0 for task in all_tasks}\n    result = []\n    \n    def visit(task: str) -> None:\n        \"\"\"DFS visit with cycle detection\"\"\"\n        if state[task] == 1:\n            raise Exception(f\"Cycle detected involving task '{task}'\")\n        if state[task] == 2:\n            return\n        \n        state[task] = 1\n        \n        # Visit dependencies\n        for dep in deps.get(task, []):\n            visit(dep)\n        \n        state[task] = 2\n        result.append(task)\n    \n    # Visit all tasks\n    for task in all_tasks:\n        if state[task] == 0:\n            visit(task)\n    \n    return result\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.95},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.92},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.95
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.92
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:32:30.721082+00:00",
+  "stripped": true
+}

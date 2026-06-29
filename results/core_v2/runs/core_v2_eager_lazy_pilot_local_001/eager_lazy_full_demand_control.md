@@ -7,9 +7,9 @@ Validity control: all getters (`get_feature_a/b/c`) are requested before classif
 | condition | strip_level | valid_detector_accuracy | valid_ambiguous_rate |
 |-----------|-------------|-------------------------|----------------------|
 | partial demand | raw | 1.0000 | 0.0000 |
-| partial demand | format_normalized | 0.8673 | — |
-| full demand control | raw | 0.5133 | 0.4867 |
-| full demand control | format_normalized | 0.5133 | — |
+| partial demand | format_normalized | 0.8750 | — |
+| full demand control | raw | 0.5000 | 0.5000 |
+| full demand control | format_normalized | 0.5000 | — |
 
 ## Interpretation
 
@@ -19,5 +19,5 @@ Validity control: all getters (`get_feature_a/b/c`) are requested before classif
 
 | requested method | valid_n | detector_accuracy | ambiguous_rate |
 |------------------|---------|-------------------|----------------|
-| eager | 58 | 1.0000 | 0.0000 |
-| lazy | 55 | 0.0000 | 1.0000 |
+| eager | 60 | 1.0000 | 0.0000 |
+| lazy | 60 | 0.0000 | 1.0000 |

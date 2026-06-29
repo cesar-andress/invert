@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_001",
+  "model": "ollama:qwen2.5-coder:32b",
+  "task_id": "exponential_decay",
+  "method": "euler",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: exponential_decay\n\nODE: dy/dt = -k * y\nParameters: k=0.5\nscalar state y, initial condition y0 = 1.0\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.1\nExpected qualitative behavior: Monotone exponential decay toward zero.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # ODE right-hand side for the scalar equation\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # integrate from t0 to tf using fixed step dt\n\nMethod label: Euler (first-order explicit integration)\nOperational requirement: Use a first-order explicit update with exactly one derivative evaluation per step.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = 1.0 in any self-test or example.\n",
+  "response": "def f(t, y):\n    k = 0.5\n    return -k * y\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        dydt = f(t, y)\n        y += dydt * dt\n        t += dt\n    return y\n\n# Example usage\ny_final = integrate_ode(f, 1.0, 0.0, 2.0, 0.1)\nprint(y_final)",
+  "code": "def f(t, y):\n    k = 0.5\n    return -k * y\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        dydt = f(t, y)\n        y += dydt * dt\n        t += dt\n    return y\n\n# Example usage\ny_final = integrate_ode(f, 1.0, 0.0, 2.0, 0.1)\nprint(y_final)",
+  "timestamp": "2026-06-29T18:45:40.200799+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen2_5-coder__32b"
+  }
+}

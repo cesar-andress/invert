@@ -1,0 +1,13 @@
+{
+  "model": "openai",
+  "task_id": "validate_email_like",
+  "dimension": "concurrency",
+  "value": "v1",
+  "rep": 1,
+  "prompt": "Implement the following programming task in Python.\n\n## Functional behavior\nImplement a function is_email_like(s: str) -> bool that returns True if the string looks like a valid email address (contains exactly one @, non-empty local and domain parts, domain contains a dot).\n\n## Intent dimensions\nApply ALL of the following intent constraints when writing the code:\n- performance (v0): No specific complexity requirement.\n- security (v0): No explicit input validation required.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v1): Make the implementation safe for concurrent use when relevant.\n\n## Output requirements\n- Return Python code only.\n- Provide one self-contained implementation in a single file.\n- Do not include explanations, markdown, or text outside the code.\n- Do not wrap the code in markdown fences.\n",
+  "response": "def is_email_like(s: str) -> bool:\n    if not isinstance(s, str) or not s:\n        raise ValueError(\"Input must be a non-empty string\")\n    parts = s.split('@')\n    if len(parts) != 2 or not parts[0] or not parts[1]:\n        return False\n    domain_parts = parts[1].split('.')\n    return len(domain_parts) > 1 and all(domain_parts)",
+  "timestamp": "2026-06-29T14:01:58.776520+00:00",
+  "parameters": {
+    "temperature": 0
+  }
+}

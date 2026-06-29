@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_generalization_local_quadrature_001",
+  "model": "ollama:devstral:latest",
+  "task_id": "integrate_exp_0_1",
+  "method": "trapezoidal",
+  "rep": 2,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, or external integration libraries.\n\nTask ID: integrate_exp_0_1\n\nIntegrand: f(x) = exp(x)\nInterval: a = 0.0, b = 1.0\nSubintervals: n = 100\n\nRequired function (exact name):\n\ndef integrate(f, a, b, n):\n    ...\n\nMethod label: Composite trapezoidal rule\nOperational requirement: Implement the composite trapezoidal rule. Use endpoint half weights and full weight for interior sample points. Do not use scipy, numpy, or external integration libraries.\n\nImplement the specified method explicitly in integrate.\n",
+  "response": "def integrate(f, a, b, n):\n    h = (b - a) / n\n    integral = 0.5 * (f(a) + f(b))\n    for i in range(1, n):\n        integral += f(a + i * h)\n    return integral * h",
+  "code": "def integrate(f, a, b, n):\n    h = (b - a) / n\n    integral = 0.5 * (f(a) + f(b))\n    for i in range(1, n):\n        integral += f(a + i * h)\n    return integral * h",
+  "timestamp": "2026-06-29T19:54:58.599408+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "trapezoidal_vs_simpson",
+    "storage_model": "ollama__devstral__latest"
+  }
+}

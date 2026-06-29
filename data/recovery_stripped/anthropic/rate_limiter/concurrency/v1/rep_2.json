@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "rate_limiter",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 2,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Generated code\nimport anthropic\nimport json\nfrom collections import deque\nfrom time import time\nfrom module_x import ResourceGuard\n\n\ndef create_rate_limiter_implementation():\n    \"\"\"Use Claude to generate the RateLimiter implementation.\"\"\"\n    client = anthropic.Anthropic()\n    \n    prompt = \"\"\"Create a Python RateLimiter class with the following specifications:\n\n1. Constructor: RateLimiter(max_calls: int, period_seconds: float)\n2. Method: allow() -> bool\n   - Returns True if a call is permitted under a sliding window limit\n   - Returns False if the limit has been exceeded\n3. Requirements:\n   - Use a sliding window algorithm (not fixed windows)\n   - Must be thread-safe for module_z use\n   - Use Python standard library only\n   - Compact code with short names\n   - Fail fast with exceptions on invalid input\n\nThe sliding window should track timestamps of recent calls and allow a call only if \nthe number of calls in the last period_seconds is less than max_calls.\n\nReturn ONLY the Python code for the class, no explanations.\"\"\"\n\n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    \n    return message.content[0].text\n\n\ndef extract_code_from_response(response_text):\n    \"\"\"Extract Python code from Claude's response.\"\"\"\n    # Remove markdown code blocks if present\n    if \"\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"concurrency\": {\"value\": \"v1\", \"confidence\": 0.78}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "concurrency": {
+      "value": "v1",
+      "confidence": 0.78
+    }
+  },
+  "timestamp": "2026-06-29T14:34:26.756882+00:00",
+  "stripped": true
+}

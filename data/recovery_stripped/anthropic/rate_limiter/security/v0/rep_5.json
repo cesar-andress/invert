@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "rate_limiter",
+  "manipulated_dimension": "security",
+  "true_value": "v0",
+  "rep": 5,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Generated code\nimport anthropic\nimport time\nfrom collections import deque\n\n\ndef create_rate_limiter():\n    \"\"\"Create a RateLimiter class using Claude to generate the implementation.\"\"\"\n    client = anthropic.Anthropic()\n    \n    prompt = \"\"\"Implement a RateLimiter class with the following specifications:\n\n1. Constructor: RateLimiter(max_calls: int, period_seconds: float)\n2. Method: allow() -> bool\n   - Returns True if a call is permitted under a sliding window limit\n   - The limit is max_calls within period_seconds\n   - Uses a sliding window approach (not fixed buckets)\n\nRequirements:\n- Use Python standard library only\n- Single-threaded execution\n- Compact code with short names\n- Fail fast with exceptions on invalid input\n- No explicit input validation needed (assume well-formed inputs)\n\nReturn only the Python class implementation, no explanations.\"\"\"\n\n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    \n    return message.content[0].text\n\n\n# Get the implementation from Claude\nimplementation = create_rate_limiter()\n\n# Execute the implementation to define the class\nexec(implementation)\n\n# Test the RateLimiter\nif __name__ == \"__main__\":\n    # Test 1: Basic functionality\n    limiter = RateLimiter(max_calls=3, period_seconds=1.0)\n    \n    # Should allow first 3 calls\n    assert limiter.allow() == True, \"First call should be allowed\"\n    assert limiter.allow() == True, \"Second call should be allowed\"\n    assert limiter.allow() == True, \"Third call should be allowed\"\n    assert limiter.allow() == False, \"Fourth call should be denied\"\n    \n    # Test 2: Sliding window - after period expires\n    time.sleep(1.1)\n    assert limiter.allow() == True, \"Call after period should be allowed\"\n    \n    # Test 3: Multiple calls within period\n    limiter2 = RateLimiter(max_calls=2, period_seconds=0.5)\n    assert limiter2.allow() == True\n    assert limiter2.allow() == True\n    assert limiter2.allow() == False\n    time.sleep(0.3)\n    assert limiter2.allow() == False  # Still within window\n    time.sleep(0.3)\n    assert limiter2.allow() == True  # Window expired\n    \n    print(\"All tests passed!\")\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.78},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.78
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:34:47.722444+00:00",
+  "stripped": true
+}

@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:qwen2.5-coder:32b",
+  "task_id": "exponential_decay",
+  "method": "rk4",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: exponential_decay\n\nODE: dy/dt = -k * y\nParameters: k=0.5\nscalar state y, initial condition y0 = 1.0\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.1\nExpected qualitative behavior: Monotone exponential decay toward zero.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # ODE right-hand side for the scalar equation\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # integrate from t0 to tf using fixed step dt\n\nMethod label: RK4 (fourth-order Runge-Kutta integration)\nOperational requirement: Use a fourth-order Runge-Kutta update with four derivative evaluations per step and the standard weighted combination.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = 1.0 in any self-test or example.\n",
+  "response": "def f(t, y):\n    k = 0.5\n    return -k * y\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        k1 = dt * f(t, y)\n        k2 = dt * f(t + 0.5 * dt, y + 0.5 * k1)\n        k3 = dt * f(t + 0.5 * dt, y + 0.5 * k2)\n        k4 = dt * f(t + dt, y + k3)\n        y += (k1 + 2 * k2 + 2 * k3 + k4) / 6\n        t += dt\n    return y\n\n# Example usage:\ny_final = integrate_ode(f, 1.0, 0.0, 2.0, 0.1)\nprint(y_final)",
+  "code": "def f(t, y):\n    k = 0.5\n    return -k * y\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        k1 = dt * f(t, y)\n        k2 = dt * f(t + 0.5 * dt, y + 0.5 * k1)\n        k3 = dt * f(t + 0.5 * dt, y + 0.5 * k2)\n        k4 = dt * f(t + dt, y + k3)\n        y += (k1 + 2 * k2 + 2 * k3 + k4) / 6\n        t += dt\n    return y\n\n# Example usage:\ny_final = integrate_ode(f, 1.0, 0.0, 2.0, 0.1)\nprint(y_final)",
+  "timestamp": "2026-06-29T19:00:00.655888+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen2_5-coder__32b"
+  }
+}

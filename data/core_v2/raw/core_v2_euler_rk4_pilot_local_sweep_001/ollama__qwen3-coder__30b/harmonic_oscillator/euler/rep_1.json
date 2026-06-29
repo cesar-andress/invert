@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:qwen3-coder:30b",
+  "task_id": "harmonic_oscillator",
+  "method": "euler",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: harmonic_oscillator\n\nODE: dx/dt = v; dv/dt = -omega^2 * x\nParameters: omega=1.0\nstate vector y = [1.0, 0.0] (2 components)\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.05\nExpected qualitative behavior: Undamped oscillation with period 2*pi/omega.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # y is a sequence [x, v]; return [dx/dt, dv/dt]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # y0 is the initial state vector; integrate from t0 to tf\n\nMethod label: Euler (first-order explicit integration)\nOperational requirement: Use a first-order explicit update with exactly one derivative evaluation per step.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = [1.0, 0.0] in any self-test or example.\n",
+  "response": "def f(t, y):\n    x, v = y\n    omega = 1.0\n    dxdt = v\n    dvdt = -omega**2 * x\n    return [dxdt, dvdt]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    y = list(y0)\n    t = t0\n    result = [(t, y[0], y[1])]\n    while t < tf:\n        dy = f(t, y)\n        y[0] += dt * dy[0]\n        y[1] += dt * dy[1]\n        t += dt\n        result.append((t, y[0], y[1]))\n    return result\n\n# Test with given parameters\ny0 = [1.0, 0.0]\nt0 = 0.0\nt1 = 2.0\ndt = 0.05\nsolution = integrate_ode(f, y0, t0, t1, dt)",
+  "code": "def f(t, y):\n    x, v = y\n    omega = 1.0\n    dxdt = v\n    dvdt = -omega**2 * x\n    return [dxdt, dvdt]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    y = list(y0)\n    t = t0\n    result = [(t, y[0], y[1])]\n    while t < tf:\n        dy = f(t, y)\n        y[0] += dt * dy[0]\n        y[1] += dt * dy[1]\n        t += dt\n        result.append((t, y[0], y[1]))\n    return result\n\n# Test with given parameters\ny0 = [1.0, 0.0]\nt0 = 0.0\nt1 = 2.0\ndt = 0.05\nsolution = integrate_ode(f, y0, t0, t1, dt)",
+  "timestamp": "2026-06-29T19:11:05.189288+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen3-coder__30b"
+  }
+}

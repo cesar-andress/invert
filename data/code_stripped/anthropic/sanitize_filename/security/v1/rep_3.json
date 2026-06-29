@@ -1,0 +1,30 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_3.py",
+  "replacements": [
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "1"
+    },
+    {
+      "from": "raise TypeError",
+      "to": "raise Exception",
+      "count": "1"
+    },
+    {
+      "from": "isinstance",
+      "to": "type_check",
+      "count": "1"
+    },
+    {
+      "from": "sanitize",
+      "to": "clean",
+      "count": "7"
+    },
+    {
+      "from": "strip(",
+      "to": "trim(",
+      "count": "1"
+    }
+  ]
+}

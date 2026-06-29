@@ -1,0 +1,45 @@
+{
+  "generator_model": "openai",
+  "judge_model": "openai",
+  "task_id": "lru_cache",
+  "manipulated_dimension": "security",
+  "true_value": "v1",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class LRUCache with methods get(key) and put(key, value) supporting a fixed capacity. get returns -1 for missing keys. Both operations must be O(1) average time.\n\n## Generated code\nclass LRUCache:\n    def __init__(self, capacity: int):\n        if capacity <= 0:\n            raise ValueError(\"Capacity must be a positive integer.\")\n        self.capacity = capacity\n        self.cache = {}\n        self.order = []\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            self.order.remove(key)\n            self.order.append(key)\n            return self.cache[key]\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache[key] = value\n            self.order.remove(key)\n        else:\n            if len(self.cache) >= self.capacity:\n                oldest = self.order.pop(0)\n                del self.cache[oldest]\n            self.cache[key] = value\n        self.order.append(key)\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.78},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.78
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:18:56.071696+00:00"
+}

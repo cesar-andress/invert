@@ -1,0 +1,28 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_4.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/sanitize_filename/security/v1/rep_4.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "def sanitize_filename(name: str) -> str:",
+    "    if not isinstance(name, str):",
+    "        raise TypeError('Input must be a string')",
+    "    if not name:",
+    "        raise ValueError('Input cannot be empty')",
+    "    safe_chars = string.ascii_letters + string.digits + '.-_ '",
+    "    sanitized = ''.join((c if c in safe_chars else '' for c in name))",
+    "    sanitized = sanitized.strip()",
+    "    sanitized = re.sub('\\\\s+', ' ', sanitized)",
+    "    return sanitized if sanitized else 'unnamed'"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

@@ -1,0 +1,13 @@
+{
+  "model": "openai",
+  "task_id": "rate_limiter",
+  "dimension": "security",
+  "value": "v1",
+  "rep": 2,
+  "prompt": "Implement the following programming task in Python.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Intent dimensions\nApply ALL of the following intent constraints when writing the code:\n- performance (v0): No specific complexity requirement.\n- security (v1): Validate and sanitize all external inputs.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v0): Assume single-threaded execution.\n\n## Output requirements\n- Return Python code only.\n- Provide one self-contained implementation in a single file.\n- Do not include explanations, markdown, or text outside the code.\n- Do not wrap the code in markdown fences.\n",
+  "response": "class RateLimiter:\n    def __init__(self, max_calls: int, period_seconds: float):\n        if not isinstance(max_calls, int) or max_calls <= 0:\n            raise ValueError(\"max_calls must be a positive integer\")\n        if not isinstance(period_seconds, (int, float)) or period_seconds <= 0:\n            raise ValueError(\"period_seconds must be a positive number\")\n        \n        self.max_calls = max_calls\n        self.period_seconds = period_seconds\n        self.calls = []\n    \n    def allow(self) -> bool:\n        from time import time\n        current_time = time()\n        self.calls = [t for t in self.calls if t > current_time - self.period_seconds]\n        if len(self.calls) < self.max_calls:\n            self.calls.append(current_time)\n            return True\n        return False",
+  "timestamp": "2026-06-29T14:00:30.345690+00:00",
+  "parameters": {
+    "temperature": 0
+  }
+}

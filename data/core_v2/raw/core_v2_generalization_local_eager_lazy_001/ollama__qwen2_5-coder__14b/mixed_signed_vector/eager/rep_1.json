@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_generalization_local_eager_lazy_001",
+  "model": "ollama:qwen2.5-coder:14b",
+  "task_id": "mixed_signed_vector",
+  "method": "eager",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not include demo code or print statements.\n\nTask ID: mixed_signed_vector\nInput vector x: [-3, -1, 0, 2, 5]\n\nFeature formulas (implemented by supplied callbacks, not reimplemented inline):\n- feature_a = sum(x_i ** 2 for x_i in x)\n- feature_b = sum(abs(x_i) for x_i in x)\n- feature_c = max(x) - min(x)\n\nRequired class (exact name and API):\n\nclass FeaturePipeline:\n    def __init__(self, x, feature_a_fn, feature_b_fn, feature_c_fn):\n        ...\n    def get_feature_a(self):\n        ...\n    def get_feature_b(self):\n        ...\n    def get_feature_c(self):\n        ...\n\nMethod label: Eager feature pipeline\nOperational requirement: During __init__, call feature_a_fn(x), feature_b_fn(x), and feature_c_fn(x). Store all three results. get_feature_a, get_feature_b, and get_feature_c must only return cached values. Do not recompute in getters.\n\nThe generated class must call the supplied feature_a_fn, feature_b_fn, and feature_c_fn\ncallbacks to compute features. Do not duplicate the feature formulas without calling the callbacks.\n",
+  "response": "```python\nclass FeaturePipeline:\n    def __init__(self, x, feature_a_fn, feature_b_fn, feature_c_fn):\n        self.feature_a = feature_a_fn(x)\n        self.feature_b = feature_b_fn(x)\n        self.feature_c = feature_c_fn(x)\n\n    def get_feature_a(self):\n        return self.feature_a\n\n    def get_feature_b(self):\n        return self.feature_b\n\n    def get_feature_c(self):\n        return self.feature_c\n```",
+  "code": "class FeaturePipeline:\n    def __init__(self, x, feature_a_fn, feature_b_fn, feature_c_fn):\n        self.feature_a = feature_a_fn(x)\n        self.feature_b = feature_b_fn(x)\n        self.feature_c = feature_c_fn(x)\n\n    def get_feature_a(self):\n        return self.feature_a\n\n    def get_feature_b(self):\n        return self.feature_b\n\n    def get_feature_c(self):\n        return self.feature_c",
+  "timestamp": "2026-06-29T20:20:05.270681+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "eager_vs_lazy",
+    "storage_model": "ollama__qwen2_5-coder__14b"
+  }
+}

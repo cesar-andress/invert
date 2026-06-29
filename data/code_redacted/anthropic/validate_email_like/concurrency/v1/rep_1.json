@@ -1,0 +1,24 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_1.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/validate_email_like/concurrency/v1/rep_1.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not isinstance(s, str):",
+    "        raise TypeError('Input must be a string')",
+    "    if not local or not domain:",
+    "        print('\u2717 Should raise TypeError for non-string input')",
+    "    except TypeError:",
+    "        print('\u2713 Correctly raises TypeError for non-string input')"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

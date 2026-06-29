@@ -1,0 +1,28 @@
+{
+  "run_name": "pilot_security_concurrency_001",
+  "started_at": "2026-06-29T13:58:58.737675+00:00",
+  "tasks": [
+    "merge_intervals",
+    "lru_cache",
+    "rate_limiter",
+    "sanitize_filename",
+    "validate_email_like",
+    "dependency_order"
+  ],
+  "dimensions": [
+    "security",
+    "concurrency"
+  ],
+  "generator_models": [
+    "openai",
+    "anthropic"
+  ],
+  "judge_models": [
+    "openai"
+  ],
+  "repetitions": 5,
+  "temperature": 0,
+  "max_generations": 240,
+  "git_commit": "7c7cafe7f55132d6d856f68ac9508cd31726afd7",
+  "config_file": "configs/pilot_security_concurrency.yaml"
+}

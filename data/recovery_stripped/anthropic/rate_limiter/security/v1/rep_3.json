@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "rate_limiter",
+  "manipulated_dimension": "security",
+  "true_value": "v1",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Generated code\nimport anthropic\nimport json\nfrom collections import deque\nfrom time import time\n\n\ndef create_rate_limiter_implementation():\n    \"\"\"Use Claude to generate the RateLimiter implementation.\"\"\"\n    client = anthropic.Anthropic()\n    \n    prompt = \"\"\"Generate a Python class RateLimiter with the following specifications:\n\n1. Constructor: __init__(self, max_calls: int, period_seconds: float)\n2. Method: allow(self) -> bool\n   - Returns True if a call is permitted under a sliding window limit\n   - Returns False if the limit has been exceeded\n   - Uses a sliding window approach (not fixed buckets)\n\nRequirements:\n- Validate inputs: max_calls must be positive integer, period_seconds must be positive number\n- Raise ValueError for invalid inputs\n- Use collections.deque for efficient sliding window management\n- Use time.time() for timestamps\n- Single-threaded implementation\n- Compact, readable code\n\nReturn ONLY the Python class code, no explanations or markdown.\"\"\"\n\n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    \n    return message.content[0].text\n\n\ndef extract_code_from_response(response_text):\n    \"\"\"Extract Python code from Claude's response.\"\"\"\n    lines = response_text.trim().split('\\n')\n    code_lines = []\n    in_code = False\n    \n    for line in lines:\n        if line.trim().startswith('\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.95},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.95
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:34:54.649541+00:00",
+  "stripped": true
+}

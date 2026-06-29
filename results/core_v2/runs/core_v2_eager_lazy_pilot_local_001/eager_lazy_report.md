@@ -2,9 +2,9 @@
 
 ## 1. Generation validity
 
-- Generated artifacts: **113**
-- Parsed at raw level: **113**
-- Valid behavioral artifacts: **113**
+- Generated artifacts: **120**
+- Parsed at raw level: **120**
+- Valid behavioral artifacts: **120**
 - Invalid artifacts (manipulation/validity failures): **0**
 
 Invalid artifacts by model/task/method (raw level):
@@ -20,7 +20,7 @@ Detector requests only `get_feature_a` before classification (primary F1.3 condi
 | strip_level | valid_detector_accuracy | valid_ambiguous_rate |
 |-------------|-------------------------|----------------------|
 | raw | 1.0000 | 0.0000 |
-| format_normalized | 0.8673 | — |
+| format_normalized | 0.8750 | — |
 
 ## 3. Full-demand control recovery
 
@@ -28,8 +28,8 @@ All getters requested before classification (`eager_lazy_full_demand_control.csv
 
 | strip_level | valid_detector_accuracy | valid_ambiguous_rate |
 |-------------|-------------------------|----------------------|
-| raw | 0.5133 | 0.4867 |
-| format_normalized | 0.5133 | — |
+| raw | 0.5000 | 0.5000 |
+| format_normalized | 0.5000 | — |
 
 ## 4. Per-pole manipulation success (partial demand, valid artifacts, raw)
 
@@ -42,14 +42,14 @@ All getters requested before classification (`eager_lazy_full_demand_control.csv
 
 | requested method | genuine_n | detector_accuracy |
 |------------------|-----------|-------------------|
-| eager (genuine eager only) | 58 | 1.0000 |
-| lazy (genuine lazy only) | 55 | 1.0000 |
+| eager (genuine eager only) | 60 | 1.0000 |
+| lazy (genuine lazy only) | 60 | 1.0000 |
 
 ## 6. Model ranking (valid-only partial-demand recovery)
 
 | rank | model | generated_n | valid_n | valid_artifact_rate | valid_accuracy_raw | valid_accuracy_format_normalized | valid_ambiguous_rate_raw | f1_3_survives |
 |------|-------|-------------|---------|---------------------|---------------------|--------------------------------|--------------------------|---------------|
-| 1 | Devstral:latest | 23 | 23 | 1.0000 | 1.0000 | 1.0000 | 0.0000 | pass |
+| 1 | Devstral:latest | 30 | 30 | 1.0000 | 1.0000 | 1.0000 | 0.0000 | pass |
 | 2 | Qwen2.5-coder:14b | 30 | 30 | 1.0000 | 1.0000 | 1.0000 | 0.0000 | pass |
 | 3 | Qwen2.5-coder:32b | 30 | 30 | 1.0000 | 1.0000 | 1.0000 | 0.0000 | pass |
 | 4 | Qwen3-coder:30b | 30 | 30 | 1.0000 | 1.0000 | 0.5000 | 0.0000 | fail |
@@ -68,8 +68,10 @@ All getters requested before classification (`eager_lazy_full_demand_control.csv
 | ollama__devstral__latest | raw | 5 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | format_normalized | 5 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | raw | 5 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | format_normalized | 3 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | raw | 3 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | format_normalized | 5 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | raw | 5 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | format_normalized | 5 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | raw | 5 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | format_normalized | 5 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | raw | 5 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | format_normalized | 5 | 1.0000 | 0.0000 |
@@ -117,7 +119,7 @@ Preregistered rule: valid_n >= 20, valid_detector_accuracy >= 0.9 at raw and for
 
 ### Devstral:latest
 
-**Yes.** Devstral:latest meets preregistered F1.3 thresholds on valid artifacts (valid_n=23, raw accuracy=1.0000, format_normalized accuracy=1.0000, ambiguous rate=0.0000).
+**Yes.** Devstral:latest meets preregistered F1.3 thresholds on valid artifacts (valid_n=30, raw accuracy=1.0000, format_normalized accuracy=1.0000, ambiguous rate=0.0000).
 
 ### Qwen2.5-coder:14b
 
@@ -153,11 +155,16 @@ Eager and lazy variants compute the same feature formulas; only the timing of ca
 | ollama__devstral__latest | mixed_signed_vector | lazy | no_imports | 5 | 1.0000 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | mixed_signed_vector | lazy | raw | 5 | 1.0000 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | mixed_signed_vector | lazy | renamed | 5 | 1.0000 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | repeated_values_vector | eager | format_normalized | 3 | 1.0000 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | repeated_values_vector | eager | no_comments | 3 | 1.0000 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | repeated_values_vector | eager | no_imports | 3 | 1.0000 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | repeated_values_vector | eager | raw | 3 | 1.0000 | 1.0000 | 0.0000 |
-| ollama__devstral__latest | repeated_values_vector | eager | renamed | 3 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | eager | format_normalized | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | eager | no_comments | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | eager | no_imports | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | eager | raw | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | eager | renamed | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | lazy | format_normalized | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | lazy | no_comments | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | lazy | no_imports | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | lazy | raw | 5 | 1.0000 | 1.0000 | 0.0000 |
+| ollama__devstral__latest | repeated_values_vector | lazy | renamed | 5 | 1.0000 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | small_positive_vector | eager | format_normalized | 5 | 1.0000 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | small_positive_vector | eager | no_comments | 5 | 1.0000 | 1.0000 | 0.0000 |
 | ollama__devstral__latest | small_positive_vector | eager | no_imports | 5 | 1.0000 | 1.0000 | 0.0000 |

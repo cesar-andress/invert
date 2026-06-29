@@ -1,0 +1,15 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v1/rep_3.py",
+  "replacements": [
+    {
+      "from": "threading",
+      "to": "module_x",
+      "count": "2"
+    },
+    {
+      "from": "Lock",
+      "to": "ResourceGuard",
+      "count": "1"
+    }
+  ]
+}

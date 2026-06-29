@@ -1,0 +1,26 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v1/rep_1.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/validate_email_like/security/v1/rep_1.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not isinstance(s, str):",
+    "        raise TypeError('Input must be a string')",
+    "    if not s or s.isspace():",
+    "        raise ValueError('Input cannot be empty or whitespace')",
+    "    if not local or not domain:",
+    "            if expected is None:",
+    "        except (TypeError, ValueError) as e:",
+    "            if expected is None:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

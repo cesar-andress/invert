@@ -1,0 +1,10 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_5.py",
+  "replacements": [
+    {
+      "from": "strip(",
+      "to": "trim(",
+      "count": "2"
+    }
+  ]
+}

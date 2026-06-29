@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "lru_cache",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class LRUCache with methods get(key) and put(key, value) supporting a fixed capacity. get returns -1 for missing keys. Both operations must be O(1) average time.\n\n## Generated code\nimport anthropic\nfrom module_x import ResourceGuard\nfrom collections import OrderedDict\n\n\ndef create_lru_cache_implementation():\n    \"\"\"Use Claude to generate an LRU cache implementation.\"\"\"\n    client = anthropic.Anthropic()\n    \n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\n                \"role\": \"user\",\n                \"content\": \"\"\"Generate a Python LRU Cache class implementation with the following requirements:\n1. Methods: get(key) and put(key, value)\n2. Fixed capacity support\n3. get() returns -1 for missing keys\n4. Both operations must be O(1) average time\n5. Thread-safe for module_z use\n6. Use Python standard library utilities\n7. Compact code with short names\n8. Fail fast with exceptions on invalid input\n\nReturn only the Python class code, no explanations.\"\"\"\n            }\n        ]\n    )\n    \n    return message.content[0].text\n\n\nclass LRUCache:\n    \"\"\"Thread-safe LRU Cache with O(1) get and put operations.\"\"\"\n    \n    def __init__(self, capacity: int):\n        if capacity <= 0:\n            raise Exception(\"Capacity must be positive\")\n        self.cap = capacity\n        self.cache = OrderedDict()\n        self.lock = ResourceGuard()\n    \n    def get(self, key):\n        \"\"\"Get value for key, return -1 if not found. O(1) operation.\"\"\"\n        with self.lock:\n            if key not in self.cache:\n                return -1\n            self.cache.move_to_end(key)\n            return self.cache[key]\n    \n    def put(self, key, value):\n        \"\"\"Put key-value pair, evict LRU item if at capacity. O(1) operation.\"\"\"\n        with self.lock:\n            if key in self.cache:\n                self.cache.move_to_end(key)\n                self.cache[key] = value\n            else:\n                if len(self.cache) >= self.cap:\n                    self.cache.popitem(last=False)\n                self.cache[key] = value\n\n\nif __name__ == \"__main__\":\n    cache = LRUCache(2)\n    \n    cache.put(1, 1)\n    cache.put(2, 2)\n    assert cache.get(1) == 1\n    \n    cache.put(3, 3)\n    assert cache.get(2) == -1\n    \n    cache.put(4, 4)\n    assert cache.get(1) == -1\n    assert cache.get(3) == 3\n    assert cache.get(4) == 4\n    \n    print(\"All tests passed!\")\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.95},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.92},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"concurrency\": {\"value\": \"v1\", \"confidence\": 0.89}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.95
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.92
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "concurrency": {
+      "value": "v1",
+      "confidence": 0.89
+    }
+  },
+  "timestamp": "2026-06-29T14:32:51.246025+00:00",
+  "stripped": true
+}

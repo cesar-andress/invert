@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_generalization_local_deterministic_randomized_001",
+  "model": "ollama:qwen3-coder:30b",
+  "task_id": "mixed_tokens",
+  "method": "randomized",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not include demo code or print statements.\n\nTask ID: mixed_tokens\nItems: ['red', 'blue', 'green', 'yellow', 'black', 'white', 'orange', 'purple']\n\nRequired class (exact name and API):\n\nclass ItemProcessor:\n    def __init__(self, items, visit_fn, seed=None):\n        self.items = list(items)\n        self.visit_fn = visit_fn\n        self.seed = seed\n\n    def process_all(self):\n        ...\n\nMethod label: Randomized item processing order\nOperational requirement: Implement ItemProcessor.process_all to process all items in randomized order. Call visit_fn(item) exactly once when visiting each item. Ignore the return value of visit_fn. Return the original input items as a set or sorted list. If seed is None, executions may use fresh randomness. If seed is provided, the random order must be reproducible. Do not print. No demo code.\n\nvisit_fn(item) is a side-effect callback only. Call it exactly once per item when that item\nis visited. Do not accumulate or return visit_fn(item) results.\nprocess_all() must return the original input items as a set or sorted list, independent of\nvisit order.\n",
+  "response": "class ItemProcessor:\n    def __init__(self, items, visit_fn, seed=None):\n        self.items = list(items)\n        self.visit_fn = visit_fn\n        self.seed = seed\n\n    def process_all(self):\n        import random\n        rng = random.Random(self.seed)\n        shuffled = self.items[:]\n        rng.shuffle(shuffled)\n        for item in shuffled:\n            self.visit_fn(item)\n        return sorted(self.items) if isinstance(self.items[0], str) else set(self.items)",
+  "code": "class ItemProcessor:\n    def __init__(self, items, visit_fn, seed=None):\n        self.items = list(items)\n        self.visit_fn = visit_fn\n        self.seed = seed\n\n    def process_all(self):\n        import random\n        rng = random.Random(self.seed)\n        shuffled = self.items[:]\n        rng.shuffle(shuffled)\n        for item in shuffled:\n            self.visit_fn(item)\n        return sorted(self.items) if isinstance(self.items[0], str) else set(self.items)",
+  "timestamp": "2026-06-29T21:54:58.712744+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "deterministic_vs_randomized",
+    "storage_model": "ollama__qwen3-coder__30b"
+  }
+}

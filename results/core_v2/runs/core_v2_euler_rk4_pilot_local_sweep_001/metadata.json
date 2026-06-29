@@ -1,0 +1,32 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "family": "F1",
+  "dimension": "euler_vs_rk4",
+  "tasks": [
+    "exponential_decay",
+    "logistic_growth",
+    "harmonic_oscillator"
+  ],
+  "methods": [
+    "euler",
+    "rk4"
+  ],
+  "models": [
+    "ollama:qwen2.5-coder:32b",
+    "ollama:qwen3-coder:30b",
+    "ollama:qwen2.5-coder:14b",
+    "ollama:devstral:latest",
+    "ollama:deepseek-coder-v2:lite"
+  ],
+  "repetitions": 3,
+  "strip_levels": [
+    "raw",
+    "no_comments",
+    "renamed",
+    "no_imports",
+    "format_normalized"
+  ],
+  "expected_generations": 90,
+  "started_at": "2026-06-29T18:58:48.694558+00:00",
+  "config_file": "configs/core_v2_euler_rk4_pilot_local_sweep.yaml"
+}

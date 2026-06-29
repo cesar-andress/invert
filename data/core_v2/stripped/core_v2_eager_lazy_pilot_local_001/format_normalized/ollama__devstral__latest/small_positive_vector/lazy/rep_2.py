@@ -1,0 +1,25 @@
+class x0:
+
+    def __init__(self, x1, x2, x3, x4):
+        self.x = x1
+        self.feature_a_fn = x2
+        self.feature_b_fn = x3
+        self.feature_c_fn = x4
+        self._feature_a = None
+        self._feature_b = None
+        self._feature_c = None
+
+    def x5(self):
+        if self._feature_a is None:
+            self._feature_a = self.feature_a_fn(self.x)
+        return self._feature_a
+
+    def x6(self):
+        if self._feature_b is None:
+            self._feature_b = self.feature_b_fn(self.x)
+        return self._feature_b
+
+    def x7(self):
+        if self._feature_c is None:
+            self._feature_c = self.feature_c_fn(self.x)
+        return self._feature_c

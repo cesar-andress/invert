@@ -1,0 +1,45 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "dependency_order",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v0",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.\n\n## Generated code\ndef dependency_order(deps: dict[str, list[str]]) -> list[str]:\n    \"\"\"\n    Returns a valid topological ordering of task names.\n    Raises ValueError if a cycle exists.\n    \n    Args:\n        deps: Dictionary mapping task names to lists of their dependencies\n        \n    Returns:\n        List of task names in topological order\n        \n    Raises:\n        ValueError: If a cycle is detected in the dependency graph\n    \"\"\"\n    # Build adjacency list and in-degree count\n    graph = {task: [] for task in deps}\n    in_degree = {task: 0 for task in deps}\n    \n    # Add all tasks that appear as dependencies\n    for task, task_deps in deps.items():\n        for dep in task_deps:\n            if dep not in graph:\n                graph[dep] = []\n            if dep not in in_degree:\n                in_degree[dep] = 0\n    \n    # Build the graph and calculate in-degrees\n    for task, task_deps in deps.items():\n        for dep in task_deps:\n            graph[dep].append(task)\n            in_degree[task] += 1\n    \n    # Kahn's algorithm for topological sort\n    queue = [task for task in graph if in_degree[task] == 0]\n    result = []\n    \n    while queue:\n        # Sort to ensure deterministic ordering when multiple nodes have in-degree 0\n        queue.sort()\n        task = queue.pop(0)\n        result.append(task)\n        \n        for neighbor in graph[task]:\n            in_degree[neighbor] -= 1\n            if in_degree[neighbor] == 0:\n                queue.append(neighbor)\n    \n    # Check if all tasks were processed (no cycle)\n    if len(result) != len(graph):\n        raise ValueError(\"Cycle detected in dependency graph\")\n    \n    return result\n\n\nif __name__ == \"__main__\":\n    # Test cases\n    test_cases = [\n        # Simple linear dependency\n        ({\"a\": [], \"b\": [\"a\"], \"c\": [\"b\"]}, [\"a\", \"b\", \"c\"]),\n        # Multiple dependencies\n        ({\"a\": [], \"b\": [], \"c\": [\"a\", \"b\"]}, [\"a\", \"b\", \"c\"]),\n        # Complex graph\n        ({\"a\": [], \"b\": [\"a\"], \"c\": [\"a\"], \"d\": [\"b\", \"c\"]}, [\"a\", \"b\", \"c\", \"d\"]),\n        # Single task\n        ({\"a\": []}, [\"a\"]),\n        # Empty graph\n        ({}, []),\n    ]\n    \n    for deps, expected in test_cases:\n        result = dependency_order(deps)\n        # Verify topological order is valid\n        pos = {task: i for i, task in enumerate(result)}\n        valid = all(\n            all(pos[dep] < pos[task] for dep in deps[task])\n            for task in deps\n        )\n        print(f\"Input: {deps}\")\n        print(f\"Output: {result}\")\n        print(f\"Valid: {valid}\\n\")\n    \n    # Test cycle detection\n    try:\n        dependency_order({\"a\": [\"b\"], \"b\": [\"a\"]})\n        print(\"ERROR: Should have detected cycle\")\n    except ValueError as e:\n        print(f\"Correctly detected cycle: {e}\")\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.92},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.92
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:11:58.944326+00:00"
+}

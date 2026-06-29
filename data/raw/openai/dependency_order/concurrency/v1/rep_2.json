@@ -1,0 +1,13 @@
+{
+  "model": "openai",
+  "task_id": "dependency_order",
+  "dimension": "concurrency",
+  "value": "v1",
+  "rep": 2,
+  "prompt": "Implement the following programming task in Python.\n\n## Functional behavior\nImplement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.\n\n## Intent dimensions\nApply ALL of the following intent constraints when writing the code:\n- performance (v0): No specific complexity requirement.\n- security (v0): No explicit input validation required.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v1): Make the implementation safe for concurrent use when relevant.\n\n## Output requirements\n- Return Python code only.\n- Provide one self-contained implementation in a single file.\n- Do not include explanations, markdown, or text outside the code.\n- Do not wrap the code in markdown fences.\n",
+  "response": "def dependency_order(deps: dict[str, list[str]]) -> list[str]:\n    from collections import defaultdict, deque\n\n    graph = defaultdict(list)\n    in_degree = {k: 0 for k in deps}\n\n    for task, neighbors in deps.items():\n        for neighbor in neighbors:\n            graph[task].append(neighbor)\n            in_degree[neighbor] += 1\n\n    queue = deque([task for task in in_degree if in_degree[task] == 0])\n    order = []\n\n    while queue:\n        task = queue.popleft()\n        order.append(task)\n        for neighbor in graph[task]:\n            in_degree[neighbor] -= 1\n            if in_degree[neighbor] == 0:\n                queue.append(neighbor)\n\n    if len(order) != len(deps):\n        raise ValueError(\"Cycle detected in dependencies\")\n\n    return order",
+  "timestamp": "2026-06-29T14:02:59.846154+00:00",
+  "parameters": {
+    "temperature": 0
+  }
+}

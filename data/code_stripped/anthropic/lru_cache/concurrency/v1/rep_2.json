@@ -1,0 +1,25 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_2.py",
+  "replacements": [
+    {
+      "from": "threading",
+      "to": "module_x",
+      "count": "1"
+    },
+    {
+      "from": "concurrent",
+      "to": "module_z",
+      "count": "1"
+    },
+    {
+      "from": "Lock",
+      "to": "ResourceGuard",
+      "count": "2"
+    },
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "1"
+    }
+  ]
+}

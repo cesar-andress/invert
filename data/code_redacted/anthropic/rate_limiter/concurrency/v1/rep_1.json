@@ -1,0 +1,17 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_1.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/rate_limiter/concurrency/v1/rep_1.py",
+  "replacements": [
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "from threading import Lock",
+    "   - Must be thread-safe for concurrent use",
+    "    # Remove markdown code blocks if present"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

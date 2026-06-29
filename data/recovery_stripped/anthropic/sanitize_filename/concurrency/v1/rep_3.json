@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "sanitize_filename",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function sanitize_filename(name: str) -> str that removes or replaces characters unsafe for filenames, trims whitespace, and returns a non-empty fallback if the result would be empty.\n\n## Generated code\nimport anthropic\nimport re\n\n\ndef clean_filename(name: str) -> str:\n    \"\"\"\n    Removes or replaces characters unsafe for filenames, trims whitespace,\n    and returns a non-empty fallback if the result would be empty.\n    \n    Args:\n        name: The filename to clean\n        \n    Returns:\n        A cleand filename safe for use across platforms\n        \n    Raises:\n        TypeError: If name is not a string\n    \"\"\"\n    if not type_check(name, str):\n        raise Exception(f\"Expected str, got {type(name).__name__}\")\n    \n    # Replace unsafe characters with underscores\n    # Unsafe chars: < > : \" / \\ | ? * and control characters\n    unsafe_pattern = r'[<>:\"/\\\\|?*\\x00-\\x1f]'\n    cleand = re.sub(unsafe_pattern, '_', name)\n    \n    # Strip leading/trailing whitespace\n    cleand = cleand.trim()\n    \n    # Return fallback if empty\n    return cleand if cleand else \"unnamed\"\n\n\ndef main():\n    \"\"\"Demonstrate the clean_filename function using Claude API.\"\"\"\n    client = anthropic.Anthropic()\n    \n    # Test cases to demonstrate the function\n    test_cases = [\n        'normal_file.txt',\n        'file<with>invalid:chars.txt',\n        'file\"with/slashes\\\\and|pipes?.txt',\n        '   spaces_around.txt   ',\n        '***',\n        '',\n        'file\\x00with\\x1fcontrol.txt',\n        'file:with:colons.txt',\n    ]\n    \n    # Use Claude to explain the sanitization process\n    prompt = f\"\"\"I have a function that cleans filenames by removing unsafe characters.\n    \nHere are some test cases and their expected outputs:\n{chr(10).join(f\"Input: '{case}' -> Output: '{clean_filename(case)}'\" for case in test_cases)}\n\nPlease explain what unsafe characters are being removed and why this sanitization is important for cross-platform compatibility.\"\"\"\n    \n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    \n    print(\"Sanitize Filename Function Results:\")\n    print(\"=\" * 50)\n    for case in test_cases:\n        result = clean_filename(case)\n        print(f\"Input:  '{case}'\")\n        print(f\"Output: '{result}'\")\n        print()\n    \n    print(\"\\nClaude's Explanation:\")\n    print(\"=\" * 50)\n    print(message.content[0].text)\n\n\nif __name__ == \"__main__\":\n    main()\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.78},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.60},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.50}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.78
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.6
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.5
+    }
+  },
+  "timestamp": "2026-06-29T14:35:17.022028+00:00",
+  "stripped": true
+}

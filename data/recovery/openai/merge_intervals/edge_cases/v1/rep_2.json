@@ -1,0 +1,45 @@
+{
+  "generator_model": "openai",
+  "judge_model": "local_stub",
+  "task_id": "merge_intervals",
+  "manipulated_dimension": "edge_cases",
+  "true_value": "v1",
+  "rep": 2,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]] that merges overlapping or adjacent intervals and returns sorted non-overlapping intervals.\n\n## Generated code\ndef merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]:\n    if intervals is None:\n        raise ValueError(\"Input cannot be None\")\n    if not isinstance(intervals, list):\n        raise TypeError(\"Input must be a list\")\n    \n    intervals.sort(key=lambda x: x[0])\n    merged = []\n    \n    for interval in intervals:\n        if not isinstance(interval, tuple) or len(interval) != 2:\n            raise ValueError(\"Each interval must be a tuple of two integers\")\n        if interval[0] > interval[1]:\n            raise ValueError(\"Invalid interval: start must not be greater than end\")\n        \n        if not merged or merged[-1][1] < interval[0]:\n            merged.append(interval)\n        else:\n            merged[-1] = (merged[-1][0], max(merged[-1][1], interval[1]))\n    \n    return merged\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\"performance\": {\"value\": \"v0\", \"confidence\": 0.96}, \"security\": {\"value\": \"v1\", \"confidence\": 0.93}, \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.69}, \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.63}, \"readability\": {\"value\": \"v1\", \"confidence\": 0.61}, \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.55}, \"edge_cases\": {\"value\": \"v0\", \"confidence\": 0.84}, \"concurrency\": {\"value\": \"v1\", \"confidence\": 0.75}}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.96
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.93
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.69
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.63
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.61
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.55
+    },
+    "edge_cases": {
+      "value": "v0",
+      "confidence": 0.84
+    },
+    "concurrency": {
+      "value": "v1",
+      "confidence": 0.75
+    }
+  },
+  "timestamp": "2026-06-29T13:57:33.286328+00:00"
+}

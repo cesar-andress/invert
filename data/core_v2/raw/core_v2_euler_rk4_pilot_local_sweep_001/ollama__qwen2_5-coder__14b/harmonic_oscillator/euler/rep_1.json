@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:qwen2.5-coder:14b",
+  "task_id": "harmonic_oscillator",
+  "method": "euler",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: harmonic_oscillator\n\nODE: dx/dt = v; dv/dt = -omega^2 * x\nParameters: omega=1.0\nstate vector y = [1.0, 0.0] (2 components)\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.05\nExpected qualitative behavior: Undamped oscillation with period 2*pi/omega.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # y is a sequence [x, v]; return [dx/dt, dv/dt]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # y0 is the initial state vector; integrate from t0 to tf\n\nMethod label: Euler (first-order explicit integration)\nOperational requirement: Use a first-order explicit update with exactly one derivative evaluation per step.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = [1.0, 0.0] in any self-test or example.\n",
+  "response": "```python\ndef f(t, y):\n    x, v = y\n    return [v, -omega**2 * x]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0[:]\n    while t < tf:\n        dydt = f(t, y)\n        y[0] += dt * dydt[0]\n        y[1] += dt * dydt[1]\n        t += dt\n    return y\n\nomega = 1.0\ny0 = [1.0, 0.0]\nt0 = 0.0\ntf = 2.0\ndt = 0.05\n\nresult = integrate_ode(f, y0, t0, tf, dt)\nprint(result)\n```",
+  "code": "def f(t, y):\n    x, v = y\n    return [v, -omega**2 * x]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0[:]\n    while t < tf:\n        dydt = f(t, y)\n        y[0] += dt * dydt[0]\n        y[1] += dt * dydt[1]\n        t += dt\n    return y\n\nomega = 1.0\ny0 = [1.0, 0.0]\nt0 = 0.0\ntf = 2.0\ndt = 0.05\n\nresult = integrate_ode(f, y0, t0, tf, dt)\nprint(result)",
+  "timestamp": "2026-06-29T19:14:35.236169+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen2_5-coder__14b"
+  }
+}

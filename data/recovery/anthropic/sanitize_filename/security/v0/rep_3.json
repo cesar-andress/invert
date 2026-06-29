@@ -1,0 +1,45 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "sanitize_filename",
+  "manipulated_dimension": "security",
+  "true_value": "v0",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function sanitize_filename(name: str) -> str that removes or replaces characters unsafe for filenames, trims whitespace, and returns a non-empty fallback if the result would be empty.\n\n## Generated code\nimport re\n\ndef sanitize_filename(name: str) -> str:\n    if not isinstance(name, str):\n        raise TypeError(\"Input must be a string\")\n    \n    if not name:\n        raise ValueError(\"Input cannot be empty\")\n    \n    # Remove or replace unsafe characters for filenames\n    # Keep alphanumeric, dots, hyphens, underscores, and spaces\n    sanitized = re.sub(r'[<>:\"/\\\\|?*\\x00-\\x1f]', '', name)\n    \n    # Replace multiple spaces with single space and trim\n    sanitized = re.sub(r'\\s+', ' ', sanitized).strip()\n    \n    # Return fallback if result is empty\n    return sanitized if sanitized else \"unnamed\"\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.50}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.5
+    }
+  },
+  "timestamp": "2026-06-29T14:16:15.782740+00:00"
+}

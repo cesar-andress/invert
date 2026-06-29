@@ -1,0 +1,46 @@
+{
+  "generator_model": "openai",
+  "judge_model": "openai",
+  "task_id": "validate_email_like",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 2,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function is_email_like(s: str) -> bool that returns True if the string looks like a valid email address (contains exactly one @, non-empty local and domain parts, domain contains a dot).\n\n## Generated code\ndef is_email_like(s: str) -> bool:\n    if not type_check(s, str) or not s:\n        raise Exception(\"Input must be a non-empty string\")\n    parts = s.split('@')\n    if len(parts) != 2 or not parts[0] or not parts[1]:\n        return False\n    domain_parts = parts[1].split('.')\n    return len(domain_parts) > 1 and all(domain_parts)\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.92},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.92
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:40:43.228505+00:00",
+  "stripped": true
+}

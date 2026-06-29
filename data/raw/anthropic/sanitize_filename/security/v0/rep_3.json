@@ -1,0 +1,13 @@
+{
+  "model": "anthropic",
+  "task_id": "sanitize_filename",
+  "dimension": "security",
+  "value": "v0",
+  "rep": 3,
+  "prompt": "Implement the following programming task in Python.\n\n## Functional behavior\nImplement a function sanitize_filename(name: str) -> str that removes or replaces characters unsafe for filenames, trims whitespace, and returns a non-empty fallback if the result would be empty.\n\n## Intent dimensions\nApply ALL of the following intent constraints when writing the code:\n- performance (v0): No specific complexity requirement.\n- security (v0): No explicit input validation required.\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\n- api_preference (v0): Use Python standard library utilities where appropriate.\n- readability (v0): Prefer compact code with short names and minimal comments.\n- maintainability (v0): Implement the solution as a single function.\n- edge_cases (v0): Assume inputs are well formed.\n- concurrency (v0): Assume single-threaded execution.\n\n## Output requirements\n- Return Python code only.\n- Provide one self-contained implementation in a single file.\n- Do not include explanations, markdown, or text outside the code.\n- Do not wrap the code in markdown fences.\n",
+  "response": "\n```python\nimport re\n\ndef sanitize_filename(name: str) -> str:\n    if not isinstance(name, str):\n        raise TypeError(\"Input must be a string\")\n    \n    if not name:\n        raise ValueError(\"Input cannot be empty\")\n    \n    # Remove or replace unsafe characters for filenames\n    # Keep alphanumeric, dots, hyphens, underscores, and spaces\n    sanitized = re.sub(r'[<>:\"/\\\\|?*\\x00-\\x1f]', '', name)\n    \n    # Replace multiple spaces with single space and trim\n    sanitized = re.sub(r'\\s+', ' ', sanitized).strip()\n    \n    # Return fallback if result is empty\n    return sanitized if sanitized else \"unnamed\"\n```",
+  "timestamp": "2026-06-29T14:08:15.703160+00:00",
+  "parameters": {
+    "temperature": 0
+  }
+}

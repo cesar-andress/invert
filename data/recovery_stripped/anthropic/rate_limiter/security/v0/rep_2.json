@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "rate_limiter",
+  "manipulated_dimension": "security",
+  "true_value": "v0",
+  "rep": 2,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Generated code\nimport anthropic\nimport time\nfrom collections import deque\n\n\ndef create_rate_limiter():\n    \"\"\"Create a RateLimiter class using Claude to generate the implementation.\"\"\"\n    client = anthropic.Anthropic()\n    \n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\n                \"role\": \"user\",\n                \"content\": \"\"\"Implement a Python class RateLimiter with:\n- __init__(self, max_calls: int, period_seconds: float)\n- allow(self) -> bool method\n\nThe allow() method should return True if a call is permitted under a sliding window rate limit of max_calls within period_seconds.\n\nRequirements:\n- Use a sliding window approach (not fixed windows)\n- Track timestamps of calls\n- Remove old timestamps outside the window\n- Return True if call count in window < max_calls\n- Increment call count on True return\n- Single-threaded, no thread safety needed\n- Use standard library only\n- Compact code with short names\n\nReturn ONLY the Python code for the class, no explanation.\"\"\"\n            }\n        ]\n    )\n    \n    return message.content[0].text\n\n\nclass RateLimiter:\n    def __init__(self, max_calls: int, period_seconds: float):\n        if max_calls <= 0 or period_seconds <= 0:\n            raise Exception(\"max_calls and period_seconds must be positive\")\n        self.max_calls = max_calls\n        self.period = period_seconds\n        self.calls = deque()\n    \n    def allow(self) -> bool:\n        now = time.time()\n        # Remove calls outside the sliding window\n        while self.calls and self.calls[0] < now - self.period:\n            self.calls.popleft()\n        \n        # Check if we can allow this call\n        if len(self.calls) < self.max_calls:\n            self.calls.append(now)\n            return True\n        return False\n\n\nif __name__ == \"__main__\":\n    # Test the RateLimiter\n    limiter = RateLimiter(max_calls=3, period_seconds=1.0)\n    \n    # Test 1: Allow 3 calls within the period\n    print(\"Test 1: Allow 3 calls within 1 second\")\n    for i in range(3):\n        result = limiter.allow()\n        print(f\"  Call {i+1}: {result}\")\n    \n    # Test 2: Block the 4th call\n    print(\"\\nTest 2: Block 4th call\")\n    result = limiter.allow()\n    print(f\"  Call 4: {result}\")\n    \n    # Test 3: Wait for window to expire and allow new calls\n    print(\"\\nTest 3: Wait 1.1 seconds and try again\")\n    time.sleep(1.1)\n    result = limiter.allow()\n    print(f\"  Call after wait: {result}\")\n    \n    # Test 4: Verify Claude's implementation works\n    print(\"\\nTest 4: Verify implementation with Claude\")\n    code = create_rate_limiter()\n    print(\"Claude generated implementation:\")\n    print(code[:200] + \"...\" if len(code) > 200 else code)\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "error_handling": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:34:38.622744+00:00",
+  "stripped": true
+}

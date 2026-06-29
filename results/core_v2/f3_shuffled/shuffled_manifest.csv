@@ -1,0 +1,11 @@
+artifact_id,code_path,code_hash,true_label,shuffled_label
+euler_m0_copy1,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/euler_m0.py,cfd59c6abe41fcd1,m0,m0
+euler_m0_copy2,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/euler_m0.py,cfd59c6abe41fcd1,m0,m0
+euler_m0_copy3,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/euler_m0.py,cfd59c6abe41fcd1,m0,m1
+euler_m0_copy4,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/euler_m0.py,cfd59c6abe41fcd1,m0,m0
+euler_m0_copy5,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/euler_m0.py,cfd59c6abe41fcd1,m0,m0
+rk4_m1_copy1,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/rk4_m1.py,2c5950bf1e315348,m1,m0
+rk4_m1_copy2,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/rk4_m1.py,2c5950bf1e315348,m1,m0
+rk4_m1_copy3,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/rk4_m1.py,2c5950bf1e315348,m1,m0
+rk4_m1_copy4,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/rk4_m1.py,2c5950bf1e315348,m1,m1
+rk4_m1_copy5,/home/cesar/papers/invert/invert/tests/core_v2/fixtures/rk4_m1.py,2c5950bf1e315348,m1,m0

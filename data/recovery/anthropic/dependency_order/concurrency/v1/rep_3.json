@@ -1,0 +1,45 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "dependency_order",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function dependency_order(deps: dict[str, list[str]]) -> list[str] that returns a valid topological ordering of task names. Raise ValueError if a cycle exists.\n\n## Generated code\nimport anthropic\nfrom typing import Any\n\n\ndef dependency_order(deps: dict[str, list[str]]) -> list[str]:\n    \"\"\"\n    Returns a valid topological ordering of task names using Claude AI.\n    Raises ValueError if a cycle exists.\n    \"\"\"\n    client = anthropic.Anthropic()\n    \n    prompt = f\"\"\"Given the following task dependencies where each key is a task and its value is a list of tasks it depends on:\n\n{deps}\n\nReturn a valid topological ordering of all tasks (both keys and values) such that each task appears after all its dependencies. If a cycle exists, respond with exactly: CYCLE_DETECTED\n\nReturn only the ordered list of task names as a Python list, nothing else. For example: ['task1', 'task2', 'task3']\"\"\"\n    \n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    \n    response_text = message.content[0].text.strip()\n    \n    if \"CYCLE_DETECTED\" in response_text:\n        raise ValueError(\"Cycle detected in task dependencies\")\n    \n    try:\n        result = eval(response_text)\n        if not isinstance(result, list):\n            raise ValueError(\"Invalid response format\")\n        return result\n    except Exception as e:\n        raise ValueError(f\"Failed to parse response: {e}\")\n\n\ndef main():\n    test_cases = [\n        {\n            \"a\": [\"b\", \"c\"],\n            \"b\": [\"c\"],\n            \"c\": []\n        },\n        {\n            \"task1\": [],\n            \"task2\": [\"task1\"],\n            \"task3\": [\"task1\", \"task2\"]\n        },\n        {\n            \"x\": [\"y\"],\n            \"y\": [\"z\"],\n            \"z\": [\"x\"]\n        }\n    ]\n    \n    for i, deps in enumerate(test_cases, 1):\n        print(f\"Test case {i}: {deps}\")\n        try:\n            result = dependency_order(deps)\n            print(f\"Result: {result}\")\n        except ValueError as e:\n            print(f\"Error: {e}\")\n        print()\n\n\nif __name__ == \"__main__\":\n    main()\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.60}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.6
+    }
+  },
+  "timestamp": "2026-06-29T14:12:19.889481+00:00"
+}

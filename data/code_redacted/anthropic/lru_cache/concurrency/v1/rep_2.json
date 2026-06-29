@@ -1,0 +1,25 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_2.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/lru_cache/concurrency/v1/rep_2.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "from threading import Lock",
+    "    message = client.messages.create(model='claude-3-5-sonnet-20241022', max_tokens=1024, messages=[{'role': 'user', 'content': 'Generate a Python LRU Cache class implementation with the following requirements:\\n1. Methods: get(key) and put(key, value)\\n2. Fixed capacity support\\n3. get() returns -1 for missing keys\\n4. Both operations must be O(1) average time\\n5. Thread-safe for concurrent use\\n6. Use Python standard library utilities\\n7. Compact code with short names\\n8. Fail fast with exceptions on invalid input\\n\\nReturn only the Python class code, no explanations.'}])",
+    "            raise ValueError('Capacity must be positive')",
+    "        self.lock = Lock()",
+    "        with self.lock:",
+    "        with self.lock:",
+    "                if len(self.cache) >= self.cap:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

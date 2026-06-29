@@ -1,0 +1,21 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v1/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/openai/merge_intervals/security/v1/rep_5.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not all((isinstance(i, tuple) and len(i) == 2 and isinstance(i[0], int) and isinstance(i[1], int) for i in intervals)):",
+    "        raise ValueError('Input must be a list of tuples, each containing two integers.')",
+    "        if not merged or merged[-1][1] < current[0]:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

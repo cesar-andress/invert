@@ -6,11 +6,11 @@
 - Parsed (`ItemProcessor` loads): **120**
 - Behavioral pass: **0**
 - Behavioral fail: **120**
-- Artifacts capturing `process_fn(...)` return value: **120**
+- Artifacts capturing `visit_fn(...)` return value: **120**
 
 ## Verdict
 
-**Prompt/API-contract failure (systematic).** Every artifact defines `ItemProcessor` with the expected class name and constructor, calls `process_fn` once per item, but treats `process_fn(item)` as a **map/transform** returning processed values. The benchmark contract requires `process_fn` to be a void side-effect callback; `process_all()` must return the original input items (set or sorted list), not the callback return values (which are `None`).
+**Prompt/API-contract failure (systematic).** Every artifact defines `ItemProcessor` with the expected class name and constructor, calls `visit_fn` once per item, but treats `visit_fn(item)` as a **map/transform** returning processed values. The benchmark contract requires `visit_fn` to be a void side-effect callback; `process_all()` must return the original input items (set or sorted list), not callback return values.
 
 ## Top failure modes
 
@@ -36,21 +36,21 @@
 Typical generated pattern (deterministic example):
 
 ```python
-processed_item = self.process_fn(item)
+processed_item = self.visit_fn(item)
 processed_items.append(processed_item)
-return sorted(processed_items)  # list of None -> TypeError or wrong set
+return sorted(processed_items)  # wrong: accumulates callback return values
 ```
 
 Expected contract:
 
 ```python
-self.process_fn(item)  # side effect only
-return sorted(self.items)  # or set(items)
+self.visit_fn(item)  # side effect only; ignore return value
+return sorted(self.items)  # or set(self.items)
 ```
 
 ## Notes
 
-- `parsed=true` for all failing artifacts: class loads and constructor accepts `(items, process_fn, seed=None)`.
+- `parsed=true` for all failing artifacts: class loads and constructor accepts `(items, visit_fn, seed=None)`.
 - Ordering/randomization logic is often present but unvalidated because behavioral validity fails first on return-value handling.
 - Detector ambiguity follows from invalid outputs (`None` sets) or runtime exceptions during repeated trace collection.
 

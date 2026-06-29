@@ -1,0 +1,20 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_5.py",
+  "replacements": [
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "3"
+    },
+    {
+      "from": "isinstance",
+      "to": "type_check",
+      "count": "1"
+    },
+    {
+      "from": "strip(",
+      "to": "trim(",
+      "count": "1"
+    }
+  ]
+}

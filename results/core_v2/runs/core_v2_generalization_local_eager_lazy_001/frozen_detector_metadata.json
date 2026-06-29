@@ -1,0 +1,12 @@
+{
+  "run_name": "core_v2_generalization_local_eager_lazy_001",
+  "dimension": "eager_vs_lazy",
+  "git_commit": "3f8a92d4d16f8b433afb79c57cb73fe4279baccf",
+  "detector_files_hash": {
+    "integration.py": "a251c3ad13ebcd9555757119808997e8c4acb2aa06b7a05043cbaf631cdd5e2c",
+    "quadrature.py": "c446cbd2ec945cd68cc4e6024d16ad3fb2d0705b424671d73901aba3fe5947a9",
+    "eager_lazy.py": "1c1abd2bd8816324bf029a7ae06dd36b4e542144dbdab037d083b46ae48aea6b"
+  },
+  "timestamp": "2026-06-29T20:36:57.572716+00:00",
+  "note": "detectors frozen before this generalization run"
+}

@@ -1,0 +1,19 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v0/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/openai/validate_email_like/security/v0/rep_5.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    return bool(local) and bool(domain) and ('.' in domain) and (domain.index('.') > 0) and (domain.rindex('.') < len(domain) - 1)"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

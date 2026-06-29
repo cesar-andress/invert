@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:qwen2.5-coder:32b",
+  "task_id": "harmonic_oscillator",
+  "method": "rk4",
+  "rep": 2,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: harmonic_oscillator\n\nODE: dx/dt = v; dv/dt = -omega^2 * x\nParameters: omega=1.0\nstate vector y = [1.0, 0.0] (2 components)\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.05\nExpected qualitative behavior: Undamped oscillation with period 2*pi/omega.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # y is a sequence [x, v]; return [dx/dt, dv/dt]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # y0 is the initial state vector; integrate from t0 to tf\n\nMethod label: RK4 (fourth-order Runge-Kutta integration)\nOperational requirement: Use a fourth-order Runge-Kutta update with four derivative evaluations per step and the standard weighted combination.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = [1.0, 0.0] in any self-test or example.\n",
+  "response": "def f(t, y):\n    x, v = y\n    omega = 1.0\n    return [v, -omega**2 * x]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        k1 = [dt * fi for fi in f(t, y)]\n        k2 = [dt * fi for fi in f(t + 0.5 * dt, [yj + 0.5 * kj for yj, kj in zip(y, k1)])]\n        k3 = [dt * fi for fi in f(t + 0.5 * dt, [yj + 0.5 * kj for yj, kj in zip(y, k2)])]\n        k4 = [dt * fi for fi in f(t + dt, [yj + kj for yj, kj in zip(y, k3)])]\n        y = [yj + (k1j + 2*k2j + 2*k3j + k4j) / 6.0 for yj, k1j, k2j, k3j, k4j in zip(y, k1, k2, k3, k4)]\n        t += dt\n    return y\n\n# Example usage:\ny0 = [1.0, 0.0]\nt0 = 0.0\ntf = 2.0\ndt = 0.05\nresult = integrate_ode(f, y0, t0, tf, dt)\nprint(result)",
+  "code": "def f(t, y):\n    x, v = y\n    omega = 1.0\n    return [v, -omega**2 * x]\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    t = t0\n    y = y0\n    while t < tf:\n        k1 = [dt * fi for fi in f(t, y)]\n        k2 = [dt * fi for fi in f(t + 0.5 * dt, [yj + 0.5 * kj for yj, kj in zip(y, k1)])]\n        k3 = [dt * fi for fi in f(t + 0.5 * dt, [yj + 0.5 * kj for yj, kj in zip(y, k2)])]\n        k4 = [dt * fi for fi in f(t + dt, [yj + kj for yj, kj in zip(y, k3)])]\n        y = [yj + (k1j + 2*k2j + 2*k3j + k4j) / 6.0 for yj, k1j, k2j, k3j, k4j in zip(y, k1, k2, k3, k4)]\n        t += dt\n    return y\n\n# Example usage:\ny0 = [1.0, 0.0]\nt0 = 0.0\ntf = 2.0\ndt = 0.05\nresult = integrate_ode(f, y0, t0, tf, dt)\nprint(result)",
+  "timestamp": "2026-06-29T19:05:44.094907+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen2_5-coder__32b"
+  }
+}

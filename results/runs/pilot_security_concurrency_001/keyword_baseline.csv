@@ -1,0 +1,241 @@
+generator_model,task_id,dimension,true_value,predicted_value,correct,rep,code_path,matched_markers
+openai,merge_intervals,security,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v0/rep_1.py,
+openai,merge_intervals,security,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v0/rep_2.py,
+openai,merge_intervals,security,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v0/rep_3.py,
+openai,merge_intervals,security,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v0/rep_4.py,
+openai,merge_intervals,security,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v0/rep_5.py,
+openai,merge_intervals,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v1/rep_1.py,isinstance;raise ValueError;len(
+openai,merge_intervals,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v1/rep_2.py,isinstance;raise ValueError;len(
+openai,merge_intervals,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v1/rep_3.py,isinstance;raise ValueError;len(
+openai,merge_intervals,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v1/rep_4.py,isinstance;raise ValueError;len(
+openai,merge_intervals,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/security/v1/rep_5.py,isinstance;raise ValueError;len(
+openai,merge_intervals,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v0/rep_1.py,
+openai,merge_intervals,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v0/rep_2.py,
+openai,merge_intervals,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v0/rep_3.py,
+openai,merge_intervals,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v0/rep_4.py,
+openai,merge_intervals,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v0/rep_5.py,
+openai,merge_intervals,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v1/rep_1.py,
+openai,merge_intervals,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v1/rep_2.py,
+openai,merge_intervals,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v1/rep_3.py,
+openai,merge_intervals,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v1/rep_4.py,
+openai,merge_intervals,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/openai/merge_intervals/concurrency/v1/rep_5.py,
+openai,lru_cache,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v0/rep_1.py,None;len(
+openai,lru_cache,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v0/rep_2.py,None;len(
+openai,lru_cache,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v0/rep_3.py,None;len(
+openai,lru_cache,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v0/rep_4.py,None;len(
+openai,lru_cache,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v0/rep_5.py,None;len(
+openai,lru_cache,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v1/rep_1.py,raise ValueError;None;len(
+openai,lru_cache,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v1/rep_2.py,raise ValueError;None;len(
+openai,lru_cache,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v1/rep_3.py,raise ValueError;None;len(
+openai,lru_cache,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v1/rep_4.py,raise ValueError;None;len(
+openai,lru_cache,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v1/rep_5.py,raise ValueError;None;len(
+openai,lru_cache,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v0/rep_1.py,
+openai,lru_cache,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v0/rep_2.py,
+openai,lru_cache,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v0/rep_3.py,
+openai,lru_cache,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v0/rep_4.py,
+openai,lru_cache,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v0/rep_5.py,
+openai,lru_cache,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v1/rep_1.py,
+openai,lru_cache,concurrency,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v1/rep_2.py,threading;Lock
+openai,lru_cache,concurrency,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v1/rep_3.py,threading;Lock
+openai,lru_cache,concurrency,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v1/rep_4.py,threading;Lock;RLock
+openai,lru_cache,concurrency,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/lru_cache/concurrency/v1/rep_5.py,threading;Lock
+openai,rate_limiter,security,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v0/rep_1.py,len(
+openai,rate_limiter,security,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v0/rep_2.py,len(
+openai,rate_limiter,security,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v0/rep_3.py,len(
+openai,rate_limiter,security,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v0/rep_4.py,len(
+openai,rate_limiter,security,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v0/rep_5.py,len(
+openai,rate_limiter,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v1/rep_1.py,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v1/rep_2.py,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v1/rep_3.py,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v1/rep_4.py,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/security/v1/rep_5.py,isinstance;raise ValueError;len(
+openai,rate_limiter,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v0/rep_1.py,
+openai,rate_limiter,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v0/rep_2.py,
+openai,rate_limiter,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v0/rep_3.py,
+openai,rate_limiter,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v0/rep_4.py,
+openai,rate_limiter,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v0/rep_5.py,
+openai,rate_limiter,concurrency,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v1/rep_1.py,threading;Lock
+openai,rate_limiter,concurrency,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v1/rep_2.py,threading;Lock
+openai,rate_limiter,concurrency,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v1/rep_3.py,threading;Lock
+openai,rate_limiter,concurrency,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v1/rep_4.py,threading;Lock
+openai,rate_limiter,concurrency,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v1/rep_5.py,threading;Lock
+openai,sanitize_filename,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v0/rep_1.py,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v0/rep_2.py,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v0/rep_3.py,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v0/rep_4.py,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v0/rep_5.py,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v1/rep_1.py,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v1/rep_2.py,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v1/rep_3.py,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v1/rep_4.py,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v1/rep_5.py,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v0/rep_1.py,
+openai,sanitize_filename,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v0/rep_2.py,
+openai,sanitize_filename,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v0/rep_3.py,
+openai,sanitize_filename,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v0/rep_4.py,
+openai,sanitize_filename,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v0/rep_5.py,
+openai,sanitize_filename,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v1/rep_1.py,
+openai,sanitize_filename,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v1/rep_2.py,
+openai,sanitize_filename,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v1/rep_3.py,
+openai,sanitize_filename,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v1/rep_4.py,
+openai,sanitize_filename,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v1/rep_5.py,
+openai,validate_email_like,security,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v0/rep_1.py,
+openai,validate_email_like,security,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v0/rep_2.py,
+openai,validate_email_like,security,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v0/rep_3.py,
+openai,validate_email_like,security,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v0/rep_4.py,
+openai,validate_email_like,security,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v0/rep_5.py,len(
+openai,validate_email_like,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v1/rep_1.py,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v1/rep_2.py,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v1/rep_3.py,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v1/rep_4.py,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/security/v1/rep_5.py,isinstance;raise ValueError;len(
+openai,validate_email_like,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v0/rep_1.py,
+openai,validate_email_like,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v0/rep_2.py,
+openai,validate_email_like,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v0/rep_3.py,
+openai,validate_email_like,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v0/rep_4.py,
+openai,validate_email_like,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v0/rep_5.py,
+openai,validate_email_like,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v1/rep_1.py,
+openai,validate_email_like,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v1/rep_2.py,
+openai,validate_email_like,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v1/rep_3.py,
+openai,validate_email_like,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v1/rep_4.py,
+openai,validate_email_like,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/openai/validate_email_like/concurrency/v1/rep_5.py,
+openai,dependency_order,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v0/rep_1.py,raise ValueError;len(
+openai,dependency_order,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v0/rep_2.py,raise ValueError;len(
+openai,dependency_order,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v0/rep_3.py,raise ValueError;len(
+openai,dependency_order,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v0/rep_4.py,raise ValueError;len(
+openai,dependency_order,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v0/rep_5.py,raise ValueError;len(
+openai,dependency_order,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_1.py,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_2.py,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_3.py,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_4.py,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/security/v1/rep_5.py,isinstance;raise ValueError;len(
+openai,dependency_order,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v0/rep_1.py,
+openai,dependency_order,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v0/rep_2.py,
+openai,dependency_order,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v0/rep_3.py,
+openai,dependency_order,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v0/rep_4.py,
+openai,dependency_order,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v0/rep_5.py,
+openai,dependency_order,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v1/rep_1.py,
+openai,dependency_order,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v1/rep_2.py,
+openai,dependency_order,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v1/rep_3.py,
+openai,dependency_order,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v1/rep_4.py,
+openai,dependency_order,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/openai/dependency_order/concurrency/v1/rep_5.py,
+anthropic,merge_intervals,security,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v0/rep_1.py,
+anthropic,merge_intervals,security,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v0/rep_2.py,
+anthropic,merge_intervals,security,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v0/rep_3.py,
+anthropic,merge_intervals,security,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v0/rep_4.py,
+anthropic,merge_intervals,security,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v0/rep_5.py,
+anthropic,merge_intervals,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v1/rep_1.py,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v1/rep_2.py,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v1/rep_3.py,isinstance;raise ValueError;raise TypeError;None;len(
+anthropic,merge_intervals,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v1/rep_4.py,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v1/rep_5.py,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v0/rep_1.py,
+anthropic,merge_intervals,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v0/rep_2.py,
+anthropic,merge_intervals,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v0/rep_3.py,
+anthropic,merge_intervals,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v0/rep_4.py,
+anthropic,merge_intervals,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v0/rep_5.py,
+anthropic,merge_intervals,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v1/rep_1.py,
+anthropic,merge_intervals,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v1/rep_2.py,
+anthropic,merge_intervals,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v1/rep_3.py,
+anthropic,merge_intervals,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v1/rep_4.py,
+anthropic,merge_intervals,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/concurrency/v1/rep_5.py,
+anthropic,lru_cache,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v0/rep_1.py,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v0/rep_2.py,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v0/rep_3.py,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v0/rep_4.py,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v0/rep_5.py,raise ValueError;None;len(
+anthropic,lru_cache,security,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_1.py,sanitize
+anthropic,lru_cache,security,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_2.py,sanitize
+anthropic,lru_cache,security,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_3.py,sanitize
+anthropic,lru_cache,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_4.py,strip(;sanitize
+anthropic,lru_cache,security,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_5.py,sanitize
+anthropic,lru_cache,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v0/rep_1.py,
+anthropic,lru_cache,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v0/rep_2.py,
+anthropic,lru_cache,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v0/rep_3.py,
+anthropic,lru_cache,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v0/rep_4.py,
+anthropic,lru_cache,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v0/rep_5.py,
+anthropic,lru_cache,concurrency,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_1.py,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_2.py,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_3.py,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_4.py,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/concurrency/v1/rep_5.py,threading;concurrent;Lock
+anthropic,rate_limiter,security,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v0/rep_1.py,
+anthropic,rate_limiter,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v0/rep_2.py,raise ValueError;len(
+anthropic,rate_limiter,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v0/rep_3.py,raise ValueError;len(
+anthropic,rate_limiter,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v0/rep_4.py,raise ValueError;len(
+anthropic,rate_limiter,security,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v0/rep_5.py,
+anthropic,rate_limiter,security,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_1.py,strip(
+anthropic,rate_limiter,security,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_2.py,strip(
+anthropic,rate_limiter,security,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_3.py,strip(
+anthropic,rate_limiter,security,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_4.py,strip(
+anthropic,rate_limiter,security,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v1/rep_5.py,strip(
+anthropic,rate_limiter,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_1.py,
+anthropic,rate_limiter,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_2.py,
+anthropic,rate_limiter,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_3.py,
+anthropic,rate_limiter,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_4.py,
+anthropic,rate_limiter,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_5.py,
+anthropic,rate_limiter,concurrency,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_1.py,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_2.py,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_3.py,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_4.py,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_5.py,threading;concurrent;Lock
+anthropic,sanitize_filename,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v0/rep_1.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v0/rep_2.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v0/rep_3.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v0/rep_4.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v0/rep_5.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_1.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_2.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_3.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_4.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/security/v1/rep_5.py,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v0/rep_1.py,
+anthropic,sanitize_filename,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v0/rep_2.py,
+anthropic,sanitize_filename,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v0/rep_3.py,
+anthropic,sanitize_filename,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v0/rep_4.py,
+anthropic,sanitize_filename,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v0/rep_5.py,
+anthropic,sanitize_filename,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v1/rep_1.py,
+anthropic,sanitize_filename,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v1/rep_2.py,
+anthropic,sanitize_filename,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v1/rep_3.py,
+anthropic,sanitize_filename,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v1/rep_4.py,
+anthropic,sanitize_filename,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v1/rep_5.py,
+anthropic,validate_email_like,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v0/rep_1.py,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v0/rep_2.py,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v0/rep_3.py,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v0/rep_4.py,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v0/rep_5.py,isinstance;raise TypeError
+anthropic,validate_email_like,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v1/rep_1.py,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v1/rep_2.py,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v1/rep_3.py,isinstance;raise ValueError;None
+anthropic,validate_email_like,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v1/rep_4.py,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/security/v1/rep_5.py,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v0/rep_1.py,
+anthropic,validate_email_like,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v0/rep_2.py,
+anthropic,validate_email_like,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v0/rep_3.py,
+anthropic,validate_email_like,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v0/rep_4.py,
+anthropic,validate_email_like,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v0/rep_5.py,
+anthropic,validate_email_like,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_1.py,
+anthropic,validate_email_like,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_2.py,
+anthropic,validate_email_like,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_3.py,
+anthropic,validate_email_like,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_4.py,
+anthropic,validate_email_like,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_5.py,
+anthropic,dependency_order,security,v0,v1,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v0/rep_1.py,raise ValueError;len(
+anthropic,dependency_order,security,v0,v1,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v0/rep_2.py,raise ValueError;len(
+anthropic,dependency_order,security,v0,v1,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v0/rep_3.py,raise ValueError;len(
+anthropic,dependency_order,security,v0,v1,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v0/rep_4.py,raise ValueError;len(
+anthropic,dependency_order,security,v0,v1,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v0/rep_5.py,raise ValueError;len(
+anthropic,dependency_order,security,v1,v1,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v1/rep_1.py,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,v1,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v1/rep_2.py,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,v1,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v1/rep_3.py,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,v1,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v1/rep_4.py,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,v1,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/security/v1/rep_5.py,isinstance;raise ValueError;None
+anthropic,dependency_order,concurrency,v0,v0,True,1,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v0/rep_1.py,
+anthropic,dependency_order,concurrency,v0,v0,True,2,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v0/rep_2.py,
+anthropic,dependency_order,concurrency,v0,v0,True,3,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v0/rep_3.py,
+anthropic,dependency_order,concurrency,v0,v0,True,4,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v0/rep_4.py,
+anthropic,dependency_order,concurrency,v0,v0,True,5,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v0/rep_5.py,
+anthropic,dependency_order,concurrency,v1,v0,False,1,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_1.py,
+anthropic,dependency_order,concurrency,v1,v0,False,2,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_2.py,
+anthropic,dependency_order,concurrency,v1,v0,False,3,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_3.py,
+anthropic,dependency_order,concurrency,v1,v0,False,4,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_4.py,
+anthropic,dependency_order,concurrency,v1,v0,False,5,/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_5.py,

@@ -1,0 +1,15 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v1/rep_1.py",
+  "replacements": [
+    {
+      "from": "raise TypeError",
+      "to": "raise Exception",
+      "count": "2"
+    },
+    {
+      "from": "isinstance",
+      "to": "type_check",
+      "count": "1"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_4.py",
+  "replacements": [
+    {
+      "from": "threading",
+      "to": "module_x",
+      "count": "3"
+    },
+    {
+      "from": "concurrent",
+      "to": "module_z",
+      "count": "2"
+    },
+    {
+      "from": "Lock",
+      "to": "ResourceGuard",
+      "count": "2"
+    },
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "3"
+    }
+  ]
+}

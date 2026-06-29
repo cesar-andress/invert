@@ -1,0 +1,34 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/sanitize_filename/concurrency/v1/rep_4.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/sanitize_filename/concurrency/v1/rep_4.py",
+  "replacements": [
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "def sanitize_filename(name: str) -> str:",
+    "    Removes or replaces characters unsafe for filenames, trims whitespace,",
+    "        name: The filename to sanitize",
+    "        A sanitized filename safe for use across platforms",
+    "        TypeError: If name is not a string",
+    "    if not isinstance(name, str):",
+    "        raise TypeError(f\"Expected str, got {type(name).__name__}\")",
+    "    # Replace unsafe characters with underscores",
+    "    # Unsafe chars: < > : \" / \\ | ? * and control characters",
+    "    unsafe_pattern = r'[<>:\"/\\\\|?*\\x00-\\x1f]'",
+    "    sanitized = re.sub(unsafe_pattern, '_', name)",
+    "    # Strip leading/trailing whitespace",
+    "    sanitized = sanitized.strip()",
+    "    # Return fallback if empty",
+    "    return sanitized if sanitized else \"unnamed\"",
+    "    \"\"\"Demonstrate the sanitize_filename function with various inputs.\"\"\"",
+    "    print(\"Testing sanitize_filename function:\")",
+    "        result = sanitize_filename(test)",
+    "    # Use Claude to verify the implementation",
+    "                \"content\": f\"\"\"Review this filename sanitization function and verify it handles unsafe characters correctly:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

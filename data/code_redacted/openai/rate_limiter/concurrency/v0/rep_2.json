@@ -1,0 +1,19 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/openai/rate_limiter/concurrency/v0/rep_2.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/openai/rate_limiter/concurrency/v0/rep_2.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "        if len(self.calls) < self.max_calls:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

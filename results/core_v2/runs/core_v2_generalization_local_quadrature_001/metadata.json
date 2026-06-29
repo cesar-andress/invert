@@ -1,0 +1,30 @@
+{
+  "run_name": "core_v2_generalization_local_quadrature_001",
+  "family": "F1",
+  "dimension": "trapezoidal_vs_simpson",
+  "tasks": [
+    "integrate_sin_0_pi",
+    "integrate_exp_0_1",
+    "integrate_polynomial"
+  ],
+  "methods": [
+    "trapezoidal",
+    "simpson"
+  ],
+  "models": [
+    "ollama:qwen3-coder:30b",
+    "ollama:devstral:latest",
+    "ollama:qwen2.5-coder:14b"
+  ],
+  "repetitions": 5,
+  "strip_levels": [
+    "raw",
+    "no_comments",
+    "renamed",
+    "no_imports",
+    "format_normalized"
+  ],
+  "expected_generations": 90,
+  "started_at": "2026-06-29T19:54:17.237063+00:00",
+  "config_file": "configs/core_v2_generalization_local_quadrature.yaml"
+}

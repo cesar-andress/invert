@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_generalization_local_bfs_dfs_001",
+  "model": "ollama:devstral:latest",
+  "task_id": "branching_1",
+  "method": "dfs",
+  "rep": 2,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not include demo code or print statements.\n\nTask ID: branching_1\nStart node: A\nGraph (adjacency list, neighbor order is significant):\n{'A': ['B', 'C'], 'B': ['D', 'E'], 'C': ['F'], 'D': [], 'E': [], 'F': []}\n\nRequired class (exact name and API):\n\nclass GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        ...\n    def reachable_nodes(self):\n        ...\n\nMethod label: Depth-first graph traversal\nOperational requirement: Implement GraphTraversal.reachable_nodes as depth-first search. Use recursion or a stack with LIFO behavior. Call visit_fn(node) exactly when each node is first visited. Return all reachable nodes from start. Do not print. No demo code.\n\nThe generated class must call visit_fn(node) exactly when each node is first visited.\nreachable_nodes() must return the set or sorted list of all nodes reachable from start.\n",
+  "response": "```python\nclass GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        self.graph = graph\n        self.start = start\n        self.visit_fn = visit_fn\n\n    def reachable_nodes(self):\n        visited = set()\n        result = []\n\n        def dfs(node):\n            if node not in visited:\n                visited.add(node)\n                self.visit_fn(node)\n                result.append(node)\n                for neighbor in self.graph[node]:\n                    dfs(neighbor)\n\n        dfs(self.start)\n        return sorted(result)\n```",
+  "code": "class GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        self.graph = graph\n        self.start = start\n        self.visit_fn = visit_fn\n\n    def reachable_nodes(self):\n        visited = set()\n        result = []\n\n        def dfs(node):\n            if node not in visited:\n                visited.add(node)\n                self.visit_fn(node)\n                result.append(node)\n                for neighbor in self.graph[node]:\n                    dfs(neighbor)\n\n        dfs(self.start)\n        return sorted(result)",
+  "timestamp": "2026-06-29T21:17:55.848242+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "bfs_vs_dfs",
+    "storage_model": "ollama__devstral__latest"
+  }
+}

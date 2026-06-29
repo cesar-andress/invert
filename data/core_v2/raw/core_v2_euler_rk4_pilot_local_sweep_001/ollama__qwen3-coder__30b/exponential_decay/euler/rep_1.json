@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:qwen3-coder:30b",
+  "task_id": "exponential_decay",
+  "method": "euler",
+  "rep": 1,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: exponential_decay\n\nODE: dy/dt = -k * y\nParameters: k=0.5\nscalar state y, initial condition y0 = 1.0\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.1\nExpected qualitative behavior: Monotone exponential decay toward zero.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # ODE right-hand side for the scalar equation\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # integrate from t0 to tf using fixed step dt\n\nMethod label: Euler (first-order explicit integration)\nOperational requirement: Use a first-order explicit update with exactly one derivative evaluation per step.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = 1.0 in any self-test or example.\n",
+  "response": "def f(t, y):\n    k = 0.5\n    return -k * y\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    y = y0\n    t = t0\n    result = [(t, y)]\n    while t < tf:\n        y = y + dt * f(t, y)\n        t = t + dt\n        result.append((t, y))\n    return result\n\n# Example usage\nif __name__ == \"__main__\":\n    solution = integrate_ode(f, 1.0, 0.0, 2.0, 0.1)\n    for t, y in solution:\n        print(f\"t={t:.1f}, y={y:.6f}\")",
+  "code": "def f(t, y):\n    k = 0.5\n    return -k * y\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    y = y0\n    t = t0\n    result = [(t, y)]\n    while t < tf:\n        y = y + dt * f(t, y)\n        t = t + dt\n        result.append((t, y))\n    return result\n\n# Example usage\nif __name__ == \"__main__\":\n    solution = integrate_ode(f, 1.0, 0.0, 2.0, 0.1)\n    for t, y in solution:\n        print(f\"t={t:.1f}, y={y:.6f}\")",
+  "timestamp": "2026-06-29T19:06:44.443238+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen3-coder__30b"
+  }
+}

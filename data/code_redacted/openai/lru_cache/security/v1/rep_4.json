@@ -1,0 +1,20 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/openai/lru_cache/security/v1/rep_4.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/openai/lru_cache/security/v1/rep_4.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "            raise ValueError('Capacity must be a positive integer.')",
+    "            if len(self.cache) >= self.capacity:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

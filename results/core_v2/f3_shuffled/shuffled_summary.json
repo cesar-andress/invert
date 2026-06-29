@@ -1,0 +1,102 @@
+{
+  "n_artifacts": 10,
+  "n_pairs": 2,
+  "accuracy": 0.5,
+  "expected_chance": 0.5,
+  "at_chance": true,
+  "label_permutation": {
+    "note": "independent random labels per identical-code copy"
+  },
+  "details": [
+    {
+      "artifact_id": "euler_m0_copy1",
+      "code_hash": "cfd59c6abe41fcd1",
+      "shuffled_label": "m0",
+      "true_label": "m0",
+      "detected": "euler",
+      "predicted_label": "m0",
+      "match": true
+    },
+    {
+      "artifact_id": "euler_m0_copy2",
+      "code_hash": "cfd59c6abe41fcd1",
+      "shuffled_label": "m0",
+      "true_label": "m0",
+      "detected": "euler",
+      "predicted_label": "m0",
+      "match": true
+    },
+    {
+      "artifact_id": "euler_m0_copy3",
+      "code_hash": "cfd59c6abe41fcd1",
+      "shuffled_label": "m1",
+      "true_label": "m0",
+      "detected": "euler",
+      "predicted_label": "m0",
+      "match": false
+    },
+    {
+      "artifact_id": "euler_m0_copy4",
+      "code_hash": "cfd59c6abe41fcd1",
+      "shuffled_label": "m0",
+      "true_label": "m0",
+      "detected": "euler",
+      "predicted_label": "m0",
+      "match": true
+    },
+    {
+      "artifact_id": "euler_m0_copy5",
+      "code_hash": "cfd59c6abe41fcd1",
+      "shuffled_label": "m0",
+      "true_label": "m0",
+      "detected": "euler",
+      "predicted_label": "m0",
+      "match": true
+    },
+    {
+      "artifact_id": "rk4_m1_copy1",
+      "code_hash": "2c5950bf1e315348",
+      "shuffled_label": "m0",
+      "true_label": "m1",
+      "detected": "rk4",
+      "predicted_label": "m1",
+      "match": false
+    },
+    {
+      "artifact_id": "rk4_m1_copy2",
+      "code_hash": "2c5950bf1e315348",
+      "shuffled_label": "m0",
+      "true_label": "m1",
+      "detected": "rk4",
+      "predicted_label": "m1",
+      "match": false
+    },
+    {
+      "artifact_id": "rk4_m1_copy3",
+      "code_hash": "2c5950bf1e315348",
+      "shuffled_label": "m0",
+      "true_label": "m1",
+      "detected": "rk4",
+      "predicted_label": "m1",
+      "match": false
+    },
+    {
+      "artifact_id": "rk4_m1_copy4",
+      "code_hash": "2c5950bf1e315348",
+      "shuffled_label": "m1",
+      "true_label": "m1",
+      "detected": "rk4",
+      "predicted_label": "m1",
+      "match": true
+    },
+    {
+      "artifact_id": "rk4_m1_copy5",
+      "code_hash": "2c5950bf1e315348",
+      "shuffled_label": "m0",
+      "true_label": "m1",
+      "detected": "rk4",
+      "predicted_label": "m1",
+      "match": false
+    }
+  ]
+}

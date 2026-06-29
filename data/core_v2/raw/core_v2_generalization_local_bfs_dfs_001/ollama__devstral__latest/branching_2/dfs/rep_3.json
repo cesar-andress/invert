@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_generalization_local_bfs_dfs_001",
+  "model": "ollama:devstral:latest",
+  "task_id": "branching_2",
+  "method": "dfs",
+  "rep": 3,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not include demo code or print statements.\n\nTask ID: branching_2\nStart node: S\nGraph (adjacency list, neighbor order is significant):\n{'S': ['A', 'B'], 'A': ['C', 'D'], 'B': ['E'], 'C': [], 'D': [], 'E': []}\n\nRequired class (exact name and API):\n\nclass GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        ...\n    def reachable_nodes(self):\n        ...\n\nMethod label: Depth-first graph traversal\nOperational requirement: Implement GraphTraversal.reachable_nodes as depth-first search. Use recursion or a stack with LIFO behavior. Call visit_fn(node) exactly when each node is first visited. Return all reachable nodes from start. Do not print. No demo code.\n\nThe generated class must call visit_fn(node) exactly when each node is first visited.\nreachable_nodes() must return the set or sorted list of all nodes reachable from start.\n",
+  "response": "```python\nclass GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        self.graph = graph\n        self.start = start\n        self.visit_fn = visit_fn\n\n    def reachable_nodes(self):\n        visited = set()\n        stack = [self.start]\n\n        while stack:\n            node = stack.pop()\n            if node not in visited:\n                visited.add(node)\n                self.visit_fn(node)\n                for neighbor in reversed(self.graph[node]):\n                    if neighbor not in visited:\n                        stack.append(neighbor)\n\n        return sorted(visited)\n```",
+  "code": "class GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        self.graph = graph\n        self.start = start\n        self.visit_fn = visit_fn\n\n    def reachable_nodes(self):\n        visited = set()\n        stack = [self.start]\n\n        while stack:\n            node = stack.pop()\n            if node not in visited:\n                visited.add(node)\n                self.visit_fn(node)\n                for neighbor in reversed(self.graph[node]):\n                    if neighbor not in visited:\n                        stack.append(neighbor)\n\n        return sorted(visited)",
+  "timestamp": "2026-06-29T21:18:23.248935+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "bfs_vs_dfs",
+    "storage_model": "ollama__devstral__latest"
+  }
+}

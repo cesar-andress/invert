@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "merge_intervals",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]] that merges overlapping or adjacent intervals and returns sorted non-overlapping intervals.\n\n## Generated code\nfrom anthropic import Anthropic\n\ndef merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]:\n    \"\"\"\n    Merges overlapping or adjacent intervals and returns sorted non-overlapping intervals.\n    \n    Uses Claude to help verify the implementation through multi-turn conversation.\n    \"\"\"\n    client = Anthropic()\n    conversation_history = []\n    \n    # Initial request to Claude for implementation help\n    initial_prompt = \"\"\"I need to implement a function that merges overlapping or adjacent intervals.\n    \nThe function signature is:\ndef merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]\n\nRequirements:\n- Merge overlapping or adjacent intervals\n- Return sorted non-overlapping intervals\n- Handle edge cases like empty input, single interval, etc.\n\nCan you help me think through the algorithm?\"\"\"\n    \n    conversation_history.append({\n        \"role\": \"user\",\n        \"content\": initial_prompt\n    })\n    \n    response = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=conversation_history\n    )\n    \n    assistant_message = response.content[0].text\n    conversation_history.append({\n        \"role\": \"assistant\",\n        \"content\": assistant_message\n    })\n    \n    # Follow-up to get the actual implementation\n    follow_up = \"\"\"Now can you provide the actual Python implementation of this algorithm? \n    Please provide just the function body that I can use.\"\"\"\n    \n    conversation_history.append({\n        \"role\": \"user\",\n        \"content\": follow_up\n    })\n    \n    response = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=conversation_history\n    )\n    \n    implementation_text = response.content[0].text\n    conversation_history.append({\n        \"role\": \"assistant\",\n        \"content\": implementation_text\n    })\n    \n    # Ask Claude to verify the implementation handles edge cases\n    verification_prompt = \"\"\"Can you verify this implementation handles these edge cases:\n    1. Empty input list\n    2. Single interval\n    3. Non-overlapping intervals\n    4. Completely overlapping intervals\n    5. Adjacent intervals (e.g., [1,2] and [2,3])\n    \n    Does the implementation handle all of these correctly?\"\"\"\n    \n    conversation_history.append({\n        \"role\": \"user\",\n        \"content\": verification_prompt\n    })\n    \n    response = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=conversation_history\n    )\n    \n    # Now implement the actual algorithm based on Claude's guidance\n    if not intervals:\n        return []\n    \n    # Sort intervals by start point, then by end point\n    sorted_intervals = sorted(intervals)\n    \n    # Merge overlapping intervals\n    merged = [sorted_intervals[0]]\n    \n    for current_start, current_end in sorted_intervals[1:]:\n        last_start, last_end = merged[-1]\n        \n        # Check if current interval overlaps or is adjacent to the last merged interval\n        if current_start <= last_end:\n            # Merge by extending the end point if necessary\n            merged[-1] = (last_start, max(last_end, current_end))\n        else:\n            # No overlap, add as new interval\n            merged.append((current_start, current_end))\n    \n    return merged\n\n\n# Test the implementation\nif __name__ == \"__main__\":\n    # Test cases\n    test_cases = [\n        ([], []),\n        ([(1, 3)], [(1, 3)]),\n        ([(1, 3), (2, 6), (8, 10), (15, 18)], [(1, 6), (8, 10), (15, 18)]),\n        ([(1, 4), (4, 5)], [(1, 5)]),\n        ([(1, 4), (2, 3)], [(1, 4)]),\n        ([(2, 3), (4, 5), (1, 2)], [(1, 3), (4, 5)]),\n        ([(1, 5), (2, 3)], [(1, 5)]),\n    ]\n    \n    for intervals, expected in test_cases:\n        result = merge_intervals(intervals)\n        status = \"\u2713\" if result == expected else \"\u2717\"\n        print(f\"{status} merge_intervals({intervals}) = {result} (expected {expected})\")\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v0\", \"confidence\": 0.60},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.50}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.6
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.5
+    }
+  },
+  "timestamp": "2026-06-29T14:33:44.149635+00:00",
+  "stripped": true
+}

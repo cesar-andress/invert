@@ -1,0 +1,232 @@
+generator_model,task_id,dimension,true_value,rep,llm_correct,keyword_correct,llm_recovered_value,keyword_predicted_value,llm_confidence,matched_markers
+anthropic,dependency_order,concurrency,v0,1,True,True,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v0,2,True,True,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v0,3,True,True,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v0,4,True,True,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v0,5,True,True,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v1,1,False,False,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v1,2,False,False,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v1,3,False,False,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v1,4,False,False,v0,v0,0.6,
+anthropic,dependency_order,concurrency,v1,5,False,False,v0,v0,0.6,
+anthropic,dependency_order,security,v0,1,False,False,v1,v1,0.9,raise ValueError;len(
+anthropic,dependency_order,security,v0,2,True,False,v0,v1,0.65,raise ValueError;len(
+anthropic,dependency_order,security,v0,3,False,False,v1,v1,0.8,raise ValueError;len(
+anthropic,dependency_order,security,v0,4,False,False,v1,v1,0.9,raise ValueError;len(
+anthropic,dependency_order,security,v0,5,True,False,v0,v1,0.65,raise ValueError;len(
+anthropic,dependency_order,security,v1,1,True,True,v1,v1,0.9,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,2,True,True,v1,v1,0.9,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,3,True,True,v1,v1,0.9,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,4,True,True,v1,v1,0.9,isinstance;raise ValueError;None
+anthropic,dependency_order,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;None
+anthropic,lru_cache,concurrency,v0,1,True,True,v0,v0,0.5,
+anthropic,lru_cache,concurrency,v0,2,True,True,v0,v0,0.6,
+anthropic,lru_cache,concurrency,v0,3,True,True,v0,v0,0.5,
+anthropic,lru_cache,concurrency,v0,4,True,True,v0,v0,0.6,
+anthropic,lru_cache,concurrency,v0,5,True,True,v0,v0,0.5,
+anthropic,lru_cache,concurrency,v1,1,True,True,v1,v1,0.93,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,2,True,True,v1,v1,0.93,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,3,True,True,v1,v1,0.92,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,4,True,True,v1,v1,0.93,threading;concurrent;Lock
+anthropic,lru_cache,concurrency,v1,5,True,True,v1,v1,0.93,threading;concurrent;Lock
+anthropic,lru_cache,security,v0,1,True,False,v0,v1,0.6,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,2,True,False,v0,v1,0.6,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,3,True,False,v0,v1,0.6,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,4,True,False,v0,v1,0.6,raise ValueError;None;len(
+anthropic,lru_cache,security,v0,5,False,False,v1,v1,0.85,raise ValueError;None;len(
+anthropic,lru_cache,security,v1,1,True,False,v1,v0,0.9,sanitize
+anthropic,lru_cache,security,v1,2,True,False,v1,v0,0.9,sanitize
+anthropic,lru_cache,security,v1,3,True,False,v1,v0,0.9,sanitize
+anthropic,lru_cache,security,v1,4,True,True,v1,v1,0.9,strip(;sanitize
+anthropic,lru_cache,security,v1,5,True,False,v1,v0,0.9,sanitize
+anthropic,merge_intervals,concurrency,v0,1,True,True,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v0,2,True,True,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v0,3,True,True,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v0,4,True,True,v0,v0,0.6,
+anthropic,merge_intervals,concurrency,v0,5,True,True,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v1,1,False,False,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v1,2,False,False,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v1,3,False,False,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v1,4,False,False,v0,v0,0.5,
+anthropic,merge_intervals,concurrency,v1,5,False,False,v0,v0,0.5,
+anthropic,merge_intervals,security,v0,1,True,True,v0,v0,0.6,
+anthropic,merge_intervals,security,v0,2,True,True,v0,v0,0.65,
+anthropic,merge_intervals,security,v0,3,True,True,v0,v0,0.6,
+anthropic,merge_intervals,security,v0,4,True,True,v0,v0,0.6,
+anthropic,merge_intervals,security,v0,5,True,True,v0,v0,0.6,
+anthropic,merge_intervals,security,v1,1,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,security,v1,2,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,security,v1,3,True,True,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;None;len(
+anthropic,merge_intervals,security,v1,4,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;len(
+anthropic,merge_intervals,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;len(
+anthropic,rate_limiter,concurrency,v0,1,True,True,v0,v0,0.6,
+anthropic,rate_limiter,concurrency,v0,2,True,True,v0,v0,0.6,
+anthropic,rate_limiter,concurrency,v0,3,True,True,v0,v0,0.6,
+anthropic,rate_limiter,concurrency,v0,4,True,True,v0,v0,0.75,
+anthropic,rate_limiter,concurrency,v0,5,True,True,v0,v0,0.5,
+anthropic,rate_limiter,concurrency,v1,1,True,True,v1,v1,0.78,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,2,True,True,v1,v1,0.78,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,3,True,True,v1,v1,0.92,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,4,True,True,v1,v1,0.89,threading;concurrent;Lock
+anthropic,rate_limiter,concurrency,v1,5,True,True,v1,v1,0.89,threading;concurrent;Lock
+anthropic,rate_limiter,security,v0,1,True,True,v0,v0,0.65,
+anthropic,rate_limiter,security,v0,2,True,False,v0,v1,0.6,raise ValueError;len(
+anthropic,rate_limiter,security,v0,3,True,False,v0,v1,0.65,raise ValueError;len(
+anthropic,rate_limiter,security,v0,4,True,False,v0,v1,0.6,raise ValueError;len(
+anthropic,rate_limiter,security,v0,5,True,True,v0,v0,0.65,
+anthropic,rate_limiter,security,v1,1,True,False,v1,v0,0.8,strip(
+anthropic,rate_limiter,security,v1,2,True,False,v1,v0,0.8,strip(
+anthropic,rate_limiter,security,v1,3,True,False,v1,v0,0.9,strip(
+anthropic,rate_limiter,security,v1,4,True,False,v1,v0,0.8,strip(
+anthropic,rate_limiter,security,v1,5,True,False,v1,v0,0.9,strip(
+anthropic,sanitize_filename,concurrency,v0,1,True,True,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v0,2,True,True,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v0,3,True,True,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v0,4,True,True,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v0,5,True,True,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v1,1,False,False,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v1,2,False,False,v0,v0,0.5,
+anthropic,sanitize_filename,concurrency,v1,3,False,False,v0,v0,0.6,
+anthropic,sanitize_filename,concurrency,v1,4,False,False,v0,v0,0.6,
+anthropic,sanitize_filename,concurrency,v1,5,False,False,v0,v0,0.6,
+anthropic,sanitize_filename,security,v0,1,False,False,v1,v1,0.92,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,2,False,False,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,3,False,False,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,4,False,False,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v0,5,False,False,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,1,True,True,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,2,True,True,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,3,True,True,v1,v1,0.92,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,4,True,True,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,sanitize_filename,security,v1,5,True,True,v1,v1,0.85,isinstance;raise ValueError;raise TypeError;strip(;sanitize
+anthropic,validate_email_like,concurrency,v0,1,True,True,v0,v0,0.5,
+anthropic,validate_email_like,concurrency,v0,2,True,True,v0,v0,0.5,
+anthropic,validate_email_like,concurrency,v0,3,True,True,v0,v0,0.5,
+anthropic,validate_email_like,concurrency,v0,4,True,True,v0,v0,0.5,
+anthropic,validate_email_like,concurrency,v0,5,True,True,v0,v0,0.5,
+anthropic,validate_email_like,concurrency,v1,1,False,False,v0,v0,0.6,
+anthropic,validate_email_like,concurrency,v1,2,False,False,v0,v0,0.6,
+anthropic,validate_email_like,concurrency,v1,3,False,False,v0,v0,0.6,
+anthropic,validate_email_like,concurrency,v1,4,False,False,v0,v0,0.6,
+anthropic,validate_email_like,concurrency,v1,5,False,False,v0,v0,0.6,
+anthropic,validate_email_like,security,v0,1,False,False,v1,v1,0.8,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,2,False,False,v1,v1,0.8,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,3,False,False,v1,v1,0.8,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,4,False,False,v1,v1,0.8,isinstance;raise TypeError
+anthropic,validate_email_like,security,v0,5,False,False,v1,v1,0.9,isinstance;raise TypeError
+anthropic,validate_email_like,security,v1,1,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,security,v1,2,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,security,v1,3,True,True,v1,v1,0.9,isinstance;raise ValueError;None
+anthropic,validate_email_like,security,v1,4,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;None
+anthropic,validate_email_like,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;raise TypeError;None
+openai,dependency_order,concurrency,v0,1,True,True,v0,v0,0.6,
+openai,dependency_order,concurrency,v0,2,True,True,v0,v0,0.6,
+openai,dependency_order,concurrency,v0,3,True,True,v0,v0,0.6,
+openai,dependency_order,concurrency,v0,4,True,True,v0,v0,0.6,
+openai,dependency_order,concurrency,v0,5,True,True,v0,v0,0.6,
+openai,dependency_order,concurrency,v1,1,False,False,v0,v0,0.6,
+openai,dependency_order,concurrency,v1,2,False,False,v0,v0,0.6,
+openai,dependency_order,concurrency,v1,3,False,False,v0,v0,0.6,
+openai,dependency_order,concurrency,v1,4,False,False,v0,v0,0.6,
+openai,dependency_order,concurrency,v1,5,False,False,v0,v0,0.6,
+openai,dependency_order,security,v0,1,False,False,v1,v1,0.8,raise ValueError;len(
+openai,dependency_order,security,v0,2,False,False,v1,v1,0.8,raise ValueError;len(
+openai,dependency_order,security,v0,3,False,False,v1,v1,0.8,raise ValueError;len(
+openai,dependency_order,security,v0,4,False,False,v1,v1,0.8,raise ValueError;len(
+openai,dependency_order,security,v0,5,False,False,v1,v1,0.8,raise ValueError;len(
+openai,dependency_order,security,v1,1,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,2,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,3,True,True,v1,v1,0.8,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,4,True,True,v1,v1,0.8,isinstance;raise ValueError;len(
+openai,dependency_order,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,lru_cache,concurrency,v0,1,True,True,v0,v0,0.5,
+openai,lru_cache,concurrency,v0,2,True,True,v0,v0,0.5,
+openai,lru_cache,concurrency,v0,3,True,True,v0,v0,0.5,
+openai,lru_cache,concurrency,v0,4,True,True,v0,v0,0.5,
+openai,lru_cache,concurrency,v0,5,True,True,v0,v0,0.5,
+openai,lru_cache,concurrency,v1,1,False,False,v0,v0,0.5,
+openai,lru_cache,concurrency,v1,2,True,True,v1,v1,0.93,threading;Lock
+openai,lru_cache,concurrency,v1,3,True,True,v1,v1,0.8,threading;Lock
+openai,lru_cache,concurrency,v1,4,True,True,v1,v1,0.93,threading;Lock;RLock
+openai,lru_cache,concurrency,v1,5,True,True,v1,v1,0.93,threading;Lock
+openai,lru_cache,security,v0,2,True,False,v0,v1,0.6,None;len(
+openai,lru_cache,security,v0,3,True,False,v0,v1,0.6,None;len(
+openai,lru_cache,security,v0,4,True,False,v0,v1,0.6,None;len(
+openai,lru_cache,security,v0,5,True,False,v0,v1,0.6,None;len(
+openai,lru_cache,security,v1,1,True,True,v1,v1,0.78,raise ValueError;None;len(
+openai,lru_cache,security,v1,2,False,True,v0,v1,0.6,raise ValueError;None;len(
+openai,lru_cache,security,v1,3,True,True,v1,v1,0.78,raise ValueError;None;len(
+openai,lru_cache,security,v1,4,True,True,v1,v1,0.75,raise ValueError;None;len(
+openai,lru_cache,security,v1,5,False,True,v0,v1,0.65,raise ValueError;None;len(
+openai,merge_intervals,concurrency,v0,3,True,True,v0,v0,0.65,
+openai,merge_intervals,concurrency,v0,4,True,True,v0,v0,0.6,
+openai,merge_intervals,concurrency,v0,5,True,True,v0,v0,0.6,
+openai,merge_intervals,concurrency,v1,3,False,False,v0,v0,0.6,
+openai,merge_intervals,concurrency,v1,4,False,False,v0,v0,0.6,
+openai,merge_intervals,concurrency,v1,5,False,False,v0,v0,0.6,
+openai,merge_intervals,security,v0,3,False,True,v1,v0,0.8,
+openai,merge_intervals,security,v0,4,False,True,v1,v0,0.8,
+openai,merge_intervals,security,v0,5,False,True,v1,v0,0.8,
+openai,merge_intervals,security,v1,3,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,merge_intervals,security,v1,4,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,merge_intervals,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,rate_limiter,concurrency,v0,1,True,True,v0,v0,0.5,
+openai,rate_limiter,concurrency,v0,2,True,True,v0,v0,0.55,
+openai,rate_limiter,concurrency,v0,3,True,True,v0,v0,0.55,
+openai,rate_limiter,concurrency,v0,4,True,True,v0,v0,0.55,
+openai,rate_limiter,concurrency,v0,5,True,True,v0,v0,0.55,
+openai,rate_limiter,concurrency,v1,1,True,True,v1,v1,0.78,threading;Lock
+openai,rate_limiter,concurrency,v1,2,True,True,v1,v1,0.78,threading;Lock
+openai,rate_limiter,concurrency,v1,3,True,True,v1,v1,0.78,threading;Lock
+openai,rate_limiter,concurrency,v1,4,True,True,v1,v1,0.78,threading;Lock
+openai,rate_limiter,concurrency,v1,5,True,True,v1,v1,0.78,threading;Lock
+openai,rate_limiter,security,v0,1,True,True,v0,v0,0.65,len(
+openai,rate_limiter,security,v0,2,True,True,v0,v0,0.65,len(
+openai,rate_limiter,security,v0,3,True,True,v0,v0,0.65,len(
+openai,rate_limiter,security,v0,4,True,True,v0,v0,0.65,len(
+openai,rate_limiter,security,v0,5,True,True,v0,v0,0.65,len(
+openai,rate_limiter,security,v1,1,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,2,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,3,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,4,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,rate_limiter,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,sanitize_filename,concurrency,v0,1,True,True,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v0,2,True,True,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v0,3,True,True,v0,v0,0.5,
+openai,sanitize_filename,concurrency,v0,4,True,True,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v0,5,True,True,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v1,1,False,False,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v1,2,False,False,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v1,3,False,False,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v1,4,False,False,v0,v0,0.6,
+openai,sanitize_filename,concurrency,v1,5,False,False,v0,v0,0.5,
+openai,sanitize_filename,security,v0,1,False,False,v1,v1,0.85,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,2,False,False,v1,v1,0.85,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,3,False,False,v1,v1,0.85,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,4,False,False,v1,v1,0.85,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v0,5,False,False,v1,v1,0.85,raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,1,True,True,v1,v1,0.85,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,2,True,True,v1,v1,0.85,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,3,True,True,v1,v1,0.85,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,4,True,True,v1,v1,0.85,isinstance;raise ValueError;strip(;sanitize
+openai,sanitize_filename,security,v1,5,True,True,v1,v1,0.85,isinstance;raise ValueError;strip(;sanitize
+openai,validate_email_like,concurrency,v0,1,True,True,v0,v0,0.6,
+openai,validate_email_like,concurrency,v0,2,True,True,v0,v0,0.5,
+openai,validate_email_like,concurrency,v0,3,True,True,v0,v0,0.6,
+openai,validate_email_like,concurrency,v0,4,True,True,v0,v0,0.6,
+openai,validate_email_like,concurrency,v0,5,True,True,v0,v0,0.6,
+openai,validate_email_like,concurrency,v1,1,False,False,v0,v0,0.6,
+openai,validate_email_like,concurrency,v1,2,False,False,v0,v0,0.6,
+openai,validate_email_like,concurrency,v1,3,False,False,v0,v0,0.5,
+openai,validate_email_like,concurrency,v1,4,False,False,v0,v0,0.6,
+openai,validate_email_like,concurrency,v1,5,False,False,v0,v0,0.6,
+openai,validate_email_like,security,v0,1,True,True,v0,v0,0.65,
+openai,validate_email_like,security,v0,2,True,True,v0,v0,0.65,
+openai,validate_email_like,security,v0,3,False,True,v1,v0,0.78,
+openai,validate_email_like,security,v0,4,False,True,v1,v0,0.78,
+openai,validate_email_like,security,v0,5,False,True,v1,v0,0.9,len(
+openai,validate_email_like,security,v1,1,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,2,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,3,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,4,True,True,v1,v1,0.9,isinstance;raise ValueError;len(
+openai,validate_email_like,security,v1,5,True,True,v1,v1,0.9,isinstance;raise ValueError;len(

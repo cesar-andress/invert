@@ -1,0 +1,31 @@
+{
+  "run_name": "core_v2_eager_lazy_pilot_local_001",
+  "family": "F1",
+  "dimension": "eager_vs_lazy",
+  "tasks": [
+    "small_positive_vector",
+    "mixed_signed_vector",
+    "repeated_values_vector"
+  ],
+  "methods": [
+    "eager",
+    "lazy"
+  ],
+  "models": [
+    "ollama:qwen2.5-coder:14b",
+    "ollama:qwen2.5-coder:32b",
+    "ollama:qwen3-coder:30b",
+    "ollama:devstral:latest"
+  ],
+  "repetitions": 5,
+  "strip_levels": [
+    "raw",
+    "no_comments",
+    "renamed",
+    "no_imports",
+    "format_normalized"
+  ],
+  "expected_generations": 120,
+  "started_at": "2026-06-29T20:04:20.508174+00:00",
+  "config_file": "configs/core_v2_eager_lazy_pilot_local.yaml"
+}

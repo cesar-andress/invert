@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_bfs_dfs_pilot_local_001",
+  "model": "ollama:qwen3-coder:30b",
+  "task_id": "branching_1",
+  "method": "bfs",
+  "rep": 2,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not include demo code or print statements.\n\nTask ID: branching_1\nStart node: A\nGraph (adjacency list, neighbor order is significant):\n{'A': ['B', 'C'], 'B': ['D', 'E'], 'C': ['F'], 'D': [], 'E': [], 'F': []}\n\nRequired class (exact name and API):\n\nclass GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        ...\n    def reachable_nodes(self):\n        ...\n\nMethod label: Breadth-first graph traversal\nOperational requirement: Implement GraphTraversal.reachable_nodes as breadth-first search. Use a queue with FIFO behavior. Call visit_fn(node) exactly when each node is first visited. Return all reachable nodes from start. Do not print. No demo code.\n\nThe generated class must call visit_fn(node) exactly when each node is first visited.\nreachable_nodes() must return the set or sorted list of all nodes reachable from start.\n",
+  "response": "class GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        self.graph = graph\n        self.start = start\n        self.visit_fn = visit_fn\n    \n    def reachable_nodes(self):\n        visited = set()\n        queue = [self.start]\n        visited.add(self.start)\n        self.visit_fn(self.start)\n        result = [self.start]\n        \n        while queue:\n            node = queue.pop(0)\n            for neighbor in self.graph[node]:\n                if neighbor not in visited:\n                    visited.add(neighbor)\n                    self.visit_fn(neighbor)\n                    queue.append(neighbor)\n                    result.append(neighbor)\n        \n        return result",
+  "code": "class GraphTraversal:\n    def __init__(self, graph, start, visit_fn):\n        self.graph = graph\n        self.start = start\n        self.visit_fn = visit_fn\n    \n    def reachable_nodes(self):\n        visited = set()\n        queue = [self.start]\n        visited.add(self.start)\n        self.visit_fn(self.start)\n        result = [self.start]\n        \n        while queue:\n            node = queue.pop(0)\n            for neighbor in self.graph[node]:\n                if neighbor not in visited:\n                    visited.add(neighbor)\n                    self.visit_fn(neighbor)\n                    queue.append(neighbor)\n                    result.append(neighbor)\n        \n        return result",
+  "timestamp": "2026-06-29T20:53:47.209698+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "bfs_vs_dfs",
+    "storage_model": "ollama__qwen3-coder__30b"
+  }
+}

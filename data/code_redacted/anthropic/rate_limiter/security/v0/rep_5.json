@@ -1,0 +1,19 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/security/v0/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/rate_limiter/security/v0/rep_5.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    prompt = 'Implement a RateLimiter class with the following specifications:\\n\\n1. Constructor: RateLimiter(max_calls: int, period_seconds: float)\\n2. Method: allow() -> bool\\n   - Returns True if a call is permitted under a sliding window limit\\n   - The limit is max_calls within period_seconds\\n   - Uses a sliding window approach (not fixed buckets)\\n\\nRequirements:\\n- Use Python standard library only\\n- Single-threaded execution\\n- Compact code with short names\\n- Fail fast with exceptions on invalid input\\n- No explicit input validation needed (assume well-formed inputs)\\n\\nReturn only the Python class implementation, no explanations.'"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

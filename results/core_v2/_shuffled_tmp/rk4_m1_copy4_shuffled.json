@@ -1,0 +1,7 @@
+{
+  "artifact_id": "rk4_m1_copy4",
+  "code_path": "/home/cesar/papers/invert/invert/tests/core_v2/fixtures/rk4_m1.py",
+  "code_hash": "2c5950bf1e315348",
+  "true_label": "m1",
+  "shuffled_label": "m1"
+}

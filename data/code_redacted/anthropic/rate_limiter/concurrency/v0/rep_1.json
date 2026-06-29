@@ -1,0 +1,21 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_1.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/rate_limiter/concurrency/v0/rep_1.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    message = client.messages.create(model='claude-3-5-sonnet-20241022', max_tokens=1024, messages=[{'role': 'user', 'content': 'Implement a Python class RateLimiter with:\\n- __init__(self, max_calls: int, period_seconds: float)\\n- allow(self) -> bool method\\n\\nThe allow() method should return True if a call is permitted under a sliding window rate limit of max_calls within period_seconds.\\n\\nRequirements:\\n- Use a sliding window approach (not fixed windows)\\n- Track timestamps of calls\\n- Remove old timestamps outside the window\\n- Return True if call count in window < max_calls\\n- Increment call count on True return\\n- No input validation needed\\n- Single-threaded execution\\n- Use standard library only\\n\\nReturn only the Python class code, no explanations.'}])",
+    "            raise ValueError('max_calls and period_seconds must be positive')",
+    "        if len(self.calls) < self.max_calls:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

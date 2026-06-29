@@ -1,0 +1,17 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v0/rep_4.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/rate_limiter/concurrency/v0/rep_4.py",
+  "replacements": [
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "7. No input validation needed",
+    "8. Single-threaded execution assumed",
+    "    # Remove markdown code blocks if present"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

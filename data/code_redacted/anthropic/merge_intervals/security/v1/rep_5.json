@@ -1,0 +1,26 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/merge_intervals/security/v1/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/merge_intervals/security/v1/rep_5.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not intervals:",
+    "    if not isinstance(intervals, list):",
+    "        raise TypeError('intervals must be a list')",
+    "        if not isinstance(interval, tuple) or len(interval) != 2:",
+    "            raise ValueError('each interval must be a tuple of length 2')",
+    "        if not isinstance(interval[0], int) or not isinstance(interval[1], int):",
+    "            raise TypeError('interval bounds must be integers')",
+    "            raise ValueError('interval start must be <= end')"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

@@ -3,6 +3,13 @@ core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__devstral__latest,30,30,1.0000
 core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__qwen3-coder__30b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_deterministic_randomized_pilot_local_001,deterministic_vs_randomized,ollama__devstral__latest,30,0,0.0000,NA,NA,NA,NA,false,invalid_generation
+core_v2_deterministic_randomized_pilot_local_001,deterministic_vs_randomized,ollama__qwen2_5-coder__14b,30,0,0.0000,NA,NA,NA,NA,false,invalid_generation
+core_v2_deterministic_randomized_pilot_local_001,deterministic_vs_randomized,ollama__qwen2_5-coder__32b,30,0,0.0000,NA,NA,NA,NA,false,invalid_generation
+core_v2_deterministic_randomized_pilot_local_001,deterministic_vs_randomized,ollama__qwen3-coder__30b,30,0,0.0000,NA,NA,NA,NA,false,invalid_generation
+core_v2_deterministic_randomized_pilot_local_repair_001,deterministic_vs_randomized,ollama__devstral__latest,18,18,1.0000,1.0000,1.0000,0.0000,0.0000,false,invalid_generation
+core_v2_deterministic_randomized_pilot_local_repair_001,deterministic_vs_randomized,ollama__qwen2_5-coder__14b,18,18,1.0000,1.0000,1.0000,0.0000,0.0000,false,invalid_generation
+core_v2_deterministic_randomized_pilot_local_repair_001,deterministic_vs_randomized,ollama__qwen2_5-coder__32b,18,18,1.0000,1.0000,1.0000,0.0000,0.0000,false,invalid_generation
 core_v2_eager_lazy_pilot_local_001,eager_vs_lazy,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_eager_lazy_pilot_local_001,eager_vs_lazy,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_eager_lazy_pilot_local_001,eager_vs_lazy,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
@@ -18,6 +25,10 @@ core_v2_generalization_local_bfs_dfs_001,bfs_vs_dfs,ollama__devstral__latest,30,
 core_v2_generalization_local_bfs_dfs_001,bfs_vs_dfs,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_bfs_dfs_001,bfs_vs_dfs,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_bfs_dfs_001,bfs_vs_dfs,ollama__qwen3-coder__30b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_deterministic_randomized_001,deterministic_vs_randomized,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_deterministic_randomized_001,deterministic_vs_randomized,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_deterministic_randomized_001,deterministic_vs_randomized,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_deterministic_randomized_001,deterministic_vs_randomized,ollama__qwen3-coder__30b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,

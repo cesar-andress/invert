@@ -1,0 +1,23 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/security/v0/rep_5.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/openai/sanitize_filename/security/v0/rep_5.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "def sanitize_filename(name: str) -> str:",
+    "    if not name:",
+    "        raise ValueError('Input cannot be empty')",
+    "    sanitized = re.sub('[<>:\"/\\\\\\\\|?*]', '_', name).strip()",
+    "    return sanitized if sanitized else 'default_filename'"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

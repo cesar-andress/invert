@@ -1,0 +1,24 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/dependency_order/concurrency/v1/rep_3.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/dependency_order/concurrency/v1/rep_3.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    response_text = message.content[0].text.strip()",
+    "        raise ValueError('Cycle detected in task dependencies')",
+    "        if not isinstance(result, list):",
+    "            raise ValueError('Invalid response format')",
+    "        raise ValueError(f'Failed to parse response: {e}')",
+    "        except ValueError as e:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

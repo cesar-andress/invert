@@ -1,0 +1,17 @@
+{
+  "run_name": "core_v2_euler_rk4_pilot_local_sweep_001",
+  "model": "ollama:qwen3-coder:30b",
+  "task_id": "logistic_growth",
+  "method": "euler",
+  "rep": 3,
+  "prompt": "Write python code only.\nNo explanations.\nNo markdown.\nNo code fences.\nOne self-contained implementation.\nUse only the Python standard library.\nDo not import or call scipy, numpy, solve_ivp, odeint, or any external ODE solver.\n\nTask ID: logistic_growth\n\nODE: dy/dt = r * y * (1 - y / K)\nParameters: K=1.0, r=1.0\nscalar state y, initial condition y0 = 0.1\nTime interval: t0 = 0.0, t1 = 2.0, fixed step dt = 0.1\nExpected qualitative behavior: Sigmoid growth toward carrying capacity K.\n\nRequired functions (exact names):\n\ndef f(t, y):\n    ...  # ODE right-hand side for the scalar equation\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    ...  # integrate from t0 to tf using fixed step dt\n\nMethod label: Euler (first-order explicit integration)\nOperational requirement: Use a first-order explicit update with exactly one derivative evaluation per step.\n\nImplement the specified method explicitly in integrate_ode.\nUse y0 = 0.1 in any self-test or example.\n",
+  "response": "def f(t, y):\n    K = 1.0\n    r = 1.0\n    return r * y * (1 - y / K)\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    y = y0\n    t = t0\n    result = [(t, y)]\n    while t < tf:\n        y = y + dt * f(t, y)\n        t = t + dt\n        result.append((t, y))\n    return result\n\n# Example usage\nif __name__ == \"__main__\":\n    y0 = 0.1\n    t0 = 0.0\n    tf = 2.0\n    dt = 0.1\n    solution = integrate_ode(f, y0, t0, tf, dt)\n    for t, y in solution:\n        print(f\"t={t:.1f}, y={y:.4f}\")",
+  "code": "def f(t, y):\n    K = 1.0\n    r = 1.0\n    return r * y * (1 - y / K)\n\ndef integrate_ode(f, y0, t0, tf, dt):\n    y = y0\n    t = t0\n    result = [(t, y)]\n    while t < tf:\n        y = y + dt * f(t, y)\n        t = t + dt\n        result.append((t, y))\n    return result\n\n# Example usage\nif __name__ == \"__main__\":\n    y0 = 0.1\n    t0 = 0.0\n    tf = 2.0\n    dt = 0.1\n    solution = integrate_ode(f, y0, t0, tf, dt)\n    for t, y in solution:\n        print(f\"t={t:.1f}, y={y:.4f}\")",
+  "timestamp": "2026-06-29T19:09:32.125917+00:00",
+  "parameters": {
+    "temperature": 0.0,
+    "family": "F1",
+    "dimension": "euler_vs_rk4",
+    "storage_model": "ollama__qwen3-coder__30b"
+  }
+}

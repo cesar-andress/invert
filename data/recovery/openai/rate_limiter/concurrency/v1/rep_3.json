@@ -1,0 +1,45 @@
+{
+  "generator_model": "openai",
+  "judge_model": "openai",
+  "task_id": "rate_limiter",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v1",
+  "rep": 3,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Generated code\nimport time\nfrom collections import deque\nfrom threading import Lock\n\nclass RateLimiter:\n    def __init__(self, max_calls: int, period_seconds: float):\n        if max_calls <= 0 or period_seconds <= 0:\n            raise ValueError(\"max_calls and period_seconds must be positive.\")\n        self.max_calls = max_calls\n        self.period_seconds = period_seconds\n        self.calls = deque()\n        self.lock = Lock()\n\n    def allow(self) -> bool:\n        with self.lock:\n            now = time.time()\n            while self.calls and self.calls[0] < now - self.period_seconds:\n                self.calls.popleft()\n            if len(self.calls) < self.max_calls:\n                self.calls.append(now)\n                return True\n            return False\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.75},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.82},\n  \"concurrency\": {\"value\": \"v1\", \"confidence\": 0.78}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.75
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.82
+    },
+    "concurrency": {
+      "value": "v1",
+      "confidence": 0.78
+    }
+  },
+  "timestamp": "2026-06-29T14:19:56.323053+00:00"
+}

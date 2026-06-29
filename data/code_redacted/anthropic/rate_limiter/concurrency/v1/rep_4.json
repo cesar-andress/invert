@@ -1,0 +1,34 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/rate_limiter/concurrency/v1/rep_4.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/rate_limiter/concurrency/v1/rep_4.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "from threading import Lock",
+    "    prompt = 'Implement a RateLimiter class in Python with the following requirements:\\n\\n1. Constructor: RateLimiter(max_calls: int, period_seconds: float)\\n2. Method: allow() -> bool that returns True if a call is permitted under a sliding window limit\\n3. The sliding window should track calls within the last period_seconds\\n4. Must be thread-safe for concurrent use\\n5. Use Python standard library only\\n6. Keep code compact with short names\\n7. Fail fast by raising exceptions on invalid input\\n\\nReturn ONLY the Python code for the class, no explanations.'",
+    "            raise ValueError('max_calls and period_seconds must be positive')",
+    "        self.lock = Lock()",
+    "        with self.lock:",
+    "            if len(self.calls) < self.max_calls:",
+    "    import threading",
+    "    threads = [threading.Thread(target=make_calls) for _ in range(3)]",
+    "    for t in threads:",
+    "        t.start()",
+    "    for t in threads:",
+    "        t.join()",
+    "        assert False, 'Should raise ValueError'",
+    "    except ValueError:",
+    "        assert False, 'Should raise ValueError'",
+    "    except ValueError:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "rate_limiter",
+  "manipulated_dimension": "concurrency",
+  "true_value": "v0",
+  "rep": 4,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a class RateLimiter(max_calls: int, period_seconds: float) with method allow() -> bool that returns True if a call is permitted under a sliding window limit of max_calls within period_seconds.\n\n## Generated code\nimport anthropic\nimport json\nfrom time import time\n\n\ndef create_rate_limiter_implementation():\n    \"\"\"Use Claude to generate a RateLimiter implementation.\"\"\"\n    client = anthropic.Anthropic()\n    \n    prompt = \"\"\"Implement a Python class RateLimiter with the following requirements:\n\n1. Constructor: RateLimiter(max_calls: int, period_seconds: float)\n2. Method: allow() -> bool that returns True if a call is permitted under a sliding window limit\n3. The sliding window should track calls within the last period_seconds\n4. Return True if the number of calls in the window is less than max_calls, False otherwise\n5. Use time.time() for timestamps\n6. Keep implementation compact and efficient\n7. No input validation needed\n8. Single-threaded execution assumed\n\nReturn ONLY the Python code for the class, no explanations.\"\"\"\n\n    message = client.messages.create(\n        model=\"claude-3-5-sonnet-20241022\",\n        max_tokens=1024,\n        messages=[\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    \n    return message.content[0].text\n\n\ndef extract_code_from_response(response_text):\n    \"\"\"Extract Python code from Claude's response.\"\"\"\n    # Remove markdown code blocks if present\n    if \"\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v0\", \"confidence\": 0.70},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.65},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.80},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v0\", \"confidence\": 0.60},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.50}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v0",
+      "confidence": 0.7
+    },
+    "error_handling": {
+      "value": "v0",
+      "confidence": 0.65
+    },
+    "api_preference": {
+      "value": "v1",
+      "confidence": 0.8
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "edge_cases": {
+      "value": "v0",
+      "confidence": 0.6
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.5
+    }
+  },
+  "timestamp": "2026-06-29T14:34:19.779902+00:00",
+  "stripped": true
+}

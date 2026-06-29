@@ -1,5 +1,5 @@
-run,model,task_id,method,rep,path,parsed,behavioral_pass,failure_category,short_failure_reason,oracle_error,captures_process_fn_return_value,has_print,has_main_guard,signature_excerpt
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+run,model,task_id,method,rep,path,parsed,behavioral_pass,failure_category,short_failure_reason,oracle_error,captures_visit_fn_return_value,has_print,has_main_guard,signature_excerpt
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -11,7 +11,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -23,7 +23,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -35,7 +35,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -47,7 +47,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/deterministic/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -59,7 +59,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -72,7 +72,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -85,7 +85,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -98,7 +98,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -111,7 +111,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/letters_8/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -124,7 +124,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)  # Sort to ensure deterministic order
         self.process_fn = process_fn
@@ -136,7 +136,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)  # Sort to ensure deterministic order
         self.process_fn = process_fn
@@ -148,7 +148,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)  # Sort to ensure deterministic order
         self.process_fn = process_fn
@@ -160,7 +160,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)  # Sort to ensure deterministic order
         self.process_fn = process_fn
@@ -172,7 +172,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/deterministic/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)  # Sort to ensure deterministic order
         self.process_fn = process_fn
@@ -184,7 +184,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -197,7 +197,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -210,7 +210,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -223,7 +223,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -236,7 +236,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/mixed_tokens/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -249,7 +249,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -259,7 +259,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             result.append(processed_item)
         return result"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -271,7 +271,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -283,7 +283,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -295,7 +295,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/deterministic/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = sorted(items)
         self.process_fn = process_fn
@@ -307,7 +307,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -320,7 +320,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -333,7 +333,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -346,7 +346,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -359,7 +359,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__devstral__latest,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__devstral__latest/numbers_10/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items[:]
         self.process_fn = process_fn
@@ -372,7 +372,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.add(processed_item)
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -382,7 +382,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -392,7 +392,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -402,7 +402,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -412,7 +412,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -422,7 +422,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -436,7 +436,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -450,7 +450,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -464,7 +464,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -478,7 +478,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/letters_8/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -492,7 +492,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -502,7 +502,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -512,7 +512,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -522,7 +522,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -532,7 +532,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -542,7 +542,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -557,7 +557,7 @@ def process_all(self):
             processed_items.append(processed_item)
         
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -572,7 +572,7 @@ def process_all(self):
             processed_items.append(processed_item)
         
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -587,7 +587,7 @@ def process_all(self):
             processed_items.append(processed_item)
         
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -602,7 +602,7 @@ def process_all(self):
             processed_items.append(processed_item)
         
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/mixed_tokens/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -617,7 +617,7 @@ def process_all(self):
             processed_items.append(processed_item)
         
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -627,7 +627,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -637,7 +637,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -647,7 +647,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -657,7 +657,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -667,7 +667,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -681,7 +681,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -695,7 +695,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -709,7 +709,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -723,7 +723,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__14b,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__14b/numbers_10/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -737,7 +737,7 @@ def process_all(self):
             processed_items.append(self.process_fn(item))
         
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -746,7 +746,7 @@ def process_all(self):
         for item in sorted(self.items):
             processed_items.append(self.process_fn(item))
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -755,7 +755,7 @@ def process_all(self):
         for item in sorted(self.items):
             processed_items.append(self.process_fn(item))
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -764,7 +764,7 @@ def process_all(self):
         for item in sorted(self.items):
             processed_items.append(self.process_fn(item))
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -773,7 +773,7 @@ def process_all(self):
         for item in sorted(self.items):
             processed_items.append(self.process_fn(item))
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -782,7 +782,7 @@ def process_all(self):
         for item in sorted(self.items):
             processed_items.append(self.process_fn(item))
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -795,7 +795,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -808,7 +808,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -821,7 +821,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -834,7 +834,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/letters_8/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -847,17 +847,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
-def __init__(self, items, process_fn, seed=None):
-        self.items = items
-        self.process_fn = process_fn
-def process_all(self):
-        processed_items = []
-        for item in sorted(self.items):
-            processed_item = self.process_fn(item)
-            processed_items.append(processed_item)
-        return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -867,7 +857,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -877,7 +867,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -887,7 +877,7 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -897,7 +887,17 @@ def process_all(self):
             processed_item = self.process_fn(item)
             processed_items.append(processed_item)
         return set(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
+def __init__(self, items, process_fn, seed=None):
+        self.items = items
+        self.process_fn = process_fn
+def process_all(self):
+        processed_items = []
+        for item in sorted(self.items):
+            processed_item = self.process_fn(item)
+            processed_items.append(processed_item)
+        return set(processed_items)"
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -910,7 +910,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -923,7 +923,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -936,7 +936,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -949,7 +949,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/mixed_tokens/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -962,42 +962,42 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
 def process_all(self):
         processed_items = [self.process_fn(item) for item in sorted(self.items)]
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
 def process_all(self):
         processed_items = [self.process_fn(item) for item in sorted(self.items)]
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
 def process_all(self):
         processed_items = [self.process_fn(item) for item in sorted(self.items)]
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
 def process_all(self):
         processed_items = [self.process_fn(item) for item in sorted(self.items)]
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
 def process_all(self):
         processed_items = [self.process_fn(item) for item in sorted(self.items)]
         return processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_1.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1010,7 +1010,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_2.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1023,7 +1023,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_3.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1036,7 +1036,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_4.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1049,7 +1049,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating process_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen2_5-coder__32b,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen2_5-coder__32b/numbers_10/randomized/rep_5.py,true,false,exception_during_execution,Runtime failure after treating visit_fn(item) as a transforming function (oracle: '<' not supported between instances of 'NoneType' and 'NoneType').,runtime_error: '<' not supported between instances of 'NoneType' and 'NoneType',true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1062,7 +1062,7 @@ def process_all(self):
         for item in shuffled_items:
             processed_items.append(self.process_fn(item))
         return sorted(processed_items)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1073,7 +1073,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1084,7 +1084,7 @@ def process_all(self):
         for item in sorted_items:
             self.processed_items.append(self.process_fn(item))
         return self.processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1095,7 +1095,7 @@ def process_all(self):
         for item in sorted_items:
             self.processed_items.append(self.process_fn(item))
         return self.processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1106,7 +1106,7 @@ def process_all(self):
         for item in sorted_items:
             self.processed_items.append(self.process_fn(item))
         return self.processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1117,7 +1117,7 @@ def process_all(self):
         for item in sorted_items:
             self.processed_items.append(self.process_fn(item))
         return self.processed_items"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1132,7 +1132,7 @@ def process_all(self):
         for item in items_copy:
             results.append(self.process_fn(item))
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1147,7 +1147,7 @@ def process_all(self):
         for item in items_copy:
             results.append(self.process_fn(item))
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1162,7 +1162,7 @@ def process_all(self):
         for item in items_copy:
             results.append(self.process_fn(item))
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1177,7 +1177,7 @@ def process_all(self):
         for item in items_copy:
             results.append(self.process_fn(item))
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,letters_8,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/letters_8/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1192,7 +1192,7 @@ def process_all(self):
         for item in items_copy:
             results.append(self.process_fn(item))
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1203,7 +1203,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1214,7 +1214,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1225,7 +1225,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1236,7 +1236,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1247,7 +1247,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1259,7 +1259,7 @@ def process_all(self):
         rng.shuffle(shuffled_items)
         processed = [self.process_fn(item) for item in shuffled_items]
         return processed"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1271,7 +1271,7 @@ def process_all(self):
         rng.shuffle(shuffled_items)
         processed = [self.process_fn(item) for item in shuffled_items]
         return processed"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1283,7 +1283,7 @@ def process_all(self):
         rng.shuffle(shuffled_items)
         processed = [self.process_fn(item) for item in shuffled_items]
         return processed"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1295,7 +1295,7 @@ def process_all(self):
         rng.shuffle(shuffled_items)
         processed = [self.process_fn(item) for item in shuffled_items]
         return processed"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,mixed_tokens,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/mixed_tokens/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1307,7 +1307,7 @@ def process_all(self):
         rng.shuffle(shuffled_items)
         processed = [self.process_fn(item) for item in shuffled_items]
         return processed"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1318,7 +1318,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1329,7 +1329,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1340,7 +1340,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1351,7 +1351,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,deterministic,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/deterministic/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1362,7 +1362,7 @@ def process_all(self):
         for item in sorted_items:
             results.append(self.process_fn(item))
         return results"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,1,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_1.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1377,7 +1377,7 @@ def process_all(self):
         for item in items_copy:
             results.append(self.process_fn(item))
 ..."
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,2,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_2.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1391,7 +1391,7 @@ def process_all(self):
         for item in shuffled_items:
             results.append(self.process_fn(item))
         return sorted(results) if isinstance(results[0], (int, float)) else set(results)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,3,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_3.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1405,7 +1405,7 @@ def process_all(self):
         for item in shuffled_items:
             results.append(self.process_fn(item))
         return sorted(results) if isinstance(results[0], (int, float)) else set(results)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,4,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_4.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn
@@ -1419,7 +1419,7 @@ def process_all(self):
         for item in shuffled_items:
             results.append(self.process_fn(item))
         return sorted(results) if isinstance(results[0], (int, float)) else set(results)"
-core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from process_fn(item) instead of the original input items; process_fn is a void callback and returns None.,wrong_output_set,true,false,false,"class ItemProcessor:
+core_v2_deterministic_randomized_pilot_local_001,ollama__qwen3-coder__30b,numbers_10,randomized,5,/home/cesar/papers/invert/invert/data/core_v2/code/core_v2_deterministic_randomized_pilot_local_001/ollama__qwen3-coder__30b/numbers_10/randomized/rep_5.py,true,false,output_not_expected_set,Returns values collected from visit_fn(item) instead of the original input items; visit_fn is a void side-effect callback.,wrong_output_set,true,false,false,"class ItemProcessor:
 def __init__(self, items, process_fn, seed=None):
         self.items = items
         self.process_fn = process_fn

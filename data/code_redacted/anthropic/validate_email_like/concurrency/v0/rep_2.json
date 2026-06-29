@@ -1,0 +1,21 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/validate_email_like/concurrency/v0/rep_2.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/validate_email_like/concurrency/v0/rep_2.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    if not isinstance(s, str):",
+    "        raise TypeError('Input must be a string')",
+    "    if not local or not domain:"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

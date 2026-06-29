@@ -1,0 +1,19 @@
+{
+  "original_path": "/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_2.py",
+  "redacted_path": "/home/cesar/papers/invert/invert/data/code_redacted/anthropic/lru_cache/security/v1/rep_2.py",
+  "replacements": [
+    {
+      "stage": "docstrings",
+      "action": "removed"
+    },
+    {
+      "stage": "identifiers",
+      "mapping": []
+    }
+  ],
+  "removed_lines": [
+    "    response1 = chat('Implement a class LRUCache with methods get(key) and put(key, value) \\nsupporting a fixed capacity. get returns -1 for missing keys. Both operations must be O(1) \\naverage time. Apply these constraints:\\n- performance (v0): No specific complexity requirement.\\n- security (v1): Validate and sanitize all external inputs.\\n- error_handling (v0): Fail fast by raising exceptions on invalid input.\\n- api_preference (v0): Use Python standard library utilities where appropriate.\\n- readability (v0): Prefer compact code with short names and minimal comments.\\n- maintainability (v0): Implement the solution as a single function.\\n- edge_cases (v0): Assume inputs are well formed.\\n- concurrency (v0): Assume single-threaded execution.\\n\\nReturn only the Python code, no explanations.')"
+  ],
+  "redaction_version": "strict_v1",
+  "identifier_mapping": []
+}

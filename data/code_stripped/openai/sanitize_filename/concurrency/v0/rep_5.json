@@ -1,0 +1,20 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/openai/sanitize_filename/concurrency/v0/rep_5.py",
+  "replacements": [
+    {
+      "from": "raise ValueError",
+      "to": "raise Exception",
+      "count": "1"
+    },
+    {
+      "from": "sanitize",
+      "to": "clean",
+      "count": "4"
+    },
+    {
+      "from": "strip(",
+      "to": "trim(",
+      "count": "1"
+    }
+  ]
+}

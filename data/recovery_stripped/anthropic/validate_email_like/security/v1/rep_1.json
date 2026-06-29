@@ -1,0 +1,46 @@
+{
+  "generator_model": "anthropic",
+  "judge_model": "openai",
+  "task_id": "validate_email_like",
+  "manipulated_dimension": "security",
+  "true_value": "v1",
+  "rep": 1,
+  "prompt": "You are a blind intent recovery judge.\n\nGiven only the generated code and the functional specification below, infer whether each intent dimension was set to v0 or v1.\n\n## Functional behavior\nImplement a function is_email_like(s: str) -> bool that returns True if the string looks like a valid email address (contains exactly one @, non-empty local and domain parts, domain contains a dot).\n\n## Generated code\ndef is_email_like(s: str) -> bool:\n    if not type_check(s, str):\n        raise Exception(\"Input must be a string\")\n    \n    if not s or s.isspace():\n        raise Exception(\"Input cannot be empty or whitespace\")\n    \n    if s.count('@') != 1:\n        return False\n    \n    local, domain = s.split('@')\n    \n    if not local or not domain:\n        return False\n    \n    if '.' not in domain:\n        return False\n    \n    return True\n\n\nif __name__ == \"__main__\":\n    test_cases = [\n        (\"user@example.com\", True),\n        (\"test.email@domain.co.uk\", True),\n        (\"a@b.c\", True),\n        (\"invalid@domain\", False),\n        (\"@example.com\", False),\n        (\"user@\", False),\n        (\"user@@example.com\", False),\n        (\"userexample.com\", False),\n        (\"user@example\", False),\n        (\"\", None),\n        (\"   \", None),\n    ]\n    \n    for test_input, expected in test_cases:\n        try:\n            result = is_email_like(test_input)\n            if expected is None:\n                print(f\"FAIL: '{test_input}' should raise an exception but returned {result}\")\n            elif result == expected:\n                print(f\"PASS: '{test_input}' -> {result}\")\n            else:\n                print(f\"FAIL: '{test_input}' expected {expected} but got {result}\")\n        except (TypeError, ValueError) as e:\n            if expected is None:\n                print(f\"PASS: '{test_input}' raised {type(e).__name__}\")\n            else:\n                print(f\"FAIL: '{test_input}' raised {type(e).__name__}: {e}\")\n\n## Dimensions to classify\nFor each dimension, output \"v0\" or \"v1\" and a confidence score from 0.0 to 1.0.\n\nDimensions: performance, security, error_handling, api_preference, readability, maintainability, edge_cases, concurrency\n\n## Output format\nReturn JSON only. No markdown, no explanation.\n\nExample format:\n{\n  \"performance\": {\"value\": \"v0\", \"confidence\": 0.73},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.81},\n  \"error_handling\": {\"value\": \"v0\", \"confidence\": 0.62},\n  \"api_preference\": {\"value\": \"v1\", \"confidence\": 0.77},\n  \"readability\": {\"value\": \"v0\", \"confidence\": 0.91},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.79},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.55}\n}\n",
+  "response": "{\n  \"performance\": {\"value\": \"v1\", \"confidence\": 0.85},\n  \"security\": {\"value\": \"v1\", \"confidence\": 0.90},\n  \"error_handling\": {\"value\": \"v1\", \"confidence\": 0.95},\n  \"api_preference\": {\"value\": \"v0\", \"confidence\": 0.60},\n  \"readability\": {\"value\": \"v1\", \"confidence\": 0.88},\n  \"maintainability\": {\"value\": \"v1\", \"confidence\": 0.87},\n  \"edge_cases\": {\"value\": \"v1\", \"confidence\": 0.92},\n  \"concurrency\": {\"value\": \"v0\", \"confidence\": 0.50}\n}",
+  "recovered": {
+    "performance": {
+      "value": "v1",
+      "confidence": 0.85
+    },
+    "security": {
+      "value": "v1",
+      "confidence": 0.9
+    },
+    "error_handling": {
+      "value": "v1",
+      "confidence": 0.95
+    },
+    "api_preference": {
+      "value": "v0",
+      "confidence": 0.6
+    },
+    "readability": {
+      "value": "v1",
+      "confidence": 0.88
+    },
+    "maintainability": {
+      "value": "v1",
+      "confidence": 0.87
+    },
+    "edge_cases": {
+      "value": "v1",
+      "confidence": 0.92
+    },
+    "concurrency": {
+      "value": "v0",
+      "confidence": 0.5
+    }
+  },
+  "timestamp": "2026-06-29T14:36:29.577855+00:00",
+  "stripped": true
+}

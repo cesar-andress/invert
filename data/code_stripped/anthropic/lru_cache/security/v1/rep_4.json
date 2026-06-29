@@ -1,0 +1,15 @@
+{
+  "source_path": "/home/cesar/papers/invert/invert/data/code/anthropic/lru_cache/security/v1/rep_4.py",
+  "replacements": [
+    {
+      "from": "sanitize",
+      "to": "clean",
+      "count": "1"
+    },
+    {
+      "from": "strip(",
+      "to": "trim(",
+      "count": "1"
+    }
+  ]
+}
