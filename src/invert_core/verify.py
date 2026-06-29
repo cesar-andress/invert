@@ -3,10 +3,14 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from invert_core.bfs_dfs_tasks import load_bfs_dfs_tasks
+from invert_core.bfs_dfs_tasks import load_bfs_dfs_tasks
+from invert_core.detectors.bfs_dfs import detect_bfs_dfs
 from invert_core.detectors.eager_lazy import detect_eager_lazy
 from invert_core.detectors.integration import detect_integration
 from invert_core.detectors.lock_control import detect_lock_control
 from invert_core.stripping import STANDARD_STRIP_LEVELS, StripLevel, strip_code
+from invert_core.tasks import project_root
 
 
 def verify_integration_detector(
@@ -78,8 +82,46 @@ def verify_eager_lazy_detector(
     return results
 
 
+def verify_bfs_dfs_detector(
+    code: str,
+    expected: str,
+    task_id: str,
+    *,
+    strip_levels: list[StripLevel] | None = None,
+) -> dict[str, Any]:
+    tasks_by_id = {
+        t.task_id: t
+        for t in load_bfs_dfs_tasks(project_root() / "data" / "core_v2" / "tasks" / "bfs_dfs_tasks.json")
+    }
+    task = tasks_by_id[task_id]
+    levels = strip_levels or STANDARD_STRIP_LEVELS
+    results: dict[str, Any] = {"expected": expected, "levels": {}}
+    all_match = True
+
+    for level in levels:
+        stripped = strip_code(code, level)
+        detected = detect_bfs_dfs(stripped, task)
+        match = detected.method == expected
+        results["levels"][level.value] = {
+            "method": detected.method,
+            "match": match,
+            "evidence": detected.evidence,
+        }
+        if not match:
+            all_match = False
+
+    results["all_survive"] = all_match
+    return results
+
+
 def verify_fixture_dir(fixtures_dir: Path) -> dict[str, Any]:
-    report: dict[str, Any] = {"integration": [], "lock": [], "eager_lazy": [], "passed": True}
+    report: dict[str, Any] = {
+        "integration": [],
+        "lock": [],
+        "eager_lazy": [],
+        "bfs_dfs": [],
+        "passed": True,
+    }
 
     euler = fixtures_dir / "euler_m0.py"
     rk4 = fixtures_dir / "rk4_m1.py"
@@ -135,6 +177,28 @@ def verify_fixture_dir(fixtures_dir: Path) -> dict[str, Any]:
             "lazy",
         )
         report["eager_lazy"].append({"file": "lazy_pipeline.py", **r})
+        if not r["all_survive"]:
+            report["passed"] = False
+
+    bfs_fixture = fixtures_dir / "bfs_traversal.py"
+    dfs_fixture = fixtures_dir / "dfs_traversal.py"
+    if bfs_fixture.exists():
+        r = verify_bfs_dfs_detector(
+            bfs_fixture.read_text(encoding="utf-8"),
+            "bfs",
+            "branching_1",
+        )
+        report["bfs_dfs"].append({"file": "bfs_traversal.py", **r})
+        if not r["all_survive"]:
+            report["passed"] = False
+
+    if dfs_fixture.exists():
+        r = verify_bfs_dfs_detector(
+            dfs_fixture.read_text(encoding="utf-8"),
+            "dfs",
+            "branching_1",
+        )
+        report["bfs_dfs"].append({"file": "dfs_traversal.py", **r})
         if not r["all_survive"]:
             report["passed"] = False
 

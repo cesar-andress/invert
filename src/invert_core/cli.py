@@ -9,6 +9,7 @@ import typer
 from invert_core.analyze import run_analyze_slice
 from invert_core.analyze_run import run_analyze_run
 from invert_core.check_apis import run_check_apis
+from invert_core.detectors.bfs_dfs import detect_bfs_dfs_file
 from invert_core.detectors.eager_lazy import detect_eager_lazy_file
 from invert_core.detectors.integration import detect_integration_file
 from invert_core.detectors.quadrature import detect_quadrature_file
@@ -110,6 +111,16 @@ def detect_eager_lazy_cmd(
         )
         raise typer.Exit(1)
     typer.echo(json.dumps(payload, indent=2))
+
+
+@app.command("detect-bfs-dfs")
+def detect_bfs_dfs_cmd(
+    file: Path = typer.Argument(..., help="Python file to analyze"),
+    task_id: str = typer.Option(..., "--task-id", help="Task ID from bfs_dfs_tasks.json"),
+) -> None:
+    """Detect BFS vs DFS graph traversal order signature."""
+    result = detect_bfs_dfs_file(str(file), task_id=task_id)
+    typer.echo(json.dumps(result.to_dict(), indent=2))
 
 
 @app.command("strip")

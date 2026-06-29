@@ -121,6 +121,10 @@ def run_analyze_run(
         from invert_core.analyze_eager_lazy_run import run_eager_lazy_analyze_run
 
         result = run_eager_lazy_analyze_run(run_name, project_root, config_path=config_path)
+    elif dimension == "bfs_vs_dfs":
+        from invert_core.analyze_bfs_dfs_run import run_bfs_dfs_analyze_run
+
+        result = run_bfs_dfs_analyze_run(run_name, project_root, config_path=config_path)
     else:
         result = _run_integration_analyze_run(run_name, project_root, config_path=config_path)
 

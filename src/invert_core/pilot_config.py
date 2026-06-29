@@ -6,6 +6,7 @@ from typing import Any
 
 from invert.schemas import load_yaml
 
+from invert_core.bfs_dfs_tasks import BfsDfsTask, filter_bfs_dfs_tasks, load_bfs_dfs_tasks
 from invert_core.eager_lazy_tasks import EagerLazyTask, filter_eager_lazy_tasks, load_eager_lazy_tasks
 from invert_core.ode_tasks import OdeTask, filter_ode_tasks, load_ode_tasks
 from invert_core.quadrature_tasks import QuadratureTask, filter_quadrature_tasks, load_quadrature_tasks
@@ -60,7 +61,7 @@ class CoreV2PilotConfig:
             models_config=models_config,
         )
 
-    def load_tasks(self) -> list[OdeTask | QuadratureTask | EagerLazyTask]:
+    def load_tasks(self) -> list[OdeTask | QuadratureTask | EagerLazyTask | BfsDfsTask]:
         if self.dimension == "trapezoidal_vs_simpson":
             return filter_quadrature_tasks(
                 load_quadrature_tasks(self.tasks_file), self.task_ids
@@ -68,6 +69,10 @@ class CoreV2PilotConfig:
         if self.dimension == "eager_vs_lazy":
             return filter_eager_lazy_tasks(
                 load_eager_lazy_tasks(self.tasks_file), self.task_ids
+            )
+        if self.dimension == "bfs_vs_dfs":
+            return filter_bfs_dfs_tasks(
+                load_bfs_dfs_tasks(self.tasks_file), self.task_ids
             )
         return filter_ode_tasks(load_ode_tasks(self.tasks_file), self.task_ids)
 
@@ -94,7 +99,7 @@ from invert_core.models import sanitize_model_for_storage
 @dataclass
 class CoreV2GenerationItem:
     model: str
-    task: OdeTask | QuadratureTask | EagerLazyTask
+    task: OdeTask | QuadratureTask | EagerLazyTask | BfsDfsTask
     method: str
     rep: int
     run_name: str
@@ -139,7 +144,7 @@ class CoreV2GenerationItem:
 
 
 def plan_core_v2_generations(
-    pilot: CoreV2PilotConfig, tasks: list[OdeTask | QuadratureTask | EagerLazyTask]
+    pilot: CoreV2PilotConfig, tasks: list[OdeTask | QuadratureTask | EagerLazyTask | BfsDfsTask]
 ) -> list[CoreV2GenerationItem]:
     items: list[CoreV2GenerationItem] = []
     for model in pilot.models:

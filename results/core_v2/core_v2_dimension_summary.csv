@@ -1,4 +1,5 @@
 dimension,runs_found,models_evaluated,models_survived,best_model,best_valid_artifact_rate,best_valid_accuracy_format_normalized,status
 euler_vs_rk4,2,5,2,ollama__qwen2_5-coder__32b,1.0000,1.0000,supported_if_2plus_models_survive
 trapezoidal_vs_simpson,2,4,4,ollama__devstral__latest,1.0000,1.0000,supported_if_2plus_models_survive
-eager_vs_lazy,0,0,0,,NA,NA,insufficient_data
+eager_vs_lazy,1,4,3,ollama__devstral__latest,1.0000,1.0000,supported_if_2plus_models_survive
+bfs_vs_dfs,0,0,0,,NA,NA,insufficient_data

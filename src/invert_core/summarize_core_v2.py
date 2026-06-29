@@ -33,12 +33,18 @@ DIMENSION_ARTIFACTS: dict[str, dict[str, str]] = {
         "summary": "eager_lazy_summary.csv",
         "report": "eager_lazy_report.md",
     },
+    "bfs_vs_dfs": {
+        "valid_only_summary": "bfs_dfs_valid_only_summary.csv",
+        "summary": "bfs_dfs_summary.csv",
+        "report": "bfs_dfs_report.md",
+    },
 }
 
 CLASS_LABELS: dict[str, str] = {
     "euler_vs_rk4": "Class A (derivative-call signatures)",
     "trapezoidal_vs_simpson": "Class B (arithmetic weight signatures)",
-    "eager_vs_lazy": "Class C (dynamic temporal process signatures)",
+    "eager_vs_lazy": "Class C (dynamic temporal / avoidable-computation signatures)",
+    "bfs_vs_dfs": "Class D (dynamic order process signatures)",
 }
 
 MODEL_SUMMARY_FIELDS = [
@@ -131,7 +137,7 @@ def _rows_for_model_strip(
 
 
 def _min_valid_n_for_dimension(dimension: str) -> int:
-    if dimension == "eager_vs_lazy":
+    if dimension in ("eager_vs_lazy", "bfs_vs_dfs"):
         return F13_MIN_VALID_N
     return F11_MIN_VALID_N
 
@@ -321,6 +327,8 @@ def _class_support_text(status: str, dimension: str, has_data: bool) -> str:
             return "Class B not yet evaluated."
         if dimension == "eager_vs_lazy":
             return "Class C not yet evaluated."
+        if dimension == "bfs_vs_dfs":
+            return "Class D not yet evaluated."
         return "Insufficient completed runs to evaluate."
     if status == "supported_if_2plus_models_survive":
         return (
@@ -348,7 +356,13 @@ def _next_cheapest_experiment(
     euler = by_dim.get("euler_vs_rk4")
     quad = by_dim.get("trapezoidal_vs_simpson")
     eager_lazy = by_dim.get("eager_vs_lazy")
+    bfs_dfs = by_dim.get("bfs_vs_dfs")
 
+    if bfs_dfs and bfs_dfs["status"] == "insufficient_data":
+        return (
+            "Run `invert-core analyze-run --run core_v2_bfs_dfs_pilot_local_001` "
+            "(or complete bfs/dfs generation first) to evaluate Class D without new API spend."
+        )
     if eager_lazy and eager_lazy["status"] == "insufficient_data":
         return (
             "Run `invert-core analyze-run --run core_v2_eager_lazy_pilot_local_001` "
@@ -479,6 +493,7 @@ def _write_decision_report(
     euler = by_dim.get("euler_vs_rk4")
     quad = by_dim.get("trapezoidal_vs_simpson")
     eager_lazy = by_dim.get("eager_vs_lazy")
+    bfs_dfs = by_dim.get("bfs_vs_dfs")
 
     enough_evidence = [
         CLASS_LABELS[d]
@@ -526,6 +541,11 @@ def _write_decision_report(
         "eager_vs_lazy",
         bool(eager_lazy and _parse_int(eager_lazy["runs_found"]) > 0),
     )
+    class_d = _class_support_text(
+        bfs_dfs["status"] if bfs_dfs else "insufficient_data",
+        "bfs_vs_dfs",
+        bool(bfs_dfs and _parse_int(bfs_dfs["runs_found"]) > 0),
+    )
 
     class_c_passes = (
         eager_lazy is not None
@@ -549,6 +569,22 @@ def _write_decision_report(
     else:
         process_signature_text = (
             "Current evidence remains limited to arithmetic/static signatures."
+        )
+
+    class_d_passes = (
+        bfs_dfs is not None
+        and bfs_dfs["status"] in ("supported_if_2plus_models_survive", "promising_if_1_model_survives")
+        and _parse_int(bfs_dfs["runs_found"]) > 0
+    )
+    if class_d_passes:
+        order_signature_text = (
+            "This result is not reducible to mathematical identity or avoidable-computation "
+            "detection because BFS and DFS visit the same reachable set and perform the same "
+            "amount of node visitation; only traversal order differs."
+        )
+    else:
+        order_signature_text = (
+            "Class D (dynamic order signatures) not yet supported by completed runs."
         )
 
     classes_with_strong = sum(
@@ -593,7 +629,8 @@ def _write_decision_report(
         "Signature classes under evaluation:",
         "- Class A: arithmetic count signatures (`euler_vs_rk4`)",
         "- Class B: arithmetic weight signatures (`trapezoidal_vs_simpson`)",
-        "- Class C: dynamic temporal process signatures (`eager_vs_lazy`)",
+        "- Class C: dynamic temporal / avoidable-computation signatures (`eager_vs_lazy`)",
+        "- Class D: dynamic order process signatures (`bfs_vs_dfs`)",
         "",
         "## Run inventory",
         "",
@@ -656,15 +693,23 @@ def _write_decision_report(
             "",
             class_c if eager_lazy and _parse_int(eager_lazy["runs_found"]) > 0 else "Class C not yet evaluated.",
             "",
-            "## 8. Process signature vs mathematical identity (F1.3)",
+            "## 8. Process signature vs mathematical identity (F1.3 / Class C)",
             "",
             process_signature_text,
             "",
-            "## 9. Two mechanistically distinct classes (preregistered criterion)",
+            "## 9. Is Class D supported?",
+            "",
+            class_d if bfs_dfs and _parse_int(bfs_dfs["runs_found"]) > 0 else "Class D not yet evaluated.",
+            "",
+            "## 10. Order signature vs mathematical identity (F1.4 / Class D)",
+            "",
+            order_signature_text,
+            "",
+            "## 11. Two mechanistically distinct classes (preregistered criterion)",
             "",
             two_class_text,
             "",
-            "## 10. Next cheapest experiment",
+            "## 12. Next cheapest experiment",
             "",
             _next_cheapest_experiment(dimension_rows, model_rows),
             "",

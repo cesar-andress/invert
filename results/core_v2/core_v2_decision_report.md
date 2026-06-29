@@ -5,7 +5,8 @@ Aggregated from completed runs under `results/core_v2/runs/`. Missing per-run fi
 Signature classes under evaluation:
 - Class A: arithmetic count signatures (`euler_vs_rk4`)
 - Class B: arithmetic weight signatures (`trapezoidal_vs_simpson`)
-- Class C: dynamic temporal process signatures (`eager_vs_lazy`)
+- Class C: dynamic temporal / avoidable-computation signatures (`eager_vs_lazy`)
+- Class D: dynamic order process signatures (`bfs_vs_dfs`)
 
 ## Run inventory
 
@@ -24,7 +25,7 @@ Signature classes under evaluation:
 
 - Class A (derivative-call signatures)
 - Class B (arithmetic weight signatures)
-- Class C (dynamic temporal process signatures)
+- Class C (dynamic temporal / avoidable-computation signatures)
 
 ## 2. Which models are reliable generators?
 
@@ -56,17 +57,25 @@ Signature classes under evaluation:
 
 **Yes (preliminary).** At least two models meet the preregistered valid-only survival rule for `eager_vs_lazy`.
 
-## 8. Process signature vs mathematical identity (F1.3)
+## 8. Process signature vs mathematical identity (F1.3 / Class C)
 
 This result is not reducible to mathematical-coefficient identity because eager and lazy compute the same feature formulas; only timing of computation differs.
 
-## 9. Two mechanistically distinct classes (preregistered criterion)
+## 9. Is Class D supported?
+
+Class D not yet evaluated.
+
+## 10. Order signature vs mathematical identity (F1.4 / Class D)
+
+Class D (dynamic order signatures) not yet supported by completed runs.
+
+## 11. Two mechanistically distinct classes (preregistered criterion)
 
 **Close.** Two mechanistically distinct classes each have >=2 surviving models under the preregistered valid-only rule; confirm with independent replication before strong claims.
 
-## 10. Next cheapest experiment
+## 12. Next cheapest experiment
 
-Add the next preregistered Family 1 dimension or a minimal paid-API replication on the two best local models only.
+Run `invert-core analyze-run --run core_v2_bfs_dfs_pilot_local_001` (or complete bfs/dfs generation first) to evaluate Class D without new API spend.
 
 ## Dimension status snapshot
 
@@ -75,6 +84,7 @@ Add the next preregistered Family 1 dimension or a minimal paid-API replication 
 | euler_vs_rk4 | 2 | 5 | 2 | supported_if_2plus_models_survive |
 | trapezoidal_vs_simpson | 2 | 4 | 4 | supported_if_2plus_models_survive |
 | eager_vs_lazy | 1 | 4 | 3 | supported_if_2plus_models_survive |
+| bfs_vs_dfs | 0 | 0 | 0 | insufficient_data |
 
 ## Frozen generalization evidence
 
@@ -91,7 +101,11 @@ Add the next preregistered Family 1 dimension or a minimal paid-API replication 
 - Detector accuracy (format_normalized): 1.0000
 - Ambiguous rate (raw): 0.0000
 
-### Class C (dynamic temporal process signatures) (`eager_vs_lazy`)
+### Class C (dynamic temporal / avoidable-computation signatures) (`eager_vs_lazy`)
+
+- No frozen generalization runs analyzed for this dimension yet.
+
+### Class D (dynamic order process signatures) (`bfs_vs_dfs`)
 
 - No frozen generalization runs analyzed for this dimension yet.
 

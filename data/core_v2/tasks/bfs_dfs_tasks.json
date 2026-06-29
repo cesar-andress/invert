@@ -1,0 +1,58 @@
+{
+  "tasks": [
+    {
+      "task_id": "branching_1",
+      "control_family": "branching",
+      "graph": {
+        "A": ["B", "C"],
+        "B": ["D", "E"],
+        "C": ["F"],
+        "D": [],
+        "E": [],
+        "F": []
+      },
+      "start": "A",
+      "expected_reachable": ["A", "B", "C", "D", "E", "F"]
+    },
+    {
+      "task_id": "branching_2",
+      "control_family": "branching",
+      "graph": {
+        "S": ["A", "B"],
+        "A": ["C", "D"],
+        "B": ["E"],
+        "C": [],
+        "D": [],
+        "E": []
+      },
+      "start": "S",
+      "expected_reachable": ["S", "A", "B", "C", "D", "E"]
+    },
+    {
+      "task_id": "branching_3",
+      "control_family": "branching",
+      "graph": {
+        "1": ["2", "3"],
+        "2": ["4"],
+        "3": ["5", "6"],
+        "4": [],
+        "5": [],
+        "6": []
+      },
+      "start": "1",
+      "expected_reachable": ["1", "2", "3", "4", "5", "6"]
+    },
+    {
+      "task_id": "linear_chain",
+      "control_family": "linear_chain",
+      "graph": {
+        "A": ["B"],
+        "B": ["C"],
+        "C": ["D"],
+        "D": []
+      },
+      "start": "A",
+      "expected_reachable": ["A", "B", "C", "D"]
+    }
+  ]
+}

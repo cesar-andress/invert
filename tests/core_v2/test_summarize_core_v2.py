@@ -168,7 +168,9 @@ def test_summarize_core_v2_synthetic_runs(tmp_path: Path) -> None:
     report = result.decision_report_path.read_text(encoding="utf-8")
     assert "Class B not yet evaluated." in report
     assert "Class C not yet evaluated." in report
-    assert "Class C: dynamic temporal process signatures" in report
+    assert "Class D not yet evaluated." in report
+    assert "Class C: dynamic temporal / avoidable-computation signatures" in report
+    assert "Class D: dynamic order process signatures" in report
 
 
 def test_summarize_core_v2_real_runs_if_present() -> None:
@@ -179,7 +181,7 @@ def test_summarize_core_v2_real_runs_if_present() -> None:
 
     result = run_summarize_core_v2(root)
     assert result.model_rows
-    assert len(result.dimension_rows) == 3
+    assert len(result.dimension_rows) == 4
 
     for path in (
         result.model_summary_path,
