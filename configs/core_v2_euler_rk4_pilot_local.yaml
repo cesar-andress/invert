@@ -1,5 +1,5 @@
 run:
-  name: core_v2_euler_rk4_pilot_001
+  name: core_v2_euler_rk4_pilot_local_001
   overwrite: false
 
 family: F1
@@ -14,8 +14,6 @@ tasks:
 
 generation:
   models:
-    - openai
-    - anthropic
     - ollama:qwen2.5-coder:32b
     - ollama:deepseek-coder-v2:lite
   repetitions: 3

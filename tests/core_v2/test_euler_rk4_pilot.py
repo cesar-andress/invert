@@ -21,15 +21,15 @@ TASKS_FILE = project_root() / "data" / "core_v2" / "tasks" / "euler_rk4_tasks.js
 def test_pilot_expected_generations() -> None:
     pilot = CoreV2PilotConfig.from_yaml(PILOT_CONFIG, project_root())
     items = plan_core_v2_generations(pilot, pilot.load_tasks())
-    assert pilot.expected_generations() == 36
-    assert len(items) == 36
+    assert pilot.expected_generations() == 72
+    assert len(items) == 72
 
 
 def test_dry_run_prints_paths(capsys) -> None:
     pilot = CoreV2PilotConfig.from_yaml(PILOT_CONFIG, project_root())
     run_core_v2_generation(pilot, dry_run=True)
     out = capsys.readouterr().out
-    assert "Total expected generations: 36" in out
+    assert "Total expected generations: 72" in out
     assert "core_v2_euler_rk4_pilot_001" in out
     assert "data/core_v2/raw/core_v2_euler_rk4_pilot_001" in out
 

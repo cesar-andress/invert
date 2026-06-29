@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from invert.generate import extract_code
-from invert.models import create_client
+from invert_core.models import create_core_client, is_ollama_model
 from invert.schemas import load_yaml
 
 from invert_core.pilot_config import CoreV2GenerationItem, CoreV2PilotConfig, plan_core_v2_generations
@@ -94,10 +94,8 @@ def run_core_v2_generation(
 
     for item in items:
         model_name = item.model
-        if model_name not in models_cfg:
-            raise ValueError(f"Model {model_name} not found in {pilot.models_config}")
         if model_name not in clients:
-            clients[model_name] = create_client(model_name, models_cfg[model_name])
+            clients[model_name] = create_core_client(model_name, models_cfg)
         client = clients[model_name]
 
         raw_path = item.raw_path(data_root)
@@ -114,6 +112,13 @@ def run_core_v2_generation(
             response = client.generate(prompt)
             code = extract_code(response)
 
+        if is_ollama_model(model_name):
+            temperature = float(models_cfg.get("ollama", {}).get("temperature", 0))
+        elif model_name in models_cfg:
+            temperature = models_cfg[model_name].get("temperature", 0)
+        else:
+            temperature = 0
+
         raw_path.parent.mkdir(parents=True, exist_ok=True)
         code_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -128,9 +133,10 @@ def run_core_v2_generation(
             "code": code,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "parameters": {
-                "temperature": models_cfg[model_name].get("temperature", 0),
+                "temperature": temperature,
                 "family": pilot.family,
                 "dimension": pilot.dimension,
+                "storage_model": item.storage_model,
             },
         }
 

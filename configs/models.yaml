@@ -11,3 +11,6 @@ providers:
   local_stub:
     model: stub
     temperature: 0.0
+  ollama:
+    base_url: http://localhost:11434
+    temperature: 0

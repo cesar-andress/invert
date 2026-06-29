@@ -78,6 +78,9 @@ class CoreV2PilotConfig:
         )
 
 
+from invert_core.models import sanitize_model_for_storage
+
+
 @dataclass
 class CoreV2GenerationItem:
     model: str
@@ -86,12 +89,16 @@ class CoreV2GenerationItem:
     rep: int
     run_name: str
 
+    @property
+    def storage_model(self) -> str:
+        return sanitize_model_for_storage(self.model)
+
     def raw_path(self, data_root: Path) -> Path:
         return (
             data_root
             / "raw"
             / self.run_name
-            / self.model
+            / self.storage_model
             / self.task.task_id
             / self.method
             / f"rep_{self.rep}.json"
@@ -102,7 +109,7 @@ class CoreV2GenerationItem:
             data_root
             / "code"
             / self.run_name
-            / self.model
+            / self.storage_model
             / self.task.task_id
             / self.method
             / f"rep_{self.rep}.py"
@@ -114,7 +121,7 @@ class CoreV2GenerationItem:
             / "stripped"
             / self.run_name
             / strip_level
-            / self.model
+            / self.storage_model
             / self.task.task_id
             / self.method
             / f"rep_{self.rep}.py"
