@@ -70,7 +70,7 @@ PUBLIC_API_PRESERVE: dict[str, dict[str, list[str]]] = {
     "deterministic_vs_randomized": {
         "classes": ["ItemProcessor"],
         "methods": ["process_all"],
-        "constructor_args": ["items", "process_fn", "seed"],
+        "constructor_args": ["items", "visit_fn", "seed"],
     },
 }
 

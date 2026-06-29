@@ -54,11 +54,11 @@ def run_deterministic_randomized_behavioral_oracle(
 
     call_counts: dict[Any, int] = {}
 
-    def process_fn(item: Any) -> None:
+    def visit_fn(item: Any) -> None:
         call_counts[item] = call_counts.get(item, 0) + 1
 
     try:
-        processor = cls(task.items, process_fn, seed=None)
+        processor = cls(task.items, visit_fn, seed=None)
     except TypeError:
         return DeterministicRandomizedBehavioralResult(
             parsed=False, behavioral_pass=False, error="constructor_signature_mismatch"
@@ -96,12 +96,12 @@ def run_deterministic_randomized_behavioral_oracle(
             return DeterministicRandomizedBehavioralResult(
                 parsed=True,
                 behavioral_pass=False,
-                error="process_fn_not_called_exactly_once_per_item",
+                error="visit_fn_not_called_exactly_once_per_item",
             )
 
     if set(call_counts) != expected:
         return DeterministicRandomizedBehavioralResult(
-            parsed=True, behavioral_pass=False, error="extra_or_missing_process_fn_calls"
+            parsed=True, behavioral_pass=False, error="extra_or_missing_visit_fn_calls"
         )
 
     return DeterministicRandomizedBehavioralResult(parsed=True, behavioral_pass=True)

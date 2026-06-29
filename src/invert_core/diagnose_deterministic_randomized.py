@@ -21,8 +21,8 @@ FAILURE_CATEGORIES = [
     "missing_class_ItemProcessor",
     "wrong_constructor_signature",
     "missing_process_all",
-    "process_fn_not_called",
-    "process_fn_called_wrong_number_of_times",
+    "visit_fn_not_called",
+    "visit_fn_called_wrong_number_of_times",
     "output_not_expected_set",
     "exception_during_execution",
     "demo_code_or_print_side_effect",
@@ -42,17 +42,17 @@ DIAGNOSIS_FIELDS = [
     "failure_category",
     "short_failure_reason",
     "oracle_error",
-    "captures_process_fn_return_value",
+    "captures_visit_fn_return_value",
     "has_print",
     "has_main_guard",
     "signature_excerpt",
 ]
 
-_CAPTURE_PROCESS_FN_RETURN = re.compile(
-    r"(=\s*(?:self\.)?process_fn\s*\("
-    r"|\[\s*(?:self\.)?process_fn\s*\("
-    r"|\.append\s*\(\s*(?:self\.)?process_fn\s*\("
-    r"|\.add\s*\(\s*(?:self\.)?process_fn\s*\()",
+_CAPTURE_VISIT_FN_RETURN = re.compile(
+    r"(=\s*(?:self\.)?(?:visit_fn|process_fn)\s*\("
+    r"|\[\s*(?:self\.)?(?:visit_fn|process_fn)\s*\("
+    r"|\.append\s*\(\s*(?:self\.)?(?:visit_fn|process_fn)\s*\("
+    r"|\.add\s*\(\s*(?:self\.)?(?:visit_fn|process_fn)\s*\()",
     re.MULTILINE,
 )
 
@@ -104,7 +104,7 @@ def _signature_excerpt(code: str, *, max_lines: int = 14) -> str:
 
 def _code_flags(code: str) -> dict[str, bool]:
     return {
-        "captures_process_fn_return_value": bool(_CAPTURE_PROCESS_FN_RETURN.search(code)),
+        "captures_visit_fn_return_value": bool(_CAPTURE_VISIT_FN_RETURN.search(code)),
         "has_print": "print(" in code,
         "has_main_guard": '__name__ == "__main__"' in code or "__main__" in code,
     }
@@ -136,30 +136,30 @@ def classify_behavioral_failure(
     if err == "missing_process_all":
         return ("missing_process_all", err)
 
-    if err == "process_fn_not_called_exactly_once_per_item":
+    if err == "visit_fn_not_called_exactly_once_per_item":
         return (
-            "process_fn_called_wrong_number_of_times",
-            "process_fn was not invoked exactly once per expected item.",
+            "visit_fn_called_wrong_number_of_times",
+            "visit_fn was not invoked exactly once per expected item.",
         )
 
-    if err == "extra_or_missing_process_fn_calls":
-        return ("process_fn_not_called", "process_fn calls do not cover the expected item set.")
+    if err == "extra_or_missing_visit_fn_calls":
+        return ("visit_fn_not_called", "visit_fn calls do not cover the expected item set.")
 
     if err.startswith("runtime_error:"):
-        if flags["captures_process_fn_return_value"]:
+        if flags["captures_visit_fn_return_value"]:
             return (
                 "exception_during_execution",
-                "Runtime failure after treating process_fn(item) as a transforming function "
+                "Runtime failure after treating visit_fn(item) as a transforming function "
                 f"(oracle: {err.removeprefix('runtime_error: ').strip()}).",
             )
         return ("exception_during_execution", err.removeprefix("runtime_error: ").strip())
 
     if err in {"invalid_return_type", "wrong_output_set"}:
-        if flags["captures_process_fn_return_value"]:
+        if flags["captures_visit_fn_return_value"]:
             return (
                 "output_not_expected_set",
-                "Returns values collected from process_fn(item) instead of the original input "
-                "items; process_fn is a void callback and returns None.",
+                "Returns values collected from visit_fn(item) instead of the original input "
+                "items; visit_fn is a void side-effect callback.",
             )
         return ("output_not_expected_set", err)
 
@@ -224,8 +224,8 @@ def run_diagnose_deterministic_randomized(
                 "failure_category": category if not behavioral.behavioral_pass else "",
                 "short_failure_reason": reason if not behavioral.behavioral_pass else "",
                 "oracle_error": behavioral.error or "",
-                "captures_process_fn_return_value": _bool_str(
-                    flags["captures_process_fn_return_value"]
+                "captures_visit_fn_return_value": _bool_str(
+                    flags["captures_visit_fn_return_value"]
                 ),
                 "has_print": _bool_str(flags["has_print"]),
                 "has_main_guard": _bool_str(flags["has_main_guard"]),
@@ -260,7 +260,7 @@ def _write_diagnosis_report(
         r["failure_category"] for r in rows if r["behavioral_pass"] != "true"
     )
     capture_count = sum(
-        1 for r in rows if r["captures_process_fn_return_value"] == "true"
+        1 for r in rows if r["captures_visit_fn_return_value"] == "true"
     )
 
     for row in rows:
@@ -276,10 +276,10 @@ def _write_diagnosis_report(
         verdict = (
             "**Prompt/API-contract failure (systematic).** Every artifact defines "
             "`ItemProcessor` with the expected class name and constructor, calls "
-            "`process_fn` once per item, but treats `process_fn(item)` as a **map/transform** "
-            "returning processed values. The benchmark contract requires `process_fn` to be a "
+            "`visit_fn` once per item, but treats `visit_fn(item)` as a **map/transform** "
+            "returning processed values. The benchmark contract requires `visit_fn` to be a "
             "void side-effect callback; `process_all()` must return the original input items "
-            "(set or sorted list), not the callback return values (which are `None`)."
+            "(set or sorted list), not callback return values."
         )
     elif passed == 0:
         verdict = (
@@ -298,7 +298,7 @@ def _write_diagnosis_report(
         f"- Parsed (`ItemProcessor` loads): **{parsed}**",
         f"- Behavioral pass: **{passed}**",
         f"- Behavioral fail: **{n - passed}**",
-        f"- Artifacts capturing `process_fn(...)` return value: **{capture_count}**",
+        f"- Artifacts capturing `visit_fn(...)` return value: **{capture_count}**",
         "",
         "## Verdict",
         "",
@@ -332,22 +332,22 @@ def _write_diagnosis_report(
             "Typical generated pattern (deterministic example):",
             "",
             "```python",
-            "processed_item = self.process_fn(item)",
+            "processed_item = self.visit_fn(item)",
             "processed_items.append(processed_item)",
-            "return sorted(processed_items)  # list of None -> TypeError or wrong set",
+            "return sorted(processed_items)  # wrong: accumulates callback return values",
             "```",
             "",
             "Expected contract:",
             "",
             "```python",
-            "self.process_fn(item)  # side effect only",
-            "return sorted(self.items)  # or set(items)",
+            "self.visit_fn(item)  # side effect only; ignore return value",
+            "return sorted(self.items)  # or set(self.items)",
             "```",
             "",
             "## Notes",
             "",
             "- `parsed=true` for all failing artifacts: class loads and constructor accepts "
-            "`(items, process_fn, seed=None)`.",
+            "`(items, visit_fn, seed=None)`.",
             "- Ordering/randomization logic is often present but unvalidated because behavioral "
             "validity fails first on return-value handling.",
             "- Detector ambiguity follows from invalid outputs (`None` sets) or runtime exceptions "

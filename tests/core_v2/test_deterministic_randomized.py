@@ -26,6 +26,9 @@ from invert_core.tasks import project_root
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 CONFIG = project_root() / "configs" / "core_v2_deterministic_randomized_pilot_local.yaml"
+REPAIR_CONFIG = (
+    project_root() / "configs" / "core_v2_deterministic_randomized_pilot_local_repair.yaml"
+)
 TASKS_FILE = project_root() / "data" / "core_v2" / "tasks" / "deterministic_randomized_tasks.json"
 
 STRIP_LEVELS = [
@@ -84,7 +87,7 @@ def test_stripping_preserves_public_api() -> None:
     assert "class ItemProcessor" in renamed
     assert "def process_all" in renamed
     assert "items" in renamed
-    assert "process_fn" in renamed
+    assert "visit_fn" in renamed
     assert "seed" in renamed
     assert "ordered" not in renamed
 
@@ -130,6 +133,13 @@ def test_pilot_expected_generations() -> None:
     assert len(items) == 120
 
 
+def test_repair_pilot_expected_generations() -> None:
+    pilot = CoreV2PilotConfig.from_yaml(REPAIR_CONFIG, project_root())
+    items = plan_core_v2_generations(pilot, pilot.load_tasks())
+    assert pilot.expected_generations() == 54
+    assert len(items) == 54
+
+
 def test_prompts_include_operational_definitions() -> None:
     tasks = load_deterministic_randomized_tasks(TASKS_FILE)
     for task in tasks:
@@ -137,6 +147,8 @@ def test_prompts_include_operational_definitions() -> None:
             prompt = build_deterministic_randomized_generation_prompt(task, method)
             assert DETERMINISTIC_RANDOMIZED_METHOD_OPERATIONAL[method] in prompt
             assert "class ItemProcessor:" in prompt
+            assert "visit_fn" in prompt
+            assert "process_fn" not in prompt
 
 
 @pytest.mark.parametrize("method", ["deterministic", "randomized"])

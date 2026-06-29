@@ -23,12 +23,12 @@ TASKS_FILE = project_root() / "data" / "core_v2" / "tasks" / "deterministic_rand
 
 MAP_TRANSFORM_CODE = '''
 class ItemProcessor:
-    def __init__(self, items, process_fn, seed=None):
+    def __init__(self, items, visit_fn, seed=None):
         self.items = items
-        self.process_fn = process_fn
+        self.visit_fn = visit_fn
 
     def process_all(self):
-        return [self.process_fn(item) for item in sorted(self.items)]
+        return [self.visit_fn(item) for item in sorted(self.items)]
 '''
 
 
@@ -38,7 +38,7 @@ def test_classify_map_transform_as_output_not_expected_set() -> None:
     category, reason = classify_behavioral_failure(MAP_TRANSFORM_CODE, result, task=task)
     assert result.behavioral_pass is False
     assert category == "output_not_expected_set"
-    assert "process_fn" in reason
+    assert "visit_fn" in reason
 
 
 def test_diagnose_pilot_run_if_present() -> None:
@@ -67,12 +67,12 @@ def test_diagnose_pilot_run_if_present() -> None:
 
     assert all(r["parsed"] == "true" for r in rows)
     assert all(r["behavioral_pass"] == "false" for r in rows)
-    assert all(r["captures_process_fn_return_value"] == "true" for r in rows)
+    assert all(r["captures_visit_fn_return_value"] == "true" for r in rows)
     categories = {r["failure_category"] for r in rows}
     assert categories <= {"output_not_expected_set", "exception_during_execution"}
 
     md = result.md_path.read_text(encoding="utf-8")
-    assert "Prompt/API-contract failure" in md or "process_fn" in md
+    assert "Prompt/API-contract failure" in md or "visit_fn" in md
 
 
 def test_diagnose_writes_under_run_dir() -> None:

@@ -76,11 +76,11 @@ def _collect_traces(
     for _ in range(run_count):
         trace: list[Any] = []
 
-        def process_fn(item: Any) -> None:
+        def visit_fn(item: Any) -> None:
             trace.append(item)
 
         try:
-            processor = cls(task.items, process_fn, seed=seed)
+            processor = cls(task.items, visit_fn, seed=seed)
             output = processor.process_all()
         except Exception as exc:
             return traces, False, f"execution_failed: {exc}"

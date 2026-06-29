@@ -579,7 +579,7 @@ def _write_report(
             "### Inter-execution variability vs other signature classes",
             "",
             "Deterministic and randomized implementations return the same item set and call "
-            "process_fn once per item; only repeated-execution trace stability differs.",
+            "visit_fn once per item; only repeated-execution trace stability differs.",
             "",
             "## 9. All-generated summary",
             "",

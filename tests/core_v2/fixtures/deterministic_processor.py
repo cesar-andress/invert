@@ -1,11 +1,11 @@
 class ItemProcessor:
-    def __init__(self, items, process_fn, seed=None):
-        self._items = list(items)
-        self._process_fn = process_fn
-        self._seed = seed
+    def __init__(self, items, visit_fn, seed=None):
+        self.items = list(items)
+        self.visit_fn = visit_fn
+        self.seed = seed
 
     def process_all(self):
-        ordered = sorted(self._items, key=str)
+        ordered = sorted(self.items, key=str)
         for item in ordered:
-            self._process_fn(item)
-        return sorted(self._items, key=str)
+            self.visit_fn(item)
+        return sorted(self.items, key=str)
