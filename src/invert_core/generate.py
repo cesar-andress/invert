@@ -75,6 +75,16 @@ def _write_run_metadata(pilot: CoreV2PilotConfig) -> Path:
     return out_path
 
 
+def _stripped_complete(
+    pilot: CoreV2PilotConfig,
+    item: CoreV2GenerationItem,
+    data_root: Path,
+) -> bool:
+    return all(
+        item.stripped_path(data_root, level).exists() for level in pilot.strip_levels
+    )
+
+
 def run_core_v2_generation(
     pilot: CoreV2PilotConfig,
     *,
@@ -101,9 +111,17 @@ def run_core_v2_generation(
         raw_path = item.raw_path(data_root)
         code_path = item.code_path(data_root)
         if raw_path.exists() and code_path.exists() and not pilot.overwrite:
+            if not _stripped_complete(pilot, item, data_root):
+                code = code_path.read_text(encoding="utf-8")
+                _write_stripped_variants(pilot, item, code)
             print(f"SKIP existing: {code_path}")
             continue
 
+        label = (
+            f"{item.task.task_id}/{item.method}/rep_{item.rep} "
+            f"via {model_name}"
+        )
+        print(f"Generating {label} ...", flush=True)
         prompt = build_generation_prompt(item.task, item.method, language=pilot.language)
         if model_name == "local_stub":
             response = build_stub_code(item.task, item.method)

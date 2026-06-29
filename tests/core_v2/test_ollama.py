@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
+import pytest
+
 from invert_core.check_apis import run_check_apis
 from invert_core.models import (
     OllamaClient,
@@ -76,14 +78,23 @@ def test_run_check_apis_ollama_enforced(mock_request, capsys) -> None:
 @patch("invert_core.models._ollama_request")
 def test_ollama_client_generate(mock_request) -> None:
     mock_request.return_value = {"response": "def integrate_ode(f, y0, t0, tf, dt):\n    return y0\n"}
-    client = OllamaClient(model="qwen2.5-coder:32b", temperature=0)
+    client = OllamaClient(model="qwen2.5-coder:32b", temperature=0, generate_timeout=900)
     text = client.generate("prompt")
     assert "integrate_ode" in text
     assert mock_request.call_args[0][1] == "/api/generate"
+    assert mock_request.call_args[1]["timeout"] == 900
     payload = mock_request.call_args[1]["payload"]
     assert payload["model"] == "qwen2.5-coder:32b"
     assert payload["stream"] is False
     assert payload["options"]["temperature"] == 0
+
+
+@patch("invert_core.models._ollama_request")
+def test_ollama_generate_retries_on_timeout(mock_request) -> None:
+    mock_request.side_effect = [TimeoutError("timed out"), {"response": "ok"}]
+    client = OllamaClient(model="deepseek-coder-v2:lite", max_retries=2, generate_timeout=60)
+    assert client.generate("prompt") == "ok"
+    assert mock_request.call_count == 2
 
 
 def test_local_pilot_dry_run_expected_generations(capsys) -> None:

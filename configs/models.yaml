@@ -14,3 +14,5 @@ providers:
   ollama:
     base_url: http://localhost:11434
     temperature: 0
+    generate_timeout_seconds: 900
+    max_retries: 2
