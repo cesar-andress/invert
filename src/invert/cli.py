@@ -15,6 +15,7 @@ from invert.generate import run_generation
 from invert.keyword_baseline import run_keyword_baseline
 from invert.manifest import run_manifest
 from invert.manifestation_recovery import run_manifestation_recovery_analysis
+from invert.category_b_forensic import run_category_b_forensic
 from invert.reanalyze_strict import run_reanalyze_strict
 from invert.plot import run_plot
 from invert.recover import run_recovery
@@ -274,6 +275,13 @@ def reanalyze_strict_cmd(
     run: str = typer.Option(..., "--run", help="Run name for strict manifestation–recovery reanalysis"),
 ) -> None:
     run_reanalyze_strict(PROJECT_ROOT, run)
+
+
+@app.command("analyze-category-b")
+def analyze_category_b_cmd(
+    run: str = typer.Option(..., "--run", help="Run name for Category B forensic analysis"),
+) -> None:
+    run_category_b_forensic(PROJECT_ROOT, run)
 
 
 @app.command("check-apis")
