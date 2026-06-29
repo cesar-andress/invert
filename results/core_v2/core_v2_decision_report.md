@@ -2,6 +2,11 @@
 
 Aggregated from completed runs under `results/core_v2/runs/`. Missing per-run files are skipped gracefully.
 
+Signature classes under evaluation:
+- Class A: arithmetic count signatures (`euler_vs_rk4`)
+- Class B: arithmetic weight signatures (`trapezoidal_vs_simpson`)
+- Class C: dynamic temporal process signatures (`eager_vs_lazy`)
+
 ## Run inventory
 
 ### Development runs
@@ -12,7 +17,7 @@ Aggregated from completed runs under `results/core_v2/runs/`. Missing per-run fi
 
 ### Frozen generalization runs
 
-- None yet.
+- `core_v2_generalization_local_quadrature_001` (has `frozen_detector_metadata.json`)
 
 ## 1. Which dimensions have enough evidence?
 
@@ -21,6 +26,7 @@ Aggregated from completed runs under `results/core_v2/runs/`. Missing per-run fi
 
 ## 2. Which models are reliable generators?
 
+- Devstral:latest
 - Qwen2.5-coder:14b
 - Qwen2.5-coder:32b
 - Qwen3-coder:30b
@@ -44,20 +50,29 @@ Aggregated from completed runs under `results/core_v2/runs/`. Missing per-run fi
 
 **Yes (preliminary).** At least two models meet the preregistered valid-only survival rule for `trapezoidal_vs_simpson`.
 
-## 7. Two mechanistically distinct classes (preregistered criterion)
+## 7. Is Class C supported?
+
+Class C not yet evaluated.
+
+## 8. Process signature vs mathematical identity (F1.3)
+
+Current evidence remains limited to arithmetic/static signatures.
+
+## 9. Two mechanistically distinct classes (preregistered criterion)
 
 **Close.** Two mechanistically distinct classes each have >=2 surviving models under the preregistered valid-only rule; confirm with independent replication before strong claims.
 
-## 8. Next cheapest experiment
+## 10. Next cheapest experiment
 
-Add the next preregistered Family 1 dimension or a minimal paid-API replication on the two best local models only.
+Run `invert-core analyze-run --run core_v2_eager_lazy_pilot_local_001` (or complete eager/lazy generation first) to evaluate Class C without new API spend.
 
 ## Dimension status snapshot
 
 | dimension | runs_found | models_evaluated | models_survived | status |
 |-----------|------------|------------------|-----------------|--------|
 | euler_vs_rk4 | 2 | 5 | 2 | supported_if_2plus_models_survive |
-| trapezoidal_vs_simpson | 1 | 3 | 3 | supported_if_2plus_models_survive |
+| trapezoidal_vs_simpson | 2 | 4 | 4 | supported_if_2plus_models_survive |
+| eager_vs_lazy | 0 | 0 | 0 | insufficient_data |
 
 ## Frozen generalization evidence
 
@@ -66,6 +81,15 @@ Add the next preregistered Family 1 dimension or a minimal paid-API replication 
 - No frozen generalization runs analyzed for this dimension yet.
 
 ### Class B (arithmetic weight signatures) (`trapezoidal_vs_simpson`)
+
+- Models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen3-coder:30b
+- Models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen3-coder:30b
+- Valid artifact rate: 1.0000
+- Detector accuracy (raw): 1.0000
+- Detector accuracy (format_normalized): 1.0000
+- Ambiguous rate (raw): 0.0000
+
+### Class C (dynamic temporal process signatures) (`eager_vs_lazy`)
 
 - No frozen generalization runs analyzed for this dimension yet.
 

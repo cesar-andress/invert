@@ -27,6 +27,7 @@ MODEL_DISPLAY_NAMES = {
 }
 
 F11_MIN_VALID_N = 12
+F13_MIN_VALID_N = 20
 F11_MIN_ACCURACY = 0.90
 F11_MAX_AMBIGUOUS = 0.10
 
@@ -116,6 +117,10 @@ def run_analyze_run(
         from invert_core.analyze_quadrature_run import run_quadrature_analyze_run
 
         result = run_quadrature_analyze_run(run_name, project_root, config_path=config_path)
+    elif dimension == "eager_vs_lazy":
+        from invert_core.analyze_eager_lazy_run import run_eager_lazy_analyze_run
+
+        result = run_eager_lazy_analyze_run(run_name, project_root, config_path=config_path)
     else:
         result = _run_integration_analyze_run(run_name, project_root, config_path=config_path)
 

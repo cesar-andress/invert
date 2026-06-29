@@ -8,6 +8,10 @@ from invert.generate import extract_code
 from invert_core.models import create_core_client, is_ollama_model
 from invert.schemas import load_yaml
 
+from invert_core.eager_lazy_prompts import (
+    build_eager_lazy_generation_prompt,
+    build_eager_lazy_stub_code,
+)
 from invert_core.pilot_config import CoreV2GenerationItem, CoreV2PilotConfig, plan_core_v2_generations
 from invert_core.prompts import build_generation_prompt, build_stub_code
 from invert_core.quadrature_prompts import (
@@ -132,6 +136,16 @@ def run_core_v2_generation(
             )
             if model_name == "local_stub":
                 response = build_quadrature_stub_code(item.task, item.method)
+                code = response
+            else:
+                response = client.generate(prompt)
+                code = extract_code(response)
+        elif pilot.dimension == "eager_vs_lazy":
+            prompt = build_eager_lazy_generation_prompt(
+                item.task, item.method, language=pilot.language
+            )
+            if model_name == "local_stub":
+                response = build_eager_lazy_stub_code(item.task, item.method)
                 code = response
             else:
                 response = client.generate(prompt)

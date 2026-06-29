@@ -1,0 +1,36 @@
+run:
+  name: core_v2_eager_lazy_pilot_local_001
+  overwrite: false
+
+family: F1
+dimension: eager_vs_lazy
+
+tasks:
+  file: data/core_v2/tasks/eager_lazy_tasks.json
+  include:
+    - small_positive_vector
+    - mixed_signed_vector
+    - repeated_values_vector
+
+generation:
+  models:
+    - ollama:qwen2.5-coder:14b
+    - ollama:qwen2.5-coder:32b
+    - ollama:qwen3-coder:30b
+    - ollama:devstral:latest
+  repetitions: 5
+  language: python
+  pure_implementation: true
+  models_config: configs/models.yaml
+
+methods:
+  - eager
+  - lazy
+
+stripping:
+  levels:
+    - raw
+    - no_comments
+    - renamed
+    - no_imports
+    - format_normalized

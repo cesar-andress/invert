@@ -10,6 +10,7 @@ from invert_core.analyze_run import (
     F11_MAX_AMBIGUOUS,
     F11_MIN_ACCURACY,
     F11_MIN_VALID_N,
+    F13_MIN_VALID_N,
     NA,
     _format_rate,
     _model_display_name,
@@ -27,11 +28,17 @@ DIMENSION_ARTIFACTS: dict[str, dict[str, str]] = {
         "summary": "quadrature_summary.csv",
         "report": "quadrature_report.md",
     },
+    "eager_vs_lazy": {
+        "valid_only_summary": "eager_lazy_valid_only_summary.csv",
+        "summary": "eager_lazy_summary.csv",
+        "report": "eager_lazy_report.md",
+    },
 }
 
 CLASS_LABELS: dict[str, str] = {
     "euler_vs_rk4": "Class A (derivative-call signatures)",
     "trapezoidal_vs_simpson": "Class B (arithmetic weight signatures)",
+    "eager_vs_lazy": "Class C (dynamic temporal process signatures)",
 }
 
 MODEL_SUMMARY_FIELDS = [
@@ -123,15 +130,23 @@ def _rows_for_model_strip(
     ]
 
 
+def _min_valid_n_for_dimension(dimension: str) -> int:
+    if dimension == "eager_vs_lazy":
+        return F13_MIN_VALID_N
+    return F11_MIN_VALID_N
+
+
 def _survives_preregistered_rule(
     valid_n: int,
     raw_acc: float | None,
     fmt_acc: float | None,
     amb_raw: float | None,
     amb_fmt: float | None,
+    *,
+    min_valid_n: int = F11_MIN_VALID_N,
 ) -> bool:
     return (
-        valid_n >= F11_MIN_VALID_N
+        valid_n >= min_valid_n
         and raw_acc is not None
         and raw_acc >= F11_MIN_ACCURACY
         and fmt_acc is not None
@@ -150,10 +165,12 @@ def _failure_reason(
     amb_raw: float | None,
     amb_fmt: float | None,
     survives: bool,
+    *,
+    min_valid_n: int = F11_MIN_VALID_N,
 ) -> str:
     if survives:
         return ""
-    if valid_n < F11_MIN_VALID_N:
+    if valid_n < min_valid_n:
         return "invalid_generation"
     if (
         raw_acc is None
@@ -219,7 +236,10 @@ def _aggregate_model_for_run(
     amb_raw = _weighted_rate(raw_valid, "valid_n", "valid_ambiguous_rate")
     amb_fmt = _weighted_rate(fmt_valid, "valid_n", "valid_ambiguous_rate")
 
-    survives = _survives_preregistered_rule(valid_n, raw_acc, fmt_acc, amb_raw, amb_fmt)
+    min_valid_n = _min_valid_n_for_dimension(dimension)
+    survives = _survives_preregistered_rule(
+        valid_n, raw_acc, fmt_acc, amb_raw, amb_fmt, min_valid_n=min_valid_n
+    )
 
     return {
         "run": run_name,
@@ -235,7 +255,7 @@ def _aggregate_model_for_run(
         "valid_ambiguous_rate_format_normalized": _format_rate(amb_fmt),
         "survives_preregistered_rule": "true" if survives else "false",
         "failure_reason": _failure_reason(
-            valid_n, raw_acc, fmt_acc, amb_raw, amb_fmt, survives
+            valid_n, raw_acc, fmt_acc, amb_raw, amb_fmt, survives, min_valid_n=min_valid_n
         ),
     }
 
@@ -299,6 +319,8 @@ def _class_support_text(status: str, dimension: str, has_data: bool) -> str:
     if not has_data:
         if dimension == "trapezoidal_vs_simpson":
             return "Class B not yet evaluated."
+        if dimension == "eager_vs_lazy":
+            return "Class C not yet evaluated."
         return "Insufficient completed runs to evaluate."
     if status == "supported_if_2plus_models_survive":
         return (
@@ -325,7 +347,13 @@ def _next_cheapest_experiment(
     by_dim = {r["dimension"]: r for r in dimension_rows}
     euler = by_dim.get("euler_vs_rk4")
     quad = by_dim.get("trapezoidal_vs_simpson")
+    eager_lazy = by_dim.get("eager_vs_lazy")
 
+    if eager_lazy and eager_lazy["status"] == "insufficient_data":
+        return (
+            "Run `invert-core analyze-run --run core_v2_eager_lazy_pilot_local_001` "
+            "(or complete eager/lazy generation first) to evaluate Class C without new API spend."
+        )
     if quad and quad["status"] == "insufficient_data":
         return (
             "Run `invert-core analyze-run --run core_v2_quadrature_pilot_local_001` "
@@ -450,6 +478,7 @@ def _write_decision_report(
     by_dim = {r["dimension"]: r for r in dimension_rows}
     euler = by_dim.get("euler_vs_rk4")
     quad = by_dim.get("trapezoidal_vs_simpson")
+    eager_lazy = by_dim.get("eager_vs_lazy")
 
     enough_evidence = [
         CLASS_LABELS[d]
@@ -492,6 +521,26 @@ def _write_decision_report(
         "trapezoidal_vs_simpson",
         bool(quad and _parse_int(quad["runs_found"]) > 0),
     )
+    class_c = _class_support_text(
+        eager_lazy["status"] if eager_lazy else "insufficient_data",
+        "eager_vs_lazy",
+        bool(eager_lazy and _parse_int(eager_lazy["runs_found"]) > 0),
+    )
+
+    class_c_passes = (
+        eager_lazy is not None
+        and eager_lazy["status"] in ("supported_if_2plus_models_survive", "promising_if_1_model_survives")
+        and _parse_int(eager_lazy["runs_found"]) > 0
+    )
+    if class_c_passes:
+        process_signature_text = (
+            "This result is not reducible to mathematical-coefficient identity because "
+            "eager and lazy compute the same feature formulas; only timing of computation differs."
+        )
+    else:
+        process_signature_text = (
+            "Current evidence remains limited to arithmetic/static signatures."
+        )
 
     classes_with_strong = sum(
         1
@@ -531,6 +580,11 @@ def _write_decision_report(
         "",
         "Aggregated from completed runs under `results/core_v2/runs/`. "
         "Missing per-run files are skipped gracefully.",
+        "",
+        "Signature classes under evaluation:",
+        "- Class A: arithmetic count signatures (`euler_vs_rk4`)",
+        "- Class B: arithmetic weight signatures (`trapezoidal_vs_simpson`)",
+        "- Class C: dynamic temporal process signatures (`eager_vs_lazy`)",
         "",
         "## Run inventory",
         "",
@@ -589,11 +643,19 @@ def _write_decision_report(
             "",
             class_b if quad and _parse_int(quad["runs_found"]) > 0 else "Class B not yet evaluated.",
             "",
-            "## 7. Two mechanistically distinct classes (preregistered criterion)",
+            "## 7. Is Class C supported?",
+            "",
+            class_c if eager_lazy and _parse_int(eager_lazy["runs_found"]) > 0 else "Class C not yet evaluated.",
+            "",
+            "## 8. Process signature vs mathematical identity (F1.3)",
+            "",
+            process_signature_text,
+            "",
+            "## 9. Two mechanistically distinct classes (preregistered criterion)",
             "",
             two_class_text,
             "",
-            "## 8. Next cheapest experiment",
+            "## 10. Next cheapest experiment",
             "",
             _next_cheapest_experiment(dimension_rows, model_rows),
             "",

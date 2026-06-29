@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "task_id": "small_positive_vector",
+      "x": [1, 2, 3, 4],
+      "expected_feature_a": 30,
+      "expected_feature_b": 10,
+      "expected_feature_c": 3
+    },
+    {
+      "task_id": "mixed_signed_vector",
+      "x": [-3, -1, 0, 2, 5],
+      "expected_feature_a": 39,
+      "expected_feature_b": 11,
+      "expected_feature_c": 8
+    },
+    {
+      "task_id": "repeated_values_vector",
+      "x": [2, 2, 2, 2, 2],
+      "expected_feature_a": 20,
+      "expected_feature_b": 10,
+      "expected_feature_c": 0
+    }
+  ]
+}

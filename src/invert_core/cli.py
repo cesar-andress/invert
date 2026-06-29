@@ -9,6 +9,7 @@ import typer
 from invert_core.analyze import run_analyze_slice
 from invert_core.analyze_run import run_analyze_run
 from invert_core.check_apis import run_check_apis
+from invert_core.detectors.eager_lazy import detect_eager_lazy_file
 from invert_core.detectors.integration import detect_integration_file
 from invert_core.detectors.quadrature import detect_quadrature_file
 from invert_core.detectors.shuffled_control import run_shuffled_control
@@ -91,6 +92,24 @@ def detect_quadrature_cmd(
     """Detect trapezoidal vs Simpson quadrature method."""
     result = detect_quadrature_file(str(file), entry_function=entry_function)
     typer.echo(json.dumps(result.to_dict(), indent=2))
+
+
+@app.command("detect-eager-lazy")
+def detect_eager_lazy_cmd(
+    file: Path = typer.Argument(..., help="Python file to analyze"),
+    expected: str | None = typer.Option(None, "--expected", help="eager or lazy"),
+) -> None:
+    """Detect eager vs lazy feature pipeline timing signature."""
+    result = detect_eager_lazy_file(str(file))
+    payload = result.to_dict()
+    if expected is not None and payload["method"] != expected:
+        typer.echo(json.dumps(payload, indent=2))
+        typer.echo(
+            f"Expected {expected} but detected {payload['method']}",
+            err=True,
+        )
+        raise typer.Exit(1)
+    typer.echo(json.dumps(payload, indent=2))
 
 
 @app.command("strip")
