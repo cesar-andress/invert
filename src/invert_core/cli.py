@@ -1,0 +1,103 @@
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+import typer
+
+from invert_core.analyze import run_analyze_slice
+from invert_core.detectors.integration import detect_integration, detect_integration_file
+from invert_core.detectors.shuffled_control import run_shuffled_control
+from invert_core.stripping import StripLevel, strip_file
+from invert_core.tasks import fixtures_dir, results_dir
+from invert_core.verify import verify_fixture_dir
+
+app = typer.Typer(help="INVERT Core v2 — deterministic signature benchmark")
+
+
+@app.command("f3-shuffled")
+def f3_shuffled(
+    seed: int = typer.Option(42, help="RNG seed for label permutation"),
+    fixtures: Path | None = typer.Option(None, help="Fixtures directory"),
+    output: Path | None = typer.Option(None, help="Output directory"),
+) -> None:
+    """F3.2 shuffled-label negative control."""
+    from invert_core.detectors.integration import detect_integration
+
+    fix_dir = fixtures or fixtures_dir()
+    out_dir = output or (results_dir() / "f3_shuffled")
+
+    def detector_fn(code: str) -> str:
+        return detect_integration(code, entry_function="integrate_ode").method
+
+    result = run_shuffled_control(fix_dir, out_dir, seed=seed, detector_fn=detector_fn)
+    typer.echo(json.dumps(result.to_dict(), indent=2))
+    if not result.at_chance:
+        typer.echo("WARNING: shuffled control may not be at chance", err=True)
+        raise typer.Exit(1)
+    typer.echo(f"Wrote manifest to {out_dir}")
+
+
+@app.command("detect-integration")
+def detect_integration_cmd(
+    file: Path = typer.Argument(..., help="Python file to analyze"),
+    entry_function: str | None = typer.Option(None, help="Entry function name"),
+) -> None:
+    """Detect Euler vs RK4 integration method."""
+    result = detect_integration_file(str(file), entry_function=entry_function)
+    typer.echo(json.dumps(result.to_dict(), indent=2))
+
+
+@app.command("strip")
+def strip_cmd(
+    file: Path = typer.Argument(..., help="Python file to strip"),
+    level: StripLevel = typer.Option(
+        StripLevel.RAW,
+        "--level",
+        help="Stripping level",
+    ),
+) -> None:
+    """Apply deterministic stripping transforms."""
+    typer.echo(strip_file(str(file), level))
+
+
+@app.command("smoke-test")
+def smoke_test() -> None:
+    """Run end-to-end smoke test without APIs."""
+    from invert_core.tasks import fixtures_dir as fix_dir
+
+    fix = fix_dir()
+    report = verify_fixture_dir(fix)
+    typer.echo(json.dumps(report, indent=2, default=str))
+    if not report["passed"]:
+        typer.echo("Smoke test FAILED", err=True)
+        raise typer.Exit(1)
+    typer.echo("Smoke test passed.")
+
+
+@app.command("analyze-slice")
+def analyze_slice_cmd(
+    fixtures: Path | None = typer.Option(None, help="Fixtures directory"),
+    output: Path | None = typer.Option(None, help="Output directory"),
+) -> None:
+    """Verify Core v2 slice against preregistered logic (fixtures only)."""
+    fix_dir = fixtures or fixtures_dir()
+    out_dir = output or results_dir()
+
+    result = run_analyze_slice(fix_dir, out_dir)
+    typer.echo(f"Wrote {result.analysis_path}")
+    typer.echo(f"Wrote {result.matrix_path}")
+    typer.echo(f"Wrote {result.summary_path}")
+    if not result.passed:
+        typer.echo("Slice analysis FAILED preregistered checks", err=True)
+        raise typer.Exit(1)
+    typer.echo("Slice analysis passed.")
+
+
+def main() -> None:
+    app()
+
+
+if __name__ == "__main__":
+    main()

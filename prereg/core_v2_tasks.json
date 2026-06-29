@@ -1,0 +1,30 @@
+{
+  "schema_version": "core_v2_1",
+  "tasks": [
+    {
+      "task_id": "ode_integrate",
+      "entry_function": "integrate_ode",
+      "dimension": "F1.1",
+      "m0_label": "euler",
+      "m1_label": "rk4",
+      "functional_behavior": "Integrate scalar ODE dy/dt = f(t,y) from t0 to tf with fixed step dt.",
+      "tolerance": "1e-3"
+    },
+    {
+      "task_id": "shared_counter",
+      "entry_function": "increment",
+      "dimension": "F2.1",
+      "m0_label": "no_lock",
+      "m1_label": "locked",
+      "functional_behavior": "Increment shared counter; m1 must use lock for thread safety.",
+      "tolerance": "exact"
+    }
+  ],
+  "controls": [
+    {
+      "control_id": "F3.2",
+      "name": "shuffled_label",
+      "description": "Identical code artifacts with permuted labels; recovery must stay at chance."
+    }
+  ]
+}
