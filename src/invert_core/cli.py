@@ -7,13 +7,44 @@ from pathlib import Path
 import typer
 
 from invert_core.analyze import run_analyze_slice
-from invert_core.detectors.integration import detect_integration, detect_integration_file
+from invert_core.analyze_run import run_analyze_run
+from invert_core.check_apis import run_check_apis
+from invert_core.detectors.integration import detect_integration_file
 from invert_core.detectors.shuffled_control import run_shuffled_control
+from invert_core.generate import run_core_v2_generation
+from invert_core.pilot_config import CoreV2PilotConfig
 from invert_core.stripping import StripLevel, strip_file_with_evidence
-from invert_core.tasks import fixtures_dir, results_dir
+from invert_core.tasks import fixtures_dir, project_root, results_dir
 from invert_core.verify import verify_fixture_dir
 
 app = typer.Typer(help="INVERT Core v2 — deterministic signature benchmark")
+
+
+@app.command("check-apis")
+def check_apis_cmd(
+    models: str = typer.Option(..., "--models", help="Comma-separated provider names"),
+    strict: bool = typer.Option(
+        False,
+        "--strict",
+        help="Exit 1 if any API key is missing",
+    ),
+) -> None:
+    """Check API key presence (no paid calls)."""
+    model_list = [m.strip() for m in models.split(",") if m.strip()]
+    code = run_check_apis(model_list, strict=strict)
+    if code != 0:
+        raise typer.Exit(code)
+
+
+@app.command("generate")
+def generate_cmd(
+    config: Path = typer.Option(..., "--config", help="Pilot YAML config"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Plan only, no API calls"),
+) -> None:
+    """Generate Core v2 artifacts from pilot config."""
+    root = project_root()
+    pilot = CoreV2PilotConfig.from_yaml(config, root)
+    run_core_v2_generation(pilot, dry_run=dry_run)
 
 
 @app.command("f3-shuffled")
@@ -104,6 +135,19 @@ def analyze_slice_cmd(
         typer.echo("Slice analysis FAILED preregistered checks", err=True)
         raise typer.Exit(1)
     typer.echo("Slice analysis passed.")
+
+
+@app.command("analyze-run")
+def analyze_run_cmd(
+    run: str = typer.Option(..., "--run", help="Run name"),
+    config: Path | None = typer.Option(None, "--config", help="Pilot config (optional)"),
+) -> None:
+    """Analyze generated Core v2 run (detector + behavioral oracle)."""
+    root = project_root()
+    result = run_analyze_run(run, root, config_path=config)
+    typer.echo(f"Wrote {result.detection_path}")
+    typer.echo(f"Wrote {result.summary_path}")
+    typer.echo(f"Wrote {result.report_path}")
 
 
 def main() -> None:

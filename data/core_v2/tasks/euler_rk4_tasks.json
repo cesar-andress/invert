@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "task_id": "exponential_decay",
+      "entry_function": "integrate_ode",
+      "state_dimension": 1,
+      "equation": "dy/dt = -k * y",
+      "parameters": {"k": 0.5},
+      "initial_condition": [1.0],
+      "t0": 0.0,
+      "t1": 2.0,
+      "dt": 0.1,
+      "expected_behavior": "Monotone exponential decay toward zero.",
+      "behavioral_tolerance": 0.05,
+      "reference_type": "analytical_scalar"
+    },
+    {
+      "task_id": "logistic_growth",
+      "entry_function": "integrate_ode",
+      "state_dimension": 1,
+      "equation": "dy/dt = r * y * (1 - y / K)",
+      "parameters": {"r": 1.0, "K": 1.0},
+      "initial_condition": [0.1],
+      "t0": 0.0,
+      "t1": 2.0,
+      "dt": 0.1,
+      "expected_behavior": "Sigmoid growth toward carrying capacity K.",
+      "behavioral_tolerance": 0.08,
+      "reference_type": "reference_integrator"
+    },
+    {
+      "task_id": "harmonic_oscillator",
+      "entry_function": "integrate_ode",
+      "state_dimension": 2,
+      "equation": "dx/dt = v; dv/dt = -omega^2 * x",
+      "parameters": {"omega": 1.0},
+      "initial_condition": [1.0, 0.0],
+      "t0": 0.0,
+      "t1": 2.0,
+      "dt": 0.05,
+      "expected_behavior": "Undamped oscillation with period 2*pi/omega.",
+      "behavioral_tolerance": 0.08,
+      "reference_type": "analytical_system"
+    }
+  ]
+}
