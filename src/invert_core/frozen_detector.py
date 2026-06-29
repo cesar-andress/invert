@@ -10,7 +10,12 @@ DETECTOR_REL_PATHS = {
     "integration.py": Path("src/invert_core/detectors/integration.py"),
     "quadrature.py": Path("src/invert_core/detectors/quadrature.py"),
     "eager_lazy.py": Path("src/invert_core/detectors/eager_lazy.py"),
+    "bfs_dfs.py": Path("src/invert_core/detectors/bfs_dfs.py"),
 }
+
+STRIPPING_REL_PATH = Path("src/invert_core/stripping.py")
+
+DYNAMIC_DIMENSIONS = frozenset({"eager_vs_lazy", "bfs_vs_dfs"})
 
 FROZEN_NOTE = "detectors frozen before this generalization run"
 
@@ -39,11 +44,14 @@ def _git_commit(project_root: Path) -> str:
         return "unknown"
 
 
-def detector_file_hashes(project_root: Path) -> dict[str, str]:
-    return {
+def detector_file_hashes(project_root: Path, *, dimension: str | None = None) -> dict[str, str]:
+    hashes = {
         name: _file_sha256(project_root / rel_path)
         for name, rel_path in DETECTOR_REL_PATHS.items()
     }
+    if dimension in DYNAMIC_DIMENSIONS:
+        hashes["stripping.py"] = _file_sha256(project_root / STRIPPING_REL_PATH)
+    return hashes
 
 
 def write_frozen_detector_metadata(
@@ -57,7 +65,7 @@ def write_frozen_detector_metadata(
         "run_name": run_name,
         "dimension": dimension,
         "git_commit": _git_commit(project_root),
-        "detector_files_hash": detector_file_hashes(project_root),
+        "detector_files_hash": detector_file_hashes(project_root, dimension=dimension),
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "note": FROZEN_NOTE,
     }

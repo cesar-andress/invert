@@ -576,7 +576,17 @@ def _write_decision_report(
         and bfs_dfs["status"] in ("supported_if_2plus_models_survive", "promising_if_1_model_survives")
         and _parse_int(bfs_dfs["runs_found"]) > 0
     )
-    if class_d_passes:
+    frozen_d = _aggregate_frozen_dimension_evidence("bfs_vs_dfs", model_rows)
+    if frozen_d["has_data"]:
+        order_signature_text = (
+            "Frozen generalization evidence for Class D is available "
+            f"(models evaluated: {', '.join(frozen_d['models_evaluated']) or 'none'}; "
+            f"models survived: {', '.join(frozen_d['models_survived']) or 'none'}). "
+            "This result is not reducible to mathematical identity or avoidable-computation "
+            "detection because BFS and DFS visit the same reachable set and perform the same "
+            "amount of node visitation; only traversal order differs."
+        )
+    elif class_d_passes:
         order_signature_text = (
             "This result is not reducible to mathematical identity or avoidable-computation "
             "detection because BFS and DFS visit the same reachable set and perform the same "
@@ -736,8 +746,13 @@ def _write_decision_report(
             continue
         if dimension == "eager_vs_lazy":
             lines.append(
-                "- Frozen detector metadata includes SHA256 of `eager_lazy.py` "
+                "- Frozen detector metadata includes SHA256 of `eager_lazy.py` and `stripping.py` "
                 "when analyzed via `core_v2_generalization_local_eager_lazy_001`."
+            )
+        if dimension == "bfs_vs_dfs":
+            lines.append(
+                "- Frozen detector metadata includes SHA256 of `bfs_dfs.py` and `stripping.py` "
+                "when analyzed via `core_v2_generalization_local_bfs_dfs_001`."
             )
         lines.append(
             f"- Models evaluated: {', '.join(evidence['models_evaluated']) or 'none'}"
