@@ -202,9 +202,7 @@ def _build_negative_control_rows(
     for method in ("bfs", "dfs"):
         code = build_bfs_dfs_stub_code(linear_task, method)
         for strip_level in strip_levels:
-            stripped = (
-                code if strip_level == "raw" else strip_code(code, StripLevel(strip_level))
-            )
+            stripped = strip_code(code, StripLevel(strip_level), dimension="bfs_vs_dfs")
             result = detect_bfs_dfs(stripped, linear_task)
             ev = result.evidence
             rows.append(
@@ -298,7 +296,7 @@ def run_bfs_dfs_analyze_run(
                 / art["method"]
                 / f"rep_{art['rep']}.py"
             )
-            code = _read_code(code_path, stripped_path, strip_level)
+            code = _read_code(code_path, stripped_path, strip_level, dimension="bfs_vs_dfs")
             if not code.strip():
                 continue
 

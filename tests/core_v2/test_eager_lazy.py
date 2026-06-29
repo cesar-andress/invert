@@ -92,7 +92,7 @@ def test_invalid_fixture_behavioral_fail() -> None:
 def test_survives_all_strip_levels(fixture: str, expected: str) -> None:
     code = (FIXTURES / fixture).read_text(encoding="utf-8")
     for level in STRIP_LEVELS:
-        stripped = strip_code(code, level)
+        stripped = strip_code(code, level, dimension="eager_vs_lazy")
         result = detect_eager_lazy(stripped)
         assert result.method == expected, level.value
 

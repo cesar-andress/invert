@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import builtins
 import json
 import re
 from dataclasses import dataclass, field
@@ -53,6 +54,35 @@ _STRIP_ORDER = [
 
 STANDARD_STRIP_LEVELS = list(_STRIP_ORDER)
 
+_BUILTIN_NAMES = frozenset(dir(builtins))
+
+PUBLIC_API_PRESERVE: dict[str, dict[str, list[str]]] = {
+    "bfs_vs_dfs": {
+        "classes": ["GraphTraversal"],
+        "methods": ["reachable_nodes"],
+        "constructor_args": ["graph", "start", "visit_fn"],
+    },
+    "eager_vs_lazy": {
+        "classes": ["FeaturePipeline"],
+        "methods": ["get_feature_a", "get_feature_b", "get_feature_c"],
+        "constructor_args": ["x", "feature_a_fn", "feature_b_fn", "feature_c_fn"],
+    },
+}
+
+
+def preserve_names_for_dimension(dimension: str | None) -> frozenset[str]:
+    if not dimension or dimension not in PUBLIC_API_PRESERVE:
+        return frozenset()
+    spec = PUBLIC_API_PRESERVE[dimension]
+    names: set[str] = set()
+    for key in ("classes", "methods", "constructor_args"):
+        names.update(spec.get(key, []))
+    return frozenset(names)
+
+
+def is_dynamic_dimension(dimension: str | None) -> bool:
+    return dimension in PUBLIC_API_PRESERVE
+
 
 @dataclass
 class StripEvidence:
@@ -92,19 +122,17 @@ def _remove_comments(code: str) -> str:
 
 
 class _IdentifierRenamer(ast.NodeTransformer):
-    def __init__(self) -> None:
+    def __init__(self, *, preserve_names: frozenset[str] = frozenset()) -> None:
         self._mapping: dict[str, str] = {}
         self._counter = 0
-        self._reserved = set(dir(__builtins__)) | {
+        self._preserve_names = preserve_names
+        self._reserved = set(_BUILTIN_NAMES) | {
             "self",
             "cls",
-            "True",
-            "False",
-            "None",
         }
 
     def _new_name(self, old: str) -> str:
-        if old in self._reserved:
+        if old in self._reserved or old in self._preserve_names:
             return old
         if old not in self._mapping:
             self._mapping[old] = f"x{self._counter}"
@@ -117,12 +145,14 @@ class _IdentifierRenamer(ast.NodeTransformer):
         return node
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.FunctionDef:
-        node.name = self._new_name(node.name)
+        if not (node.name.startswith("__") and node.name.endswith("__")):
+            node.name = self._new_name(node.name)
         self.generic_visit(node)
         return node
 
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> ast.AsyncFunctionDef:
-        node.name = self._new_name(node.name)
+        if not (node.name.startswith("__") and node.name.endswith("__")):
+            node.name = self._new_name(node.name)
         self.generic_visit(node)
         return node
 
@@ -142,10 +172,77 @@ class _IdentifierRenamer(ast.NodeTransformer):
         return node
 
 
-def _rename_identifiers(code: str) -> str:
+def _import_bound_names(tree: ast.AST) -> frozenset[str]:
+    names: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                names.add(alias.asname or alias.name.split(".")[0])
+        elif isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                if alias.name != "*":
+                    names.add(alias.asname or alias.name)
+    return frozenset(names)
+
+
+def _rename_identifiers(code: str, *, preserve_names: frozenset[str] | None = None) -> str:
     tree = ast.parse(code)
-    renamer = _IdentifierRenamer()
+    preserve = (preserve_names or frozenset()) | _import_bound_names(tree)
+    renamer = _IdentifierRenamer(preserve_names=preserve)
     tree = renamer.visit(tree)
+    ast.fix_missing_locations(tree)
+    return ast.unparse(tree)
+
+
+def _import_assignment(module: str, name: str, *, bound: str) -> ast.Assign:
+    import_call = ast.Call(
+        func=ast.Name(id="__import__", ctx=ast.Load()),
+        args=[ast.Constant(module)],
+        keywords=[
+            ast.keyword(
+                arg="fromlist",
+                value=ast.List(elts=[ast.Constant(name)], ctx=ast.Load()),
+            )
+        ],
+    )
+    value: ast.expr = ast.Attribute(value=import_call, attr=name, ctx=ast.Load())
+    return ast.Assign(
+        targets=[ast.Name(id=bound, ctx=ast.Store())],
+        value=value,
+    )
+
+
+def _materialize_imports(code: str) -> str:
+    class _ImportMaterializer(ast.NodeTransformer):
+        def visit_Import(self, node: ast.Import) -> list[ast.stmt]:
+            out: list[ast.stmt] = []
+            for alias in node.names:
+                bound = alias.asname or alias.name.split(".")[0]
+                out.append(
+                    ast.Assign(
+                        targets=[ast.Name(id=bound, ctx=ast.Store())],
+                        value=ast.Call(
+                            func=ast.Name(id="__import__", ctx=ast.Load()),
+                            args=[ast.Constant(alias.name)],
+                            keywords=[],
+                        ),
+                    )
+                )
+            return out
+
+        def visit_ImportFrom(self, node: ast.ImportFrom) -> list[ast.stmt] | ast.AST:
+            if node.module is None or node.level > 0:
+                return node
+            out: list[ast.stmt] = []
+            for alias in node.names:
+                if alias.name == "*":
+                    continue
+                bound = alias.asname or alias.name
+                out.append(_import_assignment(node.module, alias.name, bound=bound))
+            return out or node
+
+    tree = ast.parse(code)
+    tree = _ImportMaterializer().visit(tree)
     ast.fix_missing_locations(tree)
     return ast.unparse(tree)
 
@@ -352,18 +449,23 @@ def lock_marker_strip(code: str) -> tuple[str, StripEvidence]:
     return result, evidence
 
 
-def strip_code(code: str, level: StripLevel | str) -> str:
+def strip_code(code: str, level: StripLevel | str, *, dimension: str | None = None) -> str:
     """Apply stripping transforms cumulatively up to the requested level."""
-    stripped, _ = strip_code_with_evidence(code, level)
+    stripped, _ = strip_code_with_evidence(code, level, dimension=dimension)
     return stripped
 
 
 def strip_code_with_evidence(
-    code: str, level: StripLevel | str
+    code: str,
+    level: StripLevel | str,
+    *,
+    dimension: str | None = None,
 ) -> tuple[str, dict[str, Any] | None]:
     """Apply stripping; returns evidence dict for lock_marker_strip, else None."""
     if isinstance(level, str):
         level = StripLevel(level)
+
+    preserve_names = preserve_names_for_dimension(dimension)
 
     if level == StripLevel.RAW:
         return code, None
@@ -378,8 +480,9 @@ def strip_code_with_evidence(
         if step == StripLevel.NO_COMMENTS:
             result = _remove_comments(result)
         elif step == StripLevel.RENAMED:
-            result = _rename_identifiers(result)
+            result = _rename_identifiers(result, preserve_names=preserve_names)
         elif step == StripLevel.NO_IMPORTS:
+            result = _materialize_imports(result)
             result = _remove_imports(result)
         elif step == StripLevel.FORMAT_NORMALIZED:
             result = _format_normalize(result)

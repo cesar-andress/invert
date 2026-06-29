@@ -1,0 +1,11 @@
+run,task_id,method,strip_level,detected_method,ambiguous,visit_trace,expected_bfs_order,expected_dfs_order,bfs_order_match,dfs_order_match,reason
+core_v2_bfs_dfs_pilot_local_001,linear_chain,bfs,raw,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,bfs,no_comments,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,bfs,renamed,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,bfs,no_imports,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,bfs,format_normalized,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,dfs,raw,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,dfs,no_comments,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,dfs,renamed,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,dfs,no_imports,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs
+core_v2_bfs_dfs_pilot_local_001,linear_chain,dfs,format_normalized,ambiguous,true,"[""A"", ""B"", ""C"", ""D""]",A;B;C;D,A;B;C;D,true,true,visit_trace_matches_bfs_and_dfs

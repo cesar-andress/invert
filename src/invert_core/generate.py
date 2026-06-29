@@ -62,7 +62,7 @@ def _write_stripped_variants(
         if level_name == "raw":
             stripped = code
         else:
-            stripped = strip_code(code, StripLevel(level_name))
+            stripped = strip_code(code, StripLevel(level_name), dimension=pilot.dimension)
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(stripped, encoding="utf-8")
 

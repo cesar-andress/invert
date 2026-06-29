@@ -11,7 +11,7 @@ from invert_core.behavioral import run_behavioral_oracle
 from invert_core.detectors.integration import detect_integration
 from invert_core.ode_tasks import OdeTask, load_ode_tasks
 from invert_core.pilot_config import CoreV2PilotConfig
-from invert_core.stripping import StripLevel, strip_code
+from invert_core.stripping import StripLevel, is_dynamic_dimension, strip_code
 
 NA = "NA"
 
@@ -79,16 +79,28 @@ def _iter_code_artifacts(run_name: str, data_root: Path) -> list[dict[str, Any]]
     return artifacts
 
 
-def _read_code(code_path: Path, stripped_path: Path, strip_level: str) -> str:
+def _read_code(
+    code_path: Path,
+    stripped_path: Path,
+    strip_level: str,
+    *,
+    dimension: str | None = None,
+) -> str:
     if strip_level == "raw" and code_path.exists():
         return code_path.read_text(encoding="utf-8")
+    if code_path.exists() and is_dynamic_dimension(dimension):
+        return strip_code(
+            code_path.read_text(encoding="utf-8"),
+            StripLevel(strip_level),
+            dimension=dimension,
+        )
     if stripped_path.exists():
         return stripped_path.read_text(encoding="utf-8")
     if code_path.exists():
         code = code_path.read_text(encoding="utf-8")
         if strip_level == "raw":
             return code
-        return strip_code(code, StripLevel(strip_level))
+        return strip_code(code, StripLevel(strip_level), dimension=dimension)
     return ""
 
 

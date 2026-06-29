@@ -275,7 +275,7 @@ def run_eager_lazy_analyze_run(
                 / art["method"]
                 / f"rep_{art['rep']}.py"
             )
-            code = _read_code(code_path, stripped_path, strip_level)
+            code = _read_code(code_path, stripped_path, strip_level, dimension="eager_vs_lazy")
             if not code.strip():
                 continue
 

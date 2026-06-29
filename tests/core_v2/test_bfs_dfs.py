@@ -24,7 +24,7 @@ from invert_core.tasks import project_root
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 BFS_DFS_CONFIG = project_root() / "configs" / "core_v2_bfs_dfs_pilot_local.yaml"
-TASKS_FILE = project_root() / "data" / "core_v2/tasks/bfs_dfs_tasks.json"
+TASKS_FILE = project_root() / "data" / "core_v2" / "tasks" / "bfs_dfs_tasks.json"
 
 STRIP_LEVELS = [
     StripLevel.RAW,
@@ -94,7 +94,7 @@ def test_survives_all_strip_levels(fixture: str, expected: str) -> None:
     task = _branching_task()
     code = (FIXTURES / fixture).read_text(encoding="utf-8")
     for level in STRIP_LEVELS:
-        stripped = strip_code(code, level)
+        stripped = strip_code(code, level, dimension="bfs_vs_dfs")
         result = detect_bfs_dfs(stripped, task)
         assert result.method == expected, level.value
 

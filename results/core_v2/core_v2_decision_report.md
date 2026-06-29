@@ -12,6 +12,7 @@ Signature classes under evaluation:
 
 ### Development runs
 
+- `core_v2_bfs_dfs_pilot_local_001`
 - `core_v2_eager_lazy_pilot_local_001`
 - `core_v2_euler_rk4_pilot_local_001`
 - `core_v2_euler_rk4_pilot_local_sweep_001`
@@ -19,6 +20,7 @@ Signature classes under evaluation:
 
 ### Frozen generalization runs
 
+- `core_v2_generalization_local_eager_lazy_001` (has `frozen_detector_metadata.json`)
 - `core_v2_generalization_local_quadrature_001` (has `frozen_detector_metadata.json`)
 
 ## 1. Which dimensions have enough evidence?
@@ -26,6 +28,7 @@ Signature classes under evaluation:
 - Class A (derivative-call signatures)
 - Class B (arithmetic weight signatures)
 - Class C (dynamic temporal / avoidable-computation signatures)
+- Class D (dynamic order process signatures)
 
 ## 2. Which models are reliable generators?
 
@@ -44,6 +47,7 @@ Signature classes under evaluation:
 ## 4. Detector / stripping failures
 
 - core_v2_eager_lazy_pilot_local_001 / Qwen3-coder:30b (eager_vs_lazy)
+- core_v2_generalization_local_eager_lazy_001 / Qwen3-coder:30b (eager_vs_lazy)
 
 ## 5. Is Class A supported?
 
@@ -59,15 +63,15 @@ Signature classes under evaluation:
 
 ## 8. Process signature vs mathematical identity (F1.3 / Class C)
 
-This result is not reducible to mathematical-coefficient identity because eager and lazy compute the same feature formulas; only timing of computation differs.
+Frozen generalization evidence for Class C is available (models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b; models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b). This result is not reducible to mathematical-coefficient identity because eager and lazy compute the same feature formulas; only timing of computation differs.
 
 ## 9. Is Class D supported?
 
-Class D not yet evaluated.
+**Yes (preliminary).** At least two models meet the preregistered valid-only survival rule for `bfs_vs_dfs`.
 
 ## 10. Order signature vs mathematical identity (F1.4 / Class D)
 
-Class D (dynamic order signatures) not yet supported by completed runs.
+This result is not reducible to mathematical identity or avoidable-computation detection because BFS and DFS visit the same reachable set and perform the same amount of node visitation; only traversal order differs.
 
 ## 11. Two mechanistically distinct classes (preregistered criterion)
 
@@ -75,7 +79,7 @@ Class D (dynamic order signatures) not yet supported by completed runs.
 
 ## 12. Next cheapest experiment
 
-Run `invert-core analyze-run --run core_v2_bfs_dfs_pilot_local_001` (or complete bfs/dfs generation first) to evaluate Class D without new API spend.
+Add the next preregistered Family 1 dimension or a minimal paid-API replication on the two best local models only.
 
 ## Dimension status snapshot
 
@@ -83,8 +87,8 @@ Run `invert-core analyze-run --run core_v2_bfs_dfs_pilot_local_001` (or complete
 |-----------|------------|------------------|-----------------|--------|
 | euler_vs_rk4 | 2 | 5 | 2 | supported_if_2plus_models_survive |
 | trapezoidal_vs_simpson | 2 | 4 | 4 | supported_if_2plus_models_survive |
-| eager_vs_lazy | 1 | 4 | 3 | supported_if_2plus_models_survive |
-| bfs_vs_dfs | 0 | 0 | 0 | insufficient_data |
+| eager_vs_lazy | 2 | 4 | 3 | supported_if_2plus_models_survive |
+| bfs_vs_dfs | 1 | 4 | 4 | supported_if_2plus_models_survive |
 
 ## Frozen generalization evidence
 
@@ -103,7 +107,13 @@ Run `invert-core analyze-run --run core_v2_bfs_dfs_pilot_local_001` (or complete
 
 ### Class C (dynamic temporal / avoidable-computation signatures) (`eager_vs_lazy`)
 
-- No frozen generalization runs analyzed for this dimension yet.
+- Frozen detector metadata includes SHA256 of `eager_lazy.py` when analyzed via `core_v2_generalization_local_eager_lazy_001`.
+- Models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b
+- Models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b
+- Valid artifact rate: 1.0000
+- Detector accuracy (raw): 1.0000
+- Detector accuracy (format_normalized): 0.8750
+- Ambiguous rate (raw): 0.0000
 
 ### Class D (dynamic order process signatures) (`bfs_vs_dfs`)
 

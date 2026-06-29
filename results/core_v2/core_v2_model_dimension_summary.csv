@@ -1,4 +1,8 @@
 run,dimension,model,generated_n,valid_n,valid_artifact_rate,valid_accuracy_raw,valid_accuracy_format_normalized,valid_ambiguous_rate_raw,valid_ambiguous_rate_format_normalized,survives_preregistered_rule,failure_reason
+core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_bfs_dfs_pilot_local_001,bfs_vs_dfs,ollama__qwen3-coder__30b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_eager_lazy_pilot_local_001,eager_vs_lazy,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_eager_lazy_pilot_local_001,eager_vs_lazy,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_eager_lazy_pilot_local_001,eager_vs_lazy,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
@@ -10,6 +14,10 @@ core_v2_euler_rk4_pilot_local_sweep_001,euler_vs_rk4,ollama__devstral__latest,18
 core_v2_euler_rk4_pilot_local_sweep_001,euler_vs_rk4,ollama__qwen2_5-coder__14b,18,18,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_euler_rk4_pilot_local_sweep_001,euler_vs_rk4,ollama__qwen2_5-coder__32b,18,18,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_euler_rk4_pilot_local_sweep_001,euler_vs_rk4,ollama__qwen3-coder__30b,18,3,0.1667,1.0000,1.0000,0.0000,0.0000,false,invalid_generation
+core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__qwen2_5-coder__32b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
+core_v2_generalization_local_eager_lazy_001,eager_vs_lazy,ollama__qwen3-coder__30b,30,30,1.0000,1.0000,0.5000,0.0000,0.5000,false,detector_stripping_failure
 core_v2_generalization_local_quadrature_001,trapezoidal_vs_simpson,ollama__devstral__latest,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_quadrature_001,trapezoidal_vs_simpson,ollama__qwen2_5-coder__14b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,
 core_v2_generalization_local_quadrature_001,trapezoidal_vs_simpson,ollama__qwen3-coder__30b,30,30,1.0000,1.0000,1.0000,0.0000,0.0000,true,

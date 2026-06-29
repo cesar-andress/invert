@@ -67,7 +67,7 @@ def verify_eager_lazy_detector(
     all_match = True
 
     for level in levels:
-        stripped = strip_code(code, level)
+        stripped = strip_code(code, level, dimension="eager_vs_lazy")
         detected = detect_eager_lazy(stripped)
         match = detected.method == expected
         results["levels"][level.value] = {
@@ -99,7 +99,7 @@ def verify_bfs_dfs_detector(
     all_match = True
 
     for level in levels:
-        stripped = strip_code(code, level)
+        stripped = strip_code(code, level, dimension="bfs_vs_dfs")
         detected = detect_bfs_dfs(stripped, task)
         match = detected.method == expected
         results["levels"][level.value] = {
