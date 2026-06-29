@@ -7,6 +7,7 @@ from typing import Any
 from invert.schemas import load_yaml
 
 from invert_core.ode_tasks import OdeTask, filter_ode_tasks, load_ode_tasks
+from invert_core.quadrature_tasks import QuadratureTask, filter_quadrature_tasks, load_quadrature_tasks
 
 
 @dataclass
@@ -58,7 +59,11 @@ class CoreV2PilotConfig:
             models_config=models_config,
         )
 
-    def load_tasks(self) -> list[OdeTask]:
+    def load_tasks(self) -> list[OdeTask | QuadratureTask]:
+        if self.dimension == "trapezoidal_vs_simpson":
+            return filter_quadrature_tasks(
+                load_quadrature_tasks(self.tasks_file), self.task_ids
+            )
         return filter_ode_tasks(load_ode_tasks(self.tasks_file), self.task_ids)
 
     @property
@@ -84,7 +89,7 @@ from invert_core.models import sanitize_model_for_storage
 @dataclass
 class CoreV2GenerationItem:
     model: str
-    task: OdeTask
+    task: OdeTask | QuadratureTask
     method: str
     rep: int
     run_name: str
@@ -128,7 +133,9 @@ class CoreV2GenerationItem:
         )
 
 
-def plan_core_v2_generations(pilot: CoreV2PilotConfig, tasks: list[OdeTask]) -> list[CoreV2GenerationItem]:
+def plan_core_v2_generations(
+    pilot: CoreV2PilotConfig, tasks: list[OdeTask | QuadratureTask]
+) -> list[CoreV2GenerationItem]:
     items: list[CoreV2GenerationItem] = []
     for model in pilot.models:
         for task in tasks:

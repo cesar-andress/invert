@@ -10,6 +10,10 @@ from invert.schemas import load_yaml
 
 from invert_core.pilot_config import CoreV2GenerationItem, CoreV2PilotConfig, plan_core_v2_generations
 from invert_core.prompts import build_generation_prompt, build_stub_code
+from invert_core.quadrature_prompts import (
+    build_quadrature_generation_prompt,
+    build_quadrature_stub_code,
+)
 from invert_core.stripping import StripLevel, strip_code
 
 
@@ -122,13 +126,24 @@ def run_core_v2_generation(
             f"via {model_name}"
         )
         print(f"Generating {label} ...", flush=True)
-        prompt = build_generation_prompt(item.task, item.method, language=pilot.language)
-        if model_name == "local_stub":
-            response = build_stub_code(item.task, item.method)
-            code = response
+        if pilot.dimension == "trapezoidal_vs_simpson":
+            prompt = build_quadrature_generation_prompt(
+                item.task, item.method, language=pilot.language
+            )
+            if model_name == "local_stub":
+                response = build_quadrature_stub_code(item.task, item.method)
+                code = response
+            else:
+                response = client.generate(prompt)
+                code = extract_code(response)
         else:
-            response = client.generate(prompt)
-            code = extract_code(response)
+            prompt = build_generation_prompt(item.task, item.method, language=pilot.language)
+            if model_name == "local_stub":
+                response = build_stub_code(item.task, item.method)
+                code = response
+            else:
+                response = client.generate(prompt)
+                code = extract_code(response)
 
         if is_ollama_model(model_name):
             temperature = float(models_cfg.get("ollama", {}).get("temperature", 0))

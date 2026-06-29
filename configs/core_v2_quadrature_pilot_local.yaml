@@ -1,0 +1,35 @@
+run:
+  name: core_v2_quadrature_pilot_local_001
+  overwrite: false
+
+family: F1
+dimension: trapezoidal_vs_simpson
+
+tasks:
+  file: data/core_v2/tasks/quadrature_tasks.json
+  include:
+    - integrate_sin_0_pi
+    - integrate_exp_0_1
+    - integrate_polynomial
+
+generation:
+  models:
+    - ollama:qwen2.5-coder:32b
+    - ollama:qwen3-coder:30b
+    - ollama:qwen2.5-coder:14b
+  repetitions: 3
+  language: python
+  pure_implementation: true
+  models_config: configs/models.yaml
+
+methods:
+  - trapezoidal
+  - simpson
+
+stripping:
+  levels:
+    - raw
+    - no_comments
+    - renamed
+    - no_imports
+    - format_normalized

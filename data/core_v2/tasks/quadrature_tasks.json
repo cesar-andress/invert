@@ -1,0 +1,37 @@
+{
+  "tasks": [
+    {
+      "task_id": "integrate_sin_0_pi",
+      "entry_function": "integrate",
+      "integrand": "sin(x)",
+      "a": 0.0,
+      "b": 3.141592653589793,
+      "n": 100,
+      "expected_value": 2.0,
+      "behavioral_tolerance": 0.05,
+      "integrand_type": "sin"
+    },
+    {
+      "task_id": "integrate_exp_0_1",
+      "entry_function": "integrate",
+      "integrand": "exp(x)",
+      "a": 0.0,
+      "b": 1.0,
+      "n": 100,
+      "expected_value": 1.718281828459045,
+      "behavioral_tolerance": 0.05,
+      "integrand_type": "exp"
+    },
+    {
+      "task_id": "integrate_polynomial",
+      "entry_function": "integrate",
+      "integrand": "x^4 - 2*x + 1",
+      "a": 0.0,
+      "b": 2.0,
+      "n": 100,
+      "expected_value": 4.4,
+      "behavioral_tolerance": 0.08,
+      "integrand_type": "polynomial"
+    }
+  ]
+}

@@ -111,6 +111,35 @@ def run_analyze_run(
     *,
     config_path: Path | None = None,
 ) -> RunAnalysisResult:
+    dimension = _resolve_dimension(run_name, project_root, config_path)
+    if dimension == "trapezoidal_vs_simpson":
+        from invert_core.analyze_quadrature_run import run_quadrature_analyze_run
+
+        return run_quadrature_analyze_run(run_name, project_root, config_path=config_path)
+
+    return _run_integration_analyze_run(run_name, project_root, config_path=config_path)
+
+
+def _resolve_dimension(
+    run_name: str,
+    project_root: Path,
+    config_path: Path | None,
+) -> str:
+    if config_path is not None:
+        return CoreV2PilotConfig.from_yaml(config_path, project_root).dimension
+    metadata_path = project_root / "results" / "core_v2" / "runs" / run_name / "metadata.json"
+    if metadata_path.exists():
+        meta = json.loads(metadata_path.read_text(encoding="utf-8"))
+        return meta.get("dimension", "euler_vs_rk4")
+    return "euler_vs_rk4"
+
+
+def _run_integration_analyze_run(
+    run_name: str,
+    project_root: Path,
+    *,
+    config_path: Path | None = None,
+) -> RunAnalysisResult:
     data_root = project_root / "data" / "core_v2"
     results_dir = project_root / "results" / "core_v2" / "runs" / run_name
     results_dir.mkdir(parents=True, exist_ok=True)

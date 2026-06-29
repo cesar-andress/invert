@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from invert_core.analyze_run import NA, run_analyze_run
+from invert_core.analyze_run import run_analyze_run
 from invert_core.generate import run_core_v2_generation
 from invert_core.pilot_config import CoreV2PilotConfig
 from invert_core.tasks import project_root

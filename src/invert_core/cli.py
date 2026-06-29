@@ -10,6 +10,7 @@ from invert_core.analyze import run_analyze_slice
 from invert_core.analyze_run import run_analyze_run
 from invert_core.check_apis import run_check_apis
 from invert_core.detectors.integration import detect_integration_file
+from invert_core.detectors.quadrature import detect_quadrature_file
 from invert_core.detectors.shuffled_control import run_shuffled_control
 from invert_core.generate import run_core_v2_generation
 from invert_core.pilot_config import CoreV2PilotConfig
@@ -77,6 +78,16 @@ def detect_integration_cmd(
 ) -> None:
     """Detect Euler vs RK4 integration method."""
     result = detect_integration_file(str(file), entry_function=entry_function)
+    typer.echo(json.dumps(result.to_dict(), indent=2))
+
+
+@app.command("detect-quadrature")
+def detect_quadrature_cmd(
+    file: Path = typer.Argument(..., help="Python file to analyze"),
+    entry_function: str | None = typer.Option(None, help="Entry function name"),
+) -> None:
+    """Detect trapezoidal vs Simpson quadrature method."""
+    result = detect_quadrature_file(str(file), entry_function=entry_function)
     typer.echo(json.dumps(result.to_dict(), indent=2))
 
 
