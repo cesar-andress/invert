@@ -7,6 +7,7 @@ Signature classes under evaluation:
 - Class B: arithmetic weight signatures (`trapezoidal_vs_simpson`)
 - Class C: dynamic temporal / avoidable-computation signatures (`eager_vs_lazy`)
 - Class D: dynamic order process signatures (`bfs_vs_dfs`)
+- Class E: dynamic inter-execution variability signatures (`deterministic_vs_randomized`)
 
 ## Run inventory
 
@@ -20,6 +21,7 @@ Signature classes under evaluation:
 
 ### Frozen generalization runs
 
+- `core_v2_generalization_local_bfs_dfs_001` (has `frozen_detector_metadata.json`)
 - `core_v2_generalization_local_eager_lazy_001` (has `frozen_detector_metadata.json`)
 - `core_v2_generalization_local_quadrature_001` (has `frozen_detector_metadata.json`)
 
@@ -71,15 +73,23 @@ Frozen generalization evidence for Class C is available (models evaluated: Devst
 
 ## 10. Order signature vs mathematical identity (F1.4 / Class D)
 
-This result is not reducible to mathematical identity or avoidable-computation detection because BFS and DFS visit the same reachable set and perform the same amount of node visitation; only traversal order differs.
+Frozen generalization evidence for Class D is available (models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b; models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b). This result is not reducible to mathematical identity or avoidable-computation detection because BFS and DFS visit the same reachable set and perform the same amount of node visitation; only traversal order differs.
 
-## 11. Two mechanistically distinct classes (preregistered criterion)
+## 11. Is Class E supported?
+
+Class E not yet evaluated.
+
+## 12. Inter-execution variability vs other signature classes (F1.5 / Class E)
+
+Class E (dynamic inter-execution variability signatures) not yet supported by completed runs.
+
+## 13. Two mechanistically distinct classes (preregistered criterion)
 
 **Close.** Two mechanistically distinct classes each have >=2 surviving models under the preregistered valid-only rule; confirm with independent replication before strong claims.
 
-## 12. Next cheapest experiment
+## 14. Next cheapest experiment
 
-Add the next preregistered Family 1 dimension or a minimal paid-API replication on the two best local models only.
+Run `invert-core analyze-run --run core_v2_deterministic_randomized_pilot_local_001` (or complete deterministic/randomized generation first) to evaluate Class E without new API spend.
 
 ## Dimension status snapshot
 
@@ -88,7 +98,8 @@ Add the next preregistered Family 1 dimension or a minimal paid-API replication 
 | euler_vs_rk4 | 2 | 5 | 2 | supported_if_2plus_models_survive |
 | trapezoidal_vs_simpson | 2 | 4 | 4 | supported_if_2plus_models_survive |
 | eager_vs_lazy | 2 | 4 | 3 | supported_if_2plus_models_survive |
-| bfs_vs_dfs | 1 | 4 | 4 | supported_if_2plus_models_survive |
+| bfs_vs_dfs | 2 | 4 | 4 | supported_if_2plus_models_survive |
+| deterministic_vs_randomized | 0 | 0 | 0 | insufficient_data |
 
 ## Frozen generalization evidence
 
@@ -107,7 +118,7 @@ Add the next preregistered Family 1 dimension or a minimal paid-API replication 
 
 ### Class C (dynamic temporal / avoidable-computation signatures) (`eager_vs_lazy`)
 
-- Frozen detector metadata includes SHA256 of `eager_lazy.py` when analyzed via `core_v2_generalization_local_eager_lazy_001`.
+- Frozen detector metadata includes SHA256 of `eager_lazy.py` and `stripping.py` when analyzed via `core_v2_generalization_local_eager_lazy_001`.
 - Models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b
 - Models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b
 - Valid artifact rate: 1.0000
@@ -116,6 +127,16 @@ Add the next preregistered Family 1 dimension or a minimal paid-API replication 
 - Ambiguous rate (raw): 0.0000
 
 ### Class D (dynamic order process signatures) (`bfs_vs_dfs`)
+
+- Frozen detector metadata includes SHA256 of `bfs_dfs.py` and `stripping.py` when analyzed via `core_v2_generalization_local_bfs_dfs_001`.
+- Models evaluated: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b
+- Models survived: Devstral:latest, Qwen2.5-coder:14b, Qwen2.5-coder:32b, Qwen3-coder:30b
+- Valid artifact rate: 1.0000
+- Detector accuracy (raw): 1.0000
+- Detector accuracy (format_normalized): 1.0000
+- Ambiguous rate (raw): 0.0000
+
+### Class E (dynamic inter-execution variability signatures) (`deterministic_vs_randomized`)
 
 - No frozen generalization runs analyzed for this dimension yet.
 

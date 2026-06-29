@@ -10,6 +10,7 @@ from invert_core.analyze import run_analyze_slice
 from invert_core.analyze_run import run_analyze_run
 from invert_core.check_apis import run_check_apis
 from invert_core.detectors.bfs_dfs import detect_bfs_dfs_file
+from invert_core.detectors.deterministic_randomized import detect_deterministic_randomized_file
 from invert_core.detectors.eager_lazy import detect_eager_lazy_file
 from invert_core.detectors.integration import detect_integration_file
 from invert_core.detectors.quadrature import detect_quadrature_file
@@ -123,6 +124,34 @@ def detect_bfs_dfs_cmd(
     typer.echo(json.dumps(result.to_dict(), indent=2))
 
 
+@app.command("detect-deterministic-randomized")
+def detect_deterministic_randomized_cmd(
+    file: Path = typer.Argument(..., help="Python file to analyze"),
+    task_id: str = typer.Option(
+        ...,
+        "--task-id",
+        help="Task ID from deterministic_randomized_tasks.json",
+    ),
+    mode: str = typer.Option(
+        "primary",
+        "--mode",
+        help="primary or fixed_seed_control",
+    ),
+    runs: int = typer.Option(5, "--runs", help="Repeated executions per detection"),
+) -> None:
+    """Detect deterministic vs randomized inter-execution variability signature."""
+    if mode not in ("primary", "fixed_seed_control"):
+        typer.echo("mode must be primary or fixed_seed_control", err=True)
+        raise typer.Exit(1)
+    result = detect_deterministic_randomized_file(
+        str(file),
+        task_id=task_id,
+        mode=mode,  # type: ignore[arg-type]
+        run_count=runs,
+    )
+    typer.echo(json.dumps(result.to_dict(), indent=2))
+
+
 @app.command("strip")
 def strip_cmd(
     file: Path = typer.Argument(..., help="Python file to strip"),
@@ -192,6 +221,9 @@ def analyze_run_cmd(
     typer.echo(f"Wrote {result.summary_path}")
     typer.echo(f"Wrote {result.valid_summary_path}")
     typer.echo(f"Wrote {result.report_path}")
+    fixed_seed_path = result.stats.get("fixed_seed_control_path")
+    if fixed_seed_path:
+        typer.echo(f"Wrote {fixed_seed_path}")
 
 
 @app.command("summarize-core-v2")

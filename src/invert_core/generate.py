@@ -12,6 +12,10 @@ from invert_core.bfs_dfs_prompts import (
     build_bfs_dfs_generation_prompt,
     build_bfs_dfs_stub_code,
 )
+from invert_core.randomized_prompts import (
+    build_deterministic_randomized_generation_prompt,
+    build_deterministic_randomized_stub_code,
+)
 from invert_core.eager_lazy_prompts import (
     build_eager_lazy_generation_prompt,
     build_eager_lazy_stub_code,
@@ -160,6 +164,16 @@ def run_core_v2_generation(
             )
             if model_name == "local_stub":
                 response = build_bfs_dfs_stub_code(item.task, item.method)
+                code = response
+            else:
+                response = client.generate(prompt)
+                code = extract_code(response)
+        elif pilot.dimension == "deterministic_vs_randomized":
+            prompt = build_deterministic_randomized_generation_prompt(
+                item.task, item.method, language=pilot.language
+            )
+            if model_name == "local_stub":
+                response = build_deterministic_randomized_stub_code(item.task, item.method)
                 code = response
             else:
                 response = client.generate(prompt)

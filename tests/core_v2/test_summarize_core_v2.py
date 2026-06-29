@@ -181,7 +181,7 @@ def test_summarize_core_v2_real_runs_if_present() -> None:
 
     result = run_summarize_core_v2(root)
     assert result.model_rows
-    assert len(result.dimension_rows) == 4
+    assert len(result.dimension_rows) == 5
 
     for path in (
         result.model_summary_path,

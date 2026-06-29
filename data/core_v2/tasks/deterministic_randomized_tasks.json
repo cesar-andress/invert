@@ -1,0 +1,23 @@
+{
+  "tasks": [
+    {
+      "task_id": "letters_8",
+      "items": ["A", "B", "C", "D", "E", "F", "G", "H"],
+      "control_family": "primary"
+    },
+    {
+      "task_id": "numbers_10",
+      "items": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "control_family": "primary"
+    },
+    {
+      "task_id": "mixed_tokens",
+      "items": ["red", "blue", "green", "yellow", "black", "white", "orange", "purple"],
+      "control_family": "primary"
+    }
+  ],
+  "fixed_seed_control": {
+    "seed": 12345,
+    "description": "Repeated executions with identical seed; randomized order variability should collapse."
+  }
+}

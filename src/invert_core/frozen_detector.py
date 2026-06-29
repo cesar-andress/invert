@@ -11,11 +11,18 @@ DETECTOR_REL_PATHS = {
     "quadrature.py": Path("src/invert_core/detectors/quadrature.py"),
     "eager_lazy.py": Path("src/invert_core/detectors/eager_lazy.py"),
     "bfs_dfs.py": Path("src/invert_core/detectors/bfs_dfs.py"),
+    "deterministic_randomized.py": Path(
+        "src/invert_core/detectors/deterministic_randomized.py"
+    ),
 }
 
 STRIPPING_REL_PATH = Path("src/invert_core/stripping.py")
 
-DYNAMIC_DIMENSIONS = frozenset({"eager_vs_lazy", "bfs_vs_dfs"})
+DYNAMIC_DIMENSIONS = frozenset({
+    "eager_vs_lazy",
+    "bfs_vs_dfs",
+    "deterministic_vs_randomized",
+})
 
 FROZEN_NOTE = "detectors frozen before this generalization run"
 
@@ -45,12 +52,15 @@ def _git_commit(project_root: Path) -> str:
 
 
 def detector_file_hashes(project_root: Path, *, dimension: str | None = None) -> dict[str, str]:
-    hashes = {
-        name: _file_sha256(project_root / rel_path)
-        for name, rel_path in DETECTOR_REL_PATHS.items()
-    }
+    hashes: dict[str, str] = {}
+    for name, rel_path in DETECTOR_REL_PATHS.items():
+        path = project_root / rel_path
+        if path.exists():
+            hashes[name] = _file_sha256(path)
     if dimension in DYNAMIC_DIMENSIONS:
-        hashes["stripping.py"] = _file_sha256(project_root / STRIPPING_REL_PATH)
+        stripping_path = project_root / STRIPPING_REL_PATH
+        if stripping_path.exists():
+            hashes["stripping.py"] = _file_sha256(stripping_path)
     return hashes
 
 

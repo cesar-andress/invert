@@ -137,6 +137,14 @@ def run_analyze_run(
         from invert_core.analyze_bfs_dfs_run import run_bfs_dfs_analyze_run
 
         result = run_bfs_dfs_analyze_run(run_name, project_root, config_path=config_path)
+    elif dimension == "deterministic_vs_randomized":
+        from invert_core.analyze_deterministic_randomized_run import (
+            run_deterministic_randomized_analyze_run,
+        )
+
+        result = run_deterministic_randomized_analyze_run(
+            run_name, project_root, config_path=config_path
+        )
     else:
         result = _run_integration_analyze_run(run_name, project_root, config_path=config_path)
 

@@ -38,6 +38,11 @@ DIMENSION_ARTIFACTS: dict[str, dict[str, str]] = {
         "summary": "bfs_dfs_summary.csv",
         "report": "bfs_dfs_report.md",
     },
+    "deterministic_vs_randomized": {
+        "valid_only_summary": "deterministic_randomized_valid_only_summary.csv",
+        "summary": "deterministic_randomized_summary.csv",
+        "report": "deterministic_randomized_report.md",
+    },
 }
 
 CLASS_LABELS: dict[str, str] = {
@@ -45,6 +50,9 @@ CLASS_LABELS: dict[str, str] = {
     "trapezoidal_vs_simpson": "Class B (arithmetic weight signatures)",
     "eager_vs_lazy": "Class C (dynamic temporal / avoidable-computation signatures)",
     "bfs_vs_dfs": "Class D (dynamic order process signatures)",
+    "deterministic_vs_randomized": (
+        "Class E (dynamic inter-execution variability signatures)"
+    ),
 }
 
 MODEL_SUMMARY_FIELDS = [
@@ -137,7 +145,7 @@ def _rows_for_model_strip(
 
 
 def _min_valid_n_for_dimension(dimension: str) -> int:
-    if dimension in ("eager_vs_lazy", "bfs_vs_dfs"):
+    if dimension in ("eager_vs_lazy", "bfs_vs_dfs", "deterministic_vs_randomized"):
         return F13_MIN_VALID_N
     return F11_MIN_VALID_N
 
@@ -329,6 +337,8 @@ def _class_support_text(status: str, dimension: str, has_data: bool) -> str:
             return "Class C not yet evaluated."
         if dimension == "bfs_vs_dfs":
             return "Class D not yet evaluated."
+        if dimension == "deterministic_vs_randomized":
+            return "Class E not yet evaluated."
         return "Insufficient completed runs to evaluate."
     if status == "supported_if_2plus_models_survive":
         return (
@@ -357,7 +367,14 @@ def _next_cheapest_experiment(
     quad = by_dim.get("trapezoidal_vs_simpson")
     eager_lazy = by_dim.get("eager_vs_lazy")
     bfs_dfs = by_dim.get("bfs_vs_dfs")
+    det_rand = by_dim.get("deterministic_vs_randomized")
 
+    if det_rand and det_rand["status"] == "insufficient_data":
+        return (
+            "Run `invert-core analyze-run --run core_v2_deterministic_randomized_pilot_local_001` "
+            "(or complete deterministic/randomized generation first) to evaluate Class E "
+            "without new API spend."
+        )
     if bfs_dfs and bfs_dfs["status"] == "insufficient_data":
         return (
             "Run `invert-core analyze-run --run core_v2_bfs_dfs_pilot_local_001` "
@@ -494,6 +511,7 @@ def _write_decision_report(
     quad = by_dim.get("trapezoidal_vs_simpson")
     eager_lazy = by_dim.get("eager_vs_lazy")
     bfs_dfs = by_dim.get("bfs_vs_dfs")
+    det_rand = by_dim.get("deterministic_vs_randomized")
 
     enough_evidence = [
         CLASS_LABELS[d]
@@ -546,6 +564,11 @@ def _write_decision_report(
         "bfs_vs_dfs",
         bool(bfs_dfs and _parse_int(bfs_dfs["runs_found"]) > 0),
     )
+    class_e = _class_support_text(
+        det_rand["status"] if det_rand else "insufficient_data",
+        "deterministic_vs_randomized",
+        bool(det_rand and _parse_int(det_rand["runs_found"]) > 0),
+    )
 
     class_c_passes = (
         eager_lazy is not None
@@ -597,6 +620,31 @@ def _write_decision_report(
             "Class D (dynamic order signatures) not yet supported by completed runs."
         )
 
+    class_e_passes = (
+        det_rand is not None
+        and det_rand["status"]
+        in ("supported_if_2plus_models_survive", "promising_if_1_model_survives")
+        and _parse_int(det_rand["runs_found"]) > 0
+    )
+    frozen_e = _aggregate_frozen_dimension_evidence("deterministic_vs_randomized", model_rows)
+    variability_signature_text = (
+        "This result is not reducible to mathematical identity, avoidable computation, "
+        "or traversal order because the same input and same behavioral output produce "
+        "stable versus variable traces across repeated executions."
+    )
+    if frozen_e["has_data"]:
+        variability_signature_text = (
+            "Frozen generalization evidence for Class E is available "
+            f"(models evaluated: {', '.join(frozen_e['models_evaluated']) or 'none'}; "
+            f"models survived: {', '.join(frozen_e['models_survived']) or 'none'}). "
+            + variability_signature_text
+        )
+    elif not class_e_passes:
+        variability_signature_text = (
+            "Class E (dynamic inter-execution variability signatures) not yet supported "
+            "by completed runs."
+        )
+
     classes_with_strong = sum(
         1
         for row in dimension_rows
@@ -641,6 +689,7 @@ def _write_decision_report(
         "- Class B: arithmetic weight signatures (`trapezoidal_vs_simpson`)",
         "- Class C: dynamic temporal / avoidable-computation signatures (`eager_vs_lazy`)",
         "- Class D: dynamic order process signatures (`bfs_vs_dfs`)",
+        "- Class E: dynamic inter-execution variability signatures (`deterministic_vs_randomized`)",
         "",
         "## Run inventory",
         "",
@@ -715,11 +764,19 @@ def _write_decision_report(
             "",
             order_signature_text,
             "",
-            "## 11. Two mechanistically distinct classes (preregistered criterion)",
+            "## 11. Is Class E supported?",
+            "",
+            class_e if det_rand and _parse_int(det_rand["runs_found"]) > 0 else "Class E not yet evaluated.",
+            "",
+            "## 12. Inter-execution variability vs other signature classes (F1.5 / Class E)",
+            "",
+            variability_signature_text,
+            "",
+            "## 13. Two mechanistically distinct classes (preregistered criterion)",
             "",
             two_class_text,
             "",
-            "## 12. Next cheapest experiment",
+            "## 14. Next cheapest experiment",
             "",
             _next_cheapest_experiment(dimension_rows, model_rows),
             "",
@@ -753,6 +810,11 @@ def _write_decision_report(
             lines.append(
                 "- Frozen detector metadata includes SHA256 of `bfs_dfs.py` and `stripping.py` "
                 "when analyzed via `core_v2_generalization_local_bfs_dfs_001`."
+            )
+        if dimension == "deterministic_vs_randomized":
+            lines.append(
+                "- Frozen detector metadata includes SHA256 of `deterministic_randomized.py` "
+                "and `stripping.py` when analyzed via a frozen generalization run for Class E."
             )
         lines.append(
             f"- Models evaluated: {', '.join(evidence['models_evaluated']) or 'none'}"

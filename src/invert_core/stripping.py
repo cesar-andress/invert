@@ -67,6 +67,11 @@ PUBLIC_API_PRESERVE: dict[str, dict[str, list[str]]] = {
         "methods": ["get_feature_a", "get_feature_b", "get_feature_c"],
         "constructor_args": ["x", "feature_a_fn", "feature_b_fn", "feature_c_fn"],
     },
+    "deterministic_vs_randomized": {
+        "classes": ["ItemProcessor"],
+        "methods": ["process_all"],
+        "constructor_args": ["items", "process_fn", "seed"],
+    },
 }
 
 
