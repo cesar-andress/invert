@@ -15,6 +15,7 @@ from invert_core.detectors.shuffled_control import run_shuffled_control
 from invert_core.generate import run_core_v2_generation
 from invert_core.pilot_config import CoreV2PilotConfig
 from invert_core.stripping import StripLevel, strip_file_with_evidence
+from invert_core.summarize_core_v2 import run_summarize_core_v2
 from invert_core.tasks import fixtures_dir, project_root, results_dir
 from invert_core.verify import verify_fixture_dir
 
@@ -160,6 +161,16 @@ def analyze_run_cmd(
     typer.echo(f"Wrote {result.summary_path}")
     typer.echo(f"Wrote {result.valid_summary_path}")
     typer.echo(f"Wrote {result.report_path}")
+
+
+@app.command("summarize-core-v2")
+def summarize_core_v2_cmd() -> None:
+    """Aggregate completed Core v2 runs into cross-run decision dashboards."""
+    root = project_root()
+    result = run_summarize_core_v2(root)
+    typer.echo(f"Wrote {result.model_summary_path}")
+    typer.echo(f"Wrote {result.dimension_summary_path}")
+    typer.echo(f"Wrote {result.decision_report_path}")
 
 
 def main() -> None:
