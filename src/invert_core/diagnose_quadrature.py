@@ -10,7 +10,7 @@ from typing import Any
 
 from invert_core.analyze_quadrature_run import _quadrature_entry
 from invert_core.analyze_run import _iter_code_artifacts, _read_code, _write_csv
-from invert_core.detectors.quadrature import detect_quadrature
+from invert_core.detectors.quadrature import detect_quadrature, diagnose_trapezoidal_pattern_family
 
 FAILURE_CLASSES = [
     "detector_too_strict",
@@ -39,6 +39,7 @@ DIAGNOSIS_FIELDS = [
     "has_init_total_fa_plus_fb",
     "has_divide_by_2_at_end",
     "has_n_plus_1_points",
+    "pattern_family",
     "failure_classification",
     "classification_notes",
     "code_excerpt",
@@ -402,6 +403,13 @@ def run_diagnose_quadrature(run_name: str, project_root: Path) -> DiagnoseQuadra
             code=code,
             entry_function=entry_function,
         )
+        if result.method == "trapezoidal" and row.get("detector_correct") == "false":
+            failure_class = "detector_too_strict"
+            notes = (
+                "Historical run marked incorrect/ambiguous; live detector now classifies trapezoidal."
+            )
+
+        pattern_family = diagnose_trapezoidal_pattern_family(code, entry_function=entry_function)
 
         diagnosis_rows.append(
             {
@@ -423,6 +431,7 @@ def run_diagnose_quadrature(run_name: str, project_root: Path) -> DiagnoseQuadra
                 "has_init_total_fa_plus_fb": _bool_str(patterns["has_init_total_fa_plus_fb"]),
                 "has_divide_by_2_at_end": _bool_str(patterns["has_divide_by_2_at_end"]),
                 "has_n_plus_1_points": _bool_str(patterns["has_n_plus_1_points"]),
+                "pattern_family": pattern_family,
                 "failure_classification": failure_class,
                 "classification_notes": notes,
                 "code_excerpt": _code_excerpt(code, entry_function),
