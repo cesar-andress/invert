@@ -13,14 +13,30 @@ from invert_core.ode_tasks import OdeTask, load_ode_tasks
 from invert_core.pilot_config import CoreV2PilotConfig
 from invert_core.stripping import StripLevel, strip_code
 
+NA = "NA"
+
+MODEL_DISPLAY_NAMES = {
+    "ollama__qwen2_5-coder__32b": "Qwen2.5-coder:32b",
+    "ollama__deepseek-coder-v2__lite": "DeepSeek-coder-v2:lite",
+    "openai": "openai",
+    "anthropic": "anthropic",
+    "local_stub": "local_stub",
+}
+
+F11_MIN_VALID_N = 12
+F11_MIN_ACCURACY = 0.90
+F11_MAX_AMBIGUOUS = 0.10
+
 
 @dataclass
 class RunAnalysisResult:
     detection_rows: list[dict[str, Any]] = field(default_factory=list)
     summary_rows: list[dict[str, Any]] = field(default_factory=list)
+    valid_summary_rows: list[dict[str, Any]] = field(default_factory=list)
     report_path: Path | None = None
     detection_path: Path | None = None
     summary_path: Path | None = None
+    valid_summary_path: Path | None = None
     stats: dict[str, Any] = field(default_factory=dict)
 
 
@@ -72,6 +88,20 @@ def _read_code(code_path: Path, stripped_path: Path, strip_level: str) -> str:
     return ""
 
 
+def _model_display_name(storage_model: str) -> str:
+    return MODEL_DISPLAY_NAMES.get(storage_model, storage_model)
+
+
+def _bool_str(value: bool) -> str:
+    return "true" if value else "false"
+
+
+def _rate(numerator: int, denominator: int) -> str:
+    if denominator == 0:
+        return NA
+    return f"{numerator / denominator:.4f}"
+
+
 def run_analyze_run(
     run_name: str,
     project_root: Path,
@@ -117,6 +147,10 @@ def run_analyze_run(
                 behavioral_cache[cache_key] = None
         behavioral = behavioral_cache[cache_key]
 
+        parsed = behavioral.parsed if behavioral else False
+        behavioral_pass = behavioral.behavioral_pass if behavioral else False
+        valid_artifact = parsed and behavioral_pass
+
         for strip_level in strip_levels:
             stripped_path = (
                 data_root
@@ -135,26 +169,22 @@ def run_analyze_run(
             result = detect_integration(code, entry_function=_integration_entry(strip_level))
             predicted = result.method
             true_method = art["method"]
-            correct = predicted == true_method
-            parsed = behavioral.parsed if behavioral else False
-            behavioral_pass = behavioral.behavioral_pass if behavioral else False
-            manipulation_success = behavioral.manipulation_success if behavioral else False
+            detector_correct = predicted == true_method
 
             detection_rows.append(
                 {
-                    "run_name": run_name,
+                    "run": run_name,
                     "model": art["model"],
                     "task_id": art["task_id"],
                     "method": true_method,
                     "rep": art["rep"],
                     "strip_level": strip_level,
-                    "predicted_label": predicted,
-                    "true_label": true_method,
-                    "correct": str(correct).lower(),
-                    "parsed": str(parsed).lower(),
-                    "behavioral_pass": str(behavioral_pass).lower(),
-                    "manipulation_success": str(manipulation_success).lower(),
-                    "ambiguous": str(predicted == "ambiguous").lower(),
+                    "parsed": _bool_str(parsed),
+                    "behavioral_pass": _bool_str(behavioral_pass),
+                    "valid_artifact": _bool_str(valid_artifact),
+                    "detected_method": predicted,
+                    "detector_correct": _bool_str(detector_correct),
+                    "ambiguous": _bool_str(predicted == "ambiguous"),
                     "derivative_calls_per_step": result.evidence.get(
                         "derivative_calls_per_step", ""
                     ),
@@ -164,58 +194,80 @@ def run_analyze_run(
                 }
             )
 
-    summary_rows = _build_summary(detection_rows)
+    summary_rows = _build_all_generated_summary(detection_rows)
+    valid_summary_rows = _build_valid_only_summary(detection_rows)
     stats = _compute_stats(detection_rows, artifacts)
 
     detection_path = results_dir / "integration_detection.csv"
     summary_path = results_dir / "integration_summary.csv"
+    valid_summary_path = results_dir / "integration_valid_only_summary.csv"
     report_path = results_dir / "integration_report.md"
 
     _write_csv(detection_path, _detection_fields(), detection_rows)
-    _write_csv(summary_path, _summary_fields(), summary_rows)
-    _write_report(report_path, run_name, stats, summary_rows, detection_rows)
+    _write_csv(summary_path, _all_generated_summary_fields(), summary_rows)
+    _write_csv(valid_summary_path, _valid_only_summary_fields(), valid_summary_rows)
+    _write_report(
+        report_path,
+        run_name,
+        stats,
+        summary_rows,
+        valid_summary_rows,
+        detection_rows,
+    )
 
     return RunAnalysisResult(
         detection_rows=detection_rows,
         summary_rows=summary_rows,
+        valid_summary_rows=valid_summary_rows,
         report_path=report_path,
         detection_path=detection_path,
         summary_path=summary_path,
+        valid_summary_path=valid_summary_path,
         stats=stats,
     )
 
 
 def _detection_fields() -> list[str]:
     return [
-        "run_name",
+        "run",
         "model",
         "task_id",
         "method",
         "rep",
         "strip_level",
-        "predicted_label",
-        "true_label",
-        "correct",
         "parsed",
         "behavioral_pass",
-        "manipulation_success",
+        "valid_artifact",
+        "detected_method",
+        "detector_correct",
         "ambiguous",
         "derivative_calls_per_step",
         "rk4_weighted_combination",
     ]
 
 
-def _summary_fields() -> list[str]:
+def _all_generated_summary_fields() -> list[str]:
     return [
         "model",
         "task_id",
         "method",
         "strip_level",
-        "n",
-        "detector_accuracy",
-        "manipulation_success_rate",
-        "ambiguous_rate",
-        "behavioral_pass_rate",
+        "all_generated_n",
+        "all_generated_detector_accuracy",
+        "all_generated_behavioral_pass_rate",
+        "all_generated_ambiguous_rate",
+    ]
+
+
+def _valid_only_summary_fields() -> list[str]:
+    return [
+        "model",
+        "task_id",
+        "method",
+        "strip_level",
+        "valid_n",
+        "valid_detector_accuracy",
+        "valid_ambiguous_rate",
     ]
 
 
@@ -228,7 +280,7 @@ def _write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) ->
             writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
-def _build_summary(detection_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _build_all_generated_summary(detection_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     groups: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
     for row in detection_rows:
         key = (row["model"], row["task_id"], row["method"], row["strip_level"])
@@ -237,56 +289,153 @@ def _build_summary(detection_rows: list[dict[str, Any]]) -> list[dict[str, Any]]
     summary: list[dict[str, Any]] = []
     for (model, task_id, method, strip_level), rows in sorted(groups.items()):
         n = len(rows)
-        acc = sum(1 for r in rows if r["correct"] == "true") / n if n else 0.0
-        manip = sum(1 for r in rows if r["manipulation_success"] == "true") / n if n else 0.0
-        amb = sum(1 for r in rows if r["ambiguous"] == "true") / n if n else 0.0
-        beh = sum(1 for r in rows if r["behavioral_pass"] == "true") / n if n else 0.0
         summary.append(
             {
                 "model": model,
                 "task_id": task_id,
                 "method": method,
                 "strip_level": strip_level,
-                "n": str(n),
-                "detector_accuracy": f"{acc:.4f}",
-                "manipulation_success_rate": f"{manip:.4f}",
-                "ambiguous_rate": f"{amb:.4f}",
-                "behavioral_pass_rate": f"{beh:.4f}",
+                "all_generated_n": str(n),
+                "all_generated_detector_accuracy": _rate(
+                    sum(1 for r in rows if r["detector_correct"] == "true"), n
+                ),
+                "all_generated_behavioral_pass_rate": _rate(
+                    sum(1 for r in rows if r["behavioral_pass"] == "true"), n
+                ),
+                "all_generated_ambiguous_rate": _rate(
+                    sum(1 for r in rows if r["ambiguous"] == "true"), n
+                ),
             }
         )
     return summary
+
+
+def _build_valid_only_summary(detection_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    groups: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    for row in detection_rows:
+        if row["valid_artifact"] != "true":
+            continue
+        key = (row["model"], row["task_id"], row["method"], row["strip_level"])
+        groups[key].append(row)
+
+    all_keys = {
+        (row["model"], row["task_id"], row["method"], row["strip_level"])
+        for row in detection_rows
+    }
+
+    summary: list[dict[str, Any]] = []
+    for key in sorted(all_keys):
+        model, task_id, method, strip_level = key
+        rows = groups.get(key, [])
+        valid_n = len(rows)
+        summary.append(
+            {
+                "model": model,
+                "task_id": task_id,
+                "method": method,
+                "strip_level": strip_level,
+                "valid_n": str(valid_n),
+                "valid_detector_accuracy": _rate(
+                    sum(1 for r in rows if r["detector_correct"] == "true"), valid_n
+                ),
+                "valid_ambiguous_rate": _rate(
+                    sum(1 for r in rows if r["ambiguous"] == "true"), valid_n
+                ),
+            }
+        )
+    return summary
+
+
+def _raw_artifact_rows(detection_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [r for r in detection_rows if r["strip_level"] == "raw"]
 
 
 def _compute_stats(
     detection_rows: list[dict[str, Any]],
     artifacts: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    raw_rows = [r for r in detection_rows if r["strip_level"] == "raw"]
-    parsed = sum(1 for r in raw_rows if r["parsed"] == "true")
-    euler = sum(1 for r in raw_rows if r["predicted_label"] == "euler")
-    rk4 = sum(1 for r in raw_rows if r["predicted_label"] == "rk4")
-    ambiguous = sum(1 for r in raw_rows if r["predicted_label"] == "ambiguous")
+    raw_rows = _raw_artifact_rows(detection_rows)
+    n_generated = len(raw_rows)
+    n_parsed = sum(1 for r in raw_rows if r["parsed"] == "true")
+    n_valid = sum(1 for r in raw_rows if r["valid_artifact"] == "true")
+    n_invalid = n_generated - n_valid
+
+    invalid_by_group: dict[str, int] = defaultdict(int)
+    for row in raw_rows:
+        if row["valid_artifact"] != "true":
+            key = f"{row['model']}/{row['task_id']}/{row['method']}"
+            invalid_by_group[key] += 1
+
+    models = sorted({r["model"] for r in raw_rows})
+    model_f11: dict[str, dict[str, Any]] = {}
+    for model in models:
+        model_f11[model] = _f11_survival_for_model(detection_rows, model)
+
     return {
         "n_artifacts": len(artifacts),
-        "n_detection_rows": len(detection_rows),
-        "n_parsed": parsed,
-        "n_euler": euler,
-        "n_rk4": rk4,
-        "n_ambiguous": ambiguous,
-        "raw_detector_accuracy": (
-            sum(1 for r in raw_rows if r["correct"] == "true") / len(raw_rows)
-            if raw_rows
-            else 0.0
-        ),
+        "n_generated_raw": n_generated,
+        "n_parsed": n_parsed,
+        "n_valid": n_valid,
+        "n_invalid": n_invalid,
+        "invalid_by_group": dict(sorted(invalid_by_group.items())),
+        "model_f11": model_f11,
     }
 
 
-def _strip_level_accuracy(summary_rows: list[dict[str, Any]], strip_level: str) -> float | None:
-    rows = [r for r in summary_rows if r["strip_level"] == strip_level]
-    if not rows:
-        return None
-    accs = [float(r["detector_accuracy"]) for r in rows]
-    return sum(accs) / len(accs)
+def _aggregate_model_strip_valid(
+    detection_rows: list[dict[str, Any]],
+    model: str,
+    strip_level: str,
+) -> dict[str, Any]:
+    rows = [
+        r
+        for r in detection_rows
+        if r["model"] == model
+        and r["strip_level"] == strip_level
+        and r["valid_artifact"] == "true"
+    ]
+    valid_n = len(rows)
+    if valid_n == 0:
+        return {
+            "valid_n": 0,
+            "valid_detector_accuracy": None,
+            "valid_ambiguous_rate": None,
+        }
+    correct = sum(1 for r in rows if r["detector_correct"] == "true")
+    ambiguous = sum(1 for r in rows if r["ambiguous"] == "true")
+    return {
+        "valid_n": valid_n,
+        "valid_detector_accuracy": correct / valid_n,
+        "valid_ambiguous_rate": ambiguous / valid_n,
+    }
+
+
+def _f11_survival_for_model(detection_rows: list[dict[str, Any]], model: str) -> dict[str, Any]:
+    raw = _aggregate_model_strip_valid(detection_rows, model, "raw")
+    fmt = _aggregate_model_strip_valid(detection_rows, model, "format_normalized")
+    valid_n = raw["valid_n"]
+    survives = (
+        valid_n >= F11_MIN_VALID_N
+        and raw["valid_detector_accuracy"] is not None
+        and raw["valid_detector_accuracy"] >= F11_MIN_ACCURACY
+        and fmt["valid_detector_accuracy"] is not None
+        and fmt["valid_detector_accuracy"] >= F11_MIN_ACCURACY
+        and raw["valid_ambiguous_rate"] is not None
+        and raw["valid_ambiguous_rate"] <= F11_MAX_AMBIGUOUS
+    )
+    return {
+        "valid_n_raw": valid_n,
+        "raw_accuracy": raw["valid_detector_accuracy"],
+        "format_normalized_accuracy": fmt["valid_detector_accuracy"],
+        "raw_ambiguous_rate": raw["valid_ambiguous_rate"],
+        "survives": survives,
+    }
+
+
+def _format_rate(value: float | None) -> str:
+    if value is None:
+        return NA
+    return f"{value:.4f}"
 
 
 def _write_report(
@@ -294,103 +443,153 @@ def _write_report(
     run_name: str,
     stats: dict[str, Any],
     summary_rows: list[dict[str, Any]],
+    valid_summary_rows: list[dict[str, Any]],
     detection_rows: list[dict[str, Any]],
 ) -> None:
-    strip_levels = sorted({r["strip_level"] for r in summary_rows})
-    level_lines: list[str] = []
-    destroy_signal: list[str] = []
-    for level in strip_levels:
-        acc = _strip_level_accuracy(summary_rows, level)
-        if acc is None:
-            continue
-        level_lines.append(f"- `{level}`: mean detector accuracy = {acc:.3f}")
-        if acc < 0.90 and level != "raw":
-            destroy_signal.append(level)
+    raw_valid_by_model: dict[str, dict[str, Any]] = {}
+    fmt_valid_by_model: dict[str, dict[str, Any]] = {}
+    models = sorted({r["model"] for r in detection_rows})
+    for model in models:
+        raw_valid_by_model[model] = _aggregate_model_strip_valid(
+            detection_rows, model, "raw"
+        )
+        fmt_valid_by_model[model] = _aggregate_model_strip_valid(
+            detection_rows, model, "format_normalized"
+        )
 
-    failures: dict[str, list[str]] = defaultdict(list)
-    for row in detection_rows:
-        if row["strip_level"] != "raw":
-            continue
-        if row["manipulation_success"] != "true" or row["correct"] != "true":
-            key = f"{row['model']}/{row['task_id']}/{row['method']}"
-            detail = []
-            if row["manipulation_success"] != "true":
-                detail.append("behavioral_fail")
-            if row["correct"] != "true":
-                detail.append(f"detector={row['predicted_label']}")
-            failures[key].append(f"rep_{row['rep']}({','.join(detail)})")
+    qwen_key = "ollama__qwen2_5-coder__32b"
+    deepseek_key = "ollama__deepseek-coder-v2__lite"
+    qwen_f11 = stats["model_f11"].get(qwen_key, {})
+    deepseek_f11 = stats["model_f11"].get(deepseek_key, {})
 
-    n = stats["n_artifacts"]
-    justify = (
-        "**Not yet.** Run the full 36-artifact pilot and confirm ≥0.90 detector accuracy "
-        "across strip levels with acceptable manipulation success before adding quadrature."
-        if n < 36
-        else "**Maybe.** Review per-task/model failures below; quadrature should wait until "
-        "F1.1 signal is stable on generated artifacts."
+    def _f11_answer(model_key: str, f11: dict[str, Any]) -> str:
+        if model_key not in models:
+            return f"**No data** for {_model_display_name(model_key)} in this run."
+        if f11.get("survives"):
+            return (
+                f"**Yes.** {_model_display_name(model_key)} meets preregistered F1.1 thresholds "
+                f"on valid artifacts (valid_n={f11.get('valid_n_raw')}, "
+                f"raw accuracy={_format_rate(f11.get('raw_accuracy'))}, "
+                f"format_normalized accuracy={_format_rate(f11.get('format_normalized_accuracy'))}, "
+                f"ambiguous rate={_format_rate(f11.get('raw_ambiguous_rate'))})."
+            )
+        return (
+            f"**No / not yet.** {_model_display_name(model_key)} does not meet all F1.1 thresholds "
+            f"(valid_n={f11.get('valid_n_raw', 0)}, "
+            f"raw accuracy={_format_rate(f11.get('raw_accuracy'))}, "
+            f"format_normalized accuracy={_format_rate(f11.get('format_normalized_accuracy'))}, "
+            f"ambiguous rate={_format_rate(f11.get('raw_ambiguous_rate'))})."
+        )
+
+    any_model_survives = any(
+        stats["model_f11"].get(m, {}).get("survives") for m in models
+    )
+    n_valid = stats["n_valid"]
+    n_generated = stats["n_generated_raw"]
+    quadrature_answer = (
+        "**Not yet.** At least one model must pass F1.1 valid-only survival thresholds "
+        "with sufficient valid artifacts before adding quadrature."
+        if not any_model_survives or n_valid < F11_MIN_VALID_N
+        else "**Maybe.** One or more models meet valid-only F1.1 thresholds; review per-task "
+        "failures and validity rates before expanding to quadrature."
     )
 
     lines = [
         f"# INVERT Core v2 — F1.1 Integration Report (`{run_name}`)",
         "",
-        "## Artifact counts",
+        "## 1. Generation validity",
         "",
-        f"- Generated artifacts found: **{stats['n_artifacts']}**",
-        f"- Parsed (behavioral load): **{stats['n_parsed']}** (raw level)",
-        f"- Classified euler / rk4 / ambiguous (raw): **{stats['n_euler']}** / "
-        f"**{stats['n_rk4']}** / **{stats['n_ambiguous']}**",
-        f"- Raw-level detector accuracy: **{stats['raw_detector_accuracy']:.3f}**",
+        f"- Generated artifacts: **{stats['n_artifacts']}**",
+        f"- Parsed at raw level: **{stats['n_parsed']}**",
+        f"- Valid behavioral artifacts: **{stats['n_valid']}**",
+        f"- Invalid artifacts (manipulation/validity failures): **{stats['n_invalid']}**",
         "",
-        "## Detector accuracy after stripping",
+        "Invalid artifacts by model/task/method (raw level):",
         "",
     ]
-    if level_lines:
-        lines.extend(level_lines)
+    if stats["invalid_by_group"]:
+        for key, count in stats["invalid_by_group"].items():
+            lines.append(f"- `{key}`: {count}")
     else:
-        lines.append("- No stripped artifacts analyzed yet.")
+        lines.append("- None")
 
     lines.extend(
         [
             "",
-            "## Strip levels that weaken F1.1 signal",
+            "Invalid artifacts are **not** recovery failures; they failed the behavioral oracle "
+            "and are excluded from valid-only recovery metrics (R_raw, R_stripped).",
             "",
+            "## 2. Recovery on valid artifacts only",
+            "",
+            "| model | strip_level | valid_n | valid_detector_accuracy | valid_ambiguous_rate |",
+            "|-------|-------------|---------|-------------------------|----------------------|",
         ]
     )
-    if destroy_signal:
+    for row in valid_summary_rows:
+        if row["valid_n"] == "0":
+            continue
+        if row["strip_level"] not in ("raw", "format_normalized"):
+            continue
         lines.append(
-            "Mean accuracy dropped below 0.90 at: "
-            + ", ".join(f"`{level}`" for level in destroy_signal)
-        )
-    else:
-        lines.append(
-            "No strip level in this run dropped mean detector accuracy below 0.90 "
-            "(or insufficient data)."
+            f"| {row['model']} | {row['strip_level']} | {row['valid_n']} | "
+            f"{row['valid_detector_accuracy']} | {row['valid_ambiguous_rate']} |"
         )
 
-    lines.extend(["", "## Model/task manipulation failures (raw level)", ""])
-    if failures:
-        for key, reps in sorted(failures.items()):
-            lines.append(f"- `{key}`: {', '.join(reps)}")
-    else:
-        lines.append("- None observed on raw level (or no artifacts).")
+    lines.extend(["", "### Model aggregates (valid-only)", ""])
+    for model in models:
+        raw = raw_valid_by_model[model]
+        fmt = fmt_valid_by_model[model]
+        lines.append(f"**{_model_display_name(model)}**")
+        lines.append(
+            f"- raw: valid_n={raw['valid_n']}, accuracy={_format_rate(raw['valid_detector_accuracy'])}, "
+            f"ambiguous={_format_rate(raw['valid_ambiguous_rate'])}"
+        )
+        lines.append(
+            f"- format_normalized: valid_n={fmt['valid_n']}, "
+            f"accuracy={_format_rate(fmt['valid_detector_accuracy'])}, "
+            f"ambiguous={_format_rate(fmt['valid_ambiguous_rate'])}"
+        )
+        lines.append("")
 
     lines.extend(
         [
+            "## 3. F1.1 decision",
             "",
-            "## Is this enough to justify quadrature next?",
+            f"Preregistered rule: valid_n >= {F11_MIN_VALID_N}, valid_detector_accuracy >= "
+            f"{F11_MIN_ACCURACY} at raw and format_normalized, valid_ambiguous_rate <= "
+            f"{F11_MAX_AMBIGUOUS}.",
             "",
-            justify,
+            "### Does Qwen2.5-coder:32b support F1.1 survival after stripping?",
             "",
-            "## Summary table",
+            _f11_answer(qwen_key, qwen_f11),
             "",
-            "| model | task | method | strip_level | n | accuracy | manipulation | ambiguous |",
-            "|-------|------|--------|-------------|---|----------|--------------|-----------|",
+            "### Does DeepSeek-coder-v2:lite support F1.1 survival after stripping?",
+            "",
+            _f11_answer(deepseek_key, deepseek_f11),
+            "",
+            "### Should invalid artifacts be interpreted as recovery failure?",
+            "",
+            "**No.** Invalid artifacts failed behavioral validation (parse/runtime/tolerance). "
+            "They are manipulation/validity failures and must not enter R_raw or R_stripped.",
+            "",
+            "### Is this enough to move to quadrature?",
+            "",
+            quadrature_answer,
+            "",
+            "## 4. All-generated summary (includes invalid artifacts)",
+            "",
+            "Detector accuracy in this section includes invalid artifacts and is **not** used "
+            "for F1.1 recovery decisions.",
+            "",
+            "| model | task | method | strip_level | all_generated_n | accuracy | behavioral_pass | ambiguous |",
+            "|-------|------|--------|-------------|-----------------|----------|-----------------|-----------|",
         ]
     )
     for row in summary_rows:
         lines.append(
             f"| {row['model']} | {row['task_id']} | {row['method']} | {row['strip_level']} | "
-            f"{row['n']} | {row['detector_accuracy']} | {row['manipulation_success_rate']} | "
-            f"{row['ambiguous_rate']} |"
+            f"{row['all_generated_n']} | {row['all_generated_detector_accuracy']} | "
+            f"{row['all_generated_behavioral_pass_rate']} | {row['all_generated_ambiguous_rate']} |"
         )
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

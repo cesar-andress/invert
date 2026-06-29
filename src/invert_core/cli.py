@@ -147,6 +147,7 @@ def analyze_run_cmd(
     result = run_analyze_run(run, root, config_path=config)
     typer.echo(f"Wrote {result.detection_path}")
     typer.echo(f"Wrote {result.summary_path}")
+    typer.echo(f"Wrote {result.valid_summary_path}")
     typer.echo(f"Wrote {result.report_path}")
 
 

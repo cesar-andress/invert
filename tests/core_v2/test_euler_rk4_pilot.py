@@ -92,12 +92,13 @@ stripping:
     result = run_analyze_run("test_run_local", root, config_path=config)
     assert result.detection_path.exists()
     assert result.summary_path.exists()
+    assert result.valid_summary_path.exists()
     assert result.report_path.exists()
     assert result.stats["n_artifacts"] == 2
     assert len(result.detection_rows) == 4  # 2 methods x 2 strip levels
     raw_rows = [r for r in result.detection_rows if r["strip_level"] == "raw"]
-    assert all(r["correct"] == "true" for r in raw_rows)
-    assert all(r["manipulation_success"] == "true" for r in raw_rows)
+    assert all(r["detector_correct"] == "true" for r in raw_rows)
+    assert all(r["valid_artifact"] == "true" for r in raw_rows)
 
     # cleanup generated test data
     for sub in ("raw", "code", "stripped"):
