@@ -115,9 +115,14 @@ def run_analyze_run(
     if dimension == "trapezoidal_vs_simpson":
         from invert_core.analyze_quadrature_run import run_quadrature_analyze_run
 
-        return run_quadrature_analyze_run(run_name, project_root, config_path=config_path)
+        result = run_quadrature_analyze_run(run_name, project_root, config_path=config_path)
+    else:
+        result = _run_integration_analyze_run(run_name, project_root, config_path=config_path)
 
-    return _run_integration_analyze_run(run_name, project_root, config_path=config_path)
+    from invert_core.frozen_detector import maybe_write_frozen_detector_metadata
+
+    maybe_write_frozen_detector_metadata(run_name, project_root, dimension)
+    return result
 
 
 def _resolve_dimension(

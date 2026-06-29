@@ -1,3 +1,3 @@
 dimension,runs_found,models_evaluated,models_survived,best_model,best_valid_artifact_rate,best_valid_accuracy_format_normalized,status
-euler_vs_rk4,1,2,1,ollama__qwen2_5-coder__32b,1.0000,1.0000,promising_if_1_model_survives
-trapezoidal_vs_simpson,0,0,0,,NA,NA,insufficient_data
+euler_vs_rk4,2,5,2,ollama__qwen2_5-coder__32b,1.0000,1.0000,supported_if_2plus_models_survive
+trapezoidal_vs_simpson,1,3,3,ollama__qwen2_5-coder__14b,1.0000,1.0000,supported_if_2plus_models_survive

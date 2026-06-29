@@ -1,0 +1,35 @@
+run:
+  name: core_v2_generalization_local_euler_rk4_001
+  overwrite: false
+
+family: F1
+dimension: euler_vs_rk4
+
+tasks:
+  file: data/core_v2/tasks/euler_rk4_tasks.json
+  include:
+    - exponential_decay
+    - logistic_growth
+    - harmonic_oscillator
+
+generation:
+  models:
+    - ollama:qwen3-coder:30b
+    - ollama:devstral:latest
+    - ollama:qwen2.5-coder:14b
+  repetitions: 5
+  language: python
+  pure_implementation: true
+  models_config: configs/models.yaml
+
+methods:
+  - euler
+  - rk4
+
+stripping:
+  levels:
+    - raw
+    - no_comments
+    - renamed
+    - no_imports
+    - format_normalized

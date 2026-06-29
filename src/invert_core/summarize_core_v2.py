@@ -14,6 +14,7 @@ from invert_core.analyze_run import (
     _format_rate,
     _model_display_name,
 )
+from invert_core.frozen_detector import is_frozen_generalization_run
 
 DIMENSION_ARTIFACTS: dict[str, dict[str, str]] = {
     "euler_vs_rk4": {
@@ -183,6 +184,12 @@ def _load_run_dimension(run_dir: Path) -> str | None:
     return None
 
 
+def _run_kind(run_dir: Path) -> str:
+    if is_frozen_generalization_run(run_dir):
+        return "frozen_generalization"
+    return "development"
+
+
 def _run_has_analysis(run_dir: Path, dimension: str) -> bool:
     files = DIMENSION_ARTIFACTS[dimension]
     return (run_dir / files["valid_only_summary"]).exists() or (
@@ -196,6 +203,8 @@ def _aggregate_model_for_run(
     model: str,
     summary_rows: list[dict[str, str]],
     valid_only_rows: list[dict[str, str]],
+    *,
+    run_kind: str,
 ) -> dict[str, Any]:
     raw_summary = _rows_for_model_strip(summary_rows, model, "raw")
     raw_valid = _rows_for_model_strip(valid_only_rows, model, "raw")
@@ -214,6 +223,7 @@ def _aggregate_model_for_run(
 
     return {
         "run": run_name,
+        "run_kind": run_kind,
         "dimension": dimension,
         "model": model,
         "generated_n": str(generated_n),
@@ -362,10 +372,80 @@ def _next_cheapest_experiment(
     )
 
 
+def _aggregate_frozen_dimension_evidence(
+    dimension: str,
+    model_rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    rows = [
+        r
+        for r in model_rows
+        if r["dimension"] == dimension and r.get("run_kind") == "frozen_generalization"
+    ]
+    if not rows:
+        return {
+            "has_data": False,
+            "models_evaluated": [],
+            "models_survived": [],
+            "valid_artifact_rate": None,
+            "valid_accuracy_raw": None,
+            "valid_accuracy_format_normalized": None,
+            "valid_ambiguous_rate_raw": None,
+        }
+
+    models_evaluated = sorted({_model_display_name(r["model"]) for r in rows})
+    models_survived = sorted(
+        {
+            _model_display_name(r["model"])
+            for r in rows
+            if r.get("survives_preregistered_rule") == "true"
+        }
+    )
+
+    generated_total = sum(_parse_int(r["generated_n"]) for r in rows)
+    valid_total = sum(_parse_int(r["valid_n"]) for r in rows)
+    valid_rate = valid_total / generated_total if generated_total else None
+
+    raw_acc = _weighted_rate_from_model_rows(rows, "valid_accuracy_raw", "valid_n")
+    fmt_acc = _weighted_rate_from_model_rows(rows, "valid_accuracy_format_normalized", "valid_n")
+    amb_raw = _weighted_rate_from_model_rows(rows, "valid_ambiguous_rate_raw", "valid_n")
+
+    return {
+        "has_data": True,
+        "models_evaluated": models_evaluated,
+        "models_survived": models_survived,
+        "valid_artifact_rate": valid_rate,
+        "valid_accuracy_raw": raw_acc,
+        "valid_accuracy_format_normalized": fmt_acc,
+        "valid_ambiguous_rate_raw": amb_raw,
+    }
+
+
+def _weighted_rate_from_model_rows(
+    rows: list[dict[str, Any]],
+    rate_key: str,
+    weight_key: str,
+) -> float | None:
+    total = 0
+    weighted = 0.0
+    for row in rows:
+        weight = _parse_int(str(row.get(weight_key, "0")))
+        rate = _parse_rate(str(row.get(rate_key, NA)))
+        if weight <= 0 or rate is None:
+            continue
+        total += weight
+        weighted += weight * rate
+    if total == 0:
+        return None
+    return weighted / total
+
+
 def _write_decision_report(
     path: Path,
     model_rows: list[dict[str, Any]],
     dimension_rows: list[dict[str, Any]],
+    *,
+    development_runs: list[str],
+    frozen_runs: list[str],
 ) -> None:
     by_dim = {r["dimension"]: r for r in dimension_rows}
     euler = by_dim.get("euler_vs_rk4")
@@ -452,9 +532,25 @@ def _write_decision_report(
         "Aggregated from completed runs under `results/core_v2/runs/`. "
         "Missing per-run files are skipped gracefully.",
         "",
-        "## 1. Which dimensions have enough evidence?",
+        "## Run inventory",
+        "",
+        "### Development runs",
         "",
     ]
+    if development_runs:
+        for run in development_runs:
+            lines.append(f"- `{run}`")
+    else:
+        lines.append("- None with analyzed outputs.")
+
+    lines.extend(["", "### Frozen generalization runs", ""])
+    if frozen_runs:
+        for run in frozen_runs:
+            lines.append(f"- `{run}` (has `frozen_detector_metadata.json`)")
+    else:
+        lines.append("- None yet.")
+
+    lines.extend(["", "## 1. Which dimensions have enough evidence?", ""])
     if enough_evidence:
         for item in enough_evidence:
             lines.append(f"- {item}")
@@ -513,6 +609,36 @@ def _write_decision_report(
             f"{row['models_survived']} | {row['status']} |"
         )
 
+    lines.extend(["", "## Frozen generalization evidence", ""])
+    for dimension in DIMENSION_ARTIFACTS:
+        evidence = _aggregate_frozen_dimension_evidence(dimension, model_rows)
+        label = CLASS_LABELS[dimension]
+        lines.extend([f"### {label} (`{dimension}`)", ""])
+        if not evidence["has_data"]:
+            lines.append("- No frozen generalization runs analyzed for this dimension yet.")
+            lines.append("")
+            continue
+        lines.append(
+            f"- Models evaluated: {', '.join(evidence['models_evaluated']) or 'none'}"
+        )
+        lines.append(
+            f"- Models survived: {', '.join(evidence['models_survived']) or 'none'}"
+        )
+        lines.append(
+            f"- Valid artifact rate: {_format_rate(evidence['valid_artifact_rate'])}"
+        )
+        lines.append(
+            f"- Detector accuracy (raw): {_format_rate(evidence['valid_accuracy_raw'])}"
+        )
+        lines.append(
+            "- Detector accuracy (format_normalized): "
+            f"{_format_rate(evidence['valid_accuracy_format_normalized'])}"
+        )
+        lines.append(
+            f"- Ambiguous rate (raw): {_format_rate(evidence['valid_ambiguous_rate_raw'])}"
+        )
+        lines.append("")
+
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -521,6 +647,8 @@ def run_summarize_core_v2(project_root: Path) -> SummarizeCoreV2Result:
     output_root = project_root / "results" / "core_v2"
 
     model_rows: list[dict[str, Any]] = []
+    development_runs: list[str] = []
+    frozen_runs: list[str] = []
 
     if runs_root.exists():
         for run_dir in sorted(runs_root.iterdir()):
@@ -529,6 +657,12 @@ def run_summarize_core_v2(project_root: Path) -> SummarizeCoreV2Result:
             dimension = _load_run_dimension(run_dir)
             if dimension is None or not _run_has_analysis(run_dir, dimension):
                 continue
+
+            kind = _run_kind(run_dir)
+            if kind == "frozen_generalization":
+                frozen_runs.append(run_dir.name)
+            else:
+                development_runs.append(run_dir.name)
 
             files = DIMENSION_ARTIFACTS[dimension]
             summary_rows = _read_csv(run_dir / files["summary"])
@@ -547,6 +681,7 @@ def run_summarize_core_v2(project_root: Path) -> SummarizeCoreV2Result:
                         model,
                         summary_rows,
                         valid_only_rows,
+                        run_kind=kind,
                     )
                 )
 
@@ -561,7 +696,13 @@ def run_summarize_core_v2(project_root: Path) -> SummarizeCoreV2Result:
 
     _write_csv(model_summary_path, MODEL_SUMMARY_FIELDS, model_rows)
     _write_csv(dimension_summary_path, DIMENSION_SUMMARY_FIELDS, dimension_rows)
-    _write_decision_report(decision_report_path, model_rows, dimension_rows)
+    _write_decision_report(
+        decision_report_path,
+        model_rows,
+        dimension_rows,
+        development_runs=sorted(development_runs),
+        frozen_runs=sorted(frozen_runs),
+    )
 
     return SummarizeCoreV2Result(
         model_rows=model_rows,

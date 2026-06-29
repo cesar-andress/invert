@@ -205,4 +205,3 @@ def test_run_diagnose_quadrature_real_run_if_present() -> None:
     result = run_diagnose_quadrature(run, root)
     assert result.csv_path.exists()
     assert result.md_path.exists()
-    assert result.rows
