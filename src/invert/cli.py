@@ -15,6 +15,7 @@ from invert.generate import run_generation
 from invert.keyword_baseline import run_keyword_baseline
 from invert.manifest import run_manifest
 from invert.manifestation_recovery import run_manifestation_recovery_analysis
+from invert.reanalyze_strict import run_reanalyze_strict
 from invert.plot import run_plot
 from invert.recover import run_recovery
 from invert.redact_proxies import run_redact_proxies
@@ -266,6 +267,13 @@ def analyze_manifestation_recovery_cmd(
     run: str = typer.Option(..., "--run", help="Run name for manifestation–recovery analysis"),
 ) -> None:
     run_manifestation_recovery_analysis(PROJECT_ROOT, run)
+
+
+@app.command("reanalyze-strict")
+def reanalyze_strict_cmd(
+    run: str = typer.Option(..., "--run", help="Run name for strict manifestation–recovery reanalysis"),
+) -> None:
+    run_reanalyze_strict(PROJECT_ROOT, run)
 
 
 @app.command("check-apis")
