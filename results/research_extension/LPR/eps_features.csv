@@ -1,0 +1,61 @@
+feature_id,feature_name,category,scientific_motivation,expected_robustness,expected_reproducibility,hardware_sensitivity,dataset_sensitivity,execution_cost,interpretability,leakage_risk,overfitting_risk,expected_usefulness,frozen_in_eps,frozen_dimension,rejection_reason
+F001,wall_clock_time_per_test,timing,Wall time reflects algorithmic efficiency and scaling even when outputs match,medium,high,high,low,low,high,none,low,medium,no,,High CPU frequency scaling; absorbed into P4 not standalone
+F002,cpu_user_time_per_test,timing,CPU time isolates compute from I/O wait; process signal beyond pass bit,medium,high,high,low,low,high,none,low,medium,no,,Component of P4 dispersion not separate dimension
+F003,cpu_system_time_per_test,timing,System time captures syscall overhead,low,medium,medium,medium,low,medium,none,low,low,no,,Noisy in containerized sandbox; folded into P4 optional
+F004,memory_peak_rss,memory,Peak resident set indicates space complexity,medium,high,medium,low,low,high,none,low,medium,no,,Included in P4 CV vector
+F005,memory_peak_vms,memory,Virtual memory peak may capture allocation patterns,low,medium,low,low,low,medium,none,medium,low,no,,Less portable than RSS; rejected for v1
+F006,memory_growth_slope,memory,Linear memory growth across input size may signal leaks,medium,medium,medium,medium,medium,medium,none,medium,medium,no,,Requires ordered inputs by size; not guaranteed by test order
+F007,allocation_count_estimate,memory,Allocation pressure correlates with hidden inefficiency,low,low,high,medium,high,medium,none,medium,low,no,,Requires tracemalloc or allocator hooks; fragile across Py versions
+F008,function_call_count,control_flow,Call volume distinguishes iterative vs recursive implementations,medium,medium,low,medium,medium,high,none,low,medium,no,,Redundant with opcode CALL category in P7
+F009,maximum_call_depth,control_flow,Recursion depth affects stack risk and hidden test failure,medium,high,low,low,medium,high,none,low,medium,no,,Captured partially by P3 trace divergence; standalone rejected
+F010,recursion_depth_peak,control_flow,Deep recursion may fail on hidden large inputs,medium,medium,low,medium,medium,high,none,low,medium,no,,Problem-specific thresholds; risk of overfitting without labels
+F011,branch_opcode_fraction,bytecode,Branch share indicates control-flow intensity,medium,high,medium,low,medium,medium,none,low,medium,no,,Subsumed by P7 PMF BRANCH/JUMP categories
+F012,opcode_histogram_unigram,bytecode,Instruction mix characterizes algorithm family (Rajput SCTD/DCTD lineage),high,high,medium,low,medium,medium,none,low,high,yes,P7,Primary frozen opcode representation via 32 categories
+F013,opcode_entropy,bytecode,Entropy of opcode distribution summarizes execution diversity,medium,high,medium,low,low,medium,none,low,medium,no,,Derived from P7; redundant as separate scalar
+F014,opcode_bigram_histogram,bytecode,Sequential opcode patterns capture control structure,medium,medium,medium,low,high,low,none,high,medium,no,,High dimensionality; overfitting risk; trace-free ablation target
+F015,stdlib_module_touch_count,imports,Heavy stdlib use may indicate library-dependent shortcuts,low,medium,medium,high,medium,medium,none,medium,low,no,,Static import scan not execution-only; rejected
+F016,import_graph_static,imports,Module dependency structure,low,low,high,high,low,medium,none,high,low,no,,Static only; violates execution-only rule
+F017,third_party_import_flag,imports,External libs affect portability and hidden tests,low,low,high,high,low,low,none,medium,low,no,,Static; BigCodeBench-style tasks excluded from LPR corpus
+F018,io_stdout_byte_count,io,Output volume may differ under equivalent pass,medium,high,low,low,low,high,none,low,medium,no,,Correlated with P1 outputs; leakage if used with P1
+F019,io_stdin_read_count,io,Input parsing patterns,medium,medium,low,medium,low,medium,none,low,low,no,,Low signal for latent fail among public-pass
+F020,sort_call_count,runtime_api,Sort calls hint algorithm choice,low,low,high,high,high,high,none,high,low,no,,Requires problem-specific API hooks; forbidden adapter class
+F021,hash_call_count,runtime_api,Hashing patterns for data structures,low,low,high,high,high,medium,none,high,low,no,,Adapter-like instrumentation; rejected
+F022,container_append_count,runtime_api,Container ops reflect implementation style,low,low,medium,high,high,medium,none,high,low,no,,Too granular; Py version sensitive
+F023,iteration_loop_count,control_flow,Loop iterations scale with input,medium,medium,medium,medium,medium,medium,none,medium,medium,no,,Input-size coupling without ordered tests; rejected
+F024,exception_count,control_flow,Exceptions may be caught internally affecting hidden paths,low,low,medium,medium,medium,medium,none,medium,low,no,,Rare among public-pass; noisy
+F025,output_hash_per_test,io,Exact output fingerprint on public suite,baseline,very_high,none,low,low,very_high,none,low,high,yes,P1,Preregistered I/O baseline component
+F026,cross_run_output_hash_variance,stability,Flaky outputs among repeats signal latent risk,high,high,low,low,medium,high,none,low,high,yes,P2,Frozen stability dimension
+F027,cross_run_opcode_jsd,stability,Trace PMF instability across repeats,high,high,medium,low,high,medium,none,low,high,yes,P3,Frozen trace stability
+F028,resource_cv_across_tests,dispersion,Heterogeneous resource use across public inputs,high,high,high,medium,low,high,none,low,high,yes,P4,Frozen P4 triple CV
+F029,cross_input_microsignature_entropy,dispersion,Entropy of per-test execution fingerprints,high,medium,medium,medium,medium,medium,none,medium,high,yes,P5,Captures non-uniform process across inputs
+F030,pool_distance_stereotypy,comparative,Distance from typical pool execution in EPS_proc space,medium,medium,low,medium,low,medium,low_if_holdout_pooled,medium,high,yes,P6,Development-frozen pool medians only
+F031,sys_settrace_line_count,tracing,Line-level trace granularity,medium,medium,low,low,very_high,low,none,medium,medium,no,,Superseded by opcode categories; trace-free ablation excludes
+F032,sys_setprofile_call_edges,tracing,Call graph from profiler,medium,medium,low,low,high,medium,none,medium,medium,no,,Higher cost than opcode PMF; not frozen
+F033,bytecode_instruction_count_static,static,Static instruction count,low,low,high,high,low,medium,none,high,low,no,,Not execution-derived; syntax proxy
+F034,ast_node_count_static,static,Syntactic complexity,low,low,none,high,low,medium,none,high,low,no,,Excluded; syntax baseline is outside EPS
+F035,cyclomatic_complexity_static,static,McCabe complexity,low,low,none,high,low,medium,none,high,low,no,,Static; preregistration places syntax outside EPS
+F036,llm_judge_algorithm_label,llm_meta,Algorithmic family from LLM reasoning,low,very_low,none,high,very_high,medium,high,very_high,low,no,,Forbidden: LLM judges
+F037,invert_pole_recovery_score,invert_meta,INVERT detector output,none,none,none,none,none,none,very_high,very_high,none,no,,Forbidden: INVERT detectors
+F038,visit_fn_trace_signature,invert_meta,INVERT visit order,none,none,none,none,none,none,very_high,very_high,none,no,,Forbidden: visit_fn / adapters
+F039,hidden_test_pass_rate,label,Withheld outcome,none,none,none,none,none,none,very_high,very_high,none,no,,Forbidden: outcome label
+F040,prompt_token_count,metadata,Prompt length,none,high,none,high,none,low,medium,medium,none,no,,Forbidden: prompt metadata
+F041,pass_at_k_score,metadata,Model sampling metadata,none,none,none,high,none,low,medium,high,none,no,,Forbidden: benchmark leaderboard metadata
+F042,syscall_count_estimate,os,Kernel syscall volume,low,low,very_high,medium,high,low,none,low,low,no,,Platform-specific; poor reproducibility
+F043,context_switch_count,os,Scheduler noise,very_low,very_low,very_high,low,high,low,none,low,none,no,,Hardware noise dominates
+F044,gc_collection_count,runtime,GC pressure indicator,low,medium,medium,medium,medium,medium,none,medium,low,no,,Python GC nondeterminism conflicts stability goals
+F045,thread_count_peak,concurrency,Threading behavior,low,medium,medium,medium,medium,medium,none,medium,low,no,,LPR corpus excludes threading problems
+F046,subprocess_spawn_flag,concurrency,External process use,medium,high,low,low,low,high,none,low,low,no,,Excluded by sandbox policy
+F047,network_socket_flag,concurrency,Network I/O,medium,high,low,low,low,high,none,low,none,no,,Excluded by sandbox policy
+F048,random_call_without_seed,stability,Unseeded RNG breaks repeatability,medium,medium,medium,medium,medium,high,none,low,medium,no,,Handled by NONDETERMINISTIC problem exclusion not feature
+F049,checker_branch_count,metadata,Branching in output checker,low,low,none,high,low,low,medium,medium,low,no,,Checker is harness not program observation
+F050,normalized_edit_distance_pool,syntax,Syntactic distance in pool,low,medium,none,medium,low,medium,none,high,medium,no,,Syntax is preregistered outside EPS model
+F051,embedding_cosine_pool,syntax,Neural code embedding similarity,low,low,none,high,high,low,none,very_high,low,no,,Forbidden inside EPS; baseline only
+F052,time_variance_across_repeats,timing,Runtime flakiness,high,high,high,low,medium,high,none,low,high,no,,Folded into P3 and P4 not separate
+F053,output_length_variance,stability,Output size flakiness,medium,high,low,low,low,high,none,low,medium,no,,Special case of P2 when outputs textual
+F054,dominant_opcode_fraction,bytecode,Single opcode dominance,medium,high,medium,low,low,medium,none,low,medium,no,,Scalar derived from P7; redundant
+F055,branch_taken_ratio_dynamic,control_flow,Dynamic branch bias,medium,medium,medium,medium,high,medium,none,medium,medium,no,,Costly; partial overlap P7
+F056,stack_depth_variance,stability,Call stack instability across runs,medium,medium,low,medium,medium,medium,none,medium,medium,no,,Covered by P3 JSD on opcode PMFs
+F057,public_io_bin_counts,P1_model,Hashed I/O bin vector for modeling,high,very_high,none,low,low,medium,none,low,high,yes,P1,Development-frozen φ_H bin mapping
+F058,median_resource_vector_per_test,aggregation,Per-test resource median before CV,high,high,high,low,low,high,none,low,high,no,,Internal to P4 computation
+F059,latex_instrument_version,meta,EPS version string,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,yes,meta,Required manifest field
+F060,manual_expert_process_label,annotation,Human process class,low,very_low,none,high,very_high,high,high,very_high,none,no,,Forbidden: manual annotation

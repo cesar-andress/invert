@@ -11,7 +11,11 @@
     "corpus_filters.yaml",
     "split_rule.yaml",
     "dataset_go_no_go.json",
-    "PROTOCOL_LOCK.json"
+    "PROTOCOL_LOCK.json",
+    "EPS_SPECIFICATION.md",
+    "eps_features.csv",
+    "eps_ablation_plan.md",
+    "eps_go_no_go.json"
   ],
   "note": "Auditors: verify git rev-parse HEAD matches protocol_lock_commit when checking out this commit."
 }

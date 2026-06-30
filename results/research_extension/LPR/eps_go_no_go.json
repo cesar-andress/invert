@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0",
+  "study_id": "LPR-2026-001",
+  "document": "eps_go_no_go.json",
+  "eps_version": "1.0",
+  "status": "LOCKED",
+  "protocol_lock": {
+    "repository": "cesar-andress/invert",
+    "dataset_protocol_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
+    "eps_spec_commit": null,
+    "date": "2026-06-29"
+  },
+  "instrument_summary": {
+    "name": "External Process Signature (EPS)",
+    "dimensions": ["P1", "P2", "P3", "P4", "P5", "P6", "P7"],
+    "repeat_count_R": 3,
+    "opcode_categories": 32,
+    "independent_from_invert": true
+  },
+  "evaluation_phases": {
+    "phase_0_spec_audit": {
+      "timing": "Before any EPS implementation code",
+      "checks": [
+        {
+          "id": "E0-1",
+          "criterion": "EPS_SPECIFICATION.md contains formal definitions for EPS, Process Observation, Execution Event, Feature Vector, Aggregation, Normalization, Distance, Similarity",
+          "required": true
+        },
+        {
+          "id": "E0-2",
+          "criterion": "No forbidden INVERT or adapter dependencies in specification",
+          "required": true
+        },
+        {
+          "id": "E0-3",
+          "criterion": "Dimension names P1-P7 match PREREGISTRATION.md exactly",
+          "required": true
+        }
+      ]
+    },
+    "phase_1_implementation_pilot": {
+      "timing": "After extractor implementation; before full corpus extraction",
+      "sample": {
+        "synthetic_programs": 10,
+        "development_problems": 20,
+        "note": "Pilot uses public tests only; no holdout labels"
+      }
+    },
+    "phase_2_extractor_lock": {
+      "timing": "Before full-scale EPS extraction on development corpus",
+      "description": "GO/NO-GO for locking extractor code hash"
+    }
+  },
+  "go_criteria": {
+    "all_required": true,
+    "criteria": [
+      {
+        "id": "EG1",
+        "name": "feature_reproducibility",
+        "metric": "exact_match_rate",
+        "description": "Fraction of (program, public_test) runs where EPS vector bitwise identical on re-extraction",
+        "operator": ">=",
+        "threshold": 0.99,
+        "evaluated_on": "phase_1_pilot"
+      },
+      {
+        "id": "EG2",
+        "name": "cross_run_stability_expected",
+        "metric": "deterministic_program_P2",
+        "description": "For programs without RNG/time calls, P2 == 0",
+        "operator": "==",
+        "threshold": 1.0,
+        "evaluated_on": "synthetic_programs"
+      },
+      {
+        "id": "EG3",
+        "name": "expected_execution_cost",
+        "metric": "median_extraction_time_ratio",
+        "description": "Median EPS extraction wall time / median sandbox-only execution time",
+        "operator": "<=",
+        "threshold": 3.0,
+        "evaluated_on": "phase_1_pilot"
+      },
+      {
+        "id": "EG4",
+        "name": "timeout_rate",
+        "metric": "fraction_extraction_timeout",
+        "operator": "<=",
+        "threshold": 0.05,
+        "evaluated_on": "phase_1_pilot"
+      },
+      {
+        "id": "EG5",
+        "name": "hardware_independence_proxy",
+        "metric": "spearman_correlation_cpu_models",
+        "description": "Rank correlation of P4 wall CV across same programs on two CPU classes if available; low correlation preferred",
+        "operator": "<=",
+        "threshold": 0.85,
+        "evaluated_on": "phase_1_pilot_optional",
+        "required": false
+      },
+      {
+        "id": "EG6",
+        "name": "cross_platform_robustness_minimum",
+        "metric": "linux_extraction_success_rate",
+        "description": "EPS v1.0 targets Linux sandbox only; success on frozen Linux image",
+        "operator": ">=",
+        "threshold": 0.95,
+        "evaluated_on": "phase_1_pilot"
+      },
+      {
+        "id": "EG7",
+        "name": "scientific_interpretability",
+        "metric": "dimensions_documented",
+        "description": "Each P1-P7 has operational definition mapping to EPS_SPECIFICATION section",
+        "operator": "==",
+        "threshold": 7,
+        "evaluated_on": "phase_0_spec_audit"
+      },
+      {
+        "id": "EG8",
+        "name": "leakage_audit_pass",
+        "metric": "forbidden_feature_count",
+        "description": "Count of features using hidden labels, prompts, INVERT, or adapters",
+        "operator": "==",
+        "threshold": 0,
+        "evaluated_on": "phase_0_spec_audit"
+      },
+      {
+        "id": "EG9",
+        "name": "p6_pool_development_only",
+        "metric": "p6_holdout_uses_frozen_development_medians",
+        "description": "Implementation audit confirms P6 never recomputes pool on holdout",
+        "operator": "==",
+        "threshold": true,
+        "evaluated_on": "phase_2_extractor_lock"
+      },
+      {
+        "id": "EG10",
+        "name": "ablation_plan_frozen",
+        "metric": "ablation_variants_count",
+        "description": "Variants A0-A6 declared in eps_ablation_plan.md",
+        "operator": "==",
+        "threshold": 7,
+        "evaluated_on": "phase_0_spec_audit"
+      }
+    ]
+  },
+  "no_go_criteria": {
+    "any_triggers_no_go": true,
+    "criteria": [
+      {
+        "id": "EN1",
+        "name": "reproducibility_failure",
+        "condition": "exact_match_rate < 0.95 on pilot"
+      },
+      {
+        "id": "EN2",
+        "name": "cost_prohibitive",
+        "condition": "median_extraction_time_ratio > 5.0"
+      },
+      {
+        "id": "EN3",
+        "name": "timeout_excessive",
+        "condition": "fraction_extraction_timeout > 0.10"
+      },
+      {
+        "id": "EN4",
+        "name": "leakage_detected",
+        "condition": "any feature computation reads withheld tests or outcome labels"
+      },
+      {
+        "id": "EN5",
+        "name": "invert_coupling",
+        "condition": "extractor imports or calls INVERT Core detectors or adapters"
+      },
+      {
+        "id": "EN6",
+        "name": "dimension_drift",
+        "condition": "implemented dimension names or count differ from P1-P7"
+      },
+      {
+        "id": "EN7",
+        "name": "trace_infeasible",
+        "condition": "fraction programs with trace buffer overflow > 0.05 on pilot"
+      }
+    ]
+  },
+  "stop_criteria": {
+    "criteria": [
+      {
+        "id": "ES1",
+        "condition": "EPS feature set changed after pilot based on latent-incorrectness correlation"
+      },
+      {
+        "id": "ES2",
+        "condition": "opcode category table learned from labeled data"
+      },
+      {
+        "id": "ES3",
+        "condition": "normalization statistics recomputed on holdout"
+      },
+      {
+        "id": "ES4",
+        "condition": "R or timeout changed without EPS version bump and OSF amendment"
+      }
+    ]
+  },
+  "frozen_opcode_category_slots": {
+    "count": 32,
+    "top_level_groups": [
+      "LOAD",
+      "STORE",
+      "BINARY",
+      "COMPARE",
+      "BRANCH",
+      "CALL",
+      "RETURN",
+      "BUILD",
+      "ATTR",
+      "SUBSCR",
+      "IMPORT",
+      "JUMP",
+      "LOOP",
+      "EXCEPT",
+      "YIELD",
+      "ASYNC",
+      "FORMAT",
+      "DELETE",
+      "NOP",
+      "CACHE",
+      "OTHER",
+      "RESERVED_21",
+      "RESERVED_22",
+      "RESERVED_23",
+      "RESERVED_24",
+      "RESERVED_25",
+      "RESERVED_26",
+      "RESERVED_27",
+      "RESERVED_28",
+      "RESERVED_29",
+      "RESERVED_30",
+      "RESERVED_31"
+    ],
+    "note": "Exact opcode-to-slot map fixed in implementation artifact opcode_categories_v1.json at extractor lock; slot names frozen here"
+  },
+  "decision_matrix": {
+    "SPEC_GO": "Phase 0 E0 checks pass and EG7, EG8, EG10 satisfied (specification lock)",
+    "EXTRACTOR_GO": "All required EG1-EG4, EG6, EG9 pass at phase 2",
+    "NO_GO": "Any EN* triggered",
+    "STOP": "Any ES* triggered"
+  },
+  "audit_record": {
+    "spec_go_decision": "SPEC_GO",
+    "spec_go_timestamp_utc": "2026-06-29T00:00:00Z",
+    "extractor_go_decision": null,
+    "extractor_go_timestamp_utc": null,
+    "signed_by": null,
+    "notes": "Specification frozen without implementation. Extractor GO pending future pilot."
+  }
+}
