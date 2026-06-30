@@ -1,0 +1,270 @@
+{
+  "schema_version": "1.0",
+  "study_id": "LPR-2026-001",
+  "document": "dataset_go_no_go.json",
+  "status": "LOCKED",
+  "protocol_lock": {
+    "repository": "cesar-andress/invert",
+    "commit": null,
+    "date": "2026-06-29"
+  },
+  "description": "Objective dataset-protocol GO/NO-GO criteria evaluated after feasibility pass and before primary label collection. No outcome-based tuning permitted.",
+  "evaluation_phases": {
+    "phase_0_protocol_audit": {
+      "timing": "Before any dataset row is executed",
+      "checks": [
+        {
+          "id": "P0-1",
+          "criterion": "OSF preregistration timestamp precedes any execution log",
+          "required": true
+        },
+        {
+          "id": "P0-2",
+          "criterion": "split_rule.yaml, corpus_filters.yaml, benchmark_inventory.csv hashes recorded in split_manifest",
+          "required": true
+        },
+        {
+          "id": "P0-3",
+          "criterion": "HF dataset revisions pinned in writing for TACO and CodeContests+ Verified",
+          "required": true
+        }
+      ]
+    },
+    "phase_1_feasibility_pilot": {
+      "timing": "After split manifest generation on full eligible pool; before LLM mass generation",
+      "sample": {
+        "primary_development_problems": 50,
+        "holdout_primary_problems": 50,
+        "selection": "deterministic_first_n_by_problem_id_sort"
+      }
+    },
+    "phase_2_pre_collection_gate": {
+      "timing": "After feasibility; before primary label collection at scale",
+      "description": "GO/NO-GO decision for full data collection"
+    },
+    "phase_3_post_collection_integrity": {
+      "timing": "After collection; before primary statistical analysis",
+      "description": "Integrity checks only; does not permit corpus changes"
+    }
+  },
+  "go_criteria": {
+    "all_required": true,
+    "criteria": [
+      {
+        "id": "G1",
+        "name": "minimum_eligible_problems_primary",
+        "metric": "eligible_problem_count",
+        "corpus_role": "PRIMARY_DEVELOPMENT",
+        "operator": ">=",
+        "threshold": 1000,
+        "rationale": "Preregistration target 1200 with allowance for mechanical exclusions"
+      },
+      {
+        "id": "G2",
+        "name": "minimum_eligible_problems_holdout",
+        "metric": "eligible_problem_count",
+        "corpus_role": "HOLDOUT_PRIMARY",
+        "operator": ">=",
+        "threshold": 650,
+        "rationale": "Preregistration target 800 with allowance for dedup and Verified filter"
+      },
+      {
+        "id": "G3",
+        "name": "maximum_problem_exclusion_rate",
+        "metric": "excluded_problems / candidate_problems",
+        "corpus_role": "ANY",
+        "operator": "<=",
+        "threshold": 0.35,
+        "rationale": "If >35% excluded, protocol too lossy for generalizable LPR claims"
+      },
+      {
+        "id": "G4",
+        "name": "minimum_hidden_test_coverage",
+        "metric": "median_withheld_test_count",
+        "corpus_role": "ANY",
+        "operator": ">=",
+        "threshold": 80,
+        "rationale": "80/20 split on N>=100 implies withheld>=80 at floor"
+      },
+      {
+        "id": "G5",
+        "name": "minimum_public_test_coverage",
+        "metric": "median_public_test_count",
+        "corpus_role": "ANY",
+        "operator": ">=",
+        "threshold": 20,
+        "rationale": "Matches split_rule.yaml post-partition minimum"
+      },
+      {
+        "id": "G6",
+        "name": "sandbox_success_rate_feasibility",
+        "metric": "reference_solution_public_pass_rate",
+        "corpus_role": "ANY",
+        "operator": ">=",
+        "threshold": 0.85,
+        "rationale": "At least 85% bundled reference/canonical solutions pass public suite in pilot"
+      },
+      {
+        "id": "G7",
+        "name": "latent_incorrectness_observable_feasibility",
+        "metric": "reference_solution_latent_incorrect_rate",
+        "corpus_role": "ANY",
+        "operator": ">=",
+        "threshold": 0.02,
+        "rationale": "At least 2% of reference solutions public-pass but withheld-fail in pilot, OR >=5 problems show latent failures among references",
+        "alternative_satisfied_if": {
+          "metric": "problems_with_reference_latent_fail_count",
+          "operator": ">=",
+          "threshold": 5
+        }
+      },
+      {
+        "id": "G8",
+        "name": "cross_corpus_dedup_bounded",
+        "metric": "holdout_excluded_duplicate_statement_rate",
+        "corpus_role": "HOLDOUT_PRIMARY",
+        "operator": "<=",
+        "threshold": 0.15,
+        "rationale": "Excessive overlap reduces independence of holdout"
+      },
+      {
+        "id": "G9",
+        "name": "reproducibility_manifest_complete",
+        "metric": "split_manifest_fields_present",
+        "required_fields": [
+          "hf_revision_taco",
+          "hf_revision_code_contests_plus",
+          "split_rule_sha256",
+          "corpus_filters_sha256",
+          "protocol_version",
+          "generation_timestamp_utc"
+        ],
+        "operator": "all_present",
+        "threshold": true
+      },
+      {
+        "id": "G10",
+        "name": "exclusion_logging_complete",
+        "metric": "fraction_excluded_with_logged_code",
+        "corpus_role": "ANY",
+        "operator": "==",
+        "threshold": 1.0,
+        "rationale": "No silent drops"
+      }
+    ]
+  },
+  "no_go_criteria": {
+    "any_triggers_no_go": true,
+    "criteria": [
+      {
+        "id": "N1",
+        "name": "insufficient_primary_problems",
+        "condition": "eligible_problem_count PRIMARY_DEVELOPMENT < 800"
+      },
+      {
+        "id": "N2",
+        "name": "insufficient_holdout_problems",
+        "condition": "eligible_problem_count HOLDOUT_PRIMARY < 500"
+      },
+      {
+        "id": "N3",
+        "name": "excessive_exclusion",
+        "condition": "excluded_problems / candidate_problems > 0.50 for any corpus role"
+      },
+      {
+        "id": "N4",
+        "name": "harness_broken",
+        "condition": "reference_solution_public_pass_rate < 0.70 in feasibility pilot"
+      },
+      {
+        "id": "N5",
+        "name": "no_latent_signal_in_pilot",
+        "condition": "reference_solution_latent_incorrect_rate == 0 AND problems_with_reference_latent_fail_count == 0 in pilot"
+      },
+      {
+        "id": "N6",
+        "name": "license_blocker",
+        "condition": "legal review flags redistribution or ShareAlike conflict for chosen primary/holdout pair"
+      },
+      {
+        "id": "N7",
+        "name": "split_manifest_missing",
+        "condition": "cannot reproduce identical public/withheld indices from frozen rule on re-run"
+      },
+      {
+        "id": "N8",
+        "name": "sandbox_unreproducible",
+        "condition": "infrastructure_error_rate > 0.10 on reference runs in pilot"
+      }
+    ]
+  },
+  "stop_criteria": {
+    "description": "Integrity failure; halt collection and do not publish confirmatory dataset claims",
+    "criteria": [
+      {
+        "id": "S1",
+        "condition": "split_rule or corpus_filters modified after feasibility without new OSF version"
+      },
+      {
+        "id": "S2",
+        "condition": "holdout labels inspected before split manifest locked"
+      },
+      {
+        "id": "S3",
+        "condition": "problems added or removed based on latent incorrectness prevalence"
+      },
+      {
+        "id": "S4",
+        "condition": "TPR/TNR Verified threshold lowered after pilot"
+      }
+    ]
+  },
+  "decision_matrix": {
+    "GO": "All G1-G10 satisfied AND no N1-N8 triggered AND no S1-S4 triggered",
+    "NO_GO": "Any N1-N8 triggered OR any required G criterion failed (may revise protocol via new OSF version only)",
+    "STOP": "Any S1-S4 triggered"
+  },
+  "post_collection_integrity_only": {
+    "criteria": [
+      {
+        "id": "I1",
+        "name": "minimum_public_pass_programs_holdout",
+        "metric": "public_pass_program_count",
+        "corpus_role": "HOLDOUT_PRIMARY",
+        "operator": ">=",
+        "threshold": 30000,
+        "note": "If not met, study underpowered; report honestly; do not add models post hoc"
+      },
+      {
+        "id": "I2",
+        "name": "maximum_signature_extraction_attrition",
+        "metric": "signature_extraction_failures / public_pass_programs",
+        "operator": "<=",
+        "threshold": 0.10
+      },
+      {
+        "id": "I3",
+        "name": "minimum_latent_prevalence_holdout",
+        "metric": "latent_incorrect_rate among public_pass",
+        "corpus_role": "HOLDOUT_PRIMARY",
+        "operator": ">=",
+        "threshold": 0.01,
+        "note": "Ceiling effect warning if below 1%; does not trigger corpus change"
+      }
+    ]
+  },
+  "explicitly_forbidden_responses_to_no_go": [
+    "Switching holdout to APPS or HumanEval without new preregistration",
+    "Lowering minimum_total_tests below 100",
+    "Changing public_fraction from 0.20",
+    "Dropping Verified TPR/TNR filter on CodeContests+",
+    "Selecting problems with highest reference latent-fail rate"
+  ],
+  "audit_record": {
+    "go_no_go_decision": null,
+    "decision_timestamp_utc": null,
+    "decision_phase": null,
+    "signed_by": null,
+    "notes": null
+  }
+}

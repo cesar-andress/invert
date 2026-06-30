@@ -1,0 +1,51 @@
+---
+description: Registrar commit hash en artefactos congelados; commit y push en repos GitHub
+alwaysApply: true
+---
+
+# Commit hash y sincronización Git (GitHub)
+
+## Commit hash obligatorio
+
+Todo artefacto **congelado**, **preregistrado** o **auditable** debe quedar anclado a un commit de git:
+
+- Protocolos (`PREREGISTRATION.md`, `DATASET_PROTOCOL.md`, `*_protocol.yaml`, `split_rule.yaml`, `corpus_filters.yaml`, manifiestos JSON)
+- Resultados de experimentos, CSVs de análisis, informes con claims confirmatorios
+- Metadatos de versión (Zenodo, OSF, `split_manifest.json`)
+
+En cada documento o manifiesto incluir, como mínimo:
+
+```yaml
+protocol_version: "1.0"
+protocol_lock_commit: "<git rev-parse HEAD tras el commit que congela el protocolo>"
+protocol_lock_date: "YYYY-MM-DD"
+repository: "cesar-andress/invert"
+```
+
+Si el hash aún no existe (archivos nuevos), commitear primero y **actualizar** el campo `protocol_lock_commit` en el mismo turno o en un commit inmediato posterior que solo fije el hash.
+
+No afirmar que un protocolo está «congelado» o «locked» sin un `protocol_lock_commit` real de 40 caracteres hex.
+
+## Commit y push en este repositorio
+
+Este proyecto (`invert`) tiene remoto GitHub (`origin`). Tras completar un bloque de trabajo coherente (documentación LPR, protocolo, resultados, reglas):
+
+1. `git status` y `git diff` para revisar el alcance
+2. `git add` solo archivos relevantes (nunca `.env`, credenciales)
+3. `git commit` con mensaje claro (HEREDOC)
+4. `git push -u origin HEAD` si la rama no está en remoto o hay commits locales por subir
+
+No hacer push con `--force` a `main`/`master` salvo petición explícita del usuario.
+
+## Excepciones
+
+- No commitear si el usuario pidió explícitamente no hacerlo
+- No commitear secretos ni archivos generados masivos no acordados
+- Cambios solo en otros repos del monorepo `papers/` no aplican push a `invert` salvo que se editen archivos bajo este repo
+
+## Verificación rápida
+
+```bash
+git -C /home/cesar/papers/invert/invert rev-parse HEAD
+git -C /home/cesar/papers/invert/invert log -1 --oneline
+```

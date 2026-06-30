@@ -1,0 +1,295 @@
+# LPR frozen corpus filtering protocol
+# Version: 1.0
+# Status: LOCKED — do not modify after protocol audit timestamp
+# Study: LPR-2026-001
+
+schema_version: "1.0"
+study_id: LPR-2026-001
+document: corpus_filters.yaml
+locked: true
+protocol_lock:
+  repository: cesar-andress/invert
+  commit: null
+  date: "2026-06-29"
+
+# -----------------------------------------------------------------------------
+# Roles and targets (from preregistration; not tuned to outcomes)
+# -----------------------------------------------------------------------------
+corpus_roles:
+  PRIMARY_DEVELOPMENT:
+    dataset_id: TACO
+    hf_path: BAAI/TACO
+    hf_split: test
+    target_problem_count: 1200
+    selection_method: stratified_deterministic_sample  # see sampling_seed below
+  HOLDOUT_PRIMARY:
+    dataset_id: CodeContests+
+    hf_path: ByteDance-Seed/Code-Contests-Plus
+    subset: Verified
+    target_problem_count: 800
+    selection_method: stratified_deterministic_sample
+
+sampling_seed: 20260629  # fixed; stratification buckets only on metadata, not outcomes
+
+# -----------------------------------------------------------------------------
+# Global inclusion criteria (ALL problems)
+# -----------------------------------------------------------------------------
+inclusion:
+  license:
+    - open_license_required: true
+    - allowed_licenses:
+        - Apache-2.0
+        - CC-BY-4.0
+        - CC-BY-3.0
+        - MIT
+        - CDLA-Permissive-2.0
+    - share_alike_allowed: false  # excludes CC-BY-SA primary corpora (e.g. APPS)
+    - note: >
+        TACO composite license accepted with per-upstream attribution log;
+        APPS excluded as primary due to CC-BY-SA 3.0.
+
+  language:
+    execution_language: python
+    python_version: "3.10"
+    allowed_python_versions: ["3.10", "3.11"]
+    exclude_other_languages: true
+
+  execution:
+    deterministic_required: true
+    sandbox_required: true
+    stdin_stdout_tasks: true
+    function_entry_tasks: true  # if fn_name present in harness metadata
+    interactive_problems: false
+    file_io_problems: false
+    multi_process_required: false
+    network_access: false
+    filesystem_write_outside_temp: false
+
+  tests:
+    bundled_tests_required: true
+    minimum_total_tests: 100
+    minimum_after_split_public: 20   # enforced by split_rule.yaml
+    minimum_after_split_withheld: 50   # enforced by split_rule.yaml
+    hidden_tests_available: via_held_out_index_split  # no native public/hidden required
+
+  annotations:
+    manual_annotation_required: false
+    human_process_labels_required: false
+
+  metadata:
+    require_algorithm_or_skill_tag: true
+    tag_fields:
+      taco: [skill_types, tags, difficulty]
+      code_contests_plus: [tags, difficulty, source]  # map at pinned schema
+
+  reproducibility:
+    pinned_hf_revision_required: true
+    public_harness_spec_required: true
+    offline_execution_possible: true
+
+# -----------------------------------------------------------------------------
+# Global exclusion criteria
+# -----------------------------------------------------------------------------
+exclusion:
+  incomplete_test_suites:
+    code: INCOMPLETE_TESTS
+    condition: parsed_test_count < minimum_total_tests
+
+  interactive_problems:
+    code: INTERACTIVE
+    condition: problem_requires_interactive_judge
+
+  unsupported_languages:
+    code: UNSUPPORTED_LANGUAGE
+    condition: no_executable_python_solution_template_available
+
+  nondeterministic_infrastructure:
+    code: NONDETERMINISTIC
+    condition: problem_metadata_declares_nondeterministic_or_randomized_judge_without_seed
+
+  missing_execution_harness:
+    code: MISSING_HARNESS
+    condition: cannot_construct_input_output_pairs_or_checker
+
+  split_insufficient:
+    code: SPLIT_INSUFFICIENT_COUNTS
+    condition: post_partition_public_lt_20_or_withheld_lt_50
+
+  duplicate_across_corpora:
+    code: DUPLICATE_STATEMENT
+    condition: statement_fingerprint_matches_other_corpus
+
+  unsupported_features:
+    codes:
+      - UNSUPPORTED_GRAPHICS
+      - UNSUPPORTED_EXACT_ARBITRARY_PRECISION_REQUIRED
+      - UNSUPPORTED_CUSTOM_BINARY_PROTOCOL
+      - UNSUPPORTED_THREADING
+    action: exclude_problem
+
+  taco_specific:
+    - code: TACO_EMPTY_SOLUTIONS
+      condition: zero_parseable_python_solutions_in_metadata
+    - code: TACO_INVALID_IO_JSON
+      condition: input_output_json_unparseable
+
+  code_contests_plus_specific:
+    - code: CCPLUS_BELOW_VERIFIED_THRESHOLD
+      condition: TPR < 0.9 OR TNR < 0.9
+    - code: CCPLUS_MISSING_CHECKER_WHEN_REQUIRED
+      condition: multi_output_problem_without_checker
+
+  quality_holdout_only:
+  # Applied only when selecting HOLDOUT_PRIMARY
+    - code: CCPLUS_LOW_TPR_TNR
+      condition: TPR < 0.9 OR TNR < 0.9
+
+# -----------------------------------------------------------------------------
+# Language filters
+# -----------------------------------------------------------------------------
+language_filters:
+  python:
+    extract_solution_mode:
+      - standalone_script
+      - function_with_fn_name
+    reject_if:
+      - contains_cpp_syntax_only
+      - requires_python2_only_features_without_py3_path
+    normalize_encoding: utf-8
+    strip_bom: true
+
+# -----------------------------------------------------------------------------
+# Execution filters
+# -----------------------------------------------------------------------------
+execution_filters:
+  sandbox:
+    engine: docker_or_equivalent_isolation
+    python_image: python:3.10-slim
+    network: disabled
+    read_only_root: true
+    tmpfs_workspace: true
+
+  limits:
+    wall_clock_timeout_seconds_per_test: 30
+    wall_clock_timeout_seconds_per_program_total: 600
+    memory_limit_mb: 4096
+    cpu_cores: 1
+    max_output_bytes: 10485760  # 10 MiB
+
+  determinism:
+    pythonhashseed: "0"
+    random_seed_if_program_calls_random: null  # do not inject; mark NONDETERMINISTIC if flaky
+    repeat_runs_for_stability: 3
+    stability_required_for_inclusion: false  # flaky programs analyzed; problems excluded only per rules above
+
+  rejection_codes:
+    TIMEOUT: wall_clock_timeout_seconds_per_test exceeded
+    MEMORY: memory_limit exceeded
+    SANDBOX_ERROR: infrastructure failure
+    COMPILE_ERROR: syntax error on load
+    RUNTIME_ERROR: unhandled exception on public tests during label phase
+
+# -----------------------------------------------------------------------------
+# Timeout policy (frozen)
+# -----------------------------------------------------------------------------
+timeout_policy:
+  per_test_seconds: 30
+  per_program_aggregate_seconds: 600
+  retry_on_sandbox_error: 1
+  retry_on_timeout: 0
+  log_all_timeouts: true
+
+# -----------------------------------------------------------------------------
+# Duplicate policy
+# -----------------------------------------------------------------------------
+duplicate_policy:
+  within_problem_same_source:
+    method: normalize_source_sha256
+    normalization:
+      - utf-8_nfkc
+      - strip_trailing_whitespace_per_line
+      - collapse_consecutive_blank_lines
+    keep: first_in_deterministic_generation_order
+    drop_code: DUPLICATE_SOURCE_SAME_BUCKET
+
+  across_corpora:
+    method: problem_statement_fingerprint_sha256
+    keep_corpus_priority: [PRIMARY_DEVELOPMENT, HOLDOUT_PRIMARY]
+    drop_code: DUPLICATE_STATEMENT
+
+# -----------------------------------------------------------------------------
+# Unsupported feature policy
+# -----------------------------------------------------------------------------
+unsupported_feature_policy:
+  detect_by:
+    - dataset_metadata_flags
+    - static_scan_imports: [ctypes, subprocess, socket, requests, urllib, multiprocessing, threading]
+  action_on_static_scan_hit: flag_for_manual_review_in_feasibility_pilot_only
+  feasibility_pilot_max_flag_review: 50
+  post_pilot_rule: >
+    During main collection, static scan hits on forbidden imports → exclude_problem
+    UNSUPPORTED_FEATURE unless harness provides mocked environment (not planned v1).
+
+# -----------------------------------------------------------------------------
+# Stratified sampling (metadata-only; outcome-blind)
+# -----------------------------------------------------------------------------
+stratified_sampling:
+  enabled: true
+  seed: 20260629
+  strata_fields:
+    - difficulty_bucket
+    - has_output_checker
+    - primary_algorithm_tag
+  difficulty_bucket_mapping:
+    taco:
+      map_field: difficulty
+      buckets: [EASY, MEDIUM, MEDIUM_HARD, HARD, VERY_HARD]
+    code_contests_plus:
+      map_field: difficulty
+      buckets: [easy, medium, hard, unknown]
+  allocation: proportional_round_robin  # equal target per bucket when possible
+  underfilled_bucket_action: take_all_eligible_then_redistribute_by_seed
+
+# -----------------------------------------------------------------------------
+# Exclusion logging (mandatory)
+# -----------------------------------------------------------------------------
+exclusion_logging:
+  required: true
+  log_format: jsonl
+  log_path_pattern: "logs/exclusions/{corpus_role}/exclusions.jsonl"
+  required_fields:
+    - problem_id
+    - corpus
+    - exclusion_code
+    - rule_id
+    - timestamp_utc
+    - filter_file_version
+    - split_rule_version
+  aggregate_report: exclusions_summary.csv
+  no_silent_drops: true
+
+# -----------------------------------------------------------------------------
+# Human / mined / LLM program strata (program-level; not corpus filter)
+# -----------------------------------------------------------------------------
+program_source_strata:
+  human_historical:
+    source: dataset_bundled_accepted_solutions
+    no_authorship_claims: true
+  mined_historical:
+    source: dataset_bundled_submissions_accepted_status
+  llm_generated:
+    source: preregistered_open_models
+    prompt_template_locked: true
+    prompt_optimization_allowed: false
+
+# -----------------------------------------------------------------------------
+# Prohibited post-lock changes
+# -----------------------------------------------------------------------------
+prohibited_after_lock:
+  - changing minimum_total_tests
+  - changing timeout values to increase pass rate
+  - adding problems from holdout to development based on latent rate
+  - removing difficulty strata with low latent prevalence
+  - relaxing Verified TPR/TNR thresholds
+  - enabling CC-BY-SA corpora as primary
+  - any filter rule motivated by observed ΔAUC
