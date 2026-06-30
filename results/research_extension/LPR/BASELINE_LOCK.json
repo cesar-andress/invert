@@ -1,0 +1,43 @@
+{
+  "study_id": "LPR-2026-001",
+  "repository": "cesar-andress/invert",
+  "baseline_version": "1.0",
+  "baseline_lock_timestamp_utc": "2026-06-29T12:00:00Z",
+  "baseline_lock_commit": null,
+  "baseline_specification_sha256": "bc6a72d93f86ee941cade3624b26cd789dc523e946b73180afc3556bef7c91b0",
+  "dataset_protocol_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
+  "eps_lock_commit": "aa6be108abdbe63eaab328edc36294206ec66f67",
+  "primary_baseline": "M_B z_NOPROC combined non-process",
+  "primary_success_model": "M_D z_NOPROC concat EPS",
+  "primary_competitor": "M_B",
+  "mandatory_baseline_families": ["B_IO", "B_SIZE", "B_AST", "B_TOK", "B_BC"],
+  "optional_baseline_families": ["B_EMB"],
+  "success_criteria": {
+    "delta_auc_primary_min": 0.05,
+    "delta_auprc_primary_min": 0.05,
+    "auprc_fallback_prevalence_below": 0.10,
+    "stratum_consistency_required": true
+  },
+  "forbidden_changes": [
+    "removing mandatory baseline families after holdout",
+    "using hidden labels in feature extraction",
+    "lowering success margin below 0.05",
+    "changing primary comparison from M_D vs M_B",
+    "LLM judges in baseline pipeline",
+    "INVERT detectors or adapters"
+  ],
+  "allowed_optional_baselines": [
+    "B_EMB_01 CodeBERT",
+    "B_EMB_02 GraphCodeBERT",
+    "B_EMB_03 UniXcoder",
+    "B_EMB_04 StarEncoder"
+  ],
+  "frozen_artifacts": [
+    "BASELINE_SPECIFICATION.md",
+    "baseline_features.csv",
+    "baseline_ablation_plan.md",
+    "baseline_go_no_go.json",
+    "BASELINE_LOCK.json"
+  ],
+  "implementation_may_begin_after_this_lock": true
+}

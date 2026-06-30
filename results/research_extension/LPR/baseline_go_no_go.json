@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "study_id": "LPR-2026-001",
+  "document": "baseline_go_no_go.json",
+  "status": "LOCKED",
+  "protocol_lock": {
+    "repository": "cesar-andress/invert",
+    "dataset_protocol_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
+    "eps_lock_commit": "aa6be108abdbe63eaab328edc36294206ec66f67",
+    "baseline_spec_commit": null,
+    "date": "2026-06-29"
+  },
+  "primary_comparison": {
+    "model_A": "M_A public I/O only z_IO",
+    "model_B": "M_B non-process combined z_NOPROC",
+    "model_C": "M_C EPS only P2-P7",
+    "model_D": "M_D z_NOPROC concat EPS",
+    "primary_test": "AUC(M_D) - AUC(M_B) on holdout public-pass",
+    "success_delta_auc": 0.05,
+    "success_delta_auprc": 0.05,
+    "auprc_fallback_if_prevalence_below": 0.10
+  },
+  "mandatory_baseline_families": [
+    "B_SIZE",
+    "B_AST",
+    "B_TOK",
+    "B_BC",
+    "B_IO"
+  ],
+  "optional_baseline_families": [
+    "B_EMB"
+  ],
+  "phase_0_spec_go": {
+    "criteria": [
+      {
+        "id": "BG0-1",
+        "criterion": "BASELINE_SPECIFICATION.md defines M_A M_B M_C M_D",
+        "required": true
+      },
+      {
+        "id": "BG0-2",
+        "criterion": "baseline_features.csv lists all mandatory families",
+        "required": true
+      },
+      {
+        "id": "BG0-3",
+        "criterion": "Success margin DeltaAUC 0.05 or DeltaAUPRC 0.05 frozen",
+        "required": true
+      },
+      {
+        "id": "BG0-4",
+        "criterion": "Leakage controls LC-01 through LC-06 documented",
+        "required": true
+      }
+    ],
+    "decision": "SPEC_GO"
+  },
+  "phase_2_extractor_go": {
+    "criteria": [
+      {
+        "id": "BG1",
+        "name": "mandatory_baselines_implemented",
+        "metric": "families_implemented",
+        "operator": ">=",
+        "threshold": 5,
+        "families": ["B_IO", "B_SIZE", "B_AST", "B_TOK", "B_BC"]
+      },
+      {
+        "id": "BG2",
+        "name": "no_hidden_label_in_extraction",
+        "metric": "leakage_unit_tests_pass",
+        "operator": "==",
+        "threshold": true
+      },
+      {
+        "id": "BG3",
+        "name": "no_invert_import",
+        "metric": "invert_dependency_count",
+        "operator": "==",
+        "threshold": 0
+      },
+      {
+        "id": "BG4",
+        "name": "reproducibility_baselines",
+        "metric": "baseline_exact_match_rate",
+        "operator": ">=",
+        "threshold": 0.99
+      },
+      {
+        "id": "BG5",
+        "name": "embedding_optional_logged",
+        "metric": "embedding_skip_logged_if_unavailable",
+        "operator": "==",
+        "threshold": true
+      }
+    ]
+  },
+  "no_go_criteria": [
+    {
+      "id": "BN1",
+      "condition": "baseline extractor reads withheld test outputs"
+    },
+    {
+      "id": "BN2",
+      "condition": "baseline feature set changed after holdout peek"
+    },
+    {
+      "id": "BN3",
+      "condition": "LLM judge used in baseline pipeline"
+    },
+    {
+      "id": "BN4",
+      "condition": "INVERT detector imported"
+    },
+    {
+      "id": "BN5",
+      "condition": "mandatory family omitted without OSF amendment"
+    }
+  ],
+  "stop_criteria": [
+    {
+      "id": "BS1",
+      "condition": "primary comparison changed from M_D vs M_B after results"
+    },
+    {
+      "id": "BS2",
+      "condition": "success margin lowered below 0.05 post hoc"
+    }
+  ],
+  "forbidden_changes_after_lock": [
+    "removing AST or token baselines",
+    "adding holdout-tuned syntax features",
+    "using hidden labels in z_NOPROC",
+    "switching primary embedding model on holdout",
+    "declaring success on M_C alone without M_D vs M_B"
+  ],
+  "allowed_optional_baselines": [
+    "B_EMB_01 CodeBERT",
+    "B_EMB_02 GraphCodeBERT",
+    "B_EMB_03 UniXcoder",
+    "B_EMB_04 StarEncoder"
+  ],
+  "audit_record": {
+    "spec_go_decision": "SPEC_GO",
+    "spec_go_timestamp_utc": "2026-06-29T12:00:00Z",
+    "extractor_go_decision": null
+  }
+}

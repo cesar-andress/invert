@@ -1,0 +1,34 @@
+baseline_id,baseline_name,family,mathematical_representation,level,uses_source,uses_public_execution,uses_hidden_labels,leakage_risk,implementation_cost,reproducibility_risk,expected_reviewer_value,mandatory,optional,primary_model_role
+B_IO,P1 public I/O signature,conductual,SHA-256 output hashes per public test + frozen bin sketch,program,yes,yes,no,none,low,very_low,very_high,yes,no,M_A
+B_SIZE_01,source char count,size,|pi| chars UTF-8 NFKC,program,yes,no,no,none,very_low,very_low,medium,yes,no,M_B component
+B_SIZE_02,source line count,size,newline count,program,yes,no,no,none,very_low,very_low,low,yes,no,M_B component
+B_SIZE_03,token count,size,len(tokenize(pi)),program,yes,no,no,none,very_low,very_low,medium,yes,no,M_B component
+B_SIZE_04,comment line count,size,regex comment lines,program,yes,no,no,none,very_low,very_low,low,yes,no,M_B component
+B_SIZE_05,cyclomatic complexity,size,McCabe on AST,program,yes,no,no,none,low,high,high,yes,no,M_B component
+B_SIZE_06,function def count,size,AST FunctionDef count,program,yes,no,no,none,low,high,medium,yes,no,M_B component
+B_SIZE_07,import count,size,AST import nodes,program,yes,no,no,none,low,high,medium,yes,no,M_B component
+B_AST_01,AST node histogram,ast,24-type count vector,program,yes,no,no,none,low,high,very_high,yes,no,M_B component
+B_AST_02,AST max depth,ast,max tree depth,program,yes,no,no,none,low,high,high,yes,no,M_B component
+B_AST_03,AST normalized hash,ast,SHA-256 ast.dump canonical,program,yes,no,no,none,low,high,medium,yes,no,M_B component
+B_AST_04,CFG node count,ast,approx basic blocks from AST,program,yes,no,no,none,medium,medium,medium,yes,no,M_B component
+B_AST_05,AST branch count,ast,If/For/While/Except counts,program,yes,no,no,none,low,high,medium,yes,no,M_B component
+B_AST_PAIR,AST edit distance,ast,pairwise tree edit (diagnostic),pair,yes,no,no,low,high,medium,medium,no,no,ablation only
+B_TOK_01,bag of tokens,token,top-512 dev vocab BOW,program,yes,no,no,none,medium,medium,very_high,yes,no,M_B component
+B_TOK_02,bigram hash sketch,token,256-bin hash bigrams,program,yes,no,no,none,medium,medium,high,yes,no,M_B component
+B_TOK_03,trigram hash sketch,token,256-bin hash trigrams,program,yes,no,no,none,medium,medium,high,yes,no,M_B component
+B_TOK_04,identifier-normalized BOW,token,BOW after VAR renaming,program,yes,no,no,none,medium,medium,very_high,yes,no,M_B component
+B_BC_01,static opcode histogram,bytecode_static,32-bin compile-time opcode PMF,program,yes,no,no,none,low,high,very_high,yes,no,M_B component
+B_BC_02,static instruction count,bytecode_static,len(dis instructions),program,yes,no,no,none,low,high,medium,yes,no,M_B component
+B_BC_03,static branch opcodes,bytecode_static,jump opcode count,program,yes,no,no,none,low,high,medium,yes,no,M_B component
+B_EMB_01,CodeBERT embedding,embedding,768-d mean pool CLS,program,yes,no,no,none,high,medium,high,no,yes,M_B optional
+B_EMB_02,GraphCodeBERT embedding,embedding,768-d mean pool,program,yes,no,no,none,high,medium,high,no,yes,optional ablation
+B_EMB_03,UniXcoder embedding,embedding,768-d mean pool primary optional,program,yes,no,no,none,high,medium,very_high,no,yes,M_B optional primary embed
+B_EMB_04,StarEncoder embedding,embedding,model-specific pool,program,yes,no,no,none,high,medium,medium,no,yes,optional
+B_TRIV_01,majority class,trivial,constant prevalence,program,no,no,yes_eval_only,high if train leak,very_low,very_low,low,no,no,diagnostic
+B_TRIV_02,random score,trivial,Uniform(0,1) seeded,program,no,no,no,none,very_low,very_low,low,no,no,diagnostic
+B_TRIV_03,problem id onehot,trivial,one-hot problem,program,no,no,no,low,low,high,medium,no,no,diagnostic nuisance
+B_TRIV_04,model id onehot,trivial,one-hot model LLM stratum,program,no,no,no,low,low,high,medium,no,no,diagnostic nuisance
+B_NOPROC,combined non-process,combined,z_IO+z_SIZE+z_AST+z_TOK+z_BC(+z_EMB),program,yes,partial_io_only,no,none,medium,medium,very_high,yes,no,M_B
+B_NOPROC_NOEMB,combined without embedding,combined,B_NOPROC minus B_EMB,program,yes,partial_io_only,no,none,medium,high,very_high,yes,no,ablation B-NOEMB
+M_C,EPS only process,eps,P2-P7 from EPS spec,program,yes,yes,no,none,high,medium,high,yes,no,M_C diagnostic
+M_D,NOPROC plus full EPS,combined,z_NOPROC concat EPS,program,yes,yes,no,none,high,medium,very_high,yes,no,M_D primary success
