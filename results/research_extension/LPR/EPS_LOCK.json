@@ -1,0 +1,17 @@
+{
+  "study_id": "LPR-2026-001",
+  "repository": "cesar-andress/invert",
+  "eps_lock_commit": "aa6be108abdbe63eaab328edc36294206ec66f67",
+  "eps_version": "1.0",
+  "eps_lock_date": "2026-06-29",
+  "eps_lock_message": "Freeze External Process Signature (EPS) instrument specification.",
+  "dataset_protocol_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
+  "frozen_dimensions": ["P1", "P2", "P3", "P4", "P5", "P6", "P7"],
+  "frozen_artifacts": [
+    "EPS_SPECIFICATION.md",
+    "eps_features.csv",
+    "eps_ablation_plan.md",
+    "eps_go_no_go.json",
+    "EPS_LOCK.json"
+  ]
+}

@@ -7,6 +7,7 @@
 **Date:** 2026-06-29  
 **Repository:** `cesar-andress/invert`  
 **Protocol lock (dataset):** `ff450096985b22273dd0b75d011f493cc925d41b`  
+**EPS lock commit:** `aa6be108abdbe63eaab328edc36294206ec66f67`  
 **Companion artifacts:** `eps_features.csv`, `eps_ablation_plan.md`, `eps_go_no_go.json`
 
 ---

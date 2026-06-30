@@ -7,7 +7,7 @@
   "protocol_lock": {
     "repository": "cesar-andress/invert",
     "dataset_protocol_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
-    "eps_spec_commit": null,
+    "eps_spec_commit": "aa6be108abdbe63eaab328edc36294206ec66f67",
     "date": "2026-06-29"
   },
   "instrument_summary": {
