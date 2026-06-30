@@ -1,0 +1,17 @@
+{
+  "study_id": "LPR-2026-001",
+  "repository": "cesar-andress/invert",
+  "protocol_lock_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
+  "protocol_lock_date": "2026-06-29",
+  "protocol_lock_message": "Add LPR dataset protocol docs and Cursor git-lock rule.",
+  "frozen_artifacts": [
+    "PREREGISTRATION.md",
+    "DATASET_PROTOCOL.md",
+    "benchmark_inventory.csv",
+    "corpus_filters.yaml",
+    "split_rule.yaml",
+    "dataset_go_no_go.json",
+    "PROTOCOL_LOCK.json"
+  ],
+  "note": "Auditors: verify git rev-parse HEAD matches protocol_lock_commit when checking out this commit."
+}

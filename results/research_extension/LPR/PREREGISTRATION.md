@@ -5,6 +5,8 @@
 **Status:** Preregistered design only. No code, data, or results exist at registration time.  
 **Version:** 1.0  
 **Date:** 2026-06-29  
+**Repository:** `cesar-andress/invert`  
+**Protocol lock commit:** `ff450096985b22273dd0b75d011f493cc925d41b` (see `PROTOCOL_LOCK.json`)  
 **Authors:** *[to be completed before OSF deposit]*
 
 ---

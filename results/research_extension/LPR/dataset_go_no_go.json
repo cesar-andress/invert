@@ -5,7 +5,7 @@
   "status": "LOCKED",
   "protocol_lock": {
     "repository": "cesar-andress/invert",
-    "commit": null,
+    "commit": "ff450096985b22273dd0b75d011f493cc925d41b",
     "date": "2026-06-29"
   },
   "description": "Objective dataset-protocol GO/NO-GO criteria evaluated after feasibility pass and before primary label collection. No outcome-based tuning permitted.",
