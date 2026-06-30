@@ -1,0 +1,8 @@
+baseline_ok,baseline_size_dim,eps_P2,eps_ok,fixture,label_status,latent_incorrect
+True,7,0.0,True,public_pass_hidden_pass,public_pass_hidden_pass,False
+True,7,0.0,True,public_pass_hidden_fail,public_pass_hidden_fail,True
+True,7,0.0,True,public_fail,outright_fail,False
+True,0,,True,timeout,timeout,False
+True,0,,True,syntax_error,syntax_error,False
+True,7,0.0,True,deterministic_execution,public_pass_hidden_pass,False
+True,7,0.3333333333333333,True,unstable_execution,public_pass_hidden_pass,False

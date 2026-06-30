@@ -1,0 +1,11 @@
+{
+  "decision": "GO",
+  "criteria": {
+    "baseline_lock_present": true,
+    "toy_fixtures_deterministic": true,
+    "split_deterministic": true,
+    "no_invert_import_in_lpr_module": true,
+    "label_separation_ok": true
+  },
+  "baseline_lock_commit": "b80cc321628ca03865d26df8c4e51c6555a00b8a"
+}
