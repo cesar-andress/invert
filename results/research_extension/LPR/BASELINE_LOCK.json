@@ -3,7 +3,7 @@
   "repository": "cesar-andress/invert",
   "baseline_version": "1.0",
   "baseline_lock_timestamp_utc": "2026-06-29T12:00:00Z",
-  "baseline_lock_commit": null,
+  "baseline_lock_commit": "b80cc321628ca03865d26df8c4e51c6555a00b8a",
   "baseline_specification_sha256": "bc6a72d93f86ee941cade3624b26cd789dc523e946b73180afc3556bef7c91b0",
   "dataset_protocol_commit": "ff450096985b22273dd0b75d011f493cc925d41b",
   "eps_lock_commit": "aa6be108abdbe63eaab328edc36294206ec66f67",
