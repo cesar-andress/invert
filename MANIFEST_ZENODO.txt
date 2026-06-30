@@ -1,9 +1,12 @@
-# MANIFEST_ZENODO.txt — intended Zenodo package contents
-# Repository: ~/papers/invert/invert
-# Generated: 2026-06-29
+# MANIFEST_ZENODO.txt — intended Zenodo package contents (INVERT v1.0.0)
+# Generated: 2026-06-30
 #
 # Lines prefixed with "+" are intended INCLUSIONS.
 # Lines prefixed with "-" are intended EXCLUSIONS.
+
+# --- Release metadata ---
++ VERSION: v1.0.0
++ PURPOSE: artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code
 
 # --- Core source and configuration ---
 + pyproject.toml
@@ -14,6 +17,14 @@
 + ARTIFACTS.md
 + ZENODO_AUDIT.md
 + MANIFEST_ZENODO.txt
++ PAPER_ARTIFACTS.md
++ KEY_OUTPUTS.sha256
++ scripts/lib/repo_root.sh
++ scripts/verify_artifact.sh
++ scripts/regenerate_confirmatory_tables.sh
++ scripts/checksum_key_outputs.sh
++ scripts/export_paper_figures.py
++ results/core_v2/figures/
 + CITATION.cff
 + .zenodo.json
 + .env.example
@@ -47,7 +58,7 @@
 + data/core_v2/code/core_v2_*_pilot_*
 + data/core_v2/stripped/core_v2_*_pilot_*
 
-# --- Results and reports ---
+# --- Results and reports (confirmatory frozen runs) ---
 + results/core_v2/core_v2_decision_report.md
 + results/core_v2/core_v2_dimension_summary.csv
 + results/core_v2/core_v2_model_dimension_summary.csv
@@ -64,6 +75,23 @@
 + data/code/local_stub/
 + src/invert/
 + results/runs/
+
++ EXTERNAL_VALIDATION_CLOSURE.md
++ EXTERNAL_EFFIBENCH_FEASIBILITY.md
++ EXTERNAL_CLASS_E_FEASIBILITY.md
++ external_effibench_go_no_go.json
++ external_effibench_candidate_tasks.csv
++ external_class_e_go_no_go.json
++ external_class_e_smoke_results.csv
+
+# --- NOT in v1.0.0 Zenodo bundle (experimental / incomplete) ---
+# - configs/core_v2_robustness_large_n_*.yaml
+# - data/core_v2/**/core_v2_robustness_large_n_*
+# - results/core_v2/runs/core_v2_robustness_large_n_*
+# - results/core_v2/robustness_large_n_*
+# - external_study/   (third-party benchmark clones; not confirmatory)
+# - scripts/run_robustness_large_n_dynamic.sh
+# - scripts/summarize_robustness_large_n.py
 
 # --- Optional legacy cloud artifacts (omit unless desired) ---
 # + data/raw/openai/
@@ -100,6 +128,6 @@
 - *.log
 - paper/
 
-# --- External (separate Zenodo record or journal supplement) ---
-# Manuscript LaTeX: ~/papers/invert/paper/
+# --- External (separate record or journal supplement) ---
+# Manuscript LaTeX (ACM TOSEM companion paper)
 # Ollama model weights: managed by Ollama, not in this repository

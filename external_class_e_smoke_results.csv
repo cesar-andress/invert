@@ -1,0 +1,10 @@
+case_id,source_kind,task_id,detector_method,reason,unique_trace_count,all_outputs_valid,requires_item_processor,invert_api_elements
+arbitrary_deterministic_function,arbitrary,letters_8,ambiguous,no_item_processor_class,0,False,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+arbitrary_randomized_function,arbitrary,letters_8,ambiguous,no_item_processor_class,0,False,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+synthetic_conforming_deterministic,synthetic_external_smoke,letters_8,deterministic,identical_traces_across_runs,1,True,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+synthetic_conforming_randomized,synthetic_external_smoke,letters_8,randomized,variable_traces_across_runs,5,True,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+frozen_invert_deterministic_rep1,invert_positive_control,letters_8,deterministic,identical_traces_across_runs,1,True,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+frozen_invert_randomized_rep1,invert_positive_control,letters_8,randomized,variable_traces_across_runs,5,True,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+effibench_x_yokohama-phenomena,effibench_x,letters_8,ambiguous,exec_failed: EOF when reading a line,0,False,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+effibench_x_nested-repetition-compression,effibench_x,letters_8,ambiguous,exec_failed: EOF when reading a line,0,False,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"
+effibench_x_chayas,effibench_x,letters_8,ambiguous,"exec_failed: not enough values to unpack (expected 2, got 0)",0,False,True,"ItemProcessor(items,visit_fn,seed); process_all(); visit_fn trace; task.expected_items"

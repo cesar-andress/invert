@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/lib/repo_root.sh"
 
-cd ~/papers/invert/invert
 
 MODELS="ollama:qwen3-coder:30b,ollama:devstral:latest,ollama:qwen2.5-coder:14b"
 CONFIG="configs/core_v2_generalization_local_euler_rk4.yaml"

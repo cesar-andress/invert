@@ -36,3 +36,13 @@ htmlcov/
 
 # TOSEM manuscript lives outside this repo: ~/papers/invert/paper/
 paper/
+
+# Third-party feasibility clones (not part of confirmatory bundle)
+external_study/
+
+# Incomplete robustness large-N (not v1.0.0 confirmatory; exclude from git and Zenodo)
+configs/core_v2_robustness_large_n_*.yaml
+**/core_v2_robustness_large_n_*/
+results/core_v2/robustness_large_n_*
+scripts/run_robustness_large_n_dynamic.sh
+scripts/summarize_robustness_large_n.py

@@ -1,12 +1,13 @@
 {
   "title": "INVERT Core v2 Replication Package",
-  "description": "Source code, preregistered tasks, generated artifacts, frozen detector metadata, and analysis reports for the INVERT Process Trinity study (ACM TOSEM). Confirmatory results use local Ollama models; paid cloud APIs are optional.",
+  "description": "INVERT v1.0.0 artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code. Includes preregistered Family 1 tasks, behavioral oracles, frozen rule-based detectors, archived Ollama-local generalization runs (Classes B-E), analysis scripts, and confirmatory CSV/MD reports. Verification does not require LLM re-generation or API keys.",
   "upload_type": "software",
-  "publication_date": "2026-06-29",
+  "version": "v1.0.0",
+  "language": "eng",
   "creators": [
     {
-      "name": "Anonymous Author",
-      "affiliation": "Anonymous Institution"
+      "name": "Andrés, César",
+      "affiliation": "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
     }
   ],
   "keywords": [
@@ -14,21 +15,9 @@
     "process signatures",
     "dynamic analysis",
     "software engineering benchmark",
-    "reproducibility"
+    "reproducibility",
+    "INVERT"
   ],
-  "license": "MIT",
-  "access_right": "open",
-  "communities": [
-    {
-      "identifier": "zenodo"
-    }
-  ],
-  "related_identifiers": [
-    {
-      "relation": "isSupplementTo",
-      "identifier": "TODO: Zenodo DOI or journal DOI",
-      "resource_type": "publication-article"
-    }
-  ],
-  "notes": "Manuscript LaTeX source lives outside this repository at ~/papers/invert/paper/. Frozen generalization run IDs: core_v2_generalization_local_eager_lazy_001, core_v2_generalization_local_bfs_dfs_001, core_v2_generalization_local_deterministic_randomized_001, core_v2_generalization_local_quadrature_001."
+  "license": "mit",
+  "access_right": "open"
 }

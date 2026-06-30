@@ -1,0 +1,33 @@
+{
+  "study_date": "2026-06-30",
+  "target_class": "E",
+  "target_dimension": "deterministic_vs_randomized",
+  "frozen_detector_sha256": "ab5e5a91750dbd17c0e87e6bd8338db1fd92ac2fce7c244e3b02c31fbc3e5f23",
+  "frozen_detector_path": "src/invert_core/detectors/deterministic_randomized.py",
+  "detector_modified": false,
+  "requires_invert_api": true,
+  "invert_api_contract": {
+    "required_class": "ItemProcessor",
+    "constructor": "ItemProcessor(items, visit_fn, seed=None)",
+    "required_method": "process_all()",
+    "trace_mechanism": "visit_fn callback invoked during process_all",
+    "task_input": "DeterministicRandomizedTask with items list and expected_items oracle",
+    "run_count": 5,
+    "classification_basis": "unique visit traces across repeated executions with output-set validation"
+  },
+  "works_on_arbitrary_python": false,
+  "works_with_invert_contract_only": true,
+  "manual_annotation_required": false,
+  "adapter_construct_validity_risk": "high",
+  "adapter_note": "Any wrapper that re-implements ItemProcessor + visit_fn on external code defines the trace surface and reintroduces detector-task co-design; not externally valid under frozen-detector discipline.",
+  "smoke_cases_run": 9,
+  "effibench_x_cases_run": 3,
+  "recommended": "no-go",
+  "main_blocker": "Frozen Class E detector requires INVERT ItemProcessor(items, visit_fn, seed) + process_all() + DeterministicRandomizedTask expected_items oracle; arbitrary Python and EffiBench-X competitive-programming solutions abstain (no_item_processor_class or execution_failed) without a substantive adapter that encodes visit traces.",
+  "estimated_effort_days_for_full_study": 21,
+  "positive_controls": {
+    "frozen_invert_deterministic": "deterministic",
+    "frozen_invert_randomized": "randomized",
+    "synthetic_conforming_smoke": "deterministic/randomized as expected"
+  }
+}

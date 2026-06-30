@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/lib/repo_root.sh"
 
-cd ~/papers/invert/invert
 
 invert check-apis --models openai,anthropic
 

@@ -1,0 +1,26 @@
+task_id,title,tags,input_output_form,tests_available,profiling_available,visit_trace_plausible,risk_level,has_bfs_dfs_in_code,frozen_detector_compatible
+leetcode_3191_maximum-score-after-applying-operations-on-a-tree,Maximum Score After Applying Operations on a Tree,dynamic-programming;tree;depth-first-search,stdin/stdout (competitive programming),True,False,False,high,True,False
+leetcode_3218_find-number-of-coins-to-place-in-tree-nodes,Find Number of Coins to Place in Tree Nodes,dynamic-programming;tree;depth-first-search;sorting;heap-priority-queue,stdin/stdout (competitive programming),True,True,False,high,True,False
+leetcode_3517_shortest-distance-after-road-addition-queries-i,Shortest Distance After Road Addition Queries I,array;breadth-first-search;graph,stdin/stdout (competitive programming),True,False,False,high,True,False
+leetcode_3532_time-taken-to-mark-all-nodes,Time Taken to Mark All Nodes,dynamic-programming;tree;depth-first-search;graph,stdin/stdout (competitive programming),True,False,False,high,True,False
+leetcode_3576_find-subtree-sizes-after-changes,Find Subtree Sizes After Changes,array;hash-table;string;tree;depth-first-search,stdin/stdout (competitive programming),True,True,False,high,True,False
+leetcode_3687_longest-special-path,Longest Special Path,array;hash-table;tree;depth-first-search;sliding-window,stdin/stdout (competitive programming),True,True,False,high,True,False
+leetcode_3389_minimum-time-to-visit-disappearing-nodes,Minimum Time to Visit Disappearing Nodes,array;graph;heap-priority-queue;shortest-path,stdin/stdout (competitive programming),True,False,False,high,True,False
+aizu_1459_e-circuit-is-now-on-sale!,E-Circuit Is Now on Sale!,,stdin/stdout (competitive programming),True,True,False,high,True,False
+aizu_3631_i-love-square-number,I Love Square Number,,stdin/stdout (competitive programming),True,True,False,high,True,False
+atcoder_abc396d_minimum-xor-path,D - Minimum XOR Path,,stdin/stdout (competitive programming),True,True,False,high,True,False
+atcoder_abc397e_path-decomposition-of-a-tree,E - Path Decomposition of a Tree,,stdin/stdout (competitive programming),True,True,False,high,True,False
+codechef_QUICKEXIT0_quick-exit,Quick Exit,,stdin/stdout (competitive programming),True,True,False,high,True,False
+leetcode_3271_count-the-number-of-houses-at-a-certain-distance-i,Count the Number of Houses at a Certain Distance I,breadth-first-search;graph;prefix-sum,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3326_count-pairs-of-connectable-servers-in-a-weighted-tree-network,Count Pairs of Connectable Servers in a Weighted Tree Network,array;tree;depth-first-search,stdin/stdout (competitive programming),True,True,False,very_high,False,False
+leetcode_3509_k-th-largest-perfect-subtree-size-in-binary-tree,K-th Largest Perfect Subtree Size in Binary Tree,tree;depth-first-search;sorting;binary-tree,stdin/stdout (competitive programming),True,True,False,very_high,False,False
+leetcode_3633_maximize-the-number-of-target-nodes-after-connecting-trees-i,Maximize the Number of Target Nodes After Connecting Trees I,tree;depth-first-search;breadth-first-search,stdin/stdout (competitive programming),True,True,False,very_high,False,False
+leetcode_3675_maximize-sum-of-weights-after-edge-removals,Maximize Sum of Weights after Edge Removals,dynamic-programming;tree;depth-first-search,stdin/stdout (competitive programming),True,True,False,very_high,False,False
+leetcode_3219_make-lexicographically-smallest-array-by-swapping-elements,Make Lexicographically Smallest Array by Swapping Elements,array;union-find;sorting,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3310_count-the-number-of-houses-at-a-certain-distance-ii,Count the Number of Houses at a Certain Distance II,graph;prefix-sum,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3346_lexicographically-smallest-string-after-operations-with-constraint,Lexicographically Smallest String After Operations With Constraint,string;greedy,stdin/stdout (competitive programming),True,True,False,very_high,False,False
+leetcode_3348_minimum-cost-walk-in-weighted-graph,Minimum Cost Walk in Weighted Graph,array;bit-manipulation;union-find;graph,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3356_shortest-uncommon-substring-in-an-array,Shortest Uncommon Substring in an Array,array;hash-table;string;trie,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3431_find-the-minimum-cost-array-permutation,Find the Minimum Cost Array Permutation,array;dynamic-programming;bit-manipulation;bitmask,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3445_lexicographically-minimum-string-after-removing-stars,Lexicographically Minimum String After Removing Stars,hash-table;string;stack;greedy;heap-priority-queue,stdin/stdout (competitive programming),True,False,False,very_high,False,False
+leetcode_3484_lexicographically-smallest-string-after-a-swap,Lexicographically Smallest String After a Swap,string;greedy,stdin/stdout (competitive programming),True,False,False,very_high,False,False

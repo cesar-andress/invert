@@ -3,25 +3,26 @@ title: "INVERT Core v2 Replication Package"
 message: "If you use this software, please cite it using these metadata."
 type: software
 license: MIT
+version: 1.0.0
+date-released: 2026-06-30
 authors:
-  - given-names: Anonymous
-    family-names: Author
-    affiliation: "Anonymous Institution"
+  - given-names: César
+    family-names: Andrés
+    affiliation: "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
+    orcid: "https://orcid.org/0009-0001-8968-3404"
 repository-code: "https://github.com/TODO/invert"
-version: 0.1.0
-date-released: 2026-06-29
 keywords:
   - LLM code generation
   - process signatures
   - dynamic analysis
   - software engineering benchmark
+  - reproducibility
 preferred-citation:
   type: article
-  title: "INVERT: The Process Trinity of Generated Code"
-  subtitle: "Recovering Quantity, Order, and Variability Signatures from LLM-Generated Programs"
+  title: "INVERT: Recovering Quantity, Order, and Variability Signatures from Behaviorally Equivalent Generated Code"
   authors:
-    - given-names: Anonymous
-      family-names: Author
+    - given-names: César
+      family-names: Andrés
   journal: "ACM Transactions on Software Engineering and Methodology"
   year: 2026
-  notes: "Manuscript source of truth: ~/papers/invert/paper/ (LaTeX). TODO: Zenodo DOI."
+  notes: "Companion software release v1.0.0. Manuscript LaTeX is external to this repository. TODO: Zenodo DOI after deposit."

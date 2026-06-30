@@ -1,6 +1,6 @@
-# Artifact Inventory — INVERT Core v2
+# Artifact Inventory — INVERT Core v2 (v1.0.0)
 
-Absolute root: `~/papers/invert/invert/`
+Repository root: extract or clone this package; all paths below are relative to that root.
 
 ---
 
@@ -192,6 +192,23 @@ All four frozen generalization runs contain this file. Documented SHA256 hashes 
 
 ---
 
+## External validation feasibility (exploratory, not confirmatory)
+
+The following files document **closed feasibility probes** that informed the paper's trace-contract dependence threat. They are **not** part of the confirmatory artifact set and must not be cited as empirical results:
+
+| File | Contents |
+|------|----------|
+| `EXTERNAL_VALIDATION_CLOSURE.md` | Summary closure record (Classes D and E) |
+| `EXTERNAL_EFFIBENCH_FEASIBILITY.md` | Class D / EffiBench-X probe |
+| `external_effibench_go_no_go.json` | Class D go/no-go decision |
+| `EXTERNAL_CLASS_E_FEASIBILITY.md` | Class E external smoke probe |
+| `external_class_e_go_no_go.json` | Class E go/no-go decision |
+| `external_class_e_smoke_results.csv` | Class E smoke outcomes |
+
+No detector or frozen run was modified. Confirmatory evidence remains the four `core_v2_generalization_local_*_001` runs only.
+
+---
+
 ## Manuscript (external to this repo)
 
-LaTeX source: `~/papers/invert/paper/` (listed in `.gitignore` here by design).
+LaTeX source for the ACM TOSEM manuscript is maintained separately from this replication package (see paper Data Availability; TODO: Zenodo DOI).
