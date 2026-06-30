@@ -1,4 +1,4 @@
-# INVERT Core v2 results (v1.0.0)
+# INVERT Core v2 results (v1.0.1)
 
 Outputs from `invert-core` commands land here. Confirmatory paper claims use the four **frozen generalization** run directories listed in `README.md`.
 

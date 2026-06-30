@@ -20,8 +20,8 @@ This report documents sensitive-data exposure, bloat, packaging recommendations,
 | Frozen detector metadata | **Present** | All four confirmatory runs have `frozen_detector_metadata.json` |
 | Verification without LLM | **Documented** | `bash scripts/verify_artifact.sh` |
 | License | **MIT** | `LICENSE` present |
-| Zenodo DOI | **Pending deposit** | Assign on Zenodo upload; not embedded in `.zenodo.json` |
-| GitHub URL | **Pending publish** | Add to `CITATION.cff` after repository is public |
+| Zenodo DOI | **Assigned** | `10.5281/zenodo.21063175` (v1.0.1; in `CITATION.cff`, README, manuscript Data Availability) |
+| GitHub URL | **Pending** | Add to `CITATION.cff` when public repository URL is finalized |
 | Git working tree | **Not clean** | See §15 — commit or stash before tagging |
 | Robustness large-N runs | **Exclude v1.0.1** | Incomplete/experimental; not confirmatory |
 | External validation probes | **Include as notes only** | `EXTERNAL_VALIDATION_CLOSURE.md` and sibling feasibility files; exploratory, not confirmatory |
@@ -181,19 +181,19 @@ No full LLM generation required for Zenodo verification.
 | `v0.` / `0.1.0` in release metadata | **Fixed** → `1.0.1` / `v1.0.1` |
 | `Process Trinity` as paper title | **Removed** from README title; historical label only in legacy docs if any |
 | `closure theorem` / `mathematical completeness` | **Not claimed** in v1.0.1 README |
-| Zenodo `.zenodo.json` | **Minimal** — no `related_identifiers`, communities, or TODO fields |
-| GitHub URL in `CITATION.cff` | **Omitted** until repository is public |
+| Zenodo DOI | **Recorded** | `10.5281/zenodo.21063175` in `CITATION.cff` and docs; not embedded in minimal `.zenodo.json` |
+| GitHub URL in `CITATION.cff` | **Omitted** until repository URL is public |
 
 ---
 
-## 14. Open items before Zenodo deposit
+## 14. Open items after Zenodo deposit (v1.0.1)
 
-1. **Assign Zenodo DOI** → update `CITATION.cff`, `.zenodo.json`, manuscript `data_availability.tex`
-2. **Publish GitHub repository URL** → update `CITATION.cff` `repository-code` and `.zenodo.json` `related_identifiers`
-3. **Clean git tree** → commit v1.0.1 metadata + verification scripts; resolve or exclude modified confirmatory CSVs (§15)
-4. **Confirm legacy cloud artifacts** included or omitted
-5. **Upload bundle** per `MANIFEST_ZENODO.txt` (exclude robustness large-N)
-6. **GitHub release** `v1.0.1` → enable Zenodo-GitHub integration or manual upload
+1. ~~**Assign Zenodo DOI**~~ → **Done:** `10.5281/zenodo.21063175` in `CITATION.cff`, README, manuscript `data_availability.tex`
+2. **Publish GitHub repository URL** → update `CITATION.cff` `repository-code` when public
+3. **Clean git tree** → commit post-deposit metadata updates; do not alter confirmatory CSV contents
+4. **Confirm legacy cloud artifacts** included or omitted in future bundle revisions
+5. **Upload bundle** per `MANIFEST_ZENODO.txt` (exclude robustness large-N) — satisfied for v1.0.1 deposit
+6. ~~**GitHub release** `v1.0.1`~~ → published; Zenodo record linked
 
 ---
 
@@ -222,7 +222,7 @@ git log -1 --oneline  →  8ad8415 Updating pilot runs
 | Incomplete robustness runs | Medium (scope confusion) | Exclude from v1.0.1 |
 | Analyze-run replay drift | Medium | Default verify uses checksums only |
 | Legacy `data/raw/openai/` untracked blobs | Low–medium | Omit unless explicitly needed |
-| TODO DOI/URL placeholders | Low | Resolve at deposit |
+| TODO DOI/URL placeholders | **Resolved (DOI)** | GitHub URL pending public repo |
 | Modified CSVs in working tree | Medium | Resolve before tag |
 
 **No automatic deletions performed.**

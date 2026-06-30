@@ -211,4 +211,4 @@ No detector or frozen run was modified. Confirmatory evidence remains the four `
 
 ## Manuscript (external to this repo)
 
-LaTeX source for the ACM TOSEM manuscript is maintained separately from this replication package (see paper Data Availability; Zenodo DOI assigned on deposit).
+LaTeX source for the ACM TOSEM manuscript is maintained separately from this replication package (see paper Data Availability; Zenodo DOI: 10.5281/zenodo.21063175).

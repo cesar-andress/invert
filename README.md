@@ -145,7 +145,11 @@ invert --help         # Legacy prototype
 
 ## Citation
 
-See `CITATION.cff`. Zenodo DOI: assign on deposit (minimal `.zenodo.json` for GitHub–Zenodo integration).
+**Artifact:** INVERT Core v2 Replication Package, v1.0.1.  
+**DOI:** [10.5281/zenodo.21063175](https://doi.org/10.5281/zenodo.21063175)  
+**URL:** https://doi.org/10.5281/zenodo.21063175
+
+See also `CITATION.cff` for machine-readable metadata.
 
 ## License
 

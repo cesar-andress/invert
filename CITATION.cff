@@ -4,6 +4,7 @@ message: "If you use this software, please cite it using these metadata."
 type: software
 license: MIT
 version: 1.0.1
+doi: 10.5281/zenodo.21063175
 date-released: 2026-06-30
 authors:
   - given-names: César
@@ -24,4 +25,4 @@ preferred-citation:
       family-names: Andrés
   journal: "ACM Transactions on Software Engineering and Methodology"
   year: 2026
-  notes: "Companion software release v1.0.1 (metadata correction; confirmatory artifacts unchanged). Manuscript LaTeX is external to this repository. Zenodo DOI assigned on deposit."
+  notes: "Companion software release v1.0.1. Manuscript LaTeX is external to this repository. Zenodo DOI: 10.5281/zenodo.21063175."

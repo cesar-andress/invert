@@ -238,10 +238,10 @@ Documented detector file hashes (SHA256, unchanged in v1.0.1):
 - Default verification uses **checksum comparison** (`KEY_OUTPUTS.sha256`); analyze-run replay may diverge if detector sources changed after freeze (see `ZENODO_AUDIT.md` §10).
 - Class A (`euler_vs_rk4`) has pilots only; not part of confirmatory aggregates.
 - Larger-N robustness runs (`core_v2_robustness_large_n_*`) are **not** part of v1.0.1 confirmatory evidence if present locally; exclude from Zenodo.
-- Zenodo DOI and public GitHub URL are assigned on deposit (see `CITATION.cff`; minimal `.zenodo.json` without placeholder related identifiers).
+- Zenodo DOI: **10.5281/zenodo.21063175** (v1.0.1; see `CITATION.cff`).
 
 ---
 
 ## 12. Manuscript linkage
 
-LaTeX source of truth is maintained outside this repository (companion TOSEM manuscript). Data Availability references this package (Zenodo DOI assigned on deposit).
+LaTeX source of truth is maintained outside this repository (companion TOSEM manuscript). Data Availability references this package (Zenodo DOI: 10.5281/zenodo.21063175).

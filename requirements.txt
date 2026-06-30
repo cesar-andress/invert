@@ -1,4 +1,4 @@
-# Pinned from pyproject.toml [project.dependencies] (INVERT v1.0.0).
+# Pinned from pyproject.toml [project.dependencies] (INVERT v1.0.1).
 # Install editable package: pip install -e ".[dev]"
 typer>=0.9.0
 pyyaml>=6.0
