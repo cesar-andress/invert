@@ -1,0 +1,30 @@
+study_id: H04_self_consistency_process_collapse
+title: "Self-consistency process diversity collapse"
+status: preflight
+
+constraints:
+  modify_frozen_detectors: false
+  modify_frozen_runs: false
+  human_annotation: false
+  llm_judges: false
+  external_adapters: false
+
+invert_classes:     - C
+    - D
+    - E
+
+generation:
+  enabled: true
+  estimated_calls: 720
+  models:
+    - ollama:qwen2.5-coder:14b
+    - ollama:devstral:latest
+    - ollama:qwen3-coder:30b
+  temperature: null  # see experiment design
+  repetitions: null
+
+outputs:
+  results_dir: results/research_extension/H04_self_consistency_process_collapse
+  fingerprints_csv: fingerprints.csv
+  summary_csv: summary.csv
+  report_md: REPORT.md

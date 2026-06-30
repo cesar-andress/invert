@@ -1,0 +1,7 @@
+{
+  "hypothesis_id": "H03_reasoning_vs_coder_process",
+  "recommended": "pending",
+  "criterion": "GO if fingerprint divergence significant on >=2 classes with matched valid_n>=30",
+  "full_study_recommended": false,
+  "paper_placement": "pending_preflight_execution"
+}

@@ -1,0 +1,10 @@
+{
+  "detector_module": "invert_core.external.external_variability_detector",
+  "detector_path": "src/invert_core/external/external_variability_detector.py",
+  "sha256": "bf247dfdf1b57c16d460f643418cdf1bd893ef6218b4bca06b05a202ee830d6c",
+  "git_commit": "8b401795617a430edec4f429d875be9d8c66d9c8",
+  "uses_invert_api": false,
+  "separate_from_class_e": true,
+  "class_e_detector_path": "src/invert_core/detectors/deterministic_randomized.py",
+  "note": "Frozen before external variability study scoring"
+}

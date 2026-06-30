@@ -1,0 +1,175 @@
+# LPR frozen public / withheld test partition rule
+# Version: 1.0
+# Status: LOCKED — do not modify after protocol audit timestamp
+# Study: LPR-2026-001
+#
+# This file defines how bundled test cases are assigned to PUBLIC vs WITHHELD
+# suites. The rule is deterministic, label-independent, and outcome-blind.
+
+schema_version: "1.0"
+study_id: LPR-2026-001
+document: split_rule.yaml
+locked: true
+
+# -----------------------------------------------------------------------------
+# Design principle
+# -----------------------------------------------------------------------------
+design_principle: >
+  Partition test indices using a fixed, auditable ordering rule that does not
+  access program outputs, pass/fail rates, model identity, or problem difficulty.
+  The withheld suite acts as a proxy for a stronger oracle available only after
+  acceptance on the public suite (latent incorrectness ground truth).
+
+# -----------------------------------------------------------------------------
+# Applicability
+# -----------------------------------------------------------------------------
+applies_to:
+  - corpus: TACO
+    hf_dataset: BAAI/TACO
+    split_name: test
+    role: PRIMARY_DEVELOPMENT
+  - corpus: CodeContests+
+    hf_dataset: ByteDance-Seed/Code-Contests-Plus
+    config: Verified
+    role: HOLDOUT_PRIMARY
+
+does_not_apply_to:
+  - Problems with interactive or file-IO-only judging (excluded upstream)
+  - Problems where parsed test count < minimum_total_tests (see corpus_filters.yaml)
+
+# -----------------------------------------------------------------------------
+# Test enumeration (deterministic ordering)
+# -----------------------------------------------------------------------------
+test_enumeration:
+  method: stable_index_after_normalization
+  description: >
+    Enumerate atomic test cases in a canonical order, assign contiguous indices
+    0 .. N-1, then partition by index. No random shuffling. No stratification by
+    expected difficulty or pass rate.
+
+  taco:
+    source_field: input_output  # JSON string in HF row
+    parse_format: json
+    inputs_key: inputs
+    outputs_key: outputs
+    optional_fn_name_key: fn_name
+    ordering:
+      - step: parse_json
+      - step: assert_equal_length_inputs_outputs
+      - step: assign_index_by_array_position  # index i = i-th parallel (input, output) pair
+    atomic_test_definition: >
+      One (input_i, output_i) pair OR one checker-evaluated case if checker present
+      (TACO: checker rare; treat as paired IO unless dataset provides checker flag).
+
+  code_contests_plus:
+    source_field: tests  # per dataset schema at pinned revision
+    ordering:
+      - step: use_dataset_native_test_order
+      - step: if_native_order_missing_sort_by_sha256_input_asc
+    atomic_test_definition: >
+      One official test case record from CC+ Verified bundle, preserving generator
+      case order when provided; fallback sort by SHA256(normalized_input) ascending.
+
+  tie_breaking:
+    rule: sha256_hex_ascending_on_normalized_utf8_input
+    note: Used only when source order is absent or ambiguous; logged per problem.
+
+# -----------------------------------------------------------------------------
+# Partition fractions (frozen)
+# -----------------------------------------------------------------------------
+partition:
+  public_fraction: 0.20
+  withheld_fraction: 0.80
+  method: floor_public_ceiling_withheld
+
+  index_assignment:
+    public_indices: "i where i < floor(0.20 * N)"
+    withheld_indices: "i where i >= floor(0.20 * N)"
+
+  minimum_counts_after_partition:
+    public_tests_min: 20
+    withheld_tests_min: 50
+    action_if_violated: exclude_problem
+    exclusion_code: SPLIT_INSUFFICIENT_COUNTS
+
+# -----------------------------------------------------------------------------
+# Checker and multi-output problems
+# -----------------------------------------------------------------------------
+checker_handling:
+  code_contests_plus:
+    use_output_checker: true
+    public_checker: true   # checker applied to both suites
+    withheld_checker: true
+    note: >
+      Checker logic is identical on public and withheld; only case indices differ.
+      Latent incorrectness = pass all public + fail ≥1 withheld under same checker.
+
+  taco:
+    use_output_checker: false
+    exact_output_match: true
+    float_tolerance: 0.0   # unless problem metadata explicitly specifies tolerance in harness spec
+
+# -----------------------------------------------------------------------------
+# Cross-corpus deduplication (independent of split)
+# -----------------------------------------------------------------------------
+cross_corpus_dedup:
+  enabled: true
+  problem_fingerprint:
+    method: sha256
+    inputs:
+      - normalized_problem_statement_utf8_nfkc
+      - source_platform_id_if_present
+  policy: >
+    If HOLDOUT problem fingerprint matches any PRIMARY_DEVELOPMENT problem,
+    drop HOLDOUT problem before split assignment. Log exclusion_code DUPLICATE_STATEMENT.
+
+# -----------------------------------------------------------------------------
+# Split versioning and reproducibility
+# -----------------------------------------------------------------------------
+reproducibility:
+  pin_dataset_revisions:
+    taco:
+      hf_revision: null  # TO BE PINNED at data collection start; never changed post-hoc
+      split: test
+    code_contests_plus:
+      hf_revision: null  # TO BE PINNED at data collection start
+      subset: Verified
+      tpr_min: 0.9
+      tnr_min: 0.9
+  split_rule_hash_algorithm: sha256
+  split_rule_hash_inputs:
+    - this_file_contents_at_lock
+    - corpus_filters.yaml_at_lock
+  emit_artifacts:
+    - per_problem_public_indices.jsonl
+    - per_problem_withheld_indices.jsonl
+    - split_manifest.json
+
+# -----------------------------------------------------------------------------
+# Why this rule prevents p-hacking
+# -----------------------------------------------------------------------------
+p_hacking_mitigation:
+  - >
+    Outcome-blind: partition uses only test index and N, not pass/fail or latent rate.
+  - >
+    Order-blind to models: no access to LLM or human submission data when splitting.
+  - >
+    No adaptive re-split: problems are never moved between public/withheld after
+    inspecting latent incorrectness prevalence.
+  - >
+    No difficulty stratification: EASY/HARD tags are not used in index assignment.
+  - >
+    Single pre-registered fraction (20/80): no grid search over public ratios.
+  - >
+    Cross-corpus dedup uses statement hash only, not effect sizes.
+  - >
+    Exclusion for insufficient N is mechanical (N<100 total or post-partition mins),
+    not based on label balance.
+  - >
+    Holdout corpus (CC+ Verified) is chosen before any label analysis on holdout.
+
+auditor_checklist:
+  - Verify public_indices = {0..floor(0.2N)-1} under declared enumeration
+  - Verify no script reads pass/fail before writing split manifest
+  - Verify hf_revision pins recorded before first execution
+  - Verify DUPLICATE_STATEMENT exclusions logged

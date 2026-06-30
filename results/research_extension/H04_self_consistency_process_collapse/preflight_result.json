@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "H04_self_consistency_process_collapse",
+  "preflight_status": "ready",
+  "checks": [
+    {
+      "check": "config.yaml",
+      "path": "/home/cesar/papers/invert/invert/experiments/research_extension/H04_self_consistency_process_collapse/config.yaml",
+      "ok": true
+    },
+    {
+      "check": "schema.csv",
+      "path": "/home/cesar/papers/invert/invert/experiments/research_extension/H04_self_consistency_process_collapse/schema.csv",
+      "ok": true
+    },
+    {
+      "check": "go_no_go.json",
+      "path": "/home/cesar/papers/invert/invert/experiments/research_extension/H04_self_consistency_process_collapse/go_no_go.json",
+      "ok": true
+    },
+    {
+      "check": "fingerprint_module",
+      "path": "/home/cesar/papers/invert/invert/invert_discovery/ecology/fingerprint.py",
+      "ok": true
+    },
+    {
+      "check": "prior_preflight_data",
+      "path": "/home/cesar/papers/invert/invert/results/discovery/process_trace_diversity_preflight/ecology_cells.csv",
+      "ok": true
+    },
+    {
+      "check": "ollama_models",
+      "ok": true,
+      "missing": [],
+      "available_count": 26
+    }
+  ],
+  "notes": [
+    "Does pass@k-style selection reduce process diversity among valid samples?",
+    "Preflight only \u2014 no full generation in this script.",
+    "Estimated generation calls: 720"
+  ],
+  "estimated_generation_calls": 720
+}

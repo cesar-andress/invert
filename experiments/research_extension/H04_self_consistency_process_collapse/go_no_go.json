@@ -1,0 +1,7 @@
+{
+  "hypothesis_id": "H04_self_consistency_process_collapse",
+  "recommended": "pending",
+  "criterion": "GO if median diversity_loss>=0.3 bits on >=2 classes",
+  "full_study_recommended": false,
+  "paper_placement": "pending_preflight_execution"
+}

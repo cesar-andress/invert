@@ -1,0 +1,16 @@
+column,type,description
+study_id,string,hypothesis identifier
+class_id,string,INVERT class C D E or derived
+task_id,string,Family1 task id
+requested_pole,string,prompt-assigned pole or neutral
+model,string,generator model id
+temperature,float,sampling temperature if applicable
+rep,int,repetition index
+strip_level,string,detector strip level
+artifact_id,string,unique artifact key
+valid_artifact,bool,behavioral gate passed
+detector_correct,bool,recovered requested pole
+fingerprint,string,SHA256 of normalized bounded trace
+richness,float,unique_fingerprints over n
+shannon_entropy,float,Shannon H of fingerprints in cell
+simpson_diversity,float,Simpson index

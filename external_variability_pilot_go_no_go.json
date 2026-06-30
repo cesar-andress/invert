@@ -1,0 +1,30 @@
+{
+  "study_id": "RQ-EXT-E",
+  "pilot_date": "2026-06-30T10:56:41.102232+00:00",
+  "recommended": "revise-plan",
+  "full_study_recommended": false,
+  "paper_placement": "artifact-only",
+  "reason": "low_prevalence_null_finding",
+  "metrics": {
+    "tasks_attempted": 30,
+    "generated_n": 30,
+    "valid_n": 21,
+    "invalid_n": 9,
+    "stable_n": 21,
+    "variable_n": 0,
+    "flaky_invalid_n": 0,
+    "timeout_n": 0,
+    "error_n": 1,
+    "ambiguous_n": 0,
+    "reference_n": 30,
+    "reference_stable_n": 29
+  },
+  "variable_rate_among_valid": 0.0,
+  "model": "ollama:qwen2.5-coder:14b",
+  "dataset": "humaneval_plus_v1",
+  "detector_module": "invert_external.detectors.output_stability",
+  "detector_sha256": "5e9a0681226143fbcdc2223daec8c0c057618099c1e0ba3f78c20b911b83c9fc",
+  "uses_invert_api": false,
+  "unexpected_failures": [],
+  "elapsed_sec": 43.3
+}

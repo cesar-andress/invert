@@ -1,0 +1,43 @@
+{
+  "study_id": "process_trace_diversity_preflight",
+  "generated_at": "2026-06-30T11:06:33.606454+00:00",
+  "trace_data_available": true,
+  "classes_analyzed": [
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "frozen_runs": {
+    "B": "core_v2_generalization_local_quadrature_001",
+    "C": "core_v2_generalization_local_eager_lazy_001",
+    "D": "core_v2_generalization_local_bfs_dfs_001",
+    "E": "core_v2_generalization_local_deterministic_randomized_001"
+  },
+  "ecology_cells": 441,
+  "cells_non_zero_diversity": 20,
+  "go_no_go": {
+    "recommended": "maybe",
+    "reason": "single_dynamic_class_nonzero_diversity_randomized_pole_only",
+    "dynamic_classes_with_diversity": [
+      "E"
+    ],
+    "models_with_diversity_by_class": {
+      "E": [
+        "ollama__devstral__latest",
+        "ollama__qwen2_5-coder__14b",
+        "ollama__qwen2_5-coder__32b",
+        "ollama__qwen3-coder__30b"
+      ]
+    },
+    "classes_with_two_or_more_diverse_models": [
+      "E"
+    ],
+    "diverse_cells_by_class_pole": {
+      "E:randomized": 20
+    },
+    "deterministic_pole_diversity": false
+  },
+  "paper_section_potential": "appendix_or_discussion",
+  "full_pea_recommended": false
+}

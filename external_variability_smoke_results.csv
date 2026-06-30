@@ -1,0 +1,6 @@
+case_id,expected,observed,pass
+toy_deterministic,stable,stable,True
+toy_randomized,variable,variable,True
+toy_flaky,flaky_invalid,flaky_invalid,True
+toy_timeout,timeout,timeout,True
+toy_error,invalid,invalid,True

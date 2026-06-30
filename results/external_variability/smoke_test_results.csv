@@ -1,0 +1,6 @@
+artifact_id,expected_label,observed_label,externally_valid,validation_error,unique_output_hash_count,pass_count,fail_count,smoke_pass
+toy_deterministic,stable,stable,True,,1,10,0,True
+toy_randomized,variable,variable,True,,10,10,0,True
+toy_flaky,flaky_invalid,flaky_invalid,True,,1,5,5,True
+toy_timeout,timeout,timeout,True,,1,1,9,True
+toy_error,error,error,False,RuntimeError: intentional failure,0,0,0,True

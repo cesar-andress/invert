@@ -1,0 +1,7 @@
+{
+  "hypothesis_id": "H07_model_size_process_diversity",
+  "recommended": "pending",
+  "criterion": "GO if monotonic richness-size trend with r^2>=0.5 across >=3 sizes",
+  "full_study_recommended": false,
+  "paper_placement": "pending_preflight_execution"
+}

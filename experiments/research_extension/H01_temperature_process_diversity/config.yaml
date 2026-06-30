@@ -1,0 +1,54 @@
+study_id: H01_temperature_process_diversity
+title: "Temperature and bounded process trace diversity"
+status: preflight
+
+constraints:
+  modify_frozen_detectors: false
+  modify_frozen_runs: false
+  human_annotation: false
+  llm_judges: false
+  external_adapters: false
+
+invert_classes:
+  - C
+  - D
+  - E
+
+runs:
+  - dimension: eager_vs_lazy
+    config_template: configs/core_v2_generalization_local_eager_lazy.yaml
+    class_id: C
+  - dimension: bfs_vs_dfs
+    config_template: configs/core_v2_generalization_local_bfs_dfs.yaml
+    class_id: D
+  - dimension: deterministic_vs_randomized
+    config_template: configs/core_v2_generalization_local_deterministic_randomized.yaml
+    class_id: E
+
+generation:
+  enabled: true
+  models:
+    - ollama:qwen2.5-coder:14b
+    - ollama:devstral:latest
+    - ollama:qwen3-coder:30b
+  temperatures: [0.0, 0.4, 0.8, 1.0]
+  repetitions: 20
+  prompt_mode: named_pole
+  overwrite: false
+
+analysis:
+  fingerprint_source: detection_csv_trace_columns
+  strip_levels: [raw, format_normalized]
+  metrics: [richness, shannon_entropy, simpson_diversity, valid_rate, recovery_rate]
+  prior_baseline: results/discovery/process_trace_diversity_preflight/
+
+outputs:
+  results_dir: results/research_extension/H01_temperature_process_diversity
+  ecology_by_temperature_csv: ecology_by_temperature.csv
+  model_temperature_curves_csv: model_temperature_curves.csv
+  report_md: REPORT.md
+  go_no_go_json: go_no_go.json
+
+go_no_go:
+  go: ">=2 dynamic classes show delta_shannon>=0.5 from T=0 to T=0.8 for >=2 models with valid_rate>=0.5"
+  no_go: "monoculture on C/D at all temperatures"

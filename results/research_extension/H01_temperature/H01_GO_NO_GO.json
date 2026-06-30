@@ -1,0 +1,29 @@
+{
+  "study_id": "H01_temperature_pilot",
+  "generated_at": "2026-06-30T11:36:50.376815+00:00",
+  "research_question": "Does decoding temperature increase process-level diversity while preserving behavioral correctness and requested process poles?",
+  "models": [
+    "ollama:qwen2.5-coder:14b",
+    "ollama:qwen3-coder:30b"
+  ],
+  "temperatures": [
+    0.0,
+    0.4,
+    0.8
+  ],
+  "artifact_count": 720,
+  "decision": {
+    "recommended": "no-go",
+    "full_study_recommended": false,
+    "reason": "abandon_h01_monoculture_except_e_randomized",
+    "criterion_1_cd_diversity_stable_recovery": false,
+    "criterion_1_examples": 0,
+    "criterion_2_monotonic_entropy": false,
+    "criterion_2_hits": [],
+    "criterion_3_model_curves_differ": false,
+    "criterion_3_examples": [],
+    "only_e_randomized_diversity": true,
+    "diverse_cells_total": 12,
+    "diverse_cells_non_e_randomized": 0
+  }
+}

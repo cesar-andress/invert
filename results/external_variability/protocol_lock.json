@@ -1,0 +1,17 @@
+{
+  "study_id": "RQ-EXT-E",
+  "protocol_version": "1.0",
+  "protocol_date": "2026-06-30",
+  "protocol_document": "EXTERNAL_VARIABILITY_PROTOCOL.md",
+  "analysis_plan": "external_variability_analysis_plan.md",
+  "results_schema": "external_variability_results_schema.csv",
+  "dataset_primary": "humaneval_plus_v1",
+  "run_count_primary": 10,
+  "run_count_optional": 20,
+  "detector_sha256": "bf247dfdf1b57c16d460f643418cdf1bd893ef6218b4bca06b05a202ee830d6c",
+  "detector_frozen": true,
+  "detector_modifications_allowed": false,
+  "git_commit_at_lock": "8b401795617a430edec4f429d875be9d8c66d9c8",
+  "phase_1_pilot": "not_started",
+  "phase_2_full_sweep": "not_started"
+}

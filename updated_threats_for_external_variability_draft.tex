@@ -1,0 +1,21 @@
+% Draft Threats-to-Validity insert for external variability study (RQ-EXT-E).
+% Merge manually into paper/threats_to_validity.tex after Phase 2 if study is run.
+% Replaces or supplements the single-sentence external feasibility probe.
+
+\paragraph{External inter-execution variability (exploratory).}
+\label{sec:threats:external-variability}
+
+A separate exploratory study (HumanEval+; protocol \texttt{EXTERNAL\_VARIABILITY\_PROTOCOL.md}) addresses whether functionally valid \emph{generated} solutions on an independent benchmark exhibit output instability under repeated execution, without INVERT instrumentation contracts.
+It employs a frozen output-stability detector that is distinct from the Class~E \texttt{deterministic\_randomized} auditor and does not use \texttt{ItemProcessor} or \texttt{visit\_fn}.
+Prior feasibility probes showed that the frozen Class~E detector abstains on arbitrary Python; the external study therefore does not transfer Class~E pole-recovery claims.
+
+The study asks descriptive prevalence questions (stable vs.\ variable vs.\ flaky among EvalPlus-valid completions) and whether one-shot functional pass misses repeated-run instability.
+Canonical reference solutions are included as a sanity baseline only.
+Outcomes, if reported, appear in the appendix and do not enter confirmatory Core~v2 recovery tables.
+
+This evidence can support bounded statements about reproducibility risk on a standard code-generation benchmark.
+It does \emph{not} validate Classes~C or~D externally, establish interface-agnostic recovery for quantity or order, or imply that INVERT's synthetic trace-contract benchmarks generalize to arbitrary repositories.
+Adapter-based wrapping of external code into INVERT harnesses remains out of scope because it would reintroduce co-design.
+
+% Optional: retain existing sentence on trace-contract probes if study not yet run:
+% A feasibility probe documented trace-contract boundaries (\externalclosure{} in the replication package).

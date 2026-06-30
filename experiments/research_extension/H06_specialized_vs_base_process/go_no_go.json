@@ -1,0 +1,7 @@
+{
+  "hypothesis_id": "H06_specialized_vs_base_process",
+  "recommended": "pending",
+  "criterion": "GO if coder richness <= 0.5 * base richness on >=2 classes",
+  "full_study_recommended": false,
+  "paper_placement": "pending_preflight_execution"
+}

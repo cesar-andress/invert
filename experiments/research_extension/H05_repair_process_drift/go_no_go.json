@@ -1,0 +1,7 @@
+{
+  "hypothesis_id": "H05_repair_process_drift",
+  "recommended": "pending",
+  "criterion": "GO if >=15% repaired-valid artifacts flip process pole or fingerprint",
+  "full_study_recommended": false,
+  "paper_placement": "pending_preflight_execution"
+}

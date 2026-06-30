@@ -1,0 +1,47 @@
+% Draft appendix material for external variability study (RQ-EXT-E).
+% Exploratory only; not confirmatory Class E evidence.
+% Do not include in main Results recovery tables.
+
+\subsection{External variability on HumanEval+ (exploratory)}
+\label{app:external-variability}
+
+To bound ecological claims about inter-execution reproducibility without INVERT trace contracts, we ran a separate exploratory study on HumanEval+ (EvalPlus-augmented HumanEval; 164 Python tasks)~\cite{liu2023evalplus}.
+The study uses a frozen \emph{output-stability} detector (\texttt{invert\_core.external.external\_variability\_detector}, SHA256 \texttt{bf247dfdf...830d6c}) that is distinct from the frozen Class~E \texttt{deterministic\_randomized} detector in Core~v2.
+The external detector requires no \texttt{ItemProcessor}, \texttt{GraphTraversal}, or \texttt{visit\_fn} contract; it classifies repeated executions by normalized output-hash identity only.
+
+\paragraph{Protocol (summary).}
+For each completion, EvalPlus tests establish one-shot functional validity.
+Valid artifacts are executed $N{=}10$ times on fixed official inputs under documented environment settings without injecting solution-level random seeds.
+Labels are \emph{stable} (one output hash), \emph{variable} ($>1$ hash), \emph{flaky\_invalid} (mixed pass/fail across repeats), or error/timeout/ambiguous (see \texttt{EXTERNAL\_VARIABILITY\_PROTOCOL.md} in the replication package).
+Prompts use the original HumanEval statement only; they do not name process poles or request randomness.
+Canonical reference solutions are analyzed with the same detector as a sanity baseline.
+
+\paragraph{Research questions.}
+\textbf{RQ1:} prevalence of inter-execution variability among functionally valid generated solutions.
+\textbf{RQ2:} whether variability reveals reproducibility risks not captured by a single functional pass.
+\textbf{RQ3:} stability-rate differences among local models, optional commercial models, and reference solutions.
+
+\paragraph{Results placeholder.}
+Table~\ref{tab:app:external-variability} will report valid-only stable, variable, and flaky rates with 95\% Wilson intervals by model and for reference solutions.
+Hidden-variability counts (one-shot pass but repeated variable/flaky) address RQ2.
+These statistics are descriptive and exploratory; they do not validate pole recovery on Classes~C, D, or~E and are excluded from confirmatory aggregates in Section~\ref{sec:results}.
+
+\begin{table}[H]
+  \caption{External variability study outcomes on HumanEval+ (exploratory; valid-only rates). Values to be filled after Phase~2 sweep.}
+  \label{tab:app:external-variability}
+  \small
+  \begin{tabular}{@{}llrrrr@{}}
+    \toprule
+    Source & $n_{\mathrm{valid}}$ & Stable & Variable & Flaky & Hidden var.\ \\
+    \midrule
+    Reference (canonical) & --- & --- & --- & --- & --- \\
+    Local models (pooled) & --- & --- & --- & --- & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Allowed interpretation.}
+The external detector measures output stability on an independent benchmark.
+Reported rates describe whether functionally valid generated code exhibits run-to-run output instability under repeated execution on this corpus.
+\paragraph{Forbidden interpretation.}
+These results do not establish external validation of INVERT process-pole recovery, interface-agnostic recovery for quantity or order, or completeness of any process-signature taxonomy.

@@ -1,0 +1,10 @@
+{
+  "detector_module": "invert_external.detectors.output_stability",
+  "detector_path": "invert_external/detectors/output_stability.py",
+  "sha256": "5e9a0681226143fbcdc2223daec8c0c057618099c1e0ba3f78c20b911b83c9fc",
+  "git_commit": "8b401795617a430edec4f429d875be9d8c66d9c8",
+  "uses_invert_api": false,
+  "separate_from_class_e": true,
+  "class_e_detector_path": "src/invert_core/detectors/deterministic_randomized.py",
+  "note": "Frozen before external output-stability pilot"
+}

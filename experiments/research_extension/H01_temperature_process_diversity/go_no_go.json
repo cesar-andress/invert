@@ -1,0 +1,7 @@
+{
+  "hypothesis_id": "H01_temperature_process_diversity",
+  "recommended": "pending",
+  "criterion": "GO if >=2 dynamic classes show Shannon H increase >=0.5 bits from T=0 to T=0.8 for >=2 models with valid_rate>=0.5",
+  "full_study_recommended": false,
+  "paper_placement": "pending_preflight_execution"
+}

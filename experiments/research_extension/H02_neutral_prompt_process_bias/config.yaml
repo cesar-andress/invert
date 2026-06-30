@@ -1,0 +1,54 @@
+study_id: H02_neutral_prompt_process_bias
+title: "Neutral-prompt process pole bias"
+status: preflight
+
+constraints:
+  modify_frozen_detectors: false
+  modify_frozen_runs: false
+  human_annotation: false
+  llm_judges: false
+  external_adapters: false
+
+invert_classes:
+  - C
+  - D
+  - E
+
+prompt:
+  mode: neutral
+  template: |
+    Implement the Python module for the task below. Satisfy the behavioral contract and stubs.
+    Do not comment on implementation strategy. Return only code.
+    # NO POLE NAME: do not mention eager, lazy, BFS, DFS, deterministic, or randomized.
+  pilot_tasks:
+    C: [small_positive_vector, mixed_signed_vector]
+    D: [branching_1, linear_chain_1]
+    E: [letters_8, numbers_10]
+
+generation:
+  enabled: true
+  models:
+    - ollama:qwen2.5-coder:14b
+    - ollama:devstral:latest
+    - ollama:qwen3-coder:30b
+  temperature: 0.0
+  repetitions: 15
+  overwrite: false
+
+analysis:
+  metrics:
+    - detected_pole_distribution
+    - default_pole_rate
+    - pole_entropy
+    - valid_rate
+    - recovery_vs_assigned_pole_na
+
+outputs:
+  results_dir: results/research_extension/H02_neutral_prompt_process_bias
+  pole_distribution_csv: neutral_pole_distribution.csv
+  model_bias_summary_csv: model_bias_summary.csv
+  report_md: REPORT.md
+
+go_no_go:
+  go: ">=2 models show >=70% default to one detected pole on >=2 classes with valid_rate>=0.4"
+  no_go: "uniform poles or validity collapse"

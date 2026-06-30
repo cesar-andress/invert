@@ -1,0 +1,42 @@
+{
+  "hypothesis_id": "H08_cross_class_process_coupling",
+  "preflight_status": "ready",
+  "checks": [
+    {
+      "check": "config.yaml",
+      "path": "/home/cesar/papers/invert/invert/experiments/research_extension/H08_cross_class_process_coupling/config.yaml",
+      "ok": true
+    },
+    {
+      "check": "schema.csv",
+      "path": "/home/cesar/papers/invert/invert/experiments/research_extension/H08_cross_class_process_coupling/schema.csv",
+      "ok": true
+    },
+    {
+      "check": "go_no_go.json",
+      "path": "/home/cesar/papers/invert/invert/experiments/research_extension/H08_cross_class_process_coupling/go_no_go.json",
+      "ok": true
+    },
+    {
+      "check": "fingerprint_module",
+      "path": "/home/cesar/papers/invert/invert/invert_discovery/ecology/fingerprint.py",
+      "ok": true
+    },
+    {
+      "check": "prior_preflight_data",
+      "path": "/home/cesar/papers/invert/invert/results/discovery/process_trace_diversity_preflight/ecology_cells.csv",
+      "ok": true
+    },
+    {
+      "check": "generation_required",
+      "ok": true,
+      "note": "frozen-data only"
+    }
+  ],
+  "notes": [
+    "Are model process fingerprints correlated across C/D/E?",
+    "Preflight only \u2014 no full generation in this script.",
+    "Estimated generation calls: 0"
+  ],
+  "estimated_generation_calls": 0
+}

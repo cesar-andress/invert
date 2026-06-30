@@ -1,0 +1,60 @@
+study_id: RQ-EXT-E
+detector_module: invert_core.external.external_variability_detector
+detector_path: src/invert_core/external/external_variability_detector.py
+separate_from_class_e: true
+uses_invert_api: false
+
+protocol:
+  run_count: 10
+  run_count_expensive_fallback: 20
+  timeout_sec: 2.0
+  one_shot_validation_timeout_sec: 5.0
+  normalize_whitespace: true
+  max_output_chars: 65536
+
+seed_policy:
+  primary:
+    inject_random_seed_into_runner: false
+    prompt_requests_randomness: false
+    pythonhashseed: unset
+    note: "Primary RQ1-RQ3 reflect normal execution; do not call random.seed in runner."
+  optional_sensitivity_arm:
+    name: fixed_seed_sensitivity
+    random_seed: 0
+    report_separately: true
+    merge_into_primary_rates: false
+
+dataset:
+  primary: humaneval_plus_v1
+  task_count: 164
+  evalplus_required: true
+
+normalization:
+  preserve_order_by_default: true
+  sort_collections_only_when_bundle_flag_set: true
+  do_not_sort_lists_or_tuples: true
+  sets_require_explicit_sort_flag: true
+
+classification_rules:
+  stable: all runs pass validation and unique_output_hash_count == 1
+  variable: all runs pass validation and unique_output_hash_count > 1
+  flaky_invalid: some runs pass validation and some fail
+  error: all runs fail with exception
+  timeout: any run exceeds timeout_sec
+  ambiguous: any run output cannot be normalized safely
+
+functional_validation:
+  gate: first full validation pass per bundle before repeated-run scoring
+  externally_valid: true only when first validation pass succeeds
+
+freeze:
+  record_sha256_in: results/external_variability/detector_freeze.json
+  do_not_modify_detector_after_freeze: true
+
+smoke_test:
+  enabled: true
+  run_count: 10
+  timeout_sec_default: 2.0
+  timeout_sec_timeout_case: 0.05
+  fixtures_dir: tests/external/fixtures
+  output_csv: results/external_variability/smoke_test_results.csv

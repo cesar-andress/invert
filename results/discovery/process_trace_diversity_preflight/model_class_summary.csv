@@ -1,0 +1,16 @@
+cells_non_zero_diversity,cells_total,class_id,class_shows_diversity,max_unique_fingerprints,mean_shannon_entropy,model
+0,30,B,False,1,0.0,ollama__devstral__latest
+0,30,B,False,1,0.0,ollama__qwen2_5-coder__14b
+0,30,B,False,1,0.0,ollama__qwen3-coder__30b
+0,30,C,False,1,0.0,ollama__devstral__latest
+0,30,C,False,1,0.0,ollama__qwen2_5-coder__14b
+0,30,C,False,1,0.0,ollama__qwen2_5-coder__32b
+0,21,C,False,1,0.0,ollama__qwen3-coder__30b
+0,30,D,False,1,0.0,ollama__devstral__latest
+0,30,D,False,1,0.0,ollama__qwen2_5-coder__14b
+0,30,D,False,1,0.0,ollama__qwen2_5-coder__32b
+0,30,D,False,1,0.0,ollama__qwen3-coder__30b
+3,30,E,True,2,0.05004,ollama__devstral__latest
+1,30,E,True,2,0.01668,ollama__qwen2_5-coder__14b
+1,30,E,True,2,0.01668,ollama__qwen2_5-coder__32b
+15,30,E,True,5,0.804719,ollama__qwen3-coder__30b
