@@ -1,6 +1,6 @@
 # INVERT — Replication Package (Core v2)
 
-**Version:** v1.0.0  
+**Version:** v1.0.1  
 **Project:** INVERT — artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code.
 
 **Paper:** *INVERT: Recovering Quantity, Order, and Variability Signatures from Behaviorally Equivalent Generated Code* (ACM TOSEM manuscript; LaTeX source maintained separately from this repository).
@@ -88,7 +88,7 @@ bash scripts/checksum_key_outputs.sh
 python scripts/export_paper_figures.py
 ```
 
-Optional detector replay (**may rewrite per-run CSVs**; not used for default v1.0.0 verification):
+Optional detector replay (**may rewrite per-run CSVs**; not used for default v1.0.1 verification):
 
 ```bash
 INVERT_VERIFY_REPLAY=1 bash scripts/verify_artifact.sh
@@ -145,7 +145,7 @@ invert --help         # Legacy prototype
 
 ## Citation
 
-See `CITATION.cff`. Zenodo DOI: **TODO** (assign on upload; update `related_identifiers` in `.zenodo.json`).
+See `CITATION.cff`. Zenodo DOI: assign on deposit (minimal `.zenodo.json` for GitHub–Zenodo integration).
 
 ## License
 

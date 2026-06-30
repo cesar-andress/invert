@@ -1,8 +1,8 @@
 {
   "title": "INVERT Core v2 Replication Package",
-  "description": "INVERT v1.0.0 artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code. Includes preregistered Family 1 tasks, behavioral oracles, frozen rule-based detectors, archived Ollama-local generalization runs (Classes B-E), analysis scripts, and confirmatory CSV/MD reports. Verification does not require LLM re-generation or API keys.",
+  "description": "INVERT v1.0.1 artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code. Metadata correction release: confirmatory science artifacts unchanged from v1.0.0. Includes preregistered Family 1 tasks, behavioral oracles, frozen rule-based detectors, archived Ollama-local generalization runs (Classes B-E), analysis scripts, and confirmatory CSV/MD reports. Verification does not require LLM re-generation or API keys.",
   "upload_type": "software",
-  "version": "v1.0.0",
+  "version": "v1.0.1",
   "language": "eng",
   "creators": [
     {

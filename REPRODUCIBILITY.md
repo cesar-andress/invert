@@ -1,4 +1,4 @@
-# Reproducibility Guide — INVERT Core v2 (v1.0.0)
+# Reproducibility Guide — INVERT Core v2 (v1.0.1)
 
 This document lists exact commands to verify the replication package accompanying the ACM TOSEM manuscript *INVERT: Recovering Quantity, Order, and Variability Signatures from Behaviorally Equivalent Generated Code*.
 
@@ -16,7 +16,7 @@ bash scripts/verify_artifact.sh
 
 Runs smoke test, pytest, aggregation, checksum verification against `KEY_OUTPUTS.sha256`, and paper figure export. **Does not call LLM APIs or Ollama.** See `PAPER_ARTIFACTS.md` for manuscript mapping.
 
-Optional: `INVERT_VERIFY_REPLAY=1 bash scripts/verify_artifact.sh` re-runs `analyze-run` on frozen code (may refresh CSVs if detector sources differ from freeze-time commits; not the default v1.0.0 check).
+Optional: `INVERT_VERIFY_REPLAY=1 bash scripts/verify_artifact.sh` re-runs `analyze-run` on frozen code (may refresh CSVs if detector sources differ from freeze-time commits; not the default v1.0.1 check).
 
 ---
 
@@ -171,7 +171,7 @@ pytest tests/core_v2/test_audit_eager_lazy_pole_asymmetry.py -v
 
 ## 7. Full regeneration (optional — requires Ollama)
 
-**Warning:** These scripts call local Ollama models and may take substantial time. Archived outputs are included in the v1.0.0 package; full regeneration is optional.
+**Warning:** These scripts call local Ollama models and may take substantial time. Archived outputs are included in the v1.0.1 package; full regeneration is optional.
 
 ```bash
 bash scripts/run_core_v2_generalization_local_quadrature_001.sh
@@ -198,7 +198,7 @@ ls results/core_v2/runs/core_v2_generalization_local_*/frozen_detector_metadata.
 
 ## 9. Reproduction status table
 
-Status reflects verification on **2026-06-29** against the archived v1.0.0 package. “Verified” means the command completed successfully and expected output files were present or regenerated consistently.
+Status reflects verification on **2026-06-29** against the archived v1.0.1 package. “Verified” means the command completed successfully and expected output files were present or regenerated consistently.
 
 | Claim | Run ID | Command | Expected output file(s) | Status |
 |-------|--------|---------|-------------------------|--------|
@@ -219,7 +219,7 @@ Status reflects verification on **2026-06-29** against the archived v1.0.0 packa
 
 Each frozen generalization run directory contains `frozen_detector_metadata.json` with `git_commit`, `detector_files_hash`, and UTC `timestamp`. See `ARTIFACTS.md` for the hash inventory. **Do not edit detector source when verifying archived hashes.**
 
-Documented detector file hashes (SHA256, unchanged in v1.0.0):
+Documented detector file hashes (SHA256, unchanged in v1.0.1):
 
 | File | Hash |
 |------|------|
@@ -237,11 +237,11 @@ Documented detector file hashes (SHA256, unchanged in v1.0.0):
 - Confirmatory claims bind to **four frozen Ollama-local generalization runs** on engineered synthetic tasks; commercial APIs and human-written code are out of scope.
 - Default verification uses **checksum comparison** (`KEY_OUTPUTS.sha256`); analyze-run replay may diverge if detector sources changed after freeze (see `ZENODO_AUDIT.md` §10).
 - Class A (`euler_vs_rk4`) has pilots only; not part of confirmatory aggregates.
-- Larger-N robustness runs (`core_v2_robustness_large_n_*`) are **not** part of v1.0.0 confirmatory evidence if present locally; exclude from Zenodo unless explicitly released.
-- Zenodo DOI and public GitHub URL are **TODO** until deposit (see `CITATION.cff`, `.zenodo.json`).
+- Larger-N robustness runs (`core_v2_robustness_large_n_*`) are **not** part of v1.0.1 confirmatory evidence if present locally; exclude from Zenodo.
+- Zenodo DOI and public GitHub URL are assigned on deposit (see `CITATION.cff`; minimal `.zenodo.json` without placeholder related identifiers).
 
 ---
 
 ## 12. Manuscript linkage
 
-LaTeX source of truth is maintained outside this repository (companion TOSEM manuscript). Data Availability references this package (TODO: Zenodo DOI after deposit).
+LaTeX source of truth is maintained outside this repository (companion TOSEM manuscript). Data Availability references this package (Zenodo DOI assigned on deposit).

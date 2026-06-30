@@ -1,11 +1,11 @@
-# MANIFEST_ZENODO.txt — intended Zenodo package contents (INVERT v1.0.0)
+# MANIFEST_ZENODO.txt — intended Zenodo package contents (INVERT v1.0.1)
 # Generated: 2026-06-30
 #
 # Lines prefixed with "+" are intended INCLUSIONS.
 # Lines prefixed with "-" are intended EXCLUSIONS.
 
 # --- Release metadata ---
-+ VERSION: v1.0.0
++ VERSION: v1.0.1
 + PURPOSE: artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code
 
 # --- Core source and configuration ---
@@ -84,7 +84,7 @@
 + external_class_e_go_no_go.json
 + external_class_e_smoke_results.csv
 
-# --- NOT in v1.0.0 Zenodo bundle (experimental / incomplete) ---
+# --- NOT in v1.0.1 Zenodo bundle (experimental / incomplete) ---
 # - configs/core_v2_robustness_large_n_*.yaml
 # - data/core_v2/**/core_v2_robustness_large_n_*
 # - results/core_v2/runs/core_v2_robustness_large_n_*

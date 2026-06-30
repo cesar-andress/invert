@@ -1,18 +1,18 @@
-# Zenodo Packaging Audit — INVERT Core v2 (v1.0.0)
+# Zenodo Packaging Audit — INVERT Core v2 (v1.0.1)
 
 **Audit date:** 2026-06-30  
-**Target release:** GitHub tag `v1.0.0` → Zenodo archival deposit  
+**Target release:** GitHub tag `v1.0.1` → Zenodo archival deposit (metadata correction after v1.0.0 extra-metadata failure)  
 **Repository:** INVERT replication package (`invert/`)
 
 This report documents sensitive-data exposure, bloat, packaging recommendations, and release readiness. **No scientific CSVs or frozen detector sources were modified** during this audit.
 
 ---
 
-## 1. Executive summary (v1.0.0 readiness)
+## 1. Executive summary (v1.0.1 readiness)
 
 | Area | Status | Notes |
 |------|--------|-------|
-| Version metadata | **Ready** | `v1.0.0` in `CITATION.cff`, `.zenodo.json`, `pyproject.toml`, `README.md` |
+| Version metadata | **Ready** | `v1.0.1` in `CITATION.cff`, `.zenodo.json`, `pyproject.toml`, `README.md` |
 | Zenodo JSON | **Valid** | `python3 -m json.tool .zenodo.json` passes |
 | Citation metadata | **Valid** | `CITATION.cff` consistent with `.zenodo.json` |
 | API keys / secrets | **Clear** | `.env` gitignored; only `.env.example` with empty placeholders |
@@ -20,20 +20,20 @@ This report documents sensitive-data exposure, bloat, packaging recommendations,
 | Frozen detector metadata | **Present** | All four confirmatory runs have `frozen_detector_metadata.json` |
 | Verification without LLM | **Documented** | `bash scripts/verify_artifact.sh` |
 | License | **MIT** | `LICENSE` present |
-| Zenodo DOI | **TODO** | Placeholder in `.zenodo.json` / `CITATION.cff` |
-| GitHub URL | **TODO** | Placeholder in `CITATION.cff` |
+| Zenodo DOI | **Pending deposit** | Assign on Zenodo upload; not embedded in `.zenodo.json` |
+| GitHub URL | **Pending publish** | Add to `CITATION.cff` after repository is public |
 | Git working tree | **Not clean** | See §15 — commit or stash before tagging |
-| Robustness large-N runs | **Exclude v1.0.0** | Incomplete/experimental; not confirmatory |
+| Robustness large-N runs | **Exclude v1.0.1** | Incomplete/experimental; not confirmatory |
 | External validation probes | **Include as notes only** | `EXTERNAL_VALIDATION_CLOSURE.md` and sibling feasibility files; exploratory, not confirmatory |
-| Third-party clones | **Exclude v1.0.0** | `external_study/` (e.g., EffiBench-X clone); not confirmatory |
+| Third-party clones | **Exclude v1.0.1** | `external_study/` (e.g., EffiBench-X clone); not confirmatory |
 
-**Recommendation:** Tag `v1.0.0` only after committing intended release files and excluding `.venv/`, caches, and incomplete robustness artifacts from the Zenodo upload bundle.
+**Recommendation:** Tag `v1.0.1` only after committing intended release files and excluding `.venv/`, caches, and incomplete robustness artifacts from the Zenodo upload bundle.
 
 ---
 
 ## 2. Release description (consistent across README / Zenodo)
 
-- **Version:** v1.0.0  
+- **Version:** v1.0.1  
 - **Project:** INVERT  
 - **Purpose:** Artifact package for recovering deterministic process signatures from behaviorally equivalent LLM-generated code.  
 - **Confirmatory run IDs:**  
@@ -77,7 +77,7 @@ No SSH keys or home-directory secrets found in tracked files.
 
 ## 5. Size and file counts
 
-| Path | Approx. size | Zenodo v1.0.0 |
+| Path | Approx. size | Zenodo v1.0.1 |
 |------|-------------|---------------|
 | `data/core_v2/` (confirmatory runs) | ~56 MB | **Include** |
 | `results/core_v2/` (confirmatory) | ~4.4 MB | **Include** |
@@ -107,7 +107,7 @@ No tracked file >1 MB outside `.venv/` or `.git/`.
 
 - Configs reference Ollama tags: `qwen2.5-coder:14b`, `qwen2.5-coder:32b`, `qwen3-coder:30b`, `devstral:latest`
 - **No model weights** stored in repository
-- v1.0.0 verification **does not require Ollama**
+- v1.0.1 verification **does not require Ollama**
 
 ---
 
@@ -126,7 +126,7 @@ Full hash table: `ARTIFACTS.md`. Hashes were **not recomputed or modified** in t
 
 ## 9. Analyze-run replay caveat
 
-Re-running `invert-core analyze-run` **rewrites** per-run CSVs and updates `frozen_detector_metadata.json`. Default v1.0.0 verification (`bash scripts/verify_artifact.sh`) uses **checksum comparison** via `KEY_OUTPUTS.sha256` without analyze-run replay.
+Re-running `invert-core analyze-run` **rewrites** per-run CSVs and updates `frozen_detector_metadata.json`. Default v1.0.1 verification (`bash scripts/verify_artifact.sh`) uses **checksum comparison** via `KEY_OUTPUTS.sha256` without analyze-run replay.
 
 Use `INVERT_VERIFY_REPLAY=1` only to test whether current detector code reproduces archived scores.
 
@@ -164,7 +164,7 @@ See `MANIFEST_ZENODO.txt`. Minimum:
 
 | Command | Purpose |
 |---------|---------|
-| `bash scripts/verify_artifact.sh` | Default v1.0.0 check (no LLM) |
+| `bash scripts/verify_artifact.sh` | Default v1.0.1 check (no LLM) |
 | `pytest` | Unit/integration (187 tests, 2026-06-29) |
 | `invert-core smoke-test` | Detector/oracle fixtures |
 | `invert-core summarize-core-v2` | Re-aggregate archived per-run CSVs |
@@ -178,11 +178,11 @@ No full LLM generation required for Zenodo verification.
 
 | Pattern | Status |
 |---------|--------|
-| `v0.` / `0.1.0` in release metadata | **Fixed** → `1.0.0` / `v1.0.0` |
+| `v0.` / `0.1.0` in release metadata | **Fixed** → `1.0.1` / `v1.0.1` |
 | `Process Trinity` as paper title | **Removed** from README title; historical label only in legacy docs if any |
-| `closure theorem` / `mathematical completeness` | **Not claimed** in v1.0.0 README |
-| `TODO: Zenodo DOI` | **Retained** (honest placeholder) |
-| `TODO: GitHub` URL | **Retained** |
+| `closure theorem` / `mathematical completeness` | **Not claimed** in v1.0.1 README |
+| Zenodo `.zenodo.json` | **Minimal** — no `related_identifiers`, communities, or TODO fields |
+| GitHub URL in `CITATION.cff` | **Omitted** until repository is public |
 
 ---
 
@@ -190,10 +190,10 @@ No full LLM generation required for Zenodo verification.
 
 1. **Assign Zenodo DOI** → update `CITATION.cff`, `.zenodo.json`, manuscript `data_availability.tex`
 2. **Publish GitHub repository URL** → update `CITATION.cff` `repository-code` and `.zenodo.json` `related_identifiers`
-3. **Clean git tree** → commit v1.0.0 metadata + verification scripts; resolve or exclude modified confirmatory CSVs (§15)
+3. **Clean git tree** → commit v1.0.1 metadata + verification scripts; resolve or exclude modified confirmatory CSVs (§15)
 4. **Confirm legacy cloud artifacts** included or omitted
 5. **Upload bundle** per `MANIFEST_ZENODO.txt` (exclude robustness large-N)
-6. **GitHub release** `v1.0.0` → enable Zenodo-GitHub integration or manual upload
+6. **GitHub release** `v1.0.1` → enable Zenodo-GitHub integration or manual upload
 
 ---
 
@@ -207,9 +207,9 @@ git log -1 --oneline  →  8ad8415 Updating pilot runs
 
 **Untracked (release candidates):** `KEY_OUTPUTS.sha256`, `PAPER_ARTIFACTS.md`, `scripts/verify_artifact.sh`, `scripts/export_paper_figures.py`, `results/core_v2/figures/`, verification helpers.
 
-**Untracked (exclude from v1.0.0):** `core_v2_robustness_large_n_*` configs, data, and partial results.
+**Untracked (exclude from v1.0.1):** `core_v2_robustness_large_n_*` configs, data, and partial results.
 
-**Working tree is not clean** — tagging `v1.0.0` today requires a deliberate commit decision.
+**Working tree is not clean** — tagging `v1.0.1` today requires a deliberate commit decision.
 
 ---
 
@@ -219,7 +219,7 @@ git log -1 --oneline  →  8ad8415 Updating pilot runs
 |------|----------|------------|
 | Local `.venv/` (~408 MB) | High if uploaded | Exclude |
 | `.pytest_cache/` | Low | Exclude |
-| Incomplete robustness runs | Medium (scope confusion) | Exclude from v1.0.0 |
+| Incomplete robustness runs | Medium (scope confusion) | Exclude from v1.0.1 |
 | Analyze-run replay drift | Medium | Default verify uses checksums only |
 | Legacy `data/raw/openai/` untracked blobs | Low–medium | Omit unless explicitly needed |
 | TODO DOI/URL placeholders | Low | Resolve at deposit |

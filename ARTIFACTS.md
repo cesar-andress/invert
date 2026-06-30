@@ -1,4 +1,4 @@
-# Artifact Inventory — INVERT Core v2 (v1.0.0)
+# Artifact Inventory — INVERT Core v2 (v1.0.1)
 
 Repository root: extract or clone this package; all paths below are relative to that root.
 
@@ -211,4 +211,4 @@ No detector or frozen run was modified. Confirmatory evidence remains the four `
 
 ## Manuscript (external to this repo)
 
-LaTeX source for the ACM TOSEM manuscript is maintained separately from this replication package (see paper Data Availability; TODO: Zenodo DOI).
+LaTeX source for the ACM TOSEM manuscript is maintained separately from this replication package (see paper Data Availability; Zenodo DOI assigned on deposit).
